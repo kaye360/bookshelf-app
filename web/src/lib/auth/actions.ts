@@ -1,3 +1,4 @@
+import { getUserBooks } from '../book/getUsersBooks';
 import { LoginDispatch, LoginPayload, RegisterDispatch, RegisterPayload } from './types';
 export const API_URL = 'http://192.168.1.70:8000/api';
 
@@ -20,8 +21,9 @@ export async function login(dispatch : LoginDispatch, loginPayload: LoginPayload
 
         if( data.user.id && data.access_token ) {
 
-            dispatch({ type: 'LOGIN_SUCCESS', payload: data });
             localStorage.setItem('currentUser', JSON.stringify(data)); // Dont store book data in localstorage
+            data.user.books = await getUserBooks(data.user.id)
+            dispatch({ type: 'LOGIN_SUCCESS', payload: data });
             return data
         }
 

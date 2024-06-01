@@ -17,7 +17,8 @@ export default {
 			// 	"bg-accent" : "hsl( 12deg 45% 97% / <alpha-value> )"
 			// },
 			colors : {
-				"primary"   : "hsl( 195deg 23% 40% / <alpha-value> )",
+				"primary-dark"   : "hsl( 195deg 23% 20% / <alpha-value> )",
+				"primary-light"   : "hsl( 195deg 23% 40% / <alpha-value> )",
 				// "primary"   : "hsl( 107deg 26% 68% / <alpha-value> )",
 				// "accent"    : "hsl( 0deg 93% 50% / <alpha-value> )",
 				"accent"    : "hsl( 0deg 65% 60% / <alpha-value> )",

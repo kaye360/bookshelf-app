@@ -1,16 +1,14 @@
 import { getUserBooks } from "../book/getUsersBooks"
-import { initialState } from "./reducerInitialState"
+import { AuthReducerState } from "./types"
 
 
-export async function userBookQuery() {
+export async function userQuery( userSession : AuthReducerState) {
 
-    const books = await getUserBooks(initialState.user?.id as string)
+    if( !userSession.user?.id ) return userSession
 
-    const auth = initialState
+    const books = await getUserBooks(userSession.user.id)
 
-    if( auth.user ) {
-        auth.user.books = books
-    }
+    userSession.user.books = books
 
-    return auth
+    return userSession
 }

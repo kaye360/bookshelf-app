@@ -32,21 +32,21 @@ export default function LoginOrRegisterForm({defaultForm = 'login'} : { defaultF
 
                 <button 
                     onClick={ () => setForm('login')}
-                    className={`border-b-2 px-2 min-w-max  ${form === 'login' ? ' border-primary' : 'border-transparent'} `}
+                    className={`border-b-2 px-2 min-w-max  ${form === 'login' ? ' border-primary-light' : 'border-transparent'} `}
                 >
                     Log In 
                 </button>
 
                 <button 
                     onClick={ () => setForm('register')}
-                    className={`border-b-2 px-2 min-w-max ${form === 'register' ? ' border-primary' : 'border-transparent'} `}
+                    className={`border-b-2 px-2 min-w-max ${form === 'register' ? ' border-primary-light' : 'border-transparent'} `}
                 >
                     Register
                 </button>
 
                 <button 
                     onClick={ () => setForm('guest')}
-                    className={`border-b-2 px-2 min-w-max ${form === 'guest' ? ' border-primary' : 'border-transparent'} `}
+                    className={`border-b-2 px-2 min-w-max ${form === 'guest' ? ' border-primary-light' : 'border-transparent'} `}
                 >
                     Guest
                 </button>

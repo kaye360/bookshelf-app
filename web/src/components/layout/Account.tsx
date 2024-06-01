@@ -7,7 +7,8 @@ import AccountModal from "./AccountModal"
 export default function Account() {
 
     const { isAuth, user } = useAuth()
-    const dispatch = useAuthDispatch()
+    const dispatch         = useAuthDispatch()
+    
     const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false)
 
     return (

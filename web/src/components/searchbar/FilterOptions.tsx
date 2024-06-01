@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { BookShelfContext } from "../../routes/bookshelf/Books";
-import { BookshelfParams } from "./bookshelfOptions";
+import { BookshelfParams } from "../book/bookshelfOptions";
 
 export default function FilterOptions() {
 
@@ -15,7 +15,7 @@ export default function FilterOptions() {
     } 
 
     return (
-        <div className="flex items-center gap-3 px-4 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center gap-3 px-4 overflow-x-auto scrollbar-hide text-primary-light">
 
             <OptionButton
                 onClick={ () => filterBy('all') }

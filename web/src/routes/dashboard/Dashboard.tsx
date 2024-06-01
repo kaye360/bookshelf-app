@@ -1,5 +1,5 @@
 import H1 from "../../components/base/H1";
-import Book from "../../components/book/BookGridItem";
+import BookGridItem from "../../components/book/BookGridItem";
 import DashboardSection from "../../components/dashboard/DashboardSection";
 import BaseLayout from "../../layouts/BaseLayout";
 import { useAuth } from "../../lib/auth/AuthProvider";
@@ -9,9 +9,6 @@ export default function Dashboard() {
     const {user} = useAuth()
 
     const books = user?.books ? user.books : []
-    // const book = books[0]
-
-    console.log(books)
 
     return (
         <BaseLayout>
@@ -30,19 +27,15 @@ export default function Dashboard() {
                 </DashboardSection>
                 
                 <DashboardSection title="Recently Added">
-                    {/* <Book book={ book } />
-                    <Book book={ book } />
-                    <Book book={ book } />
-                    <Book book={ book } />
-                    <Book book={ book } /> */}
+                    {books && books.slice(0,10).map( book => (
+                        <BookGridItem book={book} key={book.id} />
+                    ))}
                 </DashboardSection>
 
                 <DashboardSection title="My Favourites">
-                    {/* <Book book={ book } />
-                    <Book book={ book } />
-                    <Book book={ book } />
-                    <Book book={ book } />
-                    <Book book={ book } /> */}
+                    { books && books.filter( book => book.isFavourite ).slice(0,10).map( book => (
+                        <BookGridItem book={book} key={book.id} />
+                    ))}
                 </DashboardSection>
 
                 <DashboardSection title="Tags">

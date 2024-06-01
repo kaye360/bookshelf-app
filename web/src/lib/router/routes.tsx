@@ -8,6 +8,7 @@ import BookShelf from "../../routes/bookshelf/Books";
 import Settings from "../../routes/settings/Settings";
 import User from "../../routes/user/User";
 import Community from "../../routes/community/Community";
+import Add from "../../routes/add/Add";
 
 export const router = createBrowserRouter([
 	{
@@ -39,6 +40,11 @@ export const router = createBrowserRouter([
 	{
 		path: '/bookshelf',
 		element : <AuthRoute><BookShelf /></AuthRoute>
+	},
+
+	{
+		path: '/add',
+		element : <AuthRoute><Add /></AuthRoute>
 	},
 
 	{

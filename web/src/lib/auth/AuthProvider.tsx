@@ -1,15 +1,17 @@
 import { Dispatch, ReactNode, createContext, useContext, useReducer } from "react"
 import { AuthReducer } from "./reducer"
 import { AuthReducerState } from "./types"
-import { initialState } from "./reducerInitialState"
 import { useQuery } from "@tanstack/react-query"
-import { userBookQuery } from "./query"
+import { getUserSession } from "./getUserSession"
+import { userQuery } from "./query"
 
 interface AuthProviderProps {
     children : ReactNode
 }
 
-export const AuthContext         = createContext<AuthReducerState>(initialState)
+const userSession = getUserSession()
+
+export const AuthContext         = createContext<AuthReducerState>(userSession)
 export const AuthDispatchContext = createContext<Dispatch<any> | null>(null)
 
 
@@ -24,19 +26,26 @@ export function useAuthDispatch() {
 
 export default function AuthProvider( {children} : AuthProviderProps ) {
 
-    useQuery({ queryKey : ['userBooks'], queryFn : async() => {
-        const data = await userBookQuery()
-        dispatch({
-            type : 'LOGIN_SUCCESS',
-            payload : { 
-                user : data?.user,
-                auth_token : data?.token
-            }
-        })
-        return data
-    }})
+    if( userSession.isAuth ) {
 
-    const [user, dispatch] = useReducer(AuthReducer, initialState);
+        useQuery({ queryKey : ['userBooks'], queryFn : async() => {
+
+            const data = await userQuery(userSession)
+
+            dispatch({
+                type : 'LOGIN_SUCCESS',
+                payload : { 
+                    user : data?.user,
+                    auth_token : data?.token
+                }
+            })
+
+            return data
+        }})
+
+    }
+
+    const [user, dispatch] = useReducer(AuthReducer, userSession);
 
 	return (
         <AuthContext.Provider value={user}>

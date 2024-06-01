@@ -8,7 +8,7 @@ export default function SearchInput() {
     return (
         <input 
             name="search" 
-            className="bg-transparent h-12 w-full px-4 focus:outline-0 text-primary/80 font-base" 
+            className="bg-transparent h-12 w-full px-4 focus:outline-0 text-primary-dark font-base" 
             placeholder="Search your library..."
             onChange={ (e) => setSearchParams( prev => {
                 prev.set('searchQuery', e.target.value)

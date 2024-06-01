@@ -16,7 +16,7 @@ export default function TextInput({label, register, name, ...props} : TextInputP
     return (
         <Tag className="block">
             { label && (
-                <h3 className="font-semibold text-primary mb-1">
+                <h3 className="font-semibold text-primary-light mb-1">
                     {label}
                 </h3>
             )}
@@ -25,7 +25,7 @@ export default function TextInput({label, register, name, ...props} : TextInputP
             <input 
                 {...(register &&  register(name) ) }
                 {...props}
-                className="bg-bg outline outline-1 outline-primary/30 w-full max-w-xl rounded p-2" 
+                className="bg-bg outline outline-1 outline-primary-light/30 w-full max-w-xl rounded p-2" 
             />
         </Tag>
     )
