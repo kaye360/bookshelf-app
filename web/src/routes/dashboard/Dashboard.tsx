@@ -8,8 +8,10 @@ import { UserBook } from "../../lib/book/types";
 export default function Dashboard() {
     const {user} = useAuth()
 
-    const books = user?.books ? Object.values( user.books ) : []
-    const book = books[0]
+    const books = user?.books ? user.books : []
+    // const book = books[0]
+
+    console.log(books)
 
     return (
         <BaseLayout>
@@ -23,24 +25,24 @@ export default function Dashboard() {
             <div className="grid gap-8">
 
                 <DashboardSection title="Currently Reading">
-                    <Book book={ book } />
+                    {/* <Book book={ book } /> */}
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, dignissimos et? Obcaecati, et vitae laborum rerum eum incidunt recusandae inventore sequi architecto minima doloremque ex facere exercitationem autem sit cupiditate.</p>
                 </DashboardSection>
                 
                 <DashboardSection title="Recently Added">
+                    {/* <Book book={ book } />
                     <Book book={ book } />
                     <Book book={ book } />
                     <Book book={ book } />
-                    <Book book={ book } />
-                    <Book book={ book } />
+                    <Book book={ book } /> */}
                 </DashboardSection>
 
                 <DashboardSection title="My Favourites">
+                    {/* <Book book={ book } />
                     <Book book={ book } />
                     <Book book={ book } />
                     <Book book={ book } />
-                    <Book book={ book } />
-                    <Book book={ book } />
+                    <Book book={ book } /> */}
                 </DashboardSection>
 
                 <DashboardSection title="Tags">

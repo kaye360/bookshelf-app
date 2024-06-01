@@ -57,3 +57,5 @@ export interface RegisterPayload {
     password        : string
     confirmPassword : string
 }
+
+

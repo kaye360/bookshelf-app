@@ -2,6 +2,8 @@ import { Dispatch, ReactNode, createContext, useContext, useReducer } from "reac
 import { AuthReducer } from "./reducer"
 import { AuthReducerState } from "./types"
 import { initialState } from "./reducerInitialState"
+import { useQuery } from "@tanstack/react-query"
+import { userBookQuery } from "./query"
 
 interface AuthProviderProps {
     children : ReactNode
@@ -21,6 +23,18 @@ export function useAuthDispatch() {
 
 
 export default function AuthProvider( {children} : AuthProviderProps ) {
+
+    useQuery({ queryKey : ['userBooks'], queryFn : async() => {
+        const data = await userBookQuery()
+        dispatch({
+            type : 'LOGIN_SUCCESS',
+            payload : { 
+                user : data?.user,
+                auth_token : data?.token
+            }
+        })
+        return data
+    }})
 
     const [user, dispatch] = useReducer(AuthReducer, initialState);
 

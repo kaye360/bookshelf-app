@@ -9,8 +9,8 @@ export interface Book {
     }
     image       : {
         url     : string
-        width   : string
-        height  : string
+        width   : number
+        height  : number
     }
 }
 
@@ -35,4 +35,24 @@ export interface BookReview {
     userId      : string
     rating      : number
     review      : string
+}
+
+
+export interface ApiBook {
+    authors     : string
+    created_at  : string
+    group       : 'wishlist' | 'owned'
+    id          : string
+    imageUrl?    : string
+    imageHeight? : number
+    imageWidth?  : number
+    isFavourite : boolean
+    isRead      : boolean
+    isbn10?      : string
+    isbn13?      : string
+    rating      : number
+    tags        : string
+    title       : string
+    updated_at  : string
+    userId      : string
 }

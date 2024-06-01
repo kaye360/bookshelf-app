@@ -1,5 +1,5 @@
 import { LoginDispatch, LoginPayload, RegisterDispatch, RegisterPayload } from './types';
-const API_URL = 'http://192.168.1.70:8000/api';
+export const API_URL = 'http://192.168.1.70:8000/api';
 
 export async function login(dispatch : LoginDispatch, loginPayload: LoginPayload) {
 
@@ -17,10 +17,11 @@ export async function login(dispatch : LoginDispatch, loginPayload: LoginPayload
         dispatch({ type: 'REQUEST_LOGIN' });
         let response = await fetch(`${API_URL}/login`, requestOptions);
         let data = await response.json();
-        
-        if (data.access_token) {
+
+        if( data.user.id && data.access_token ) {
+
             dispatch({ type: 'LOGIN_SUCCESS', payload: data });
-            localStorage.setItem('currentUser', JSON.stringify(data));
+            localStorage.setItem('currentUser', JSON.stringify(data)); // Dont store book data in localstorage
             return data
         }
 

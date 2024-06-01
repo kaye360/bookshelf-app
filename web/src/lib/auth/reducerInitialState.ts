@@ -12,6 +12,11 @@ const token = typeof currentUserLocalStorage === 'string'
 
 const isAuth = user !== null && token !== null
 
+
+if( user ) {
+    user.books = []
+}
+
 export const initialState : AuthReducerState = {
     user,
     token,

@@ -16,7 +16,7 @@ export default function useBooks() {
 
     const [searchParams, setSearchParams] = useSearchParams(bookshelfOptionsInitialState)
 
-    const allUsersBooks = user?.books ? Object.values(user?.books) : []
+    const allUsersBooks = user?.books ? user?.books : []
     const books         = resolveBookList(allUsersBooks, searchParams)
 
     let BookList = BookGrid

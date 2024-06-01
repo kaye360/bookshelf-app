@@ -57,19 +57,6 @@ class UserAuthenticationController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        $books = UserBook::all()->where('userId', '=', $user->id)->toArray();
-        foreach( $books as &$book ) {
-            $book['tags'] = json_decode($book['tags']);
-            $book['image'] = new stdClass();
-            $book['image']->url = $book['imageUrl'];
-            $book['image']->width = $book['imageWidth'];
-            $book['image']->height = $book['imageHeight'];
-            unset($book['imageUrl'], $book['imageWidth'], $book['imageHeight']);
-        }
-
-        $user->books = $books;
-
-
         return response()->json([
             'user' => $user,
             'access_token' => $token,
