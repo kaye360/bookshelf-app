@@ -1,4 +1,4 @@
-import { API_URL } from "../auth/actions"
+import { API_URL } from "../../config"
 import { UserBook, ApiBook } from "./types"
 
 export async function getUserBooks(userId : string) : Promise<UserBook[]> {

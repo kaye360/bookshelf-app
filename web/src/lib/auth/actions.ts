@@ -1,6 +1,7 @@
+import { API_URL } from '../../config';
 import { getUserBooks } from '../book/getUsersBooks';
 import { LoginDispatch, LoginPayload, RegisterDispatch, RegisterPayload } from './types';
-export const API_URL = 'http://192.168.1.70:8000/api';
+
 
 export async function login(dispatch : LoginDispatch, loginPayload: LoginPayload) {
 
@@ -17,7 +18,7 @@ export async function login(dispatch : LoginDispatch, loginPayload: LoginPayload
         if( !dispatch) return
         dispatch({ type: 'REQUEST_LOGIN' });
         let response = await fetch(`${API_URL}/login`, requestOptions);
-        let data = await response.json();
+        let data     = await response.json();
 
         if( data.user.id && data.access_token ) {
 
