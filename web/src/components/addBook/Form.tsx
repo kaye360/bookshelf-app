@@ -2,9 +2,8 @@ import { UseAddBook } from "../../routes/add/types";
 import Button from "../form/Button";
 import TextInput from "../form/TextInput";
 
-type FormProps = Pick<UseAddBook, 'handleSubmit' | 'onSubmit' | 'register' | 'setQuery'>
 
-export default function Form({handleSubmit, onSubmit, register, setQuery} : FormProps) {
+export default function Form({handleSubmit, onSubmit, register, setQuery} : UseAddBook['formProps']) {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -14,6 +13,7 @@ export default function Form({handleSubmit, onSubmit, register, setQuery} : Form
                 type='search'
                 register={register}
                 placeholder='Enter an author, book title, category, or isbn'
+                autoComplete="off"
             />
 
             <div className='flex items-center gap-4'>

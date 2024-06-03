@@ -7,6 +7,7 @@ export interface User {
     email     : string 
     settings  : Settings
     books     : UserBook[]
+    updateUser : Function
 }
 
 export interface Settings {
@@ -20,6 +21,7 @@ interface AuthReducerStateIsAuth {
     loading: boolean,
     errorMessage: string | null
     isAuth : true
+    updateUser : Function
 }
 
 interface AuthReducerStateNoAuth {
@@ -28,6 +30,7 @@ interface AuthReducerStateNoAuth {
     loading: boolean,
     errorMessage: string | null
     isAuth : false
+    updateUser : Function
 }
 
 export type AuthReducerState = AuthReducerStateIsAuth | AuthReducerStateNoAuth

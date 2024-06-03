@@ -22,6 +22,7 @@ export function getUserSession() : AuthReducerState {
         loading: false,
         errorMessage: null,
         isAuth,
+        updateUser : () => {}
     }
 
     return initialState

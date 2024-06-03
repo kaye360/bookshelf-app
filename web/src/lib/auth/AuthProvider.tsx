@@ -9,7 +9,7 @@ interface AuthProviderProps {
     children : ReactNode
 }
 
-const userSession = getUserSession()
+let userSession = getUserSession()
 
 export const AuthContext         = createContext<AuthReducerState>(userSession)
 export const AuthDispatchContext = createContext<Dispatch<any> | null>(null)
@@ -28,7 +28,7 @@ export default function AuthProvider( {children} : AuthProviderProps ) {
 
     if( userSession.isAuth ) {
 
-        useQuery({ queryKey : ['userBooks'], queryFn : async() => {
+        const { refetch } = useQuery({ queryKey : ['userBooks'], queryFn : async() => {
 
             const data = await userQuery(userSession)
 
@@ -42,6 +42,8 @@ export default function AuthProvider( {children} : AuthProviderProps ) {
 
             return data
         }})
+
+        userSession.updateUser = refetch
 
     }
 

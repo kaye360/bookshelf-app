@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { GoogleBookResponse } from "../../lib/book/types"
 import { SearchInput, UseAddBook } from "./types"
+import { GOOGLE_BOOKS_API_URL } from "../../config"
 
 
 
@@ -18,7 +19,7 @@ export default function useAddBook() : UseAddBook {
 
     async function searchGoogleBooks(query: string | null) {
         if(!query) return null
-        const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`)
+        const res = await fetch(`${GOOGLE_BOOKS_API_URL}?q=${query}`)
         const json = await res.json()
         return json as GoogleBookResponse
     }
@@ -33,15 +34,22 @@ export default function useAddBook() : UseAddBook {
     const hasResults   = isSuccess && !isFetching && data !== null && data.totalItems !== 0
     
     return {
-        handleSubmit,
-        onSubmit,
-        register,
-        setQuery,
-        isFetching,
-        isError,
-        hasNoResults,
-        hasResults,
-        query,
-        data
+        formProps : {
+            handleSubmit,
+            onSubmit,
+            register,
+            setQuery,
+        },
+        statusProps : {
+            isFetching,
+            isError,
+            hasNoResults,
+            hasResults,
+            query,
+            data
+        },
+        resultsProps : {
+            data
+        }
     }
 }

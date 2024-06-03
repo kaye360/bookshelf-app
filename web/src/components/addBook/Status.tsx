@@ -1,8 +1,6 @@
 import { UseAddBook } from "../../routes/add/types"
 
-type StatusProps = Pick<UseAddBook, 'isFetching' | 'isError' | 'hasResults' | 'hasNoResults' | 'query' | 'data'>
-
-export default function Status({isFetching, isError, hasNoResults, hasResults, query, data} : StatusProps) {
+export default function Status({isFetching, isError, hasNoResults, hasResults, query, data} : UseAddBook['statusProps'] ) {
     return (
         <div className='text-xl my-6'>
             { isFetching && (

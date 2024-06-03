@@ -38,8 +38,7 @@ export default function AccountModal({showLogoutModal, setShowLogoutModal, dispa
                         </button>
                     </div>
                 </Modal>
-                    ,
-                document.body
+                , document.body
             )}
         </>
     )

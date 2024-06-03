@@ -37,7 +37,7 @@ Route::post('logout', [UserAuthenticationController::class, 'logout'])->middlewa
 // Route::get('community', [GlobalBookController::class, 'index']);
 
 Route::get('bookshelf/{userId}', [UserBookController::class, 'index']);
-Route::post('book/{id}', [UserBookController::class, 'create']);
+Route::post('book/add', [UserBookController::class, 'create']);
 // Route::put('book/{id}', [UserBookController::class, 'update']);
 // Route::delete('book/{id}', [UserBookController::class, 'delete']);
 

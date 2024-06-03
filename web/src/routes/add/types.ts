@@ -6,14 +6,21 @@ export interface SearchInput {
 }
 
 export interface UseAddBook {
-    handleSubmit : UseFormHandleSubmit<SearchInput, undefined>
-    onSubmit     : SubmitHandler<SearchInput>
-    register     : UseFormRegister<SearchInput>
-    setQuery     : React.Dispatch<React.SetStateAction<string | null>>,
-    isFetching   : boolean,
-    isError      : boolean,
-    hasNoResults : boolean,
-    hasResults   : boolean,
-    query        : string | null,
-    data         : GoogleBookResponse | null
+    formProps : {
+        handleSubmit : UseFormHandleSubmit<SearchInput, undefined>
+        onSubmit     : SubmitHandler<SearchInput>
+        register     : UseFormRegister<SearchInput>
+        setQuery     : React.Dispatch<React.SetStateAction<string | null>>,
+    }
+    statusProps : {
+        isFetching   : boolean,
+        isError      : boolean,
+        hasNoResults : boolean,
+        hasResults   : boolean,
+        query        : string | null,
+        data         : GoogleBookResponse | null
+    }
+    resultsProps : {
+        data         : GoogleBookResponse | null
+    }
 }

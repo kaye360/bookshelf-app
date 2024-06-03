@@ -11,7 +11,7 @@ export default function Button({variant = 'fill', onClick, children, ...props} :
         <button 
             onClick={onClick}
             className={`
-                flex items-center justify-center gap-2 text-lg font-semibold tracking-wider p-4 mt-2 rounded-lg active:scale-95
+                flex items-center justify-center gap-2 text-lg font-semibold tracking-wider px-4 py-2 mt-2 rounded-lg active:scale-95
                 ${ variant === 'fill' 
                     ? 'bg-gradient-to-tr from-accent to-accent/80 text-bg shadow-md hover:from-primary-light hover:to-primary-light/60 ' : ''}
                 ${ variant === 'ghost' ? 'text-accent hover:text-primary-light' : ''}

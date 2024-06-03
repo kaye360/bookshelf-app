@@ -2,34 +2,22 @@ import BaseLayout from '../../layouts/BaseLayout'
 import useAddBook from './useAddBook'
 import Form from '../../components/addBook/Form'
 import Status from '../../components/addBook/Status'
-import Results from '../../components/addBook/Results'
+import ResultList from '../../components/addBook/ResultList'
 
 
 export default function AddBook() {
 
-    const { handleSubmit, onSubmit, register, setQuery, isFetching, isError, hasNoResults, hasResults, query, data } = useAddBook()
+    const { formProps, statusProps, resultsProps} = useAddBook()
 
     return (
         <BaseLayout>
 
-            <Form
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
-                register={register}
-                setQuery={setQuery}
-             />
+            <Form { ...formProps } />
 
-            <Status 
-                isFetching={isFetching}
-                isError={isError}
-                hasNoResults={hasNoResults}
-                hasResults={hasResults}
-                query={query}
-                data={data}
-            />
+            <Status { ...statusProps } />
 
-            { hasResults && (
-                <Results data={data} />
+            { statusProps.hasResults && (
+                <ResultList { ...resultsProps } />
             )}
 
         </BaseLayout>
