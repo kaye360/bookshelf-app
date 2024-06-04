@@ -44,7 +44,6 @@ export default function AuthProvider( {children} : AuthProviderProps ) {
         }})
 
         userSession.updateUser = refetch
-
     }
 
     const [user, dispatch] = useReducer(AuthReducer, userSession);

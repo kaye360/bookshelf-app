@@ -1,4 +1,5 @@
 import { GoogleBook } from "../../lib/book/types"
+import { PlusIcon, CheckIcon } from "../base/Icon"
 import AddBookModal from "./AddBookModal"
 import useResult from "./useResult"
 
@@ -67,19 +68,5 @@ export default function Result({book} : {book: GoogleBook}) {
             }
         </div>
 
-    )
-}
-
-
-function PlusIcon() {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-    )
-}
-
-
-function CheckIcon() {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
     )
 }

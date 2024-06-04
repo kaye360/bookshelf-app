@@ -4,7 +4,7 @@ import BookTableCell from "./BookTableCell";
 export default function BookTableRow({book} : {book : UserBook}) {
     return (
         <tr className=" even:bg-bg-accent">
-                <BookTableCell>{book.image.url}</BookTableCell>
+                <BookTableCell><img src={book.image.url} /></BookTableCell>
                 <BookTableCell>{book.title}</BookTableCell>
                 <BookTableCell>{book.authors}</BookTableCell>
                 <BookTableCell>{book.isRead ? 'Read' : 'Unread'}</BookTableCell>
