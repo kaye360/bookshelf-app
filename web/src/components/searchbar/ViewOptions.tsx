@@ -1,19 +1,11 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { BookShelfContext } from "../../routes/bookshelf/Books";
-import { BookshelfParams } from "../book/bookshelfOptions";
 import { GridIcon, ListIcon, CardIcon } from "../base/Icon";
 
 export default function ViewOptions() {
 
-    const { searchParams, setSearchParams } = useContext(BookShelfContext)
-
-    function viewAs(viewAs: BookshelfParams['viewAs']) {
-        setSearchParams(prev => { 
-            prev.set('viewAs', viewAs)
-            return prev
-        }, {replace : true} )
-    }
+    const { searchParams, updateSearchParam } = useContext(BookShelfContext)
 
     return (
         <div className="grid grid-cols-[55px_1fr] items-start">
@@ -23,7 +15,7 @@ export default function ViewOptions() {
             <div className="flex flex-wrap gap-3">
 
                 <OptionButton 
-                    onClick={ () => viewAs('grid') }
+                    onClick={ () => updateSearchParam('viewAs', 'grid') }
                     isActive={searchParams.get('viewAs') === 'grid'}
                 >
                     <GridIcon />
@@ -31,7 +23,7 @@ export default function ViewOptions() {
                 </OptionButton>
 
                 <OptionButton 
-                    onClick={ () => viewAs('list') }
+                    onClick={ () => updateSearchParam('viewAs', 'list') }
                     isActive={searchParams.get('viewAs') === 'list'}
                 >
                     <ListIcon />
@@ -39,7 +31,7 @@ export default function ViewOptions() {
                 </OptionButton>
 
                 <OptionButton 
-                    onClick={ () => viewAs('card') }
+                    onClick={ () => updateSearchParam('viewAs', 'card') }
                     isActive={searchParams.get('viewAs') === 'card'}
                 >
                     <CardIcon />

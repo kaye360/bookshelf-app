@@ -5,7 +5,7 @@ import BookTable from "../../components/book/BookTable"
 import BookTableRow from "../../components/book/BookTableRow"
 import { useAuth } from "../../lib/auth/AuthProvider"
 import { resolveBookList } from "../../lib/book/bookList"
-import { bookshelfOptionsInitialState } from "../../components/book/bookshelfOptions"
+import { BookshelfParams, bookshelfOptionsInitialState } from "../../components/book/bookshelfOptions"
 import BookCardList from "../../components/book/BookCardList"
 import BookCard from "../../components/book/BookCard"
 
@@ -15,6 +15,14 @@ export default function useBooks() {
     const { user } = useAuth()
 
     const [searchParams, setSearchParams] = useSearchParams(bookshelfOptionsInitialState)
+
+    function updateSearchParam<K extends keyof BookshelfParams>(param : K, value: BookshelfParams[K]) {
+        if( typeof param !== 'string') return
+        setSearchParams(prev => {
+            prev.set(param, value)
+            return prev
+        }, {replace : true} )
+    } 
 
     const allUsersBooks = user?.books ? user?.books : []
     const books         = resolveBookList(allUsersBooks, searchParams)
@@ -30,6 +38,7 @@ export default function useBooks() {
     return {
         searchParams,
         setSearchParams,
+        updateSearchParam,
         books,
         BookList,
         BookListItem

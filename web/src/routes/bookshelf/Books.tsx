@@ -14,6 +14,7 @@ export default function BookShelf() {
     const {
         searchParams,
         setSearchParams,
+        updateSearchParam,
         books,
         BookList,
         BookListItem
@@ -22,18 +23,18 @@ export default function BookShelf() {
     return (
         <BaseLayout>
         
-            <BookShelfContext.Provider value={{searchParams, setSearchParams}}>
+            <BookShelfContext.Provider value={{searchParams, setSearchParams, updateSearchParam}}>
                 <div className="grid gap-2 my-6">
                     <SearchBar />
                     <FilterOptions />
                 </div>
+                <BookList>
+                    {books.map( book => (
+                        <BookListItem book={book} key={book.id} />
+                    ))}
+                </BookList>
             </BookShelfContext.Provider>
 
-            <BookList>
-                {books.map( book => (
-                    <BookListItem book={book} key={book.id} />
-                ))}
-            </BookList>
         </BaseLayout>
     )
 } 

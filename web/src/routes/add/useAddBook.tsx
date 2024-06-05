@@ -19,8 +19,11 @@ export default function useAddBook() : UseAddBook {
 
     async function searchGoogleBooks(query: string | null) {
         if(!query) return null
-        const res = await fetch(`${GOOGLE_BOOKS_API_URL}?q=${query}`)
+        const res = await fetch(`${GOOGLE_BOOKS_API_URL}?q=${query}&maxResults=40`)
         const json = await res.json()
+        if( json.error ) {
+            throw new Error('Something went wrong')
+        }
         return json as GoogleBookResponse
     }
 

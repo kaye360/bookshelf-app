@@ -1,25 +1,17 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { BookShelfContext } from "../../routes/bookshelf/Books";
-import { BookshelfParams } from "../book/bookshelfOptions";
 import { AllIcon, ReadIcon, UnreadIcon, FavouritesIcon, HashIcon } from "../base/Icon";
 
 export default function FilterOptions() {
 
-    const { searchParams, setSearchParams } = useContext(BookShelfContext)
-
-    function filterBy(filterBy: BookshelfParams['filterBy']) {
-        setSearchParams(prev => {
-            prev.set('filterBy', filterBy)
-            return prev
-        }, {replace : true} )
-    } 
+    const { searchParams, updateSearchParam } = useContext(BookShelfContext)
 
     return (
         <div className="flex items-center gap-3 px-4 overflow-x-auto scrollbar-hide text-primary-light">
 
             <OptionButton
-                onClick={ () => filterBy('all') }
+                onClick={ () => updateSearchParam('filterBy', 'all') }
                 isActive={searchParams.get('filterBy') === 'all'}
             >
                 <AllIcon />
@@ -27,7 +19,7 @@ export default function FilterOptions() {
             </OptionButton>
 
             <OptionButton
-                onClick={ () => filterBy('read') }
+                onClick={ () => updateSearchParam('filterBy', 'read') }
                 isActive={searchParams.get('filterBy') === 'read'}
             >
                 <ReadIcon />
@@ -35,7 +27,7 @@ export default function FilterOptions() {
             </OptionButton>
 
             <OptionButton
-                onClick={ () => filterBy('unread') }
+                onClick={ () => updateSearchParam('filterBy', 'unread') }
                 isActive={searchParams.get('filterBy') === 'unread'}
             >
                 <UnreadIcon />
@@ -43,7 +35,7 @@ export default function FilterOptions() {
             </OptionButton>
 
             <OptionButton
-                onClick={ () => filterBy('favourite') }
+                onClick={ () => updateSearchParam('filterBy', 'favourite') }
                 isActive={searchParams.get('filterBy') === 'favourite'}
             >
                 <FavouritesIcon />
@@ -51,7 +43,7 @@ export default function FilterOptions() {
             </OptionButton>
 
             <OptionButton
-                onClick={ () => filterBy('tag1') }
+                onClick={ () => updateSearchParam('filterBy', 'tag1') }
                 isActive={searchParams.get('filterBy') === 'tag1'}
             >
                 <HashIcon />
@@ -59,7 +51,7 @@ export default function FilterOptions() {
             </OptionButton>
 
             <OptionButton
-                onClick={ () => filterBy('#science') }
+                onClick={ () => updateSearchParam('filterBy', 'science') }
                 isActive={searchParams.get('filterBy') === '#science'}
             >
                 <HashIcon />
@@ -67,7 +59,7 @@ export default function FilterOptions() {
             </OptionButton>
 
             <OptionButton
-                onClick={ () => filterBy('#biology') }
+                onClick={ () => updateSearchParam('filterBy', 'biology') }
                 isActive={searchParams.get('filterBy') === '#biology'}
             >
                 <HashIcon />
@@ -75,7 +67,7 @@ export default function FilterOptions() {
             </OptionButton>
 
             <OptionButton
-                onClick={ () => filterBy('#politics') }
+                onClick={ () => updateSearchParam('filterBy', 'politics') }
                 isActive={searchParams.get('filterBy') === '#politics'}
             >
                 <HashIcon />

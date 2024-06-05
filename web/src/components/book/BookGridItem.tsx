@@ -1,5 +1,6 @@
 import { UserBook } from "../../lib/book/types";
 import { BookmarkIcon, CheckIcon, FavouritesIcon, MoreIcon } from "../base/Icon";
+import BookTitle from "./BookTitle";
 
 
 export default function BookGridItem({book} :  { book : UserBook}) {
@@ -7,7 +8,7 @@ export default function BookGridItem({book} :  { book : UserBook}) {
     const hasImage = book.image.url.includes('google')
 
     return (
-        <div className={` grid gap-2 text-primary-light ${ !hasImage ? 'bg-primary-light/20 rounded min-h-56 p-1 items-end' : '' } `}>
+        <div className={` grid gap-2 text-primary-light ${ !hasImage ? 'bg-primary-light/10 rounded min-h-56 p-1 items-end' : '' } `}>
 
             { hasImage ? (
                 <img 
@@ -15,12 +16,12 @@ export default function BookGridItem({book} :  { book : UserBook}) {
                     className="w-full aspect-[2/3] object-cover rounded-md"
                 />
             ) : (
-                <span className="text-medium text-lg mb-auto">
+                <BookTitle>
                     {book.title}
-                </span>
+                </BookTitle>
             )}
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 mt-auto">
                 <FavouritesIcon className={book.isFavourite ? 'fill-accent/50 stroke-accent/50' : ''} />
                 <CheckIcon size={18} />
                 <BookmarkIcon size={18} className={book.group === 'owned' ? 'fill-primary-light/50 stroke-primary-light/50' : ''} />

@@ -5,14 +5,7 @@ import { BookshelfParams } from "../book/bookshelfOptions";
 
 export default function SortOptions() {
 
-    const {searchParams, setSearchParams } = useContext(BookShelfContext)
-
-    function sortBy(sortBy : BookshelfParams['sortBy']) {
-        setSearchParams( prev => {
-            prev.set('sortBy', sortBy)
-            return prev
-        }, {replace : true} )
-    }
+    const {searchParams, updateSearchParam } = useContext(BookShelfContext)
 
     return (
         <div className="grid grid-cols-[55px_1fr] items-start">
@@ -22,7 +15,7 @@ export default function SortOptions() {
             <div className="flex gap-3 flex-wrap">
 
                 <OptionButton
-                    onClick={ () => sortBy('title') }
+                    onClick={ () => updateSearchParam('sortBy', 'title') }
                     isActive={searchParams.get('sortBy') === 'title'}
                 >
                     <TitleButton />
@@ -30,7 +23,7 @@ export default function SortOptions() {
                 </OptionButton>
 
                 <OptionButton
-                    onClick={ () => sortBy('authors') }
+                    onClick={ () => updateSearchParam('sortBy', 'authors') }
                     isActive={searchParams.get('sortBy') === 'authors'}
                 >
                     <AuthorButton />
@@ -38,7 +31,7 @@ export default function SortOptions() {
                 </OptionButton>
 
                 <OptionButton
-                    onClick={ () => sortBy('newest') }
+                    onClick={ () => updateSearchParam('sortBy', 'newest') }
                     isActive={searchParams.get('sortBy') === 'newest'}
                 >
                     <NewestButton />
@@ -46,7 +39,7 @@ export default function SortOptions() {
                 </OptionButton>
 
                 <OptionButton
-                    onClick={ () => sortBy('oldest') }
+                    onClick={ () => updateSearchParam('sortBy', 'oldest') }
                     isActive={searchParams.get('sortBy') === 'oldest'}
                 >
                     <OldestButton />
