@@ -1,9 +1,8 @@
-import H1 from "../../components/base/H1";
-import BookGridItem from "../../components/book/BookGridItem";
-import DashboardSection from "../../components/dashboard/DashboardSection";
+import H1 from "../../components/common/H1";
+import BookGridItem from "../../features/bookshelf/components/BookGridItem";
 import BaseLayout from "../../layouts/BaseLayout";
-import { useAuth } from "../../lib/auth/AuthProvider";
-import { UserBook } from "../../lib/book/types";
+import { useAuth } from "../../features/auth/components/AuthProvider";
+import DashboardSection from "../../features/dashboard/components/DashboardSection";
 
 export default function Dashboard() {
     const {user} = useAuth()
@@ -22,7 +21,6 @@ export default function Dashboard() {
             <div className="grid gap-8">
 
                 <DashboardSection title="Currently Reading">
-                    {/* <Book book={ book } /> */}
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, dignissimos et? Obcaecati, et vitae laborum rerum eum incidunt recusandae inventore sequi architecto minima doloremque ex facere exercitationem autem sit cupiditate.</p>
                 </DashboardSection>
                 

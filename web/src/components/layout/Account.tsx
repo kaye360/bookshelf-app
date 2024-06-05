@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
-import { useAuth, useAuthDispatch } from "../../lib/auth/AuthProvider"
+import { useAuth, useAuthDispatch } from "../../features/auth/components/AuthProvider"
 import { useState } from "react"
 import AccountModal from "./AccountModal"
-import { AtIcon, LogoutIcon, SettingsIcon } from "../base/Icon"
+import { AtIcon, LogoutIcon, SettingsIcon } from "../common/Icon"
 
 
 export default function Account() {

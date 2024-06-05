@@ -1,4 +1,4 @@
-import LoginOrRegisterForm from "../../components/auth/LoginOrRegisterForm";
+import LoginOrRegisterForm from "../../features/auth/components/LoginOrRegisterForm";
 import BaseLayout from "../../layouts/BaseLayout";
 
 export default function Error401() {

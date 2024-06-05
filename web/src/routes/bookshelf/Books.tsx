@@ -1,9 +1,9 @@
 import BaseLayout from "../../layouts/BaseLayout";
-import SearchBar from "../../components/searchbar/SearchBar";
+import SearchBar from "../../features/searchbar/components/SearchBar";
 import { createContext } from "react";
 import useBooks from "./useBooks";
-import { BookShelfContextProps, bookShelfContextInitialState } from "../../components/book/bookshelfOptions";
-import FilterOptions from "../../components/searchbar/FilterOptions";
+import { BookShelfContextProps, bookShelfContextInitialState } from "../../features/bookshelf/services/initialState";
+import FilterOptions from "../../features/searchbar/components/FilterOptions";
 
 
 export const BookShelfContext = createContext<BookShelfContextProps>(bookShelfContextInitialState)

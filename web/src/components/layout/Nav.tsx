@@ -1,4 +1,4 @@
-import { useAuth } from "../../lib/auth/AuthProvider";
+import { useAuth } from "../../features/auth/components/AuthProvider";
 import Wrapper from "./Wrapper";
 import { AddBookNavLink, BookshelfNavLink, CommunityNavLink, DashboardNavLink, HomeNavLink } from "./NavLinks";
 

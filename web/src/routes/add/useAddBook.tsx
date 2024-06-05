@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { GoogleBookResponse } from "../../lib/book/types"
+import { GoogleBookResponse } from "../../features/book/types/types"
 import { SearchInput, UseAddBook } from "./types"
 import { GOOGLE_BOOKS_API_URL } from "../../config"
 

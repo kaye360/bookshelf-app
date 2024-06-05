@@ -1,5 +1,5 @@
 import { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form"
-import { GoogleBookResponse } from "../../lib/book/types"
+import { GoogleBookResponse } from "../../features/book/types/types"
 
 export interface SearchInput {
     query : string

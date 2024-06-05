@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import './main.css'
 import { RouterProvider } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import AuthProvider from './lib/auth/AuthProvider'
-import { router } from './lib/router/routes'
+import AuthProvider from './features/auth/components/AuthProvider'
+import { router } from './features/router/routes'
 
 const queryClient = new QueryClient()
 

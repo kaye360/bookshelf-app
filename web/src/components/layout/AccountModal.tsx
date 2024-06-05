@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
-import { logout } from "../../lib/auth/actions";
-import Modal from "../base/Modal";
+import { logout } from "../../features/auth/services/actions";
+import Modal from "../common/Modal";
 import Button from "../form/Button";
 import { useNavigate } from "react-router-dom";
 

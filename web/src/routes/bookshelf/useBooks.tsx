@@ -1,13 +1,14 @@
 import { useSearchParams } from "react-router-dom"
-import BookGrid from "../../components/book/BookGrid"
-import BookGridItem from "../../components/book/BookGridItem"
-import BookTable from "../../components/book/BookTable"
-import BookTableRow from "../../components/book/BookTableRow"
-import { useAuth } from "../../lib/auth/AuthProvider"
-import { resolveBookList } from "../../lib/book/bookList"
-import { BookshelfParams, bookshelfOptionsInitialState } from "../../components/book/bookshelfOptions"
-import BookCardList from "../../components/book/BookCardList"
-import BookCard from "../../components/book/BookCard"
+import BookGrid from "../../features/bookshelf/components/BookGrid"
+import BookGridItem from "../../features/bookshelf/components/BookGridItem"
+import BookTable from "../../features/bookshelf/components/BookTable"
+import { useAuth } from "../../features/auth/components/AuthProvider"
+import { resolveBookList } from "../../features/bookshelf/services/resolveBookList"
+import { bookshelfOptionsInitialState } from "../../features/bookshelf/services/initialState"
+import BookCardList from "../../features/bookshelf/components/BookCardList"
+import BookCard from "../../features/bookshelf/components/BookCard"
+import BookTableRow from "../../features/bookshelf/components/BookTableRow"
+import { BookshelfParams } from "../../features/bookshelf/types/types"
 
 
 export default function useBooks() {
