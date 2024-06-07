@@ -56,16 +56,15 @@ export default function Result({book} : {book: GoogleBook}) {
 
             </div>
 
-            { showAddBookModal &&
-                <AddBookModal 
-                    showAddBookModal={showAddBookModal}
-                    setShowAddBookModal={setShowAddBookModal}
-                    book={book}
-                    isClicked={isClicked}
-                    setIsClicked={setIsClicked}
-                    query={query}
-                />
-            }
+            <AddBookModal 
+                showAddBookModal={showAddBookModal}
+                setShowAddBookModal={setShowAddBookModal}
+                book={book}
+                isClicked={isClicked}
+                setIsClicked={setIsClicked}
+                query={query}
+            />
+            
         </div>
 
     )

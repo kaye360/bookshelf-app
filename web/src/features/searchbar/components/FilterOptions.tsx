@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { BookShelfContext } from "../../../routes/bookshelf/Books";
-import { AllIcon, ReadIcon, UnreadIcon, FavouritesIcon, HashIcon } from "../../../components/common/Icon";
+import { AllIcon, CheckIcon, FavouritesIcon, HashIcon, UncheckIcon } from "../../../components/common/Icon";
 
 export default function FilterOptions() {
 
@@ -22,7 +22,7 @@ export default function FilterOptions() {
                 onClick={ () => updateSearchParam('filterBy', 'read') }
                 isActive={searchParams.get('filterBy') === 'read'}
             >
-                <ReadIcon />
+                <CheckIcon size={18} />
                 Read
             </OptionButton>
 
@@ -30,7 +30,7 @@ export default function FilterOptions() {
                 onClick={ () => updateSearchParam('filterBy', 'unread') }
                 isActive={searchParams.get('filterBy') === 'unread'}
             >
-                <UnreadIcon />
+                <UncheckIcon size={18} />
                 Unread
             </OptionButton>
 

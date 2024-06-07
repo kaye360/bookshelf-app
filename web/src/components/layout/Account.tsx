@@ -41,6 +41,7 @@ export default function Account() {
                 </div>
             }
 
+            
             <AccountModal 
                 showLogoutModal={showLogoutModal}
                 setShowLogoutModal={setShowLogoutModal}

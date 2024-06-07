@@ -27,27 +27,32 @@ export default function Modal( {showModal, setShowModal, children} : ModalProps 
         }
     }
     
-    return (
-        <div
-            id="modal"
-            onClick={handleClick}
-            className={`
-                fixed inset-0 grid place-items-center bg-white/90 transition-all duration-500
-                ${showModal ? 'z-[9999] opacity-100' : 'z-[-9999] opacity-0'}
-            `}
-        >
-            <div className="bg-bg-accent shadow-md p-12 max-w-xl relative">
+    if (showModal) { 
+        return (
 
-                {children}
+            <div
+                id="modal"
+                onClick={handleClick}
+                className={`
+                    fixed inset-0 grid place-items-center bg-white/90 transition-all duration-500
+                    ${showModal ? 'z-[9999] opacity-100' : 'z-[-9999] opacity-0'}
+                `}
+            >
+                <div className="bg-bg-accent shadow-md p-12 max-w-xl relative">
 
-                <button 
-                    onClick={ () => setShowModal(false) } 
-                    className="absolute right-3 top-3"
-                >
-                    <CloseIcon />
-                </button>
+                    {children}
 
+                    <button 
+                        onClick={ () => setShowModal(false) } 
+                        className="absolute right-3 top-3"
+                    >
+                        <CloseIcon />
+                    </button>
+
+                </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        return <></>
+    }
 }

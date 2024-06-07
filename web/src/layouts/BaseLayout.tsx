@@ -6,9 +6,9 @@ import { ReactNode, useEffect } from "react";
 
 export default function BaseLayout({children} : {children? : ReactNode}) {
 
-    // useEffect( () => {
-    //     scrollTo({ top : 0, behavior : 'instant'})
-    // }, [window.location])
+    useEffect( () => {
+        scrollTo({ top : 0, behavior : 'instant'})
+    }, [window.location.href])
     
     return (
         <>

@@ -38,6 +38,10 @@ Route::post('logout', [UserAuthenticationController::class, 'logout'])->middlewa
 
 Route::get('bookshelf/{userId}', [UserBookController::class, 'index']);
 Route::post('book/add', [UserBookController::class, 'create']);
-// Route::put('book/{id}', [UserBookController::class, 'update']);
+Route::put('book/{id}', [UserBookController::class, 'update'])->middleware('auth:sanctum');
 // Route::delete('book/{id}', [UserBookController::class, 'delete']);
 
+Route::fallback( function(){
+    return response()->json([
+        'message' => 'Page Not Found.'], 404);
+});

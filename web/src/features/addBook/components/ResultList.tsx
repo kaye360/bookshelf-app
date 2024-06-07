@@ -13,7 +13,7 @@ export default function ResultList({data} : UseAddBook['resultsProps'] ) {
     const hasMoreBooks =  page * 7 < totalBooks
 
     return (
-        <div className='grid gap-8 w-full max-w-3xl'>
+        <div className='grid gap-16 w-full max-w-3xl'>
 
             { bookList.map( book => (
                 <Result book={book} key={book.id} />
