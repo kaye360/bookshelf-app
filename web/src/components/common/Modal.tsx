@@ -1,5 +1,6 @@
 import { SyntheticEvent, useEffect } from "react"
 import { CloseIcon } from "./Icon"
+import { createPortal } from "react-dom"
 
 
 interface ModalProps {
@@ -28,8 +29,7 @@ export default function Modal( {showModal, setShowModal, children} : ModalProps 
     }
     
     if (showModal) { 
-        return (
-
+        return createPortal(
             <div
                 id="modal"
                 onClick={handleClick}
@@ -51,7 +51,7 @@ export default function Modal( {showModal, setShowModal, children} : ModalProps 
 
                 </div>
             </div>
-        )
+        , document.body)
     } else {
         return <></>
     }

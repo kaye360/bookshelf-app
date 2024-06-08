@@ -26,119 +26,114 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
     const { isError, isFetching, isSuccess } = query
 
     return (
-        <>
-            { createPortal(
-                <Modal
-                    showModal={ showAddBookModal }
-                    setShowModal={ setShowAddBookModal }
-                >
-                    <div className="flex items-center gap-3 text-primary-light">
-                        <img src={book.volumeInfo.imageLinks?.thumbnail} />
-                        <div className="grid gap-2">
-                            <h2 className="text-xl font-bold">
-                                {book.volumeInfo.title}
-                            </h2>
-                            <span className="font-semibold">
-                                {book.volumeInfo.subtitle}
-                            </span>
-                            <span>
-                                {book.volumeInfo.authors?.slice(0,5).join(', ')}
-                            </span>
-                        </div>
-                    </div>
+        <Modal
+            showModal={ showAddBookModal }
+            setShowModal={ setShowAddBookModal }
+        >
+            <div className="flex items-center gap-3 text-primary-light">
+                <img src={book.volumeInfo.imageLinks?.thumbnail} />
+                <div className="grid gap-2">
+                    <h2 className="text-xl font-bold">
+                        {book.volumeInfo.title}
+                    </h2>
+                    <span className="font-semibold">
+                        {book.volumeInfo.subtitle}
+                    </span>
+                    <span>
+                        {book.volumeInfo.authors?.slice(0,5).join(', ')}
+                    </span>
+                </div>
+            </div>
 
-                    <form 
-                        className="grid gap-3 mt-5 text-primary-light"
-                        onSubmit={ handleSubmit }
-                        id="addBookForm"
+            <form 
+                className="grid gap-3 mt-5 text-primary-light"
+                onSubmit={ handleSubmit }
+                id="addBookForm"
+            >
+
+                <label className="flex items-center gap-2 group relative">
+
+                    <span className="hidden group-has-[:checked]:block">
+                        <CheckIcon />
+                    </span>
+
+                    <span className="block group-has-[:checked]:hidden">
+                        <UncheckIcon />
+                    </span>
+
+                    <input 
+                        type="checkbox" 
+                        defaultChecked 
+                        name="isRead"
+                        id="isRead"
+                        className="opacity-0 absolute" 
+                    />
+
+                    <span className="select-none cursor-pointer">
+                        I have read this book
+                    </span>
+
+                </label>
+
+                <label className="flex items-center gap-2 group relative">
+
+                    <span className="hidden group-has-[:checked]:block">
+                        <CheckIcon />
+                    </span>
+
+                    <span className="block group-has-[:checked]:hidden">
+                        <UncheckIcon />
+                    </span>
+
+                    <input 
+                        type="checkbox" 
+                        name="isOwned"
+                        id="isOwned"
+                        defaultChecked 
+                        className="opacity-0 absolute" 
+                    />
+
+                    <span className="select-none cursor-pointer">
+                        I own this book
+                    </span>
+
+                </label>
+
+                { !isFetching && !isClicked && (
+                    <Button 
+                        type="submit"
                     >
+                        Add Book
+                    </Button>
+                )}
 
-                        <label className="flex items-center gap-2 group relative">
 
-                            <span className="hidden group-has-[:checked]:block">
+                <div className="flex items-center gap-2 justify-center text-xl font-semibold">
+                    { isFetching && (
+                        <>
+                            <LoaderIcon />
+                            Adding Book...
+                        </>
+                    )}
+                    { !isFetching && isSuccess && isClicked && (
+                        <div className="grid gap-1">
+                            <div className="flex items-center gap-2">
                                 <CheckIcon />
-                            </span>
-
-                            <span className="block group-has-[:checked]:hidden">
-                                <UncheckIcon />
-                            </span>
-
-                            <input 
-                                type="checkbox" 
-                                defaultChecked 
-                                name="isRead"
-                                id="isRead"
-                                className="opacity-0 absolute" 
-                            />
-
-                            <span className="select-none cursor-pointer">
-                                I have read this book
-                            </span>
-
-                        </label>
-
-                        <label className="flex items-center gap-2 group relative">
-
-                            <span className="hidden group-has-[:checked]:block">
-                                <CheckIcon />
-                            </span>
-
-                            <span className="block group-has-[:checked]:hidden">
-                                <UncheckIcon />
-                            </span>
-
-                            <input 
-                                type="checkbox" 
-                                name="isOwned"
-                                id="isOwned"
-                                defaultChecked 
-                                className="opacity-0 absolute" 
-                            />
-
-                            <span className="select-none cursor-pointer">
-                                I own this book
-                            </span>
-
-                        </label>
-
-                        { !isFetching && !isClicked && (
-                            <Button 
-                                type="submit"
+                                Book Added! 
+                            </div>
+                            <button
+                                onClick={ () => setShowAddBookModal(false) }
+                                className="text-sm font-medium text-center hover:underline"
                             >
-                                Add Book
-                            </Button>
-                        )}
-
-
-                        <div className="flex items-center gap-2 justify-center text-xl font-semibold">
-                            { isFetching && (
-                                <>
-                                    <LoaderIcon />
-                                    Adding Book...
-                                </>
-                            )}
-                            { !isFetching && isSuccess && isClicked && (
-                                <div className="grid gap-1">
-                                    <div className="flex items-center gap-2">
-                                        <CheckIcon />
-                                        Book Added! 
-                                    </div>
-                                    <button
-                                        onClick={ () => setShowAddBookModal(false) }
-                                        className="text-sm font-medium text-center hover:underline"
-                                    >
-                                        Close
-                                    </button>
-                                </div>
-                            )}
+                                Close
+                            </button>
                         </div>
+                    )}
+                </div>
 
 
-                    </form>
-                </Modal>,
-                document.body
-            )}
-        </>
+            </form>
+        </Modal>
     )
 }
 

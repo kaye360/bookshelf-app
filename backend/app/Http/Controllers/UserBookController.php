@@ -46,6 +46,7 @@ class UserBookController extends Controller
 
     public function delete(string $id)
     {
-
+        UserBook::find($id)->delete();
+        return 204;
     }
 }

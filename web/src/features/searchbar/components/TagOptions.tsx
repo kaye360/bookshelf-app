@@ -10,7 +10,7 @@ export default function TagOptions() {
     const { user } = useAuth()
     const { searchParams, updateSearchParam } = useContext(BookShelfContext)
 
-    const tags = getTagsFromBookList(user?.books || []).slice(0,6)
+    const tags = getTagsFromBookList(user?.books || []).slice(0,8)
 
     return (
         <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide text-primary-light">

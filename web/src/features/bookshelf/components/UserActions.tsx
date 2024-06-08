@@ -8,7 +8,9 @@ import UserActionsMore from "./UserActionsMore";
 
 export default function UserActions({book} : {book : UserBook}) {
 
-    const { userProps, handleIsFavouriteClick, handleIsReadClick, handleIsOwnedClick } = useUserProps(book)
+    const { userProps, handlers, moreActions} = useUserProps(book)
+    const { handleIsFavouriteClick, handleIsOwnedClick, handleIsReadClick } = handlers
+    const { isMoreActionsOpen, setIsMoreActionsOpen, toggleIsMoreActionsOpen } = moreActions
 
     const IsReadIcon = userProps.isRead ? CheckIcon : UncheckIcon
 
@@ -36,17 +38,18 @@ export default function UserActions({book} : {book : UserBook}) {
                 </UserActionButton>
             </ToolTipWrapper>
 
-            <ToolTipWrapper className="ml-auto cursor-pointer">
-                <UserActionButton>
-                    <label>
-                        <MoreIcon size={18} className="cursor-pointer" />
-                        <input type="checkbox" defaultChecked={false} className="hidden" />
-                    </label>
+            <ToolTipWrapper className="ml-auto">
+                <UserActionButton onClick={ toggleIsMoreActionsOpen }>
+                    <MoreIcon size={18} />
                     <ToolTip title="More" />
                 </UserActionButton>
             </ToolTipWrapper>
 
-            <UserActionsMore book={book} />
+            <UserActionsMore 
+                book={book} 
+                isOpen={isMoreActionsOpen} 
+                setIsOpen={setIsMoreActionsOpen} 
+            />
             
         </div>
   )

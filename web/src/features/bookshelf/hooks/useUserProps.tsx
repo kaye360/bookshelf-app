@@ -3,6 +3,7 @@ import { API_URL } from "../../../config"
 import useFetch from "../../../hooks/useFetch"
 import { UserBook } from "../../book/types/types"
 import { useAuth } from "../../auth/components/AuthProvider"
+import useToggleState from "../../../hooks/useToggleState"
 
 export default function useUserProps(book : UserBook) {
 
@@ -19,10 +20,7 @@ export default function useUserProps(book : UserBook) {
     const toggleBookIsRead      = () => setUserProps( prev => ({ ...prev, isRead : !prev.isRead}) )
     const toggleBookIsOwned     = () => setUserProps( prev => ({ ...prev, group : prev.group === 'owned' ? 'wishlist' : 'owned'}) )
 
-
-    /**
-     * @todo refactor the following into 1 function
-     */
+    const [isMoreActionsOpen, setIsMoreActionsOpen, toggleIsMoreActionsOpen] = useToggleState(false)
 
     async function handleIsFavouriteClick() {
 
@@ -72,21 +70,19 @@ export default function useUserProps(book : UserBook) {
         updateUser()
     }
 
-    async function updateTags(tags: string[]) {
-        const response = await fetchApi({
-            url: `${API_URL}/book/${book.id}`,
-            method: 'PUT',
-            auth : true,
-            payload : { tags: JSON.stringify( tags ) }
-        })
-        return response
-    }
-    
+
     return {
-        handleIsFavouriteClick,
-        handleIsReadClick,
-        handleIsOwnedClick,
-        updateTags,
+        handlers : {
+            handleIsFavouriteClick,
+            handleIsReadClick,
+            handleIsOwnedClick,
+
+        },
+        moreActions : {
+            isMoreActionsOpen,
+            setIsMoreActionsOpen,
+            toggleIsMoreActionsOpen,
+        },
         userProps
     }
 }

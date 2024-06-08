@@ -1,45 +1,22 @@
-import { Dispatch, SyntheticEvent, useState } from "react";
 import Modal from "../../../components/common/Modal";
 import { UserBook } from "../../book/types/types";
 import { AlertIcon, LoaderIcon } from "../../../components/common/Icon";
 import Button from "../../../components/form/Button";
-import useUserProps from "../hooks/useUserProps";
-import { useAuth } from "../../auth/components/AuthProvider";
+import useEditBookTags from "../hooks/useEditBookTags";
 
 
 interface EditTagsModalProps {
     book : UserBook
     showEditTagsModal : boolean
-    setShowEditTagsModal : Dispatch<React.SetStateAction<boolean>>
+    setShowEditTagsModal : React.Dispatch<React.SetStateAction<boolean>>
 }
 
 
 export default function EditTagsModal({book, showEditTagsModal, setShowEditTagsModal} : EditTagsModalProps) {
 
-    const { updateUser } = useAuth()
-    const { updateTags } = useUserProps(book)
-
-    const defaultStatus = { isLoading : false, isSuccess : false }
-    const [status, setStatus] = useState(defaultStatus)
+    const { handleSubmit, status } = useEditBookTags({book})
 
     const hasImage = book.image.url.includes('google')
-
-
-    async function handleSubmit(e: SyntheticEvent) {
-        e.preventDefault()
-        setStatus( prev => ({...prev, isLoading : true}) )
-        const tagsInput = document.querySelector('#book-tags-textarea') as HTMLTextAreaElement
-        const tags = tagsInput.value.trim().toLowerCase().split(' ').filter( tag => tag !== "")
-        const query = await updateTags(tags)
-
-        setStatus( prev => ({...prev, isLoading : false}))
-
-        if( !query.error ) {
-            updateUser()
-            setStatus( prev => ({...prev, isSuccess : true}) )
-            setTimeout( () => setStatus(defaultStatus), 5000 )
-        }
-    }
 
     return (
         <Modal showModal={showEditTagsModal} setShowModal={setShowEditTagsModal}>
