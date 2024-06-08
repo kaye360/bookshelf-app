@@ -1,4 +1,3 @@
-import H1 from "../../components/common/H1";
 import BookGridItem from "../../features/bookshelf/components/BookGridItem";
 import BaseLayout from "../../layouts/BaseLayout";
 import { useAuth } from "../../features/auth/components/AuthProvider";
@@ -12,9 +11,7 @@ export default function Dashboard() {
     return (
         <BaseLayout>
 
-            <H1>Dashboard</H1>
-
-            <p className="text-xl mb-8">
+            <p className="text-xl my-8">
                 Welcome {user?.name} 
             </p>
 
