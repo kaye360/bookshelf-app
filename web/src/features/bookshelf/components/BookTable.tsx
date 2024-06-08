@@ -10,8 +10,8 @@ export default function BookTable({children} : {children?:any}) {
                     <BookTableCell>Cover</BookTableCell>
                     <BookTableCell>Title</BookTableCell>
                     <BookTableCell>Authors</BookTableCell>
-                    <BookTableCell>Read?</BookTableCell>
-                    <BookTableCell>Favorite?</BookTableCell>
+                    <BookTableCell>Tags</BookTableCell>
+                    <BookTableCell>Actions</BookTableCell>
                 </tr>
             </thead>
 

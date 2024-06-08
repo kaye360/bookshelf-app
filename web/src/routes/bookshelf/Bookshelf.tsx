@@ -1,9 +1,11 @@
 import BaseLayout from "../../layouts/BaseLayout";
 import SearchBar from "../../features/searchbar/components/SearchBar";
 import { createContext } from "react";
-import useBooks from "./useBooks";
-import { BookShelfContextProps, bookShelfContextInitialState } from "../../features/bookshelf/services/initialState";
+import { bookShelfContextInitialState } from "../../features/bookshelf/services/initialState";
 import FilterOptions from "../../features/searchbar/components/FilterOptions";
+import { BookShelfContextProps } from "../../features/bookshelf/types/types";
+import useSearchBarParams from "../../features/searchbar/hooks/useSearchBarParams";
+import TagOptions from "../../features/searchbar/components/TagOptions";
 
 
 export const BookShelfContext = createContext<BookShelfContextProps>(bookShelfContextInitialState)
@@ -18,15 +20,16 @@ export default function BookShelf() {
         books,
         BookList,
         BookListItem
-    } = useBooks()
+    } = useSearchBarParams()
 
     return (
         <BaseLayout>
         
             <BookShelfContext.Provider value={{searchParams, setSearchParams, updateSearchParam}}>
-                <div className="grid gap-2 my-6">
+                <div className="grid gap-3 mt-6 mb-8">
                     <SearchBar />
                     <FilterOptions />
+                    <TagOptions />
                 </div>
                 <BookList>
                     {books.map( book => (

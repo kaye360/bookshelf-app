@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserBook } from "../../book/types/types";
-import { BookShelfContext } from "../../../routes/bookshelf/Books";
+import { BookShelfContext } from "../../../routes/bookshelf/Bookshelf";
 import BookTitle from "./BookTitle";
 import UserActions from "./UserActions";
 

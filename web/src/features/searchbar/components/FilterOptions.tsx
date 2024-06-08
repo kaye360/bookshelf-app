@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
-import { BookShelfContext } from "../../../routes/bookshelf/Books";
-import { AllIcon, CheckIcon, FavouritesIcon, HashIcon, UncheckIcon } from "../../../components/common/Icon";
+import { BookShelfContext } from "../../../routes/bookshelf/Bookshelf";
+import { AllIcon, CheckIcon, FavouritesIcon, UncheckIcon } from "../../../components/common/Icon";
 
 export default function FilterOptions() {
 
     const { searchParams, updateSearchParam } = useContext(BookShelfContext)
 
     return (
-        <div className="flex items-center gap-3 px-4 overflow-x-auto scrollbar-hide text-primary-light">
+        <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide text-primary-light">
 
             <OptionButton
                 onClick={ () => updateSearchParam('filterBy', 'all') }
@@ -43,35 +43,19 @@ export default function FilterOptions() {
             </OptionButton>
 
             <OptionButton
-                onClick={ () => updateSearchParam('filterBy', 'tag1') }
-                isActive={searchParams.get('filterBy') === 'tag1'}
+                onClick={ () => updateSearchParam('filterBy', 'favourite') }
+                isActive={false}
             >
-                <HashIcon />
-                tag1
+                <FavouritesIcon />
+                Owned
             </OptionButton>
 
             <OptionButton
-                onClick={ () => updateSearchParam('filterBy', 'science') }
-                isActive={searchParams.get('filterBy') === '#science'}
+                onClick={ () => updateSearchParam('filterBy', 'favourite') }
+                isActive={false}
             >
-                <HashIcon />
-                science
-            </OptionButton>
-
-            <OptionButton
-                onClick={ () => updateSearchParam('filterBy', 'biology') }
-                isActive={searchParams.get('filterBy') === '#biology'}
-            >
-                <HashIcon />
-                biology
-            </OptionButton>
-
-            <OptionButton
-                onClick={ () => updateSearchParam('filterBy', 'politics') }
-                isActive={searchParams.get('filterBy') === '#politics'}
-            >
-                <HashIcon />
-                politics
+                <FavouritesIcon />
+                Wishlist
             </OptionButton>
 
         </div>

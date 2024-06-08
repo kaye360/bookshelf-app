@@ -8,7 +8,7 @@ export default function BookGridItem({book} :  { book : UserBook}) {
     const hasImage = book.image.url.includes('google')
 
     return (
-        <div className={` grid gap-2 text-primary-light ${ !hasImage ? 'bg-primary-light/10 rounded min-h-56 p-1 items-end' : '' } `}>
+        <div className={` grid gap-1 text-primary-light `}>
 
             { hasImage ? (
                 <img 
@@ -16,10 +16,18 @@ export default function BookGridItem({book} :  { book : UserBook}) {
                     className="w-full aspect-[2/3] object-cover rounded-md"
                 />
             ) : (
-                <BookTitle>
-                    {book.title}
-                </BookTitle>
+                <div className="bg-primary-light/5 text-primary-light/80 rounded min-h-64 p-4">
+                    <BookTitle>
+                        {book.title}
+                    </BookTitle>
+                </div>
             )}
+
+            <div className="flex flex-wrap items-center gap-x-2 text-xs overflow-hidden">
+                {book.tags.map( (tag, i) => (
+                    <a href={`/bookshelf/tag/${tag}`} key={i}>#{tag}</a>
+                ))}
+            </div>
 
             <UserActions book={book} />
 

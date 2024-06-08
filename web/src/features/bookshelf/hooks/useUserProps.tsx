@@ -19,6 +19,11 @@ export default function useUserProps(book : UserBook) {
     const toggleBookIsRead      = () => setUserProps( prev => ({ ...prev, isRead : !prev.isRead}) )
     const toggleBookIsOwned     = () => setUserProps( prev => ({ ...prev, group : prev.group === 'owned' ? 'wishlist' : 'owned'}) )
 
+
+    /**
+     * @todo refactor the following into 1 function
+     */
+
     async function handleIsFavouriteClick() {
 
         toggleBookIsFavourite()
@@ -66,11 +71,22 @@ export default function useUserProps(book : UserBook) {
 
         updateUser()
     }
+
+    async function updateTags(tags: string[]) {
+        const response = await fetchApi({
+            url: `${API_URL}/book/${book.id}`,
+            method: 'PUT',
+            auth : true,
+            payload : { tags: JSON.stringify( tags ) }
+        })
+        return response
+    }
     
     return {
         handleIsFavouriteClick,
         handleIsReadClick,
         handleIsOwnedClick,
+        updateTags,
         userProps
     }
 }

@@ -12,7 +12,7 @@ export default function SearchBar() {
     const [showFilters, setShowFilters] = useState<boolean>(false)
 
     return (
-        <div className="grid gap-0 text-primary-light/70 mb-3">
+        <div className="grid gap-0 text-primary-light/70 mb-0">
 
             <div className="flex items-stretch border border-primary-light/20 rounded-lg has-[input:focus]:border-primary-light/70 ">
 

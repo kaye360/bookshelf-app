@@ -4,7 +4,7 @@ import Dashboard from "../../routes/dashboard/Dashboard";
 import Index from "../../routes/Index";
 import AuthRoute from "../auth/components/AuthRoute";
 import Book from "../../routes/book/Book";
-import BookShelf from "../../routes/bookshelf/Books";
+import BookShelf from "../../routes/bookshelf/Bookshelf";
 import Settings from "../../routes/settings/Settings";
 import User from "../../routes/user/User";
 import Community from "../../routes/community/Community";
