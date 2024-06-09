@@ -13,7 +13,10 @@ export default function TagOptions() {
     const tags = getTagsFromBookList(user?.books || []).slice(0,8)
 
     return (
-        <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide text-primary-light">
+        <div className={`
+            flex items-center gap-3 overflow-x-auto scrollbar-hide text-primary-light 
+            ${ searchParams.get('searchQuery') ? 'opacity-40' : ''} 
+        `}>
 
             { tags.map( tag => (
                 <OptionButton

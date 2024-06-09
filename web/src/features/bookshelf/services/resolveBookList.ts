@@ -9,7 +9,8 @@ export function resolveBookList(bookList : UserBook[], searchParams : URLSearchP
     if( searchQuery !== "" ) {
         bookList = bookList.filter( book => 
             book.authors.toLowerCase().includes( searchQuery ) || 
-            book.title.toLowerCase().includes( searchQuery ) 
+            book.title.toLowerCase().includes( searchQuery ) ||
+            book.tags.filter( tag => tag.includes( searchQuery )).length > 0
         )
     }
 
@@ -24,6 +25,12 @@ export function resolveBookList(bookList : UserBook[], searchParams : URLSearchP
                 break
             case 'favourite':
                 bookList = bookList.filter( book => !!book.isFavourite )
+                break
+            case 'wishlist':
+                bookList = bookList.filter( book => book.group === 'wishlist' )
+                break
+            case 'owned':
+                bookList = bookList.filter( book => book.group === 'owned' )
                 break
             default :
                 bookList = bookList.filter( book => book.tags.includes( filterBy ))

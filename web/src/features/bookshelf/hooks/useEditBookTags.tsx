@@ -18,8 +18,9 @@ export default function useEditBookTags({book} : {book : UserBook}) {
         e.preventDefault()
         setStatus( prev => ({...prev, isLoading : true}) )
         const tagsInput = document.querySelector('#book-tags-textarea') as HTMLTextAreaElement
-        const tags = tagsInput.value.trim().toLowerCase().split(' ').filter( tag => tag !== "")
-        const query = await updateTags(tags)
+        const tags = new Set( tagsInput.value.trim().toLowerCase().split(' ').filter( tag => tag !== "") )
+        const tagsArray = Array.from( tags )
+        const query = await updateTags(tagsArray)
 
         setStatus( prev => ({...prev, isLoading : false}))
 

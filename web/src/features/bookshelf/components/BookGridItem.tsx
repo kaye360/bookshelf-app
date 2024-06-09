@@ -1,11 +1,18 @@
 import { UserBook } from "../../book/types/types";
-import BookTitle from "./BookTitle";
 import UserActions from "./UserActions";
+import useSearchBarParams from "../../searchbar/hooks/useSearchBarParams";
+import { ComponentPropsWithoutRef } from "react";
 
 
-export default function BookGridItem({book} :  { book : UserBook}) {
+interface BookGridItemProps extends ComponentPropsWithoutRef<'div'> {
+    book : UserBook
+    hideUserActions? : boolean
+}
+
+export default function BookGridItem({book, hideUserActions=false} : BookGridItemProps ) {
 
     const hasImage = book.image.url.includes('google')
+    const { updateSearchParam } = useSearchBarParams()
 
     return (
         <div className={` grid gap-1 text-primary-light `}>
@@ -17,19 +24,24 @@ export default function BookGridItem({book} :  { book : UserBook}) {
                 />
             ) : (
                 <div className="bg-primary-light/5 text-primary-light/80 rounded min-h-64 p-4">
-                    <BookTitle>
-                        {book.title}
-                    </BookTitle>
+                    {book.title}
                 </div>
             )}
 
-            <div className="flex flex-wrap items-center gap-x-2 text-xs overflow-hidden">
-                {book.tags.map( (tag, i) => (
-                    <a href={`/bookshelf/tag/${tag}`} key={i}>#{tag}</a>
-                ))}
-            </div>
+            { !hideUserActions && 
+                <div className="flex flex-wrap items-center gap-x-2 text-xs overflow-hidden">
+                    {book.tags.map( (tag, i) => (
+                        <button 
+                            key={i}
+                            onClick={ () => updateSearchParam('filterBy', tag)}
+                        >
+                            #{tag}
+                        </button>
+                    ))}
+                </div>
+            }
 
-            <UserActions book={book} />
+            { !hideUserActions && <UserActions book={book} /> }
 
         </div>
     )

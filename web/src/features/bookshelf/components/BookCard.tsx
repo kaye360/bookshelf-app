@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { UserBook } from "../../book/types/types";
 import { BookShelfContext } from "../../../routes/bookshelf/Bookshelf";
-import BookTitle from "./BookTitle";
 import UserActions from "./UserActions";
 
 
@@ -10,16 +9,16 @@ export default function BookCard({book} : {book: UserBook}) {
     const { updateSearchParam } = useContext(BookShelfContext)
 
     return (
-        <div className="grid grid-cols-[1fr_2fr] gap-3">
+        <div className="grid grid-cols-[1fr_2fr] gap-3 text-sm">
             
             <div className="bg-slate-300 aspect-[1/1.6]">
                 <img src={book.image.url} className="w-full h-full object-cover" />
             </div>
 
             <div className="flex flex-col gap-1">
-                <BookTitle>
+                <span className="font-semibold">
                     {book.title}
-                </BookTitle>
+s               </span>
 
                 <div>
                     {book.authors}

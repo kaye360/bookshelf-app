@@ -1,20 +1,23 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { BookShelfContext } from "../../../routes/bookshelf/Bookshelf";
-import { AllIcon, CheckIcon, FavouritesIcon, UncheckIcon } from "../../../components/common/Icon";
+import { AllIcon, BookmarkIcon, CheckIcon, FavouritesIcon, FileTextIcon, UncheckIcon } from "../../../components/common/Icon";
 
 export default function FilterOptions() {
 
     const { searchParams, updateSearchParam } = useContext(BookShelfContext)
 
     return (
-        <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide text-primary-light">
+        <div className={`
+            flex items-center gap-3 overflow-x-auto scrollbar-hide text-primary-light 
+            ${ searchParams.get('searchQuery')  ? 'opacity-40' : ''} 
+        `}>
 
             <OptionButton
                 onClick={ () => updateSearchParam('filterBy', 'all') }
                 isActive={searchParams.get('filterBy') === 'all'}
             >
-                <AllIcon />
+                <AllIcon size={18} />
                 All
             </OptionButton>
 
@@ -38,23 +41,23 @@ export default function FilterOptions() {
                 onClick={ () => updateSearchParam('filterBy', 'favourite') }
                 isActive={searchParams.get('filterBy') === 'favourite'}
             >
-                <FavouritesIcon />
+                <FavouritesIcon size={18} />
                 Favourites
             </OptionButton>
 
             <OptionButton
-                onClick={ () => updateSearchParam('filterBy', 'favourite') }
+                onClick={ () => updateSearchParam('filterBy', 'owned') }
                 isActive={false}
             >
-                <FavouritesIcon />
+                <BookmarkIcon size={18} />    
                 Owned
             </OptionButton>
 
             <OptionButton
-                onClick={ () => updateSearchParam('filterBy', 'favourite') }
+                onClick={ () => updateSearchParam('filterBy', 'wishlist') }
                 isActive={false}
             >
-                <FavouritesIcon />
+                <FileTextIcon size={18} />
                 Wishlist
             </OptionButton>
 

@@ -2,7 +2,7 @@ import BookTableCell from "./BookTableCell";
 
 export default function BookTable({children} : {children?:any}) {
   return (
-    <div className="max-w-[100vw] overflow-auto">
+    <div className="max-w-[100vw] overflow-x-auto">
         <table className="w-full">
 
             <thead>

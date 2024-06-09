@@ -18,18 +18,18 @@ export default function Dashboard() {
             <div className="grid gap-8">
 
                 <DashboardSection title="Currently Reading">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, dignissimos et? Obcaecati, et vitae laborum rerum eum incidunt recusandae inventore sequi architecto minima doloremque ex facere exercitationem autem sit cupiditate.</p>
+                    <p className=" col-span-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, dignissimos et? Obcaecati, et vitae laborum rerum eum incidunt recusandae inventore sequi architecto minima doloremque ex facere exercitationem autem sit cupiditate.</p>
                 </DashboardSection>
                 
                 <DashboardSection title="Recently Added">
                     {books && books.slice(0,10).map( book => (
-                        <BookGridItem book={book} key={book.id} />
+                        <BookGridItem book={book} key={book.id} hideUserActions />
                     ))}
                 </DashboardSection>
 
                 <DashboardSection title="My Favourites">
                     { books && books.filter( book => book.isFavourite ).slice(0,10).map( book => (
-                        <BookGridItem book={book} key={book.id} />
+                        <BookGridItem book={book} key={book.id} hideUserActions />
                     ))}
                 </DashboardSection>
 

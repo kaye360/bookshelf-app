@@ -31,7 +31,7 @@ export default function UserActionsMore({book, isOpen, setIsOpen} : UserActionsM
     }
 
     return (
-        <div className={`absolute bottom-[34px] -left-[0px] -right-[0px] overflow-hidden py-0 max-h-0 grid gap-0 bg-bg/95 rounded shadow-md transition-all duration-300 ${isOpen ? 'py-2 max-h-[150px]' : ''}`}>
+        <div className={`absolute bottom-[34px] -right-[0px] overflow-hidden py-0 max-h-0 grid gap-0 bg-bg/95 rounded shadow-md transition-all duration-300 ${isOpen ? 'py-2 max-h-[150px]' : ''}`}>
 
             <UserActionsMoreButton onClick={ handleEditTags }>
                 Edit Tags

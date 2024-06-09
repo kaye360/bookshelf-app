@@ -12,7 +12,7 @@ export default function DashboardSection({title, children} : DashboardSectionPro
                 {title}
             </H2>
             
-            <div className="flex gap-4 w-fit">
+            <div className="grid grid-cols-[repeat(10,minmax(150px,1fr))] gap-4 ">
                 {children}
             </div>
         </section>  

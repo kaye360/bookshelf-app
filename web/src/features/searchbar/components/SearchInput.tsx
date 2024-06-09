@@ -7,6 +7,7 @@ export default function SearchInput() {
 
     return (
         <input 
+            type="search"
             name="search" 
             className="bg-transparent h-12 w-full px-4 focus:outline-0 text-primary-dark font-base" 
             placeholder="Search your library..."
