@@ -33,12 +33,9 @@ export default function Modal( {showModal, setShowModal, children} : ModalProps 
             <div
                 id="modal"
                 onClick={handleClick}
-                className={`
-                    fixed inset-0 grid place-items-center bg-white/90 transition-all duration-500
-                    ${showModal ? 'z-[9999] opacity-100' : 'z-[-9999] opacity-0'}
-                `}
+                className={`fixed inset-0 grid place-items-center bg-white/90 animate-modal-bg`}
             >
-                <div className="bg-bg-accent shadow-md p-12 max-w-xl relative">
+                <div className={`bg-bg-accent shadow-md p-12 max-w-xl relative animate-modal-content`}>
 
                     {children}
 

@@ -1,3 +1,5 @@
+import { transform } from 'typescript';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -7,24 +9,41 @@ export default {
   theme: {
     extend: {
 			fontFamily : {
-				'base' : ['Raleway', 'Helvetica', 'system-ui', 'sans-serif'],
+				'base'  : ['Raleway', 'Helvetica', 'system-ui', 'sans-serif'],
 				'theme' : ['Courgette', 'Helvetica', 'system-ui', 'sans-serif'],
 			},
-			// colors : {
-			// 	"primary"   : "hsl( 190deg 48% 30% / <alpha-value> )",
-			// 	"accent"    : "hsl( 0deg 70% 60% / <alpha-value> )",
-			// 	"bg"	    : "hsl( 12deg 45% 99% / <alpha-value> )",
-			// 	"bg-accent" : "hsl( 12deg 45% 97% / <alpha-value> )"
-			// },
 			colors : {
-				"primary-dark"   : "hsl( 195deg 23% 20% / <alpha-value> )",
-				"primary-light"   : "hsl( 195deg 23% 40% / <alpha-value> )",
-				// "primary"   : "hsl( 107deg 26% 68% / <alpha-value> )",
-				// "accent"    : "hsl( 0deg 93% 50% / <alpha-value> )",
-				"accent"    : "hsl( 0deg 65% 60% / <alpha-value> )",
-				"bg"	    : "hsl( 30deg 38% 99% / <alpha-value> )",
-				"bg-accent" : "hsl( 30deg 38% 96% / <alpha-value> )"
+				"primary-dark"  : "hsl( 210deg 23% 20% / <alpha-value> )",
+				"primary-light" : "hsl( 210deg 23% 40% / <alpha-value> )",
+				"accent"    	: "hsl( 0deg 65% 60% / <alpha-value> )",
+				"bg"	    	: "hsl( 30deg 38% 99% / <alpha-value> )",
+				"bg-accent" 	: "hsl( 30deg 38% 96% / <alpha-value> )"
 			},
+			animation : {
+				'modal-bg' 		: 'modal-bg 200ms ease both',
+				'modal-content' : 'modal-content 200ms ease both',
+				'error-toast'   : 'error-toast 300ms ease both',
+				'error-toast-timer'   : 'error-toast-timer 4s linear both',
+			},
+			keyframes :{
+				'modal-bg' : {
+					'0%'   : {opacity: 0},
+					'100%' : {opacity : 1}
+				},
+				'modal-content' : {
+					'0%'   : {transform : 'translateY(30px)'},
+					'100%' : {transform : 'translateY(0px)'}
+				},
+				'error-toast' : {
+					'0%'  : {transform : 'translateY(30px)'},
+					'80%' : {transform : 'translateY(-5px)'},
+					'100%' : {transform : 'translateY(0)'},
+				},
+				'error-toast-timer' : {
+					'0%'  : {width : '0%'},
+					'100%' : {width : '100%'},
+				}
+			}
 		},
   },
   plugins: [],
