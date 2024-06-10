@@ -2,21 +2,14 @@ import BookGridItem from "../../features/bookshelf/components/BookGridItem";
 import BaseLayout from "../../layouts/BaseLayout";
 import { useAuth } from "../../features/auth/components/AuthProvider";
 import DashboardSection from "../../features/dashboard/components/DashboardSection";
-import ErrorToast from "../../components/error/ErrorToast";
-import { useState } from "react";
 
 export default function Dashboard() {
+
     const {user} = useAuth()
-
-    const books = user?.books ? user.books : []
-
-    const [a, b] = useState(false)
+    const books  = user?.books ? user.books : []
 
     return (
         <BaseLayout>
-            <button onClick={() => b(p => !p)}>
-                click me pop {a ? 'show' : 'hide'}
-            </button>
 
             <p className="text-xl my-8">
                 Welcome {user?.name} 
@@ -63,11 +56,6 @@ export default function Dashboard() {
             </div>
 
 
-
-            <ErrorToast 
-                isShown={a}
-                message="Massive poopies were pooped. Massive poopies were pooped. "
-            />
 
         </BaseLayout>
     )

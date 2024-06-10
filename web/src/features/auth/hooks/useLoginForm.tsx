@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form"
+import { useForm, SubmitHandler, UseFormHandleSubmit, UseFormRegister, FieldErrors } from "react-hook-form"
 import { useAuthDispatch, useAuth } from "../components/AuthProvider"
 import { login } from "../services/actions"
 import { User } from "../types/types"
@@ -10,6 +10,7 @@ interface UseLoginForm {
     loading      : boolean
     errorMessage : string | null
     user         : User | null
+    errors       : FieldErrors<LoginFormInput>
 }
 
 export interface LoginFormInput {
@@ -25,13 +26,14 @@ export default function useLoginForm() : UseLoginForm {
 
     const onSubmit: SubmitHandler<LoginFormInput> = async (formData) => {
 
-        const payload = {
-            handle: formData.handle,
-            password : formData.password
-        }
-
         try {
+            const payload = {
+                handle: formData.handle,
+                password : formData.password
+            }
+
             await login(dispatch, payload)
+            
         } catch (e) {}
     }
 
@@ -41,6 +43,7 @@ export default function useLoginForm() : UseLoginForm {
         register,
         loading,
         errorMessage,
-        user
+        user,
+        errors
     }
 }

@@ -20,7 +20,7 @@ export async function login(dispatch : LoginDispatch, loginPayload: LoginPayload
         let response = await fetch(`${API_URL}/login`, requestOptions);
         let data     = await response.json();
 
-        if( data.user.id && data.access_token ) {
+        if( data.user?.id && data.access_token ) {
 
             localStorage.setItem('currentUser', JSON.stringify(data)); // Dont store book data in localstorage
             data.user.books = await getUserBooks(data.user.id)

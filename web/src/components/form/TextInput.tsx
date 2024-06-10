@@ -1,15 +1,16 @@
 import { ComponentPropsWithoutRef } from "react"
-import { UseFormRegister } from "react-hook-form"
+import { RegisterOptions, UseFormRegister } from "react-hook-form"
 
 
 interface TextInputProps extends ComponentPropsWithoutRef<"input"> {
-    label?    : string
-    register? : UseFormRegister<any>
-    name      : string
+    label?      : string
+    register?   : UseFormRegister<any>
+    name        : string
+    validation? : RegisterOptions<any, string> | undefined
 }
 
 
-export default function TextInput({label, register, name, ...props} : TextInputProps) {
+export default function TextInput({label, register, name, validation = undefined, ...props} : TextInputProps) {
 
     const Tag = label ? 'label' : 'div'
 
@@ -23,7 +24,7 @@ export default function TextInput({label, register, name, ...props} : TextInputP
 
 
             <input 
-                {...(register &&  register(name) ) }
+                {...(register &&  register(name, validation) ) }
                 {...props}
                 className="bg-bg outline outline-1 outline-primary-light/30 w-full max-w-xl rounded-md p-4" 
             />
