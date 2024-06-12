@@ -1,24 +1,35 @@
 import { SubmitHandler, useForm } from "react-hook-form"
-import TextInput from "../../../components/form/TextInput"
 import { useAuthDispatch, useAuth } from "./AuthProvider"
 import { register as registerUser } from "../services/actions"
 import Button from "../../../components/form/Button"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { registerSchema } from "../services/validation"
+import useIsUserHandleAvailable from "../hooks/useIsUserHandleAvailable"
+import ValidatedTextInput from "../../../components/form/ValidatedTextInput"
+import { CheckIcon, AlertIcon, LoaderIcon } from "../../../components/common/Icon"
+import UniqueUsernameStatus from "./UniqueUsernameStatus"
 
-interface RegisterFormInput {
-    handle          : string
-    email           : string
-    name            : string
-    password        : string
-    confirmPassword : string
+
+export interface RegisterFormInput {
+    handle             : string
+    email              : string
+    name               : string
+    password           : string
+    password_confirmation : string
 }
 
 
 export default function RegisterForm() {
 
     const dispatch = useAuthDispatch()
-    const { loading, errorMessage, user } = useAuth()
-    const { register, handleSubmit, formState : {errors} } = useForm<RegisterFormInput>()
+    const { loading : isLoading, errorMessage: isError, user } = useAuth()
 
+    const { register, handleSubmit, formState } = useForm<RegisterFormInput>({
+        resolver : yupResolver(registerSchema),
+        mode : 'onTouched'
+    })
+
+    const { handleUsernameOnChange, isUserHandleAvailable, hasTouched } = useIsUserHandleAvailable()
 
     const onSubmit: SubmitHandler<RegisterFormInput> = async (formData) => {
 
@@ -27,7 +38,7 @@ export default function RegisterForm() {
             email           : formData.email,
             name            : formData.name,
             password        : formData.password,
-            confirmPassword : formData.confirmPassword,
+            password_confirmation : formData.password_confirmation,
         }
 
         try {
@@ -43,36 +54,49 @@ export default function RegisterForm() {
                 className="grid gap-4"
             >
         
-                <TextInput 
+                <ValidatedTextInput 
                     label="Username"
                     name="handle"
                     register={register}
-                />
+                    onChange={ handleUsernameOnChange }
+                    formStateData={ [formState, 'handle'] }
+                />     
 
-                <TextInput 
+                { !formState.errors.handle && (
+                    <UniqueUsernameStatus 
+                        isUserHandleAvailable={isUserHandleAvailable}
+                        hasTouched={hasTouched}
+                    />
+                )}
+
+                <ValidatedTextInput
                     label="Email"
                     name="email"
                     register={register}
+                    formStateData={ [formState, 'email' ] }
                 />
 
-                <TextInput 
+                <ValidatedTextInput 
                     label="Your Name"
                     name="name"
                     register={register}
+                    formStateData={ [formState, 'name' ] }
                 />
 
-                <TextInput
+                <ValidatedTextInput
                     label="Password"
                     name="password"
                     type="password"
                     register={register}
+                    formStateData={ [formState, 'password' ] }
                 />
 
-                <TextInput
+                <ValidatedTextInput
                     label="Confirm Password"
-                    name="confirmPassword"
-                    type="password"
+                    name="password_confirmation"
+                    type="text"
                     register={register}
+                    formStateData={ [formState, 'password_confirmation' ] }
                 />
             
                 <Button type="submit">
@@ -81,21 +105,32 @@ export default function RegisterForm() {
         
             </form>
 
-            {
-                user && <p className=" text-emerald-400">Success! Redirecting...</p>
-            }
+            <div className={`
+                flex items-center gap-2 justify-center text-lg font-medium mt-3
+                ${isError === 'REGISTER' ? 'text-accent' : ''}
+                ${user ? 'text-emerald-400' : ''}
+            `}>
 
-            {
-                loading && <p>Loading...</p>
-            }
-        
-            {
-                errorMessage  && (
-                    <p className="text-red-500">
-                        {errorMessage}
-                    </p>
-            )}
-        
+                { isLoading && (
+                    <>
+                        <LoaderIcon />
+                        Registering...
+                    </>
+                )}
+                { isError === 'REGISTER' && (
+                    <>
+                        <AlertIcon />
+                        Somthing went wrong, please check all fields.
+                    </>
+                )}
+                { user && (
+                    <>
+                        <CheckIcon />
+                        Success! Redirecting...
+                    </>
+                )}
+            </div>
+                
         </div>
 
     )

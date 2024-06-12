@@ -6,6 +6,7 @@ import useLoginForm from "../hooks/useLoginForm"
 export default function LoginForm() {
 
     const {  handleSubmit, onSubmit, register, loading : isLoading, errorMessage: isError, user, errors } = useLoginForm()
+    
 
     return (
         <div className="px-4">
@@ -20,12 +21,11 @@ export default function LoginForm() {
                         label="Username"
                         name="handle"
                         register={register}
-                        validation={{ required : true}}
                     />
 
                     { errors.handle?.type === 'required' && (
                         <span className="text-red-400">Username is required.</span>
-                    ) }
+                    )}
                 </div>
 
                 <div>
@@ -34,12 +34,11 @@ export default function LoginForm() {
                         type="password"
                         name="password"
                         register={register}
-                        validation={{ required : true }}
                     />
 
                     { errors.password?.type === 'required' && (
                         <span className="text-red-400">Password is required.</span>
-                    ) }
+                    )}
                 </div>
             
                 { !isLoading && (
@@ -61,10 +60,10 @@ export default function LoginForm() {
                             Logging in...
                         </>
                     )}
-                    { isError && (
+                    { isError === 'LOGIN' && (
                         <>
                             <AlertIcon />
-                            {isError}
+                            Incorrect login credentials
                         </>
                     )}
                     { user && (
@@ -80,11 +79,6 @@ export default function LoginForm() {
                 </p>
         
             </form>
-        
-
-
-
-
 
         </div>
 

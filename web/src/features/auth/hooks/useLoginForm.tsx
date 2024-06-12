@@ -1,14 +1,16 @@
 import { useForm, SubmitHandler, UseFormHandleSubmit, UseFormRegister, FieldErrors } from "react-hook-form"
 import { useAuthDispatch, useAuth } from "../components/AuthProvider"
 import { login } from "../services/actions"
-import { User } from "../types/types"
+import { AuthError, User } from "../types/types"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { loginSchema } from "../services/validation"
 
 interface UseLoginForm { 
     handleSubmit : UseFormHandleSubmit<LoginFormInput, undefined>
     onSubmit     : SubmitHandler<LoginFormInput>
     register     : UseFormRegister<LoginFormInput>
     loading      : boolean
-    errorMessage : string | null
+    errorMessage : AuthError
     user         : User | null
     errors       : FieldErrors<LoginFormInput>
 }
@@ -22,7 +24,9 @@ export default function useLoginForm() : UseLoginForm {
     
     const dispatch = useAuthDispatch()
     const { loading, errorMessage, user } = useAuth()
-    const { register, handleSubmit, formState : {errors} } = useForm<LoginFormInput>()
+    const { register, handleSubmit, formState : {errors} } = useForm<LoginFormInput>({
+        resolver : yupResolver(loginSchema),
+    })
 
     const onSubmit: SubmitHandler<LoginFormInput> = async (formData) => {
 

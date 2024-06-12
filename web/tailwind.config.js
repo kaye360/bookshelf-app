@@ -42,7 +42,7 @@ export default {
 				'error-toast-timer' : {
 					'0%'  : {width : '0%'},
 					'100%' : {width : '100%'},
-				}
+				},
 			}
 		},
   },

@@ -15,11 +15,13 @@ export interface Settings {
     order : 'alphabetical' | 'uploadedAsc' | 'uploadedDesc'
 }
 
+export type AuthError = 'LOGIN' | 'REGISTER' | null
+
 interface AuthReducerStateIsAuth {
     user: User,
     token: string,
     loading: boolean,
-    errorMessage: string | null
+    errorMessage: AuthError
     isAuth : true
     updateUser : Function
 }
@@ -28,7 +30,7 @@ interface AuthReducerStateNoAuth {
     user: null,
     token: null,
     loading: boolean,
-    errorMessage: string | null
+    errorMessage: AuthError
     isAuth : false
     updateUser : Function
 }
@@ -41,7 +43,7 @@ export interface AuthReducerAction {
         user: any
         auth_token: any
     };
-    error?: any
+    error?: AuthError
 }
 
 export type LoginDispatch = ((arg0: AuthReducerAction) => void) | null
@@ -58,7 +60,7 @@ export interface RegisterPayload {
     email           : string
     name            : string
     password        : string
-    confirmPassword : string
+    password_confirmation : string
 }
 
 

@@ -2,29 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\UserBook;
-use stdClass;
 
 class UserAuthenticationController extends Controller
 {
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-            $name = $request->input('name');
-            $handle = $request->input('handle');
-            $handle = str_replace(' ', '_', $handle );
-            $handle = substr($handle, 0, 10);
-            $email = strtolower($request->input('email'));
-            $password = $request->input('password');
+            $validated = $request->validated();
 
             $user = User::create([
-                'name' => $name,
-                'handle' => $handle,
-                'email' => $email,
-                'password' => Hash::make($password)
+                'name' => $validated['name'],
+                'handle' => $validated['handle'],
+                'email' => $validated['email'],
+                'password' => Hash::make($validated['password'])
             ]);
 
             $token = $user->createToken('auth_token')->plainTextToken;
@@ -35,6 +29,13 @@ class UserAuthenticationController extends Controller
                 'access_token' => $token,
                 'token_type' => 'Bearer',
             ], 201);
+    }
+
+
+    public function isUserHandleAvailable($handle)
+    {
+        $isHandleAvailable = User::where('handle', $handle)->exists();
+        return response()->json( ['isHandleAvailable' => !$isHandleAvailable] );
     }
 
 
@@ -67,7 +68,7 @@ class UserAuthenticationController extends Controller
 
     public function logout()
     {
-        auth()->user()->tokens()->delete();
+        request()->user()->tokens()->delete();
 
         return response()->json([
             'message' => 'Succesfully Logged out'

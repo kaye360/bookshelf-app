@@ -23,8 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('login', [UserAuthenticationController::class, 'login']);
-Route::post('register', [UserAuthenticationController::class, 'register']);
 Route::post('logout', [UserAuthenticationController::class, 'logout'])->middleware('auth:sanctum');
+
+Route::post('register', [UserAuthenticationController::class, 'register']);
+Route::get('register/isUserHandleAvailable/{handle}', [UserAuthenticationController::class, 'isUserHandleAvailable']);
 // Route::post('logout', [UserAuthenticationController::class, 'logout']);
 // Route::get('user/{id}', [UserController::class, 'show']);
 // Route::post('user', [UserController::class, 'create']);

@@ -28,11 +28,11 @@ export async function login(dispatch : LoginDispatch, loginPayload: LoginPayload
             return data
         }
 
-        dispatch({ type: 'LOGIN_ERROR', error: data.message });
+        dispatch({ type: 'LOGIN_ERROR', error: 'LOGIN' });
         return
     } catch (error) {
         if( typeof error === 'string') {
-            dispatch && dispatch({ type: 'LOGIN_ERROR', error: error });
+            dispatch && dispatch({ type: 'LOGIN_ERROR', error: 'LOGIN' });
         }
     }
 }
@@ -68,11 +68,9 @@ export async function register(dispatch : RegisterDispatch, registerPayload: Reg
             return data
         }
 
-        dispatch({ type: 'REGISTER_ERROR', error: data.message });
+        dispatch({ type: 'REGISTER_ERROR', error: 'REGISTER' });
         return
     } catch (error) {
-        if( typeof error === 'string') {
-            dispatch && dispatch({ type: 'REGISTER_ERROR', error: error });
-        }
+        dispatch && dispatch({ type: 'REGISTER_ERROR', error: 'REGISTER' });
     }
 }

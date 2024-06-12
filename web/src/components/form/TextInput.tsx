@@ -6,16 +6,15 @@ interface TextInputProps extends ComponentPropsWithoutRef<"input"> {
     label?      : string
     register?   : UseFormRegister<any>
     name        : string
-    validation? : RegisterOptions<any, string> | undefined
 }
 
 
-export default function TextInput({label, register, name, validation = undefined, ...props} : TextInputProps) {
+export default function TextInput({label, register, name, ...props} : TextInputProps) {
 
-    const Tag = label ? 'label' : 'div'
+    const Wrapper = label ? 'label' : 'div'
 
     return (
-        <Tag className="block">
+        <Wrapper className="block">
             { label && (
                 <h3 className="font-semibold text-primary-light mb-1">
                     {label}
@@ -24,10 +23,10 @@ export default function TextInput({label, register, name, validation = undefined
 
 
             <input 
-                {...(register &&  register(name, validation) ) }
+                {...(register &&  register(name) ) }
                 {...props}
-                className="bg-bg outline outline-1 outline-primary-light/30 w-full max-w-xl rounded-md p-4" 
+                className="bg-bg outline outline-1 outline-primary-light/30 w-full max-w-xl rounded-md p-4 transition-all" 
             />
-        </Tag>
+        </Wrapper>
     )
 }
