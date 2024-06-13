@@ -26,6 +26,8 @@ export function useAuthDispatch() {
 
 export default function AuthProvider( {children} : AuthProviderProps ) {
 
+    const [user, dispatch] = useReducer(AuthReducer, userSession);
+
     if( userSession.isAuth ) {
 
         const { refetch } = useQuery({ queryKey : ['userBooks'], queryFn : async() => {
@@ -46,8 +48,7 @@ export default function AuthProvider( {children} : AuthProviderProps ) {
         userSession.updateUser = refetch
     }
 
-    const [user, dispatch] = useReducer(AuthReducer, userSession);
-
+    
 	return (
         <AuthContext.Provider value={user}>
             <AuthDispatchContext.Provider value={dispatch}>

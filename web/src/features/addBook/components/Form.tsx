@@ -16,7 +16,7 @@ export default function Form({handleSubmit, onSubmit, register, setQuery} : UseA
                 autoComplete="off"
             />
 
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-4 mt-4'>
 
                 <Button>
                     Search

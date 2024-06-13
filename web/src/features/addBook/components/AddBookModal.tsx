@@ -3,23 +3,23 @@ import { GoogleBook } from "../../book/types/types";
 import Button from "../../../components/form/Button";
 import { SyntheticEvent } from "react";
 import { UseQueryResult } from "@tanstack/react-query";
-import { CheckIcon, UncheckIcon, LoaderIcon } from "../../../components/common/Icon";
+import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon } from "../../../components/common/Icon";
 
 
 interface AddBookModalProps {
     showAddBookModal : boolean
     setShowAddBookModal : React.Dispatch<React.SetStateAction<boolean>>
     book : GoogleBook
-    isClicked : boolean
-    setIsClicked : React.Dispatch<React.SetStateAction<boolean>>
+    isBookAdded : boolean
+    setIsBookAdded : React.Dispatch<React.SetStateAction<boolean>>
     query : UseQueryResult<any, Error>
 }
 
-export default function AddBookModal({ book, showAddBookModal, setShowAddBookModal, query, isClicked, setIsClicked} : AddBookModalProps) {
+export default function AddBookModal({ book, showAddBookModal, setShowAddBookModal, query, isBookAdded, setIsBookAdded} : AddBookModalProps) {
 
     function handleSubmit(e: SyntheticEvent) {
         e.preventDefault()
-        setIsClicked(true)
+        setIsBookAdded(true)
     }
 
     const { isError, isFetching, isSuccess } = query
@@ -98,7 +98,7 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
 
                 </label>
 
-                { !isFetching && !isClicked && (
+                { !isFetching && !isBookAdded && (
                     <Button type="submit">
                         Add Book
                     </Button>
@@ -112,7 +112,7 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
                             Adding Book...
                         </>
                     )}
-                    { !isFetching && isSuccess && isClicked && (
+                    { !isFetching && isSuccess && isBookAdded && (
                         <div className="grid gap-1">
                             <div className="flex items-center gap-2">
                                 <CheckIcon />
@@ -126,7 +126,16 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
                             </button>
                         </div>
                     )}
+
+                    { isError && (
+                        <>
+                            <AlertIcon />
+                            Something went wrong, please try again. 
+                        </>
+                    )}
                 </div>
+
+
 
 
             </form>

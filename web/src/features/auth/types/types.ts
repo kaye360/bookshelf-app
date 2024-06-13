@@ -43,7 +43,7 @@ export interface AuthReducerAction {
         user: any
         auth_token: any
     };
-    error?: AuthError
+    // error?: any
 }
 
 export type LoginDispatch = ((arg0: AuthReducerAction) => void) | null
@@ -62,5 +62,3 @@ export interface RegisterPayload {
     password        : string
     password_confirmation : string
 }
-
-

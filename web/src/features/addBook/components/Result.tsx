@@ -2,10 +2,11 @@ import { GoogleBook } from "../../book/types/types"
 import { PlusIcon, CheckIcon } from "../../../components/common/Icon"
 import AddBookModal from "./AddBookModal"
 import useResult from "../hooks/useResult"
+import { formatGoogleBookResult } from "../services/formatGoogleBookResults"
 
 export default function Result({book} : {book: GoogleBook}) {
 
-    const { showAddBookModal, setShowAddBookModal, query, isClicked, setIsClicked, formatGoogleBookResult } = useResult({book})
+    const { showAddBookModal, setShowAddBookModal, query, isBookAdded, setIsBookAdded } = useResult({book})
 
     const { thumbnail, title, subTitle, pageCount, identifiers, categories, authors, description } = formatGoogleBookResult(book)
 
@@ -14,7 +15,7 @@ export default function Result({book} : {book: GoogleBook}) {
 
             <div className="grid gap-2">
                 { thumbnail && <img src={thumbnail} /> }
-                { query.isSuccess && !isClicked ? (
+                { query.isSuccess && !isBookAdded ? (
                     <button 
                         onClick={ () => setShowAddBookModal(true) }
                         className='flex gap-2 justify-center items-center min-w-max px-6 py-2 text-sm text-accent border border-accent/30 rounded-lg w-full hover:bg-accent hover:text-bg transition-colors'
@@ -60,8 +61,8 @@ export default function Result({book} : {book: GoogleBook}) {
                 showAddBookModal={showAddBookModal}
                 setShowAddBookModal={setShowAddBookModal}
                 book={book}
-                isClicked={isClicked}
-                setIsClicked={setIsClicked}
+                isBookAdded={isBookAdded}
+                setIsBookAdded={setIsBookAdded}
                 query={query}
             />
             

@@ -11,15 +11,24 @@ export default function Dashboard() {
     return (
         <BaseLayout>
 
-            <p className="text-xl my-8">
-                Welcome {user?.name} 
-            </p>
+            <div className="grid grid-cols-[1fr_0.6fr]">
+                <div>
+                    <p className="text-xl my-8">
+                        Welcome {user?.name} 
+                    </p>
+
+                    <h2 className="font-semibold text-2xl mb-3">
+                        Currently Reading
+                    </h2>
+
+                    <p className="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, dignissimos et? Obcaecati, et vitae laborum rerum eum incidunt recusandae inventore sequi architecto minima doloremque ex facere exercitationem autem sit cupiditate.</p>
+                </div>
+
+                <img src="/bookshelf.png" className="" />
+            </div>
 
             <div className="grid gap-8">
 
-                <DashboardSection title="Currently Reading">
-                    <p className=" col-span-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, dignissimos et? Obcaecati, et vitae laborum rerum eum incidunt recusandae inventore sequi architecto minima doloremque ex facere exercitationem autem sit cupiditate.</p>
-                </DashboardSection>
                 
                 <DashboardSection title="Recently Added">
                     {books && books.slice(0,10).map( book => (
