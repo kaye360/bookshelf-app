@@ -51,7 +51,7 @@ export default function useResult({book} : {book: GoogleBook}) {
                 body: JSON.stringify(payload)
             }
 
-            const res = await fetch(`${API_URL}/book/add`, requestOptions)
+            const res = await fetch(`${API_URL}/book`, requestOptions)
             const json = await res.json()
 
             updateUser()
