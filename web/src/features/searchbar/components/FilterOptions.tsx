@@ -9,7 +9,7 @@ export default function FilterOptions() {
 
     return (
         <div className={`
-            flex items-center gap-3 overflow-x-auto scrollbar-hide text-primary-light 
+            flex items-center gap-3 overflow-x-auto scrollbar-hide  
             ${ searchParams.get('searchQuery')  ? 'opacity-40' : ''} 
         `}>
 

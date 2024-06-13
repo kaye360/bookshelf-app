@@ -9,12 +9,12 @@ export default {
   theme: {
     extend: {
 			fontFamily : {
-				'base'  : ['Raleway', 'Helvetica', 'system-ui', 'sans-serif'],
+				'base'  : ['Plus Jakarta Sans', 'Helvetica', 'system-ui', 'sans-serif'],
 				'theme' : ['Courgette', 'Helvetica', 'system-ui', 'sans-serif'],
 			},
 			colors : {
-				"primary-dark"  : "hsl( 210deg 23% 20% / <alpha-value> )",
-				"primary-light" : "hsl( 210deg 23% 40% / <alpha-value> )",
+				"primary-dark"  : "hsl( 210deg 23% 40% / <alpha-value> )",
+				"primary-light" : "hsl( 210deg 23% 85% / <alpha-value> )",
 				"accent"    	: "hsl( 0deg 65% 60% / <alpha-value> )",
 				"bg"	    	: "hsl( 30deg 38% 99% / <alpha-value> )",
 				"bg-accent" 	: "hsl( 30deg 38% 96% / <alpha-value> )"
@@ -24,6 +24,7 @@ export default {
 				'modal-content' : 'modal-content 200ms ease both',
 				'error-toast'   : 'error-toast 300ms ease both',
 				'error-toast-timer'   : 'error-toast-timer 4s linear both',
+				'scale-in'   	: 'scale-in 100ms ease both',
 			},
 			keyframes :{
 				'modal-bg' : {
@@ -43,6 +44,10 @@ export default {
 					'0%'  : {width : '0%'},
 					'100%' : {width : '100%'},
 				},
+				'scale-in' : {
+					'0%' : {transform : 'scale(0)'},
+					'100%' : {transform : 'scale(1)'}
+				}
 			}
 		},
   },

@@ -7,9 +7,9 @@ export default function Nav() {
     const { isAuth } = useAuth()
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 z-50 md:static bg-bg py-4 md:py-0 max-w-[100vw]">
+        <nav className="fixed bottom-0 left-0 right-0 z-50 md:static bg-bg md:bg-primary-light/20 py-4 md:py-2 max-w-[100vw]">
             <Wrapper className="!py-0">
-                <ul className={`flex items-center gap-6 ${ isAuth ? 'justify-between' : 'justify-start'}`}>
+                <ul className={`flex items-center gap-6 ${ isAuth ? 'justify-evenly' : 'justify-start'}`}>
                     { isAuth ? (
                         <>
                             <DashboardNavLink />

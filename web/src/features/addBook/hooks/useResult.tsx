@@ -38,7 +38,7 @@ export default function useResult({book} : {book: GoogleBook}) {
                 group       : isOwned.checked ? 'owned' : 'wishlist',
                 isRead      : isRead.checked,
                 tags        : JSON.stringify([]),
-                authors     : book.volumeInfo.authors?.join(', ') || '',
+                authors     : book.volumeInfo.authors?.join(', ') || 'N/A',
                 isFavourite : false
             }
 

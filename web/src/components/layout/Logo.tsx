@@ -4,7 +4,7 @@ export default function Logo() {
     return (
         <Link 
             to="/"
-            className="flex items-center gap-0 w-fit font-theme text-xl tracking-tight text-primary-light relative border-0 -rotate-2 hover:scale-110 hover:translate-x-2 translate-y-1-[2px] transition-all"
+            className="flex items-center gap-0 w-fit font-theme text-xl tracking-tight text-primary-dark relative border-0 -rotate-2 hover:scale-110 hover:translate-x-2 translate-y-1-[2px] transition-all"
         >
             <svg width="99" height="37" viewBox="0 0 99 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.5 25H4.5C4.10218 25 3.72064 25.1405 3.43934 25.3905C3.15804 25.6406 3 25.9797 3 26.3333V37L7.5 33.6667L12 37V26.3333C12 25.9797 11.842 25.6406 11.5607 25.3905C11.2794 25.1405 10.8978 25 10.5 25Z" fill="#DA8B8B"/>

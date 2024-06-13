@@ -32,7 +32,7 @@ export default function EditTagsModal({book, showEditTagsModal, setShowEditTagsM
                         </span>
                     </h2>
 
-                    <div className="flex items-center gap-2 p-3 rounded border border-primary-light/30 text-primary-light text-sm">
+                    <div className="flex items-center gap-2 p-3 rounded border border-primary-light text-primary-dark text-sm">
                         <AlertIcon className="min-w-[24px]" />
                         Note: Separate each tag with a space. No hashtag is required.
                     </div>
@@ -59,12 +59,20 @@ export default function EditTagsModal({book, showEditTagsModal, setShowEditTagsM
 
                 <div className="flex items-center gap-3">
 
-                    <Button type="submit" variant="fill">
-                        { status.isLoading 
-                            ? <> <LoaderIcon /> Updating tags...</>
-                            : 'Update Tags'
-                        }
-                    </Button>
+                    { status.isLoading && (
+                        <>
+                            <LoaderIcon /> 
+                            <span className="text-lg font-semibold py-2">
+                                Updating tags...
+                            </span>
+                        </>
+                    )}
+
+                    { !status.isLoading && (
+                        <Button type="submit" variant="fill">
+                            Update Tags
+                        </Button>
+                    )}
 
                     { status.isSuccess && 'Changes saved.' }
 

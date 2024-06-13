@@ -5,8 +5,8 @@ import Account from "./Account";
 export default function Header() {
 
     return (
-        <header className="border-b border-primary-light/20">
-            <Wrapper className="flex justify-between w-full">
+        <header>
+            <Wrapper className="flex justify-between w-full !py-2">
                 <Logo />
                 <Account />
             </Wrapper>

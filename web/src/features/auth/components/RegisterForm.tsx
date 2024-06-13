@@ -94,7 +94,7 @@ export default function RegisterForm() {
                 <ValidatedTextInput
                     label="Confirm Password"
                     name="password_confirmation"
-                    type="text"
+                    type="password"
                     register={register}
                     formStateData={ [formState, 'password_confirmation' ] }
                 />

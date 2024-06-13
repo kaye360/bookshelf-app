@@ -38,7 +38,7 @@ export default function Result({book} : {book: GoogleBook}) {
                     { authors  && <span className="text-sm">{ authors }</span> }
                 </div>
 
-                <div className="grid text-primary-light/80 text-sm">
+                <div className="grid text-primary-dark/80 text-sm">
 
                     { pageCount && <span>Pages: { pageCount }</span> }
 

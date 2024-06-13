@@ -1,4 +1,3 @@
-import { createPortal } from "react-dom";
 import Modal from "../../../components/common/Modal";
 import { GoogleBook } from "../../book/types/types";
 import Button from "../../../components/form/Button";
@@ -30,7 +29,7 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
             showModal={ showAddBookModal }
             setShowModal={ setShowAddBookModal }
         >
-            <div className="flex items-center gap-3 text-primary-light">
+            <div className="flex items-center gap-3 darklight">
                 <img src={book.volumeInfo.imageLinks?.thumbnail} />
                 <div className="grid gap-2">
                     <h2 className="text-xl font-bold">
@@ -46,7 +45,7 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
             </div>
 
             <form 
-                className="grid gap-3 mt-5 text-primary-light"
+                className="grid gap-3 mt-5 text-primary-dark"
                 onSubmit={ handleSubmit }
                 id="addBookForm"
             >
@@ -100,9 +99,7 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
                 </label>
 
                 { !isFetching && !isClicked && (
-                    <Button 
-                        type="submit"
-                    >
+                    <Button type="submit">
                         Add Book
                     </Button>
                 )}

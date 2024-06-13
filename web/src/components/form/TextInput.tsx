@@ -16,7 +16,7 @@ export default function TextInput({label, register, name, ...props} : TextInputP
     return (
         <Wrapper className="block">
             { label && (
-                <h3 className="font-semibold text-primary-light mb-1">
+                <h3 className="font-semibold text-primary-dark mb-1">
                     {label}
                 </h3>
             )}
@@ -25,7 +25,7 @@ export default function TextInput({label, register, name, ...props} : TextInputP
             <input 
                 {...(register &&  register(name) ) }
                 {...props}
-                className="bg-bg outline outline-1 outline-primary-light/30 w-full max-w-xl rounded-md p-4 transition-all" 
+                className="bg-bg outline outline-1 outline-primary-light w-full max-w-xl rounded-md p-4 transition-all" 
             />
         </Wrapper>
     )

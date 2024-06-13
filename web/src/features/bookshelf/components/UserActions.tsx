@@ -33,7 +33,7 @@ export default function UserActions({book} : {book : UserBook}) {
 
             <ToolTipWrapper>
                 <UserActionButton onClick={handleIsOwnedClick}>
-                    <BookmarkIcon size={20} className={userProps.group === 'owned' ? 'fill-primary-light/50 stroke-primary-light/50' : ''} />
+                    <BookmarkIcon size={20} className={userProps.group === 'owned' ? 'fill-primary-dark/40 stroke-primary-light' : ''} />
                     <ToolTip title="Owned" />
                 </UserActionButton>
             </ToolTipWrapper>
