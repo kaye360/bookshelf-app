@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import LoginForm from "./LoginForm"
 import RegisterForm from "./RegisterForm"
 import GuestForm from "./GuestForm"
-import { useAuth } from "./AuthProvider"
 import { useLocation } from "react-router-dom"
+import { useAuth } from "../hooks/useAuth"
 
 type Form = 'login' | 'register' | 'guest'
 

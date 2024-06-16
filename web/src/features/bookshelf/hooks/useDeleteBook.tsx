@@ -1,8 +1,8 @@
 import { useState, SyntheticEvent } from "react"
-import { useAuth } from "../../auth/components/AuthProvider"
 import { UserBook } from "../../book/types/types"
 import { API_URL } from "../../../config"
 import useFetch from "../../../hooks/useFetch"
+import { useAuth } from "../../auth/hooks/useAuth"
 
 export default function useDeleteBook(book: UserBook) {
 

@@ -42,6 +42,7 @@ export default function BookShelf() {
                     ))}
                 </BookList>
 
+
                 { books.length === 0 && (
                     <>
                         <div className="text-2xl flex items-center justify-center gap-2 my-4">

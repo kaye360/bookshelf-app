@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom"
-import { useAuth, useAuthDispatch } from "../../features/auth/components/AuthProvider"
 import { useState } from "react"
 import AccountModal from "./AccountModal"
 import { LogoutIcon, SettingsIcon, UserIcon } from "../common/Icon"
 import useToggleState from "../../hooks/useToggleState"
+import { useAuth } from "../../features/auth/hooks/useAuth"
+import { useAuthDispatch } from "../../features/auth/hooks/useAuthDispatch"
 
 
 export default function Account() {

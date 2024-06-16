@@ -1,14 +1,14 @@
 import { useState, SyntheticEvent } from "react"
 import { API_URL } from "../../../config"
 import useFetch from "../../../hooks/useFetch"
-import { useAuth } from "../../auth/components/AuthProvider"
 import { UserBook } from "../../book/types/types"
+import { useAuth } from "../../auth/hooks/useAuth"
 
 export default function useEditBookTags({book} : {book : UserBook}) {
 
     
     const { updateUser } = useAuth()
-    const { fetchApi } = useFetch()
+    const { fetchApi }   = useFetch()
 
     const defaultStatus = { isLoading : false, isSuccess : false }
     const [status, setStatus] = useState(defaultStatus)

@@ -1,8 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import LoginOrRegisterForm from "../features/auth/components/LoginOrRegisterForm";
 import BaseLayout from "../layouts/BaseLayout";
-import { useAuth } from "../features/auth/components/AuthProvider";
 import { useEffect } from "react";
+import { useAuth } from "../features/auth/hooks/useAuth";
+
 
 export default function Index() {
 

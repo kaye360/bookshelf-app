@@ -1,5 +1,4 @@
 import { SubmitHandler, useForm } from "react-hook-form"
-import { useAuthDispatch, useAuth } from "./AuthProvider"
 import { register as registerUser } from "../services/actions"
 import Button from "../../../components/form/Button"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -8,6 +7,8 @@ import useIsUserHandleAvailable from "../hooks/useIsUserHandleAvailable"
 import ValidatedTextInput from "../../../components/form/ValidatedTextInput"
 import { CheckIcon, AlertIcon, LoaderIcon } from "../../../components/common/Icon"
 import UniqueUsernameStatus from "./UniqueUsernameStatus"
+import { useAuthDispatch } from "../hooks/useAuthDispatch"
+import { useAuth } from "../hooks/useAuth"
 
 
 export interface RegisterFormInput {

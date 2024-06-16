@@ -1,23 +1,23 @@
 import { GoogleBook } from "../../book/types/types"
 import { PlusIcon, CheckIcon } from "../../../components/common/Icon"
 import AddBookModal from "./AddBookModal"
-import useResult from "../hooks/useResult"
-import { formatGoogleBookResult } from "../services/formatGoogleBookResults"
+import { formatGoogleBookResult } from "../../externalBookApi/services/formatGoogleBookResults"
+import useAddExternalApiBook from "../../externalBookApi/hooks/useAddExternalApiBook"
 
-export default function Result({book} : {book: GoogleBook}) {
 
-    const { showAddBookModal, setShowAddBookModal, query, isBookAdded, setIsBookAdded } = useResult({book})
+export default function Result({book, userHasBook} : {book: GoogleBook, userHasBook : boolean}) {
 
-    const { thumbnail, title, subTitle, pageCount, identifiers, categories, authors, description } = formatGoogleBookResult(book)
+    const result     = useAddExternalApiBook({book})
+    const googleBook = formatGoogleBookResult(book)
 
     return (
         <div className='grid grid-cols-[auto_1fr] gap-3 items-start'>
 
             <div className="grid gap-2">
-                { thumbnail && <img src={thumbnail} /> }
-                { query.isSuccess && !isBookAdded ? (
+                { googleBook.thumbnail && <img src={googleBook.thumbnail} /> }
+                { result.query.isSuccess && !userHasBook ? (
                     <button 
-                        onClick={ () => setShowAddBookModal(true) }
+                        onClick={ () => result.setShowAddBookModal(true) }
                         className='flex gap-2 justify-center items-center min-w-max px-6 py-2 text-sm text-accent border border-accent/30 rounded-lg w-full hover:bg-accent hover:text-bg transition-colors'
                     >
                         <PlusIcon />
@@ -34,37 +34,40 @@ export default function Result({book} : {book: GoogleBook}) {
             <div className='grid gap-4 justify-start'>
 
                 <div className="grid gap-1">
-                    { title    && <h2 className="font-bold">{ title } </h2> }
-                    { subTitle && <span className="text-sm font-semibold">{ subTitle }</span> }
-                    { authors  && <span className="text-sm">{ authors }</span> }
+                    { googleBook.title    && <h2 className="font-bold">{ googleBook.title } </h2> }
+                    { googleBook.subTitle && <span className="text-sm font-semibold">{ googleBook.subTitle }</span> }
+                    { googleBook.authors  && <span className="text-sm">{ googleBook.authors }</span> }
                 </div>
 
                 <div className="grid text-primary-dark/80 text-sm">
 
-                    { pageCount && <span>Pages: { pageCount }</span> }
+                    { googleBook.pageCount && <span>Pages: { googleBook.pageCount }</span> }
 
-                    { identifiers && identifiers.map( id => (
+                    { googleBook.identifiers && googleBook.identifiers.map( id => (
                         <span className="block" key={id.type}>
                             {id.type?.replaceAll('_', ' ')}: {id.identifier}
                         </span>
                     ))}
 
-                    { categories && <span>Category: {categories}</span> }
+                    { googleBook.categories && <span>Category: {googleBook.categories}</span> }
 
                 </div>
 
-                { description && <p>{description}</p> }
+                { googleBook.description && <p>{googleBook.description}</p> }
 
             </div>
 
-            <AddBookModal 
-                showAddBookModal={showAddBookModal}
-                setShowAddBookModal={setShowAddBookModal}
-                book={book}
-                isBookAdded={isBookAdded}
-                setIsBookAdded={setIsBookAdded}
-                query={query}
-            />
+            { result.showAddBookModal && (
+                <AddBookModal 
+                    showAddBookModal={result.showAddBookModal}
+                    setShowAddBookModal={result.setShowAddBookModal}
+                    book={book}
+                    isBookAdded={result.isBookAdded}
+                    setIsBookAdded={result.setIsBookAdded}
+                    query={result.query}
+                    errorMessage={result.errorMessage}
+                />
+            )}
             
         </div>
 

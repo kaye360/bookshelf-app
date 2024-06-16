@@ -2,13 +2,13 @@ import { useSearchParams } from "react-router-dom"
 import BookGrid from "../../bookshelf/components/BookGrid"
 import BookGridItem from "../../bookshelf/components/BookGridItem"
 import BookTable from "../../bookshelf/components/BookTable"
-import { useAuth } from "../../auth/components/AuthProvider"
 import { resolveBookList } from "../../bookshelf/services/resolveBookList"
 import { bookshelfOptionsInitialState } from "../../bookshelf/services/initialState"
 import BookCardList from "../../bookshelf/components/BookCardList"
 import BookCard from "../../bookshelf/components/BookCard"
 import BookTableRow from "../../bookshelf/components/BookTableRow"
 import { BookshelfParams } from "../../bookshelf/types/types"
+import { useAuth } from "../../auth/hooks/useAuth"
 
 
 export default function useSearchBarParams() {

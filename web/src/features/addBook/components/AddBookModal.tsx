@@ -13,9 +13,10 @@ interface AddBookModalProps {
     isBookAdded : boolean
     setIsBookAdded : React.Dispatch<React.SetStateAction<boolean>>
     query : UseQueryResult<any, Error>
+    errorMessage : string | null
 }
 
-export default function AddBookModal({ book, showAddBookModal, setShowAddBookModal, query, isBookAdded, setIsBookAdded} : AddBookModalProps) {
+export default function AddBookModal({ book, showAddBookModal, setShowAddBookModal, query, isBookAdded, setIsBookAdded, errorMessage} : AddBookModalProps) {
 
     function handleSubmit(e: SyntheticEvent) {
         e.preventDefault()
@@ -130,7 +131,7 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
                     { isError && (
                         <>
                             <AlertIcon />
-                            Something went wrong, please try again. 
+                            { errorMessage ? errorMessage : 'Something went wrong, please try again. ' }
                         </>
                     )}
                 </div>

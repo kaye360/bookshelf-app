@@ -50,7 +50,7 @@ Route::put('settings/{id}', [SettingsController::class, 'update'])->middleware('
  * User Bookshelf Routes
  */
 Route::get('bookshelf/{userId}', [UserBookController::class, 'index']);
-Route::post('book', [UserBookController::class, 'store']);
+Route::post('book', [UserBookController::class, 'store'])->middleware('auth:sanctum');
 Route::put('book/{id}', [UserBookController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('book/{id}', [UserBookController::class, 'delete'])->middleware('auth:sanctum');
 
@@ -64,7 +64,7 @@ Route::post('community/book', [CommunityBookController::class, 'store']);
 /**
  * Error Routes
  */
-Route::fallback( function(){
-    return response()->json([
-        'message' => 'Page Not Found.'], 404);
-});
+// Route::fallback( function(){
+//     return response()->json([
+//         'message' => 'Page Not Found.'], 404);
+// });

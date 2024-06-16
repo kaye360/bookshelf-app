@@ -1,32 +1,22 @@
-import { Dispatch, ReactNode, createContext, useContext, useReducer } from "react"
+import { ReactNode, useReducer } from "react"
 import { AuthReducer } from "../services/reducer"
-import { AuthReducerState } from "../types/types"
 import { useQuery } from "@tanstack/react-query"
-import { getUserSession } from "../services/getUserSession"
 import { userQuery } from "../services/userQuery"
+import { getUserSession } from "../services/getUserSession"
+import { AuthContext } from "../hooks/useAuth"
+import { AuthDispatchContext } from "../hooks/useAuthDispatch"
+
 
 interface AuthProviderProps {
     children : ReactNode
 }
 
-let userSession = getUserSession()
-
-export const AuthContext         = createContext<AuthReducerState>(userSession)
-export const AuthDispatchContext = createContext<Dispatch<any> | null>(null)
-
-
-export function useAuth () {
-    return useContext(AuthContext)
-}
-
-export function useAuthDispatch() {
-    return useContext(AuthDispatchContext)
-}
-
 
 export default function AuthProvider( {children} : AuthProviderProps ) {
 
-    const [user, dispatch] = useReducer(AuthReducer, userSession);
+    const userSession = getUserSession()
+
+    const [user, dispatch] = useReducer(AuthReducer, userSession)
 
     if( userSession.isAuth ) {
 
@@ -47,13 +37,14 @@ export default function AuthProvider( {children} : AuthProviderProps ) {
 
         userSession.updateUser = refetch
     }
-
     
 	return (
-        <AuthContext.Provider value={user}>
-            <AuthDispatchContext.Provider value={dispatch}>
-                {children}
-            </AuthDispatchContext.Provider>
-        </AuthContext.Provider>
+        <>
+            <AuthContext.Provider value={user}>
+                <AuthDispatchContext.Provider value={dispatch}>
+                    {children}
+                </AuthDispatchContext.Provider>
+            </AuthContext.Provider>
+        </>
     )
 }

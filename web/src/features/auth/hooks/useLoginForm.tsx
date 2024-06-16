@@ -1,9 +1,11 @@
 import { useForm, SubmitHandler, UseFormHandleSubmit, UseFormRegister, FieldErrors } from "react-hook-form"
-import { useAuthDispatch, useAuth } from "../components/AuthProvider"
 import { login } from "../services/actions"
 import { AuthError, User } from "../types/types"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "../services/validation"
+import { useAuth } from "./useAuth"
+import { useAuthDispatch } from "./useAuthDispatch"
+
 
 interface UseLoginForm { 
     handleSubmit : UseFormHandleSubmit<LoginFormInput, undefined>
@@ -15,10 +17,12 @@ interface UseLoginForm {
     errors       : FieldErrors<LoginFormInput>
 }
 
+
 export interface LoginFormInput {
     handle   : string
     password : string
 }
+
 
 export default function useLoginForm() : UseLoginForm {
     

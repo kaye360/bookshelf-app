@@ -2,13 +2,13 @@ import { useState } from "react"
 import { API_URL } from "../../../config"
 import useFetch from "../../../hooks/useFetch"
 import { UserBook } from "../../book/types/types"
-import { useAuth } from "../../auth/components/AuthProvider"
 import useToggleState from "../../../hooks/useToggleState"
+import { useAuth } from "../../auth/hooks/useAuth"
 
 export default function useUserProps(book : UserBook) {
 
     const { updateUser }  = useAuth()
-    const { fetchApi } = useFetch()
+    const { fetchApi }    = useFetch()
 
     const [userProps, setUserProps] = useState({
         isRead : book.isRead,

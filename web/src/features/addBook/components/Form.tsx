@@ -1,9 +1,23 @@
-import { UseAddBook } from "../../../routes/add/types";
 import Button from "../../../components/form/Button";
 import TextInput from "../../../components/form/TextInput";
+import { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
+import { Dispatch, SetStateAction } from "react";
 
 
-export default function Form({handleSubmit, onSubmit, register, setQuery} : UseAddBook['formProps']) {
+export interface SearchInput {
+    query : string
+}
+
+
+interface FormProps {
+    handleSubmit   : UseFormHandleSubmit<SearchInput, undefined>,
+    onSubmit       : SubmitHandler<SearchInput>,
+    register       : UseFormRegister<SearchInput>,
+    setSearchQuery : Dispatch<SetStateAction<string | null>>
+}
+
+
+export default function Form( {handleSubmit, onSubmit, register, setSearchQuery} : FormProps) {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -25,7 +39,7 @@ export default function Form({handleSubmit, onSubmit, register, setQuery} : UseA
                 <Button 
                     variant='ghost'
                     type='reset'
-                    onClick={ () => setQuery(null) }
+                    onClick={ () => setSearchQuery(null) }
                 >
                     Reset
                 </Button>

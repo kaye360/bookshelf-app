@@ -1,7 +1,8 @@
 import BookGridItem from "../../features/bookshelf/components/BookGridItem";
 import BaseLayout from "../../layouts/BaseLayout";
-import { useAuth } from "../../features/auth/components/AuthProvider";
 import DashboardSection from "../../features/dashboard/components/DashboardSection";
+import { useAuth } from "../../features/auth/hooks/useAuth";
+
 
 export default function Dashboard() {
 
@@ -28,7 +29,6 @@ export default function Dashboard() {
             </div>
 
             <div className="grid gap-8">
-
                 
                 <DashboardSection title="Recently Added">
                     {books && books.slice(0,10).map( book => (

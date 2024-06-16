@@ -1,7 +1,18 @@
-import { UseAddBook } from "../../../routes/add/types"
 import { LoaderIcon } from "../../../components/common/Icon"
+import { GoogleBookResponse } from "../../book/types/types"
 
-export default function Status({isFetching, isError, hasNoResults, hasResults, query, data} : UseAddBook['statusProps'] ) {
+
+interface StatusProps {
+    isFetching  : boolean
+    isError     : boolean
+    hasResults  : boolean
+    searchQuery : string | null
+    data        : GoogleBookResponse | null
+}
+
+
+export default function Status( {isFetching, isError, hasResults, searchQuery, data} : StatusProps ) {
+
     return (
         <div className='text-xl my-6'>
             { isFetching && (
@@ -15,14 +26,14 @@ export default function Status({isFetching, isError, hasNoResults, hasResults, q
                     Something went wrong, please try again.
                 </>
             )}
-            { hasNoResults && (
+            { !hasResults || !searchQuery && (
                 <>
                     No results were found. Please try another search
                 </>
             )}
             { hasResults && (
                 <>
-                    Search results for: <span className='font-bold'>{query}</span> <br />
+                    Search results for: <span className='font-bold'>{searchQuery}</span> <br />
                     ({data?.totalItems} results)
                 </>
             )}

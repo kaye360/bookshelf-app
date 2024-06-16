@@ -1,6 +1,6 @@
-import { useAuth } from "../../features/auth/components/AuthProvider";
 import Wrapper from "./Wrapper";
 import { AddBookNavLink, BookshelfNavLink, CommunityNavLink, DashboardNavLink, HomeNavLink } from "./NavLinks";
+import { useAuth } from "../../features/auth/hooks/useAuth";
 
 export default function Nav() {
 

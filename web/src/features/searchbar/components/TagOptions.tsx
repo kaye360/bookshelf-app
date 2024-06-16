@@ -2,8 +2,9 @@ import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { BookShelfContext } from "../../../routes/bookshelf/Bookshelf";
 import { HashIcon } from "../../../components/common/Icon";
-import { useAuth } from "../../auth/components/AuthProvider";
 import { getTagsFromBookList } from "../../tags/services/getTagsFromBookList";
+import { useAuth } from "../../auth/hooks/useAuth";
+
 
 export default function TagOptions() {
 

@@ -1,28 +1,35 @@
-import { useState } from "react"
-import { UseAddBook } from "../../../routes/add/types"
 import Button from "../../../components/form/Button"
 import Result from "./Result"
+import useUserHasBook from "../../externalBookApi/hooks/useUserHasBook"
+import { GoogleBook } from "../../book/types/types"
 
 
-export default function ResultList({data} : UseAddBook['resultsProps'] ) {
+interface ResultListProps {
+    bookList : GoogleBook[]
+    hasMoreBooks : boolean
+    nextPage : () => void
+}
 
-    const [page, setPage] = useState<number>(1)
 
-    const bookList     = data?.items ? data.items.slice(0, page * 7) : []
-    const totalBooks   = data?.items.length ? data.items.length : 0
-    const hasMoreBooks =  page * 7 < totalBooks
+export default function ResultList( {bookList, hasMoreBooks, nextPage} : ResultListProps ) {
+
+    const userHasBook = useUserHasBook()
 
     return (
         <div className='grid gap-16 w-full max-w-3xl'>
 
-            { bookList.map( book => (
-                <Result book={book} key={book.id} />
+            { bookList.map( (book, i) => (
+                <Result 
+                    userHasBook={userHasBook(book)}
+                    book={book} 
+                    key={i} 
+                />
             ))}
 
             { hasMoreBooks && (
                 <Button 
                     variant="ghost"
-                    onClick={ () => setPage(page + 1) }
+                    onClick={ nextPage }
                 >
                     Load More Results
                 </Button>
