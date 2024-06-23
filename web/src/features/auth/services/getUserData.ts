@@ -3,7 +3,7 @@ import { getUserSettings } from "./getUserSettings"
 import { getUserBooks } from "./getUsersBooks"
 
 
-export async function userQuery( userSession : AuthReducerState) {
+export async function getUserData( userSession : AuthReducerState) {
 
     if( !userSession.user?.id ) return userSession
 

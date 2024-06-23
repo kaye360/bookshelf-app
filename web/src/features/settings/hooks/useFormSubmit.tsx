@@ -1,22 +1,21 @@
 import { SyntheticEvent } from "react"
 import { API_URL } from "../../../config"
 import { getFormData } from "../../../utils/getFormData"
-import useFetch from "../../../hooks/useFetch"
 import { useAuth } from "../../auth/hooks/useAuth"
+import { Req } from "../../../utils/req"
 
 export default function useFormSubmit() {
     
-    const { user, updateUser } = useAuth()
-    const { fetchApi }         = useFetch()
+    const { user, updateUser, token } = useAuth()
 
     async function handleSubmit(e : SyntheticEvent) {
         e.preventDefault()
 
-        const response = await fetchApi({
+        const response = await Req.send({
             url : `${API_URL}/settings/${user?.id}`,
             method : 'PUT',
-            auth : true,
-            payload : getFormData('#settingsForm')
+            payload : getFormData('#settingsForm'),
+            token
         })
 
         if( !response.error ) updateUser()

@@ -11,7 +11,6 @@ interface UseSearchExternalBookApiProps {
 
 export default function useSearchExternalBookApi( {searchQuery} : UseSearchExternalBookApiProps ) {
 
-
     const { data, isError, isFetching, isSuccess } = useQuery({
         queryKey : ['searchGoogleBooks', searchQuery],
         queryFn  : () => searchGoogleBooks(searchQuery),
