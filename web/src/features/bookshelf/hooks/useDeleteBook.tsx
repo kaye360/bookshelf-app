@@ -1,24 +1,21 @@
 import { useState, SyntheticEvent } from "react"
 import { UserBook } from "../../book/types/types"
 import { API_URL } from "../../../config"
-import useFetch from "../../../hooks/useFetch"
 import { useAuth } from "../../auth/hooks/useAuth"
+import { Req } from "../../../utils/req"
 
 export default function useDeleteBook(book: UserBook) {
 
-    const { updateUser } = useAuth()
-    const { fetchApi } = useFetch()
+    const { updateUser, token } = useAuth()
 
     const defaultStatus = { isLoading : false, isSuccess : false }
     const [status, setStatus] = useState(defaultStatus)
 
-
-
     async function deleteBook(book: UserBook) {
-        const response = await fetchApi({
+        const response = await Req.send({
             url: `${API_URL}/book/${book.id}`,
             method: 'DELETE',
-            auth : true,
+            token
         })
         return response
     }

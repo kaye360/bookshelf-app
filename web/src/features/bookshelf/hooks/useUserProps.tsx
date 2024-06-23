@@ -1,14 +1,13 @@
 import { useState } from "react"
 import { API_URL } from "../../../config"
-import useFetch from "../../../hooks/useFetch"
 import { UserBook } from "../../book/types/types"
 import useToggleState from "../../../hooks/useToggleState"
 import { useAuth } from "../../auth/hooks/useAuth"
+import { Req } from "../../../utils/req"
 
 export default function useUserProps(book : UserBook) {
 
-    const { updateUser }  = useAuth()
-    const { fetchApi }    = useFetch()
+    const { updateUser, token }  = useAuth()
 
     const [userProps, setUserProps] = useState({
         isRead : book.isRead,
@@ -26,11 +25,11 @@ export default function useUserProps(book : UserBook) {
 
         toggleBookIsFavourite()
 
-        const response = await fetchApi({
+        const response = await Req.send({
             url: `${API_URL}/book/${book.id}`,
             method: 'PUT',
-            auth : true,
-            payload : {isFavourite : !userProps.isFavourite}
+            payload : {isFavourite : !userProps.isFavourite},
+            token
         })
 
         if(response.error) toggleBookIsFavourite()
@@ -42,11 +41,11 @@ export default function useUserProps(book : UserBook) {
 
         toggleBookIsRead()
 
-        const response = await fetchApi({
+        const response = await Req.send({
             url: `${API_URL}/book/${book.id}`,
             method: 'PUT',
-            auth : true,
-            payload : {isRead : !userProps.isRead}
+            payload : {isRead : !userProps.isRead},
+            token
         })
 
         if(response.error) toggleBookIsRead()
@@ -58,11 +57,11 @@ export default function useUserProps(book : UserBook) {
 
         toggleBookIsOwned()
 
-        const response = await fetchApi({
+        const response = await Req.send({
             url: `${API_URL}/book/${book.id}`,
             method: 'PUT',
-            auth : true,
-            payload : {group : userProps.group === 'owned' ? 'wishlist' : 'owned'}
+            payload : {group : userProps.group === 'owned' ? 'wishlist' : 'owned'},
+            token
         })
 
         if(response.error) toggleBookIsOwned()

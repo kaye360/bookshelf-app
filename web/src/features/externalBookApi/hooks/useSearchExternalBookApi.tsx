@@ -1,7 +1,7 @@
     import { useQuery } from "@tanstack/react-query"
 import { GoogleBookResponse } from "../../book/types/types"
 import { GOOGLE_BOOKS_API_URL } from "../../../config"
-import useFetch from "../../../hooks/useFetch"
+import { Req } from "../../../utils/req"
 
 
 interface UseSearchExternalBookApiProps {
@@ -11,7 +11,6 @@ interface UseSearchExternalBookApiProps {
 
 export default function useSearchExternalBookApi( {searchQuery} : UseSearchExternalBookApiProps ) {
 
-    const { fetchApi } = useFetch()
 
     const { data, isError, isFetching, isSuccess } = useQuery({
         queryKey : ['searchGoogleBooks', searchQuery],
@@ -23,7 +22,7 @@ export default function useSearchExternalBookApi( {searchQuery} : UseSearchExter
 
         if(!searchQuery) return null
 
-        const result = await fetchApi({
+        const result = await Req.send({
             url : `${GOOGLE_BOOKS_API_URL}?q=${searchQuery}&maxResults=40&orderBy=relevance&printType=books`
         })
 

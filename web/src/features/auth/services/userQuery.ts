@@ -1,4 +1,5 @@
 import { AuthReducerState } from "../types/types"
+import { getUserSettings } from "./getUserSettings"
 import { getUserBooks } from "./getUsersBooks"
 
 
@@ -6,9 +7,18 @@ export async function userQuery( userSession : AuthReducerState) {
 
     if( !userSession.user?.id ) return userSession
 
-    const books = await getUserBooks(userSession.user.id)
+    const [books, settings] = await Promise.allSettled([
+        getUserBooks(userSession.user.id),
+        getUserSettings(userSession.token)
+    ])
 
-    userSession.user.books = books
+    if(books.status === 'fulfilled') {
+        userSession.user.books = books.value
+    }
+
+    if(settings.status === 'fulfilled') {
+        userSession.user.settings = settings.value
+    }
 
     return userSession
-}
+} 

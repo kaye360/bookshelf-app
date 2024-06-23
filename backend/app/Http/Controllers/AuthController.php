@@ -55,6 +55,8 @@ class AuthController extends Controller
         }
 
         $user = User::where('handle', $request['handle'])->firstOrFail();
+        $user->books    = [];
+        $user->settings = null;
 
         $token = $user->createToken('auth_token')->plainTextToken;
 

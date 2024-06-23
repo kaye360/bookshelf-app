@@ -43,7 +43,7 @@ Route::put('profile/{id}', [ProfileController::class, 'update'])->middleware('au
 /**
  * User Settings Routes
  */
-Route::get('settings/{id}', [SettingsController::class, 'show'])->middleware('auth:sanctum');;
+Route::get('settings', [SettingsController::class, 'show'])->middleware('auth:sanctum');;
 Route::put('settings/{id}', [SettingsController::class, 'update'])->middleware('auth:sanctum');;
 
 /**

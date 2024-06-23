@@ -25,7 +25,7 @@ export default function Dashboard() {
                     <p className="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, dignissimos et? Obcaecati, et vitae laborum rerum eum incidunt recusandae inventore sequi architecto minima doloremque ex facere exercitationem autem sit cupiditate.</p>
                 </div>
 
-                <img src="/bookshelf.png" className="" />
+                <img src="/illustrations/book_coffee_plant_1.webp" className="" />
             </div>
 
             <div className="grid gap-8">

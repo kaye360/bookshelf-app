@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from "react"
-import { RegisterOptions, UseFormRegister } from "react-hook-form"
+import { UseFormRegister } from "react-hook-form"
 
 
 interface TextInputProps extends ComponentPropsWithoutRef<"input"> {
@@ -23,6 +23,7 @@ export default function TextInput({label, register, name, ...props} : TextInputP
 
 
             <input 
+                name={ name }
                 {...(register &&  register(name) ) }
                 {...props}
                 className="bg-bg outline outline-1 outline-primary-light w-full max-w-xl rounded-md p-4 transition-all" 

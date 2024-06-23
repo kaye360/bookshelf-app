@@ -3,8 +3,8 @@ import { GoogleBook } from "../../book/types/types";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../../config";
 import { useAuth } from "../../auth/hooks/useAuth";
-import useFetch from "../../../hooks/useFetch";
 import { formatPayload } from "../services/formatPayload";
+import { Req } from "../../../utils/req";
 
 
 export default function useAddExternalApiBook({book} : {book: GoogleBook}) {
@@ -13,8 +13,7 @@ export default function useAddExternalApiBook({book} : {book: GoogleBook}) {
     const [isBookAdded, setIsBookAdded]           = useState(false)
     const [errorMessage, setErorrMessage]         = useState<string|null>(null)
 
-    const { user, updateUser } = useAuth()
-    const { fetchApi }         = useFetch()
+    const { user, updateUser, token } = useAuth()
 
     const query = useQuery({
         queryKey : ['addGoogleBook', book.id, isBookAdded],
@@ -33,11 +32,11 @@ export default function useAddExternalApiBook({book} : {book: GoogleBook}) {
                 throw new Error('User ID is not valid')
             }
 
-            const response = await fetchApi({
+            const response = await Req.send({
                 url     : `${API_URL}/book`,
                 method  : 'POST',
-                auth    : true,
-                payload : formatPayload({book, user, isOwned, isRead})
+                payload : formatPayload({book, user, isOwned, isRead}),
+                token
             })
 
             updateUser()

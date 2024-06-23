@@ -1,18 +1,14 @@
 import { UserBook } from "../../book/types/types"
+import { Settings } from "../../settings/types/types"
 
 export interface User {
     id        : string
     name      : string
     handle    : string  
     email     : string 
-    settings  : Settings
+    settings  : Settings | null
     books     : UserBook[]
     updateUser : Function
-}
-
-export interface Settings {
-    theme : 'light' | 'dark'
-    order : 'alphabetical' | 'uploadedAsc' | 'uploadedDesc'
 }
 
 export type AuthError = 'LOGIN' | 'REGISTER' | null
@@ -28,7 +24,7 @@ interface AuthReducerStateIsAuth {
 
 interface AuthReducerStateNoAuth {
     user: null,
-    token: null,
+    token: undefined,
     loading: boolean,
     errorMessage: AuthError
     isAuth : false
@@ -43,7 +39,7 @@ export interface AuthReducerAction {
         user: any
         auth_token: any
     };
-    // error?: any
+    error?: any
 }
 
 export type LoginDispatch = ((arg0: AuthReducerAction) => void) | null

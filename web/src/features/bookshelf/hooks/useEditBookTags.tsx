@@ -1,14 +1,12 @@
 import { useState, SyntheticEvent } from "react"
 import { API_URL } from "../../../config"
-import useFetch from "../../../hooks/useFetch"
 import { UserBook } from "../../book/types/types"
 import { useAuth } from "../../auth/hooks/useAuth"
+import { Req } from "../../../utils/req"
 
 export default function useEditBookTags({book} : {book : UserBook}) {
 
-    
-    const { updateUser } = useAuth()
-    const { fetchApi }   = useFetch()
+    const { updateUser, token } = useAuth()
 
     const defaultStatus = { isLoading : false, isSuccess : false }
     const [status, setStatus] = useState(defaultStatus)
@@ -32,11 +30,11 @@ export default function useEditBookTags({book} : {book : UserBook}) {
     }
 
     async function updateTags(tags: string[]) {
-        const response = await fetchApi({
+        const response = await Req.send({
             url: `${API_URL}/book/${book.id}`,
             method: 'PUT',
-            auth : true,
-            payload : { tags: JSON.stringify( tags ) }
+            payload : { tags: JSON.stringify( tags ) },
+            token
         })
         return response
     }

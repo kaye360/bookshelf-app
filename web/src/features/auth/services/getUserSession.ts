@@ -7,14 +7,10 @@ export function getUserSession() : AuthReducerState {
     const isUserSet        = typeof userLocalStorage === 'string'
     const userSession      = isUserSet ? JSON.parse( userLocalStorage ) : null
 
-    const user  = isUserSet ? userSession.user       : null
+    const user  = isUserSet ? userSession.user         : null
     const token = isUserSet ? userSession.access_token : null
-    
+
     const isAuth = user !== null && token !== null
-    
-    if( user ) {
-        user.books = []
-    }
     
     const initialState : AuthReducerState = {
         user,

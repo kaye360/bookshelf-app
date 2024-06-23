@@ -1,10 +1,15 @@
 import { SetURLSearchParams } from "react-router-dom"
 
+export type BookshelfFilters = 'all' | 'read' | 'unread' | 'favourite' | 'wishlist' | 'owned'
+
+export type BookshelfViews = 'grid' | 'list' | 'card'
+
+export type BookshelfSorts = 'title' | 'authors' | 'newest' | 'oldest'
 
 export interface BookshelfParams {
-    viewAs      : 'grid' | 'list' | 'card'
-    sortBy      : 'title' | 'authors' | 'newest' | 'oldest'
-    filterBy    : 'all' | 'read' | 'unread' | 'favourite' | 'wishlist' | 'owned' | string
+    viewAs      : BookshelfViews
+    sortBy      : BookshelfSorts
+    filterBy    : BookshelfFilters | string
     searchQuery : string
 }
 
