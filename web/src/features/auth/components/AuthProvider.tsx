@@ -7,31 +7,36 @@ import { AuthContext } from "../hooks/useAuth"
 import { AuthDispatchContext } from "../hooks/useAuthDispatch"
 
 
-interface AuthProviderProps {
+export default function AuthProvider({
+    children
+} : {
     children : ReactNode
-}
-
-
-export default function AuthProvider( {children} : AuthProviderProps ) {
+}) {
 
     const userSession = getUserSession()
 
     const [user, dispatch] = useReducer(AuthReducer, userSession)
 
+    const { refetch } = useQuery({ queryKey : ['userData', user.isAuth], queryFn : userQuery })
+    userSession.updateUser = refetch
+
     async function userQuery() {
         const data = await getUserData(userSession)
 
-        dispatch({
-            type : 'LOGIN_SUCCESS',
-            payload : { 
-                user : data?.user,
-                auth_token : data?.token
-            }
-        })
+        if( data.isAuth ) {
+            dispatch({
+                type : 'LOGIN_SUCCESS',
+                payload : { 
+                    user : data?.user,
+                    auth_token : data?.token
+                }
+            })
+        }
+
+        return true
     }
 
-    const { refetch } = useQuery({ queryKey : ['userBooks'], queryFn : userQuery })
-    userSession.updateUser = refetch
+
 
 	return (
         <>

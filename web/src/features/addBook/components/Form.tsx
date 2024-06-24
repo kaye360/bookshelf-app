@@ -9,15 +9,21 @@ export interface SearchInput {
 }
 
 
-interface FormProps {
+/**
+ * 
+ * @parent routes/add/<AddBook />
+ * 
+ */
+export default function Form({handleSubmit,
+    onSubmit,
+    register,
+    setSearchQuery
+} : {
     handleSubmit   : UseFormHandleSubmit<SearchInput, undefined>,
     onSubmit       : SubmitHandler<SearchInput>,
     register       : UseFormRegister<SearchInput>,
     setSearchQuery : Dispatch<SetStateAction<string | null>>
-}
-
-
-export default function Form( {handleSubmit, onSubmit, register, setSearchQuery} : FormProps) {
+}) {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
 

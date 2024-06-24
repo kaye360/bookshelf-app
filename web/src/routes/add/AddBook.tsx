@@ -1,11 +1,12 @@
 import BaseLayout from '../../layouts/BaseLayout'
 import Form from '../../features/addBook/components/Form'
 import Status from '../../features/addBook/components/Status'
-import ResultList from '../../features/addBook/components/ResultList'
 import { useState } from 'react'
 import useExternalBookSearchForm from '../../features/externalBookApi/hooks/useSearchExternalBookForm'
 import useSearchExternalBookApi from '../../features/externalBookApi/hooks/useSearchExternalBookApi'
 import usePaginateResults from '../../features/externalBookApi/hooks/usePaginateResults'
+import Button from '../../components/form/Button'
+import Result from '../../features/addBook/components/Result'
 
 
 export default function AddBook() {
@@ -17,7 +18,8 @@ export default function AddBook() {
 
     const formProps    = { setSearchQuery, ...form }
     const statusProps  = { searchQuery, ...status }
-    const resultsProps = usePaginateResults({ data : status.data})
+
+    const { bookList, hasMoreBooks, nextPage } = usePaginateResults({ data : status.data})
 
     return (
         <BaseLayout>
@@ -27,7 +29,19 @@ export default function AddBook() {
             <Status { ...statusProps } />
 
             { statusProps.hasResults && (
-                <ResultList { ...resultsProps } />
+                <div className='grid gap-16 w-full max-w-3xl'>
+
+                    { bookList.map( (book, i) => (
+                        <Result book={book} key={i} />
+                    ))}
+        
+                    { hasMoreBooks && (
+                        <Button variant="ghost" onClick={ nextPage }>
+                            Load More Results
+                        </Button>
+                    )}
+        
+                </div>
             )}
 
         </BaseLayout>

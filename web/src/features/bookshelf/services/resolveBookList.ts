@@ -23,7 +23,7 @@ export function resolveBookList(bookList : UserBook[], searchParams : URLSearchP
             case 'unread':
                 bookList = bookList.filter( book => !book.isRead )
                 break
-            case 'favourite':
+            case 'favourites':
                 bookList = bookList.filter( book => !!book.isFavourite )
                 break
             case 'wishlist':

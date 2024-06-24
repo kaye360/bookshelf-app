@@ -12,7 +12,7 @@ export default function Dashboard() {
     return (
         <BaseLayout>
 
-            <div className="grid grid-cols-[1fr_0.6fr]">
+            <div className="grid grid-cols-[1fr_0.6fr] items-center">
                 <div>
                     <p className="text-xl my-8">
                         Welcome {user?.name} 

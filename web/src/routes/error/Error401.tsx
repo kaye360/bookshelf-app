@@ -1,4 +1,4 @@
-import LoginOrRegisterForm from "../../features/auth/components/LoginOrRegisterForm";
+import AccountForm from "../../features/auth/components/AccountForm";
 import BaseLayout from "../../layouts/BaseLayout";
 
 export default function Error401() {
@@ -19,7 +19,7 @@ export default function Error401() {
 
                 </div>
 
-                <LoginOrRegisterForm />
+                <AccountForm />
 
             </div>
         </BaseLayout>

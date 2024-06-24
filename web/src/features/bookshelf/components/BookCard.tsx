@@ -4,7 +4,11 @@ import { BookShelfContext } from "../../../routes/bookshelf/Bookshelf";
 import UserActions from "./UserActions";
 
 
-export default function BookCard({book} : {book: UserBook}) {
+export default function BookCard({
+    book
+} : {
+    book: UserBook
+}) {
 
     const { updateSearchParam } = useContext(BookShelfContext)
 

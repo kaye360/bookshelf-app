@@ -1,21 +1,9 @@
-import { useForm, SubmitHandler, UseFormHandleSubmit, UseFormRegister, FieldErrors } from "react-hook-form"
+import { useForm, SubmitHandler } from "react-hook-form"
 import { login } from "../services/actions"
-import { AuthError, User } from "../types/types"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "../services/validation"
-import { useAuth } from "./useAuth"
 import { useAuthDispatch } from "./useAuthDispatch"
-
-
-interface UseLoginForm { 
-    handleSubmit : UseFormHandleSubmit<LoginFormInput, undefined>
-    onSubmit     : SubmitHandler<LoginFormInput>
-    register     : UseFormRegister<LoginFormInput>
-    loading      : boolean
-    errorMessage : AuthError
-    user         : User | null
-    errors       : FieldErrors<LoginFormInput>
-}
+import { useAuth } from "./useAuth"
 
 
 export interface LoginFormInput {
@@ -24,10 +12,11 @@ export interface LoginFormInput {
 }
 
 
-export default function useLoginForm() : UseLoginForm {
+export default function useLoginForm() {
     
     const dispatch = useAuthDispatch()
-    const { loading, errorMessage, user } = useAuth()
+    const { updateUser } = useAuth()
+
     const { register, handleSubmit, formState : {errors} } = useForm<LoginFormInput>({
         resolver : yupResolver(loginSchema),
     })
@@ -41,6 +30,8 @@ export default function useLoginForm() : UseLoginForm {
             }
 
             await login(dispatch, payload)
+
+            updateUser()
             
         } catch (e) {}
     }
@@ -49,9 +40,6 @@ export default function useLoginForm() : UseLoginForm {
         handleSubmit,
         onSubmit,
         register,
-        loading,
-        errorMessage,
-        user,
         errors
     }
 }

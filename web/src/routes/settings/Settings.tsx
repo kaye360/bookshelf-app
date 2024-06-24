@@ -6,15 +6,21 @@ import PersonalSettings from "../../features/settings/components/PersonalSetting
 import ThemeSettings from "../../features/settings/components/ThemeSettings";
 import useFormTouch from "../../hooks/useFormTouch";
 import useFormSubmit from "../../features/settings/hooks/useFormSubmit";
+import { SyntheticEvent, useState } from "react";
+import { CheckIcon, LoaderIcon } from "../../components/common/Icon";
 
 export default function Settings() {
 
-    const { isTouched, touchForm } = useFormTouch()
-    const handleSubmit             = useFormSubmit()
+    const {
+        touchForm,
+        handleSubmit,
+        currentlyReadingProps,
+        bookshelfProps,
+        isTouched,
+        isSaved,
+        isLoading
+    } = useSettings()
 
-    const currentlyReadingProps = { touchForm }
-    const bookshelfProps        = { isTouched, touchForm }
-    
     return (
         <BaseLayout>
 
@@ -35,16 +41,34 @@ export default function Settings() {
                     
                     <PersonalSettings />
 
-                    <ThemeSettings />
+                    <ThemeSettings touchForm={touchForm} />
 
                 </div>  
 
                 <div className="relative">
                     <div className="sticky top-0">
+
                         <img src="/illustrations/book_coffee_plant_2.webp" className="" />
+
                         <Button variant="fill" className="w-full" disabled={!isTouched}>
                             Save Changes
                         </Button>
+
+                        <span className="flex items-center justify-center gap-2 mt-3 text-xl font-semibold">
+                            { isLoading && (
+                                <>
+                                    <LoaderIcon />
+                                    Saving
+                                </>
+                            )}
+                            { isSaved && (
+                                <>
+                                    <CheckIcon />
+                                    Saved
+                                </>
+                            ) }
+                        </span>
+
                     </div>
                 </div>
                 
@@ -53,3 +77,43 @@ export default function Settings() {
         </BaseLayout>
     )
 } 
+
+
+
+
+function useSettings() {
+
+    const [isLoading, setIsLoading]            = useState<boolean>(false)
+    const [isSaved, setIsSaved]                = useState<boolean>(false)
+    const { isTouched, touchForm, resetTouch } = useFormTouch()
+    const updateSettings                       = useFormSubmit()
+
+    const currentlyReadingProps = { touchForm }
+    const bookshelfProps        = { isTouched, touchForm }
+
+    async function handleSubmit(e: SyntheticEvent) {
+        setIsLoading(true)
+
+        const response = await updateSettings(e)
+
+        if( !response.error ) {
+            setIsLoading(false)
+            setIsSaved(true)
+
+            setTimeout( () => {
+                setIsSaved(false)
+                resetTouch()
+            }, 4000)
+        }
+    }
+
+    return {
+        touchForm,
+        handleSubmit,
+        currentlyReadingProps,
+        bookshelfProps,
+        isTouched,
+        isSaved,
+        isLoading
+    }
+}

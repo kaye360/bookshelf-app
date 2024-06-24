@@ -1,9 +1,14 @@
 import { MoonIcon, SunIcon } from "../../../components/common/Icon";
 import { useAuth } from "../../auth/hooks/useAuth";
 
-export default function ThemeSettings() {
+export default function ThemeSettings({
+    touchForm
+} : {
+    touchForm : () => void
+}) {
 
     const { user } = useAuth()
+    const isLightTheme = user?.settings?.theme === 'light'
 
     return (
         <div>
@@ -13,16 +18,15 @@ export default function ThemeSettings() {
 
             <div className="flex items-center gap-2 font-semibold">
 
-                {user?.settings?.theme}
-
                 <label className="flex items-center gap-1 w-fit p-3 rounded has-[:checked]:text-accent border border-transparent has-[:checked]:border-accent cursor-pointer transition-colors">
 
                     <input 
                         type="radio" 
                         name="theme" 
                         value="light" 
+                        onChange={touchForm}
                         className="absolute -left-2 opacity-0" 
-                        defaultChecked={user?.settings?.theme === 'light'}
+                        defaultChecked={isLightTheme}
                     />
                     <SunIcon />
                     Light Mode
@@ -35,8 +39,9 @@ export default function ThemeSettings() {
                         type="radio" 
                         name="theme" 
                         value="dark" 
+                        onChange={touchForm}
                         className="absolute -left-2 opacity-0" 
-                        defaultChecked={user?.settings?.theme === 'dark'}
+                        defaultChecked={!isLightTheme}
                     />
                     <MoonIcon />
                     Dark Mode

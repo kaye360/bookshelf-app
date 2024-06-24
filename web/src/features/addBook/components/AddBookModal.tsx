@@ -5,18 +5,28 @@ import { SyntheticEvent } from "react";
 import { UseQueryResult } from "@tanstack/react-query";
 import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon } from "../../../components/common/Icon";
 
-
-interface AddBookModalProps {
-    showAddBookModal : boolean
-    setShowAddBookModal : React.Dispatch<React.SetStateAction<boolean>>
-    book : GoogleBook
-    isBookAdded : boolean
-    setIsBookAdded : React.Dispatch<React.SetStateAction<boolean>>
-    query : UseQueryResult<any, Error>
-    errorMessage : string | null
-}
-
-export default function AddBookModal({ book, showAddBookModal, setShowAddBookModal, query, isBookAdded, setIsBookAdded, errorMessage} : AddBookModalProps) {
+/**
+ * 
+ * @parent <Result />
+ * 
+ */
+export default function AddBookModal({ 
+    book, 
+    isModalOpen, 
+    setIsModalOpen, 
+    query, 
+    isBookAdded, 
+    setIsBookAdded, 
+    errorMessage
+} : {
+    book            : GoogleBook
+    isModalOpen     : boolean
+    setIsModalOpen  : React.Dispatch<React.SetStateAction<boolean>>
+    query           : UseQueryResult<any, Error>
+    isBookAdded     : boolean
+    setIsBookAdded  : React.Dispatch<React.SetStateAction<boolean>>
+    errorMessage    : string | null
+}) {
 
     function handleSubmit(e: SyntheticEvent) {
         e.preventDefault()
@@ -27,8 +37,8 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
 
     return (
         <Modal
-            showModal={ showAddBookModal }
-            setShowModal={ setShowAddBookModal }
+            showModal={ isModalOpen }
+            setShowModal={ setIsModalOpen }
         >
             <div className="flex items-center gap-3 darklight">
                 <img src={book.volumeInfo.imageLinks?.thumbnail} />
@@ -105,7 +115,6 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
                     </Button>
                 )}
 
-
                 <div className="flex items-center gap-2 justify-center text-xl font-semibold">
                     { isFetching && (
                         <>
@@ -120,7 +129,7 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
                                 Book Added! 
                             </div>
                             <button
-                                onClick={ () => setShowAddBookModal(false) }
+                                onClick={ () => setIsModalOpen(false) }
                                 className="text-sm font-medium text-center hover:underline"
                             >
                                 Close
@@ -135,9 +144,6 @@ export default function AddBookModal({ book, showAddBookModal, setShowAddBookMod
                         </>
                     )}
                 </div>
-
-
-
 
             </form>
         </Modal>

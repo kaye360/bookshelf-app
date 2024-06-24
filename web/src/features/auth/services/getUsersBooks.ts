@@ -1,10 +1,13 @@
 import { API_URL } from "../../../config"
+import { Req } from "../../../utils/req"
 import { UserBook, ApiBook } from "../../book/types/types"
 
 export async function getUserBooks(userId : string) : Promise<UserBook[]> {
-    const response = await fetch(`${API_URL}/bookshelf/${userId}`)
-    const json = await response.json()
-    const bookDataValues = Object.values( json ) as unknown as ApiBook[]
+
+    const response = await Req.send({
+        url : `${API_URL}/bookshelf/${userId}`
+    })
+    const bookDataValues = Object.values( response.data ) as unknown as ApiBook[]
     const bookDataFormatted = bookDataValues.map( book => {
 
         const formattedBook =  {

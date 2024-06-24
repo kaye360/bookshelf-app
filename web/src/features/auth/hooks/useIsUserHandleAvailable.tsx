@@ -1,28 +1,34 @@
 import debounce from "lodash.debounce"
 import { useRef, useState } from "react"
 import { API_URL } from "../../../config"
+import useFormTouch from "../../../hooks/useFormTouch"
+import { Req } from "../../../utils/req"
 
 export default function useIsUserHandleAvailable() {
 
     const handleUsernameOnChange = useRef (
         debounce( async (e) => {
-            if( !hasTouched ) {
-                setHasTouched(true)
+            if( !isTouched ) {
+                touchForm()
             }
-            const res = await fetch(`${API_URL}/register/isUserHandleAvailable/${e.target.value}`)
-            const json = await res.json()
-            if( Object.hasOwn( json, 'isHandleAvailable' )) {
-                setIsUserHandleAvailable( json.isHandleAvailable )
+
+            const response = await Req.send({
+                url : `${API_URL}/register/isUserHandleAvailable/${e.target.value}`
+            })
+
+            if( Object.hasOwn( response.data, 'isHandleAvailable' )) {
+                setIsUserHandleAvailable( response.data.isHandleAvailable )
             }
         }, 1000) 
     ).current
 
     const [isUserHandleAvailable, setIsUserHandleAvailable] = useState<boolean>(true)
-    const [hasTouched, setHasTouched] = useState(false)
+
+    const { isTouched, touchForm } = useFormTouch()
     
     return {
         handleUsernameOnChange,
         isUserHandleAvailable,
-        hasTouched
+        isTouched
     }
 }

@@ -2,16 +2,24 @@ import { LoaderIcon } from "../../../components/common/Icon"
 import { GoogleBookResponse } from "../../book/types/types"
 
 
-interface StatusProps {
+/**
+ * 
+ * @parent routes/add/<AddBook />
+ * 
+ */
+export default function Status({
+    isFetching,
+    isError,
+    hasResults,
+    searchQuery,
+    data
+} : {
     isFetching  : boolean
     isError     : boolean
     hasResults  : boolean
     searchQuery : string | null
     data        : GoogleBookResponse | null
-}
-
-
-export default function Status( {isFetching, isError, hasResults, searchQuery, data} : StatusProps ) {
+}) {
 
     return (
         <div className='text-xl my-6'>

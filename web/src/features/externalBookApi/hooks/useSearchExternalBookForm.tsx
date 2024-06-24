@@ -3,11 +3,11 @@ import { Dispatch } from "react"
 import { SearchInput } from "../../addBook/components/Form"
 
 
-interface UseExternalBookSearchFormProps {
+export default function useExternalBookSearchForm({
+    setSearchQuery
+} : {
     setSearchQuery : Dispatch<React.SetStateAction<string | null>>
-}
-
-export default function useExternalBookSearchForm( {setSearchQuery} : UseExternalBookSearchFormProps ) {
+}) {
 
     const { register, handleSubmit } = useForm<SearchInput>()
 

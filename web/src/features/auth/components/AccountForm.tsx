@@ -3,23 +3,28 @@ import LoginForm from "./LoginForm"
 import RegisterForm from "./RegisterForm"
 import GuestForm from "./GuestForm"
 import { useLocation } from "react-router-dom"
-import { useAuth } from "../hooks/useAuth"
+
 
 type Form = 'login' | 'register' | 'guest'
 
-export default function LoginOrRegisterForm({defaultForm = 'login'} : { defaultForm? : Form}) {
 
-    const { isAuth } = useAuth()
-    if( isAuth ) return <></>
+export default function AccountForm({
+    defaultForm = 'login'
+} : { 
+    defaultForm? : Form
+}) {
 
     const [form, setForm] = useState<Form>(defaultForm)
 
     const location = useLocation()
+
     useEffect( () => {
         setForm(defaultForm)
     }, [location.pathname])
 
-    const translateX : { [key in Form] : string } = {
+    const translateX : { 
+        [key in Form] : string 
+    } = {
         login    : '0%',
         register : '33.3%',
         guest    : '66.6%'

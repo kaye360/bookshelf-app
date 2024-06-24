@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import LoginOrRegisterForm from "../features/auth/components/LoginOrRegisterForm";
 import BaseLayout from "../layouts/BaseLayout";
 import { useEffect } from "react";
 import { useAuth } from "../features/auth/hooks/useAuth";
+import AccountForm from "../features/auth/components/AccountForm";
 
 
 export default function Index() {
@@ -20,7 +20,7 @@ export default function Index() {
 
     return (
         <BaseLayout>
-            <LoginOrRegisterForm defaultForm={defaultForm} />
+            <AccountForm defaultForm={defaultForm} />
         </BaseLayout>
     )
 } 

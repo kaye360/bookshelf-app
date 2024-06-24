@@ -3,21 +3,34 @@ import { PlusIcon, CheckIcon } from "../../../components/common/Icon"
 import AddBookModal from "./AddBookModal"
 import { formatGoogleBookResult } from "../../externalBookApi/services/formatGoogleBookResults"
 import useAddExternalApiBook from "../../externalBookApi/hooks/useAddExternalApiBook"
+import { useState } from "react"
+import useUserHasBook from "../hooks/useUserHasBook"
 
+/**
+ * 
+ * @parent routes/add/<AddBook />
+ * 
+ */
+export default function Result({
+    book, 
+} : {
+    book: GoogleBook, 
+}) {
 
-export default function Result({book, userHasBook} : {book: GoogleBook, userHasBook : boolean}) {
+    const result      = useAddExternalApiBook({book})
+    const googleBook  = formatGoogleBookResult(book)
+    const userHasBook = useUserHasBook()
 
-    const result     = useAddExternalApiBook({book})
-    const googleBook = formatGoogleBookResult(book)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     return (
         <div className='grid grid-cols-[auto_1fr] gap-3 items-start'>
 
             <div className="grid gap-2">
                 { googleBook.thumbnail && <img src={googleBook.thumbnail} /> }
-                { result.query.isSuccess && !userHasBook ? (
+                { result.query.isSuccess && !userHasBook(book) ? (
                     <button 
-                        onClick={ () => result.setShowAddBookModal(true) }
+                        onClick={ () => setIsModalOpen(true) }
                         className='flex gap-2 justify-center items-center min-w-max px-6 py-2 text-sm text-accent border border-accent/30 rounded-lg w-full hover:bg-accent hover:text-bg transition-colors'
                     >
                         <PlusIcon />
@@ -57,10 +70,10 @@ export default function Result({book, userHasBook} : {book: GoogleBook, userHasB
 
             </div>
 
-            { result.showAddBookModal && (
+            { isModalOpen && (
                 <AddBookModal 
-                    showAddBookModal={result.showAddBookModal}
-                    setShowAddBookModal={result.setShowAddBookModal}
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
                     book={book}
                     isBookAdded={result.isBookAdded}
                     setIsBookAdded={result.setIsBookAdded}

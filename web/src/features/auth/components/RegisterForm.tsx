@@ -30,7 +30,7 @@ export default function RegisterForm() {
         mode : 'onTouched'
     })
 
-    const { handleUsernameOnChange, isUserHandleAvailable, hasTouched } = useIsUserHandleAvailable()
+    const { handleUsernameOnChange, isUserHandleAvailable, isTouched } = useIsUserHandleAvailable()
 
     const onSubmit: SubmitHandler<RegisterFormInput> = async (formData) => {
 
@@ -66,7 +66,7 @@ export default function RegisterForm() {
                 { !formState.errors.handle && (
                     <UniqueUsernameStatus 
                         isUserHandleAvailable={isUserHandleAvailable}
-                        hasTouched={hasTouched}
+                        isTouched={isTouched}
                     />
                 )}
 

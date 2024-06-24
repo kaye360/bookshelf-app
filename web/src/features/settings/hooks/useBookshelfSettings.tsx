@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { BookshelfViews, BookshelfFilters, BookshelfSorts } from "../../bookshelf/types/types"
+import { useAuth } from "../../auth/hooks/useAuth"
 
 
 interface BookShelfSettingsProps {
@@ -10,9 +11,11 @@ interface BookShelfSettingsProps {
 
 export default function useBookshelfSettings({ isTouched, touchForm } : BookShelfSettingsProps) {
 
-    const [view, setView]     = useState<BookshelfViews>('grid')
-    const [filter, setFilter] = useState<BookshelfFilters>('all')
-    const [sort, setsort]     = useState<BookshelfSorts>('title')
+    const { user } = useAuth()
+
+    const [view, setView]     = useState<BookshelfViews>(user?.settings?.view || 'grid')
+    const [filter, setFilter] = useState<BookshelfFilters>(user?.settings?.filter || 'all')
+    const [sort, setsort]     = useState<BookshelfSorts>(user?.settings?.sort || 'title')
     
     function handleClick( setting : 'view', value : BookshelfViews) : void
     function handleClick( setting : 'filter', value : BookshelfFilters) : void

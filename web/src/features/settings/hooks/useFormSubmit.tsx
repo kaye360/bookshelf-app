@@ -8,7 +8,7 @@ export default function useFormSubmit() {
     
     const { user, updateUser, token } = useAuth()
 
-    async function handleSubmit(e : SyntheticEvent) {
+    async function updateSettings(e : SyntheticEvent) {
         e.preventDefault()
 
         const response = await Req.send({
@@ -19,7 +19,9 @@ export default function useFormSubmit() {
         })
 
         if( !response.error ) updateUser()
+
+        return response
     }
 
-    return handleSubmit
+    return updateSettings
 }

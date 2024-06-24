@@ -1,28 +1,50 @@
-import { UserBook } from "../../book/types/types";
-import UserActions from "./UserActions";
-import { HashIcon } from "../../../components/common/Icon";
-import useSearchBarParams from "../../searchbar/hooks/useSearchBarParams";
-import { BookTableComponent } from "./BookTableComponents";
+import { HashIcon } from "../../../components/common/Icon"
+import { UserBook } from "../../book/types/types"
+import useSearchBarParams from "../../searchbar/hooks/useSearchBarParams"
+import UserActions from "./UserActions"
 
-export default function BookTableRow({book} : {book : UserBook}) {
+
+export const BookTableComponent = {
+    Cell,
+    Row
+}
+
+
+function Cell({
+    className, 
+    children
+} : {
+    className? : string, 
+    children? : any
+}) {
+    
+    return (
+        <td className={`p-4 ${className}`}>
+            {children}
+        </td>
+    )
+}
+
+
+function Row({book} : {book : UserBook}) {
 
     const { updateSearchParam } = useSearchBarParams()
 
     return (
         <tr className=" even:bg-bg-accent text-sm">
-            <BookTableComponent.Cell>
+            <Cell>
                 <img src={book.image.url} />
-            </BookTableComponent.Cell>
+            </Cell>
 
-            <BookTableComponent.Cell className="font-semibold">
+            <Cell className="font-semibold">
                 {book.title}
-            </BookTableComponent.Cell>
+            </Cell>
 
-            <BookTableComponent.Cell>
+            <Cell>
                 {book.authors}
-            </BookTableComponent.Cell>
+            </Cell>
 
-            <BookTableComponent.Cell>
+            <Cell>
                 <div className="flex items-center gap-x-2 flex-wrap">
                     {book.tags.map( tag => (
                         <button 
@@ -35,13 +57,12 @@ export default function BookTableRow({book} : {book : UserBook}) {
                         </button>
                     ))}
                 </div>
-            </BookTableComponent.Cell>
+            </Cell>
             
-            <BookTableComponent.Cell>
+            <Cell>
                 <UserActions book={book} />
-            </BookTableComponent.Cell>
+            </Cell>
         </tr>
     )
 }
-
 

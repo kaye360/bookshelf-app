@@ -3,13 +3,13 @@ import OptionButton from "../../searchbar/components/OptionButton";
 import useBookshelfSettings from "../hooks/useBookshelfSettings";
 
 
-interface BookShelfSettingsProps {
+export default function BookShelfSettings({ 
+    isTouched, 
+    touchForm 
+} : {
     isTouched : boolean
     touchForm : () => void
-}
-
-
-export default function BookShelfSettings({ isTouched, touchForm } : BookShelfSettingsProps) {
+}) {
     
     const { view, filter, sort, handleClick } = useBookshelfSettings({isTouched, touchForm})
 
@@ -83,8 +83,8 @@ export default function BookShelfSettings({ isTouched, touchForm } : BookShelfSe
                     </OptionButton>
 
                     <OptionButton
-                        onClick={ () => handleClick('filter', 'favourite') }
-                        isActive={ filter === 'favourite' }
+                        onClick={ () => handleClick('filter', 'favourites') }
+                        isActive={ filter === 'favourites' }
                     >
                         <FavouritesIcon size={18} />
                         Favourites

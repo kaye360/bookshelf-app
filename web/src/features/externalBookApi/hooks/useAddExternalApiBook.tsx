@@ -7,11 +7,14 @@ import { formatPayload } from "../services/formatPayload";
 import { Req } from "../../../utils/req";
 
 
-export default function useAddExternalApiBook({book} : {book: GoogleBook}) {
+export default function useAddExternalApiBook({
+    book
+} : {
+    book: GoogleBook
+}) {
 
-    const [showAddBookModal, setShowAddBookModal] = useState(false)
-    const [isBookAdded, setIsBookAdded]           = useState(false)
-    const [errorMessage, setErorrMessage]         = useState<string|null>(null)
+    const [isBookAdded, setIsBookAdded]   = useState(false)
+    const [errorMessage, setErorrMessage] = useState<string|null>(null)
 
     const { user, updateUser, token } = useAuth()
 
@@ -55,8 +58,6 @@ export default function useAddExternalApiBook({book} : {book: GoogleBook}) {
     }
 
     return {
-        showAddBookModal,
-        setShowAddBookModal,
         isBookAdded,
         setIsBookAdded,
         query,

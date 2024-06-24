@@ -9,13 +9,17 @@ interface BookGridItemProps extends ComponentPropsWithoutRef<'div'> {
     hideUserActions? : boolean
 }
 
-export default function BookGridItem({book, hideUserActions=false} : BookGridItemProps ) {
+
+export default function BookGridItem({
+    book, 
+    hideUserActions = false
+} : BookGridItemProps ) {
 
     const hasImage = book.image.url.includes('google')
     const { updateSearchParam } = useSearchBarParams()
 
     return (
-        <div className={` grid gap-1 text-primary-dark `}>
+        <div className={` grid gap-1 text-primary-dark animate-scale-in ori `}>
 
             { hasImage ? (
                 <img 

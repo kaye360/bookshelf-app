@@ -38,8 +38,8 @@ export default function FilterOptions() {
             </OptionButton>
 
             <OptionButton
-                onClick={ () => updateSearchParam('filterBy', 'favourite') }
-                isActive={searchParams.get('filterBy') === 'favourite'}
+                onClick={ () => updateSearchParam('filterBy', 'favourites') }
+                isActive={searchParams.get('filterBy') === 'favourites'}
             >
                 <FavouritesIcon size={18} />
                 Favourites
@@ -47,7 +47,7 @@ export default function FilterOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('filterBy', 'owned') }
-                isActive={false}
+                isActive={searchParams.get('filterBy') === 'owned'}
             >
                 <BookmarkIcon size={18} />    
                 Owned
@@ -55,7 +55,7 @@ export default function FilterOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('filterBy', 'wishlist') }
-                isActive={false}
+                isActive={searchParams.get('filterBy') === 'wishlist'}
             >
                 <FileTextIcon size={18} />
                 Wishlist

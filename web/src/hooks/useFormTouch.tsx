@@ -8,6 +8,10 @@ export default function useFormTouch() {
     const touchForm = () => {
         if( !isTouched) setHasTouched(true)
     } 
+
+    const resetTouch = () => [
+        setHasTouched(false)
+    ]
     
-    return { isTouched, touchForm }
+    return { isTouched, touchForm, resetTouch }
 }

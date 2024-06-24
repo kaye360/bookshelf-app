@@ -11,7 +11,7 @@ export function getUserSession() : AuthReducerState {
     const token = isUserSet ? userSession.access_token : null
 
     const isAuth = user !== null && token !== null
-    
+
     const initialState : AuthReducerState = {
         user,
         token,

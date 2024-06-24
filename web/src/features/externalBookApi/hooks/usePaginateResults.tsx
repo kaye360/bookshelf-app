@@ -2,12 +2,11 @@ import { useState } from "react"
 import { GoogleBookResponse } from "../../book/types/types"
 
 
-interface UsePaginateResults {
+export default function usePaginateResults({
+    data
+} : {
     data : GoogleBookResponse | null
-}
-
-
-export default function usePaginateResults({ data } : UsePaginateResults ) {
+}) {
 
     const [page, setPage] = useState<number>(1)
     const nextPage = () => setPage( page + 1)

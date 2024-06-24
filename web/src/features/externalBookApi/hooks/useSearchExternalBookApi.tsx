@@ -4,12 +4,11 @@ import { GOOGLE_BOOKS_API_URL } from "../../../config"
 import { Req } from "../../../utils/req"
 
 
-interface UseSearchExternalBookApiProps {
+export default function useSearchExternalBookApi({
+    searchQuery
+} : {
     searchQuery : string | null
-}
-
-
-export default function useSearchExternalBookApi( {searchQuery} : UseSearchExternalBookApiProps ) {
+}) {
 
     const { data, isError, isFetching, isSuccess } = useQuery({
         queryKey : ['searchGoogleBooks', searchQuery],
@@ -28,7 +27,7 @@ export default function useSearchExternalBookApi( {searchQuery} : UseSearchExter
         return result.data as GoogleBookResponse
     }
 
-    const hasResults   = isSuccess && !isFetching && data !== null && data.totalItems !== 0
+    const hasResults = isSuccess && !isFetching && data !== null && data.totalItems !== 0
     
     return {
         data,

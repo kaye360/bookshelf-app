@@ -1,6 +1,6 @@
 import { SetURLSearchParams } from "react-router-dom"
 
-export type BookshelfFilters = 'all' | 'read' | 'unread' | 'favourite' | 'wishlist' | 'owned'
+export type BookshelfFilters = 'all' | 'read' | 'unread' | 'favourites' | 'wishlist' | 'owned'
 
 export type BookshelfViews = 'grid' | 'list' | 'card'
 
