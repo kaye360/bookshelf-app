@@ -1,9 +1,9 @@
-import { AuthReducerState } from "../types/types"
+import { Auth } from "../../../types/types"
 import { getUserSettings } from "./getUserSettings"
 import { getUserBooks } from "./getUsersBooks"
 
 
-export async function getUserData( userSession : AuthReducerState) {
+export async function getUserData( userSession : Auth) {
 
     if( !userSession.user?.id ) return userSession
 

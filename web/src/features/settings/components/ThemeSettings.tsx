@@ -1,5 +1,5 @@
 import { MoonIcon, SunIcon } from "../../../components/common/Icon";
-import { useAuth } from "../../auth/hooks/useAuth";
+import { useStore } from "../../../store/store";
 
 export default function ThemeSettings({
     touchForm
@@ -7,7 +7,7 @@ export default function ThemeSettings({
     touchForm : () => void
 }) {
 
-    const { user } = useAuth()
+    const { auth : { user } } = useStore()
     const isLightTheme = user?.settings?.theme === 'light'
 
     return (

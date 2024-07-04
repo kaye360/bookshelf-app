@@ -1,10 +1,10 @@
 import Wrapper from "./Wrapper";
 import { AddBookNavLink, BookshelfNavLink, CommunityNavLink, DashboardNavLink, HomeNavLink } from "./NavLinks";
-import { useAuth } from "../../features/auth/hooks/useAuth";
+import { useStore } from "../../store/store";
 
 export default function Nav() {
 
-    const { isAuth } = useAuth()
+    const { auth : { isAuth } } = useStore()
 
     return (
         <nav className="fixed bottom-0 left-0 right-0 z-50 md:static bg-bg md:bg-primary-light/20 py-4 md:py-2 max-w-[100vw]">

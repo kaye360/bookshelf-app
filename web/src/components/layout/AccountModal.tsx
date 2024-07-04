@@ -1,4 +1,4 @@
-import { logout } from "../../features/auth/services/actions";
+import useLogout from "../../features/auth/api/useLogout";
 import Modal from "../common/Modal";
 import Button from "../form/Button";
 import { useNavigate } from "react-router-dom";
@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 interface AccountModalProps {
     showLogoutModal : boolean
     setShowLogoutModal : Function
-    dispatch : any
 }
 
-export default function AccountModal({showLogoutModal, setShowLogoutModal, dispatch} : AccountModalProps) {
+export default function AccountModal({showLogoutModal, setShowLogoutModal } : AccountModalProps) {
 
+    const logout   = useLogout()
     const navigate = useNavigate()
 
     async function handleLogout () {
-        logout(dispatch)
+        await logout()
         navigate('/')
     }
 

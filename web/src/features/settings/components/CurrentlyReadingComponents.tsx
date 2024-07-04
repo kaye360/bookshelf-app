@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import TextInput from "../../../components/form/TextInput"
-import { useAuth } from "../../auth/hooks/useAuth"
 import { UserBook } from "../../book/types/types"
+import { useStore } from "../../../store/store"
 
 
 export const CurrentlyReading = {
@@ -57,7 +57,7 @@ export default function Selector({
     showEditForm : boolean
 }) {
 
-    const { user } = useAuth()
+    const { auth : { user } } = useStore()
     const [searchQuery, setSearchQuery] = useState<string>('')
 
     const booklist = user?.books.filter( book => 

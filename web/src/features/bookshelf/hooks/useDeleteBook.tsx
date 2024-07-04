@@ -1,12 +1,12 @@
 import { useState, SyntheticEvent } from "react"
 import { UserBook } from "../../book/types/types"
 import { API_URL } from "../../../config"
-import { useAuth } from "../../auth/hooks/useAuth"
 import { Req } from "../../../utils/req"
+import { useStore } from "../../../store/store"
 
 export default function useDeleteBook(book: UserBook) {
 
-    const { updateUser, token } = useAuth()
+    const { auth : { token } } = useStore()
 
     const defaultStatus = { isLoading : false, isSuccess : false }
     const [status, setStatus] = useState(defaultStatus)
@@ -31,7 +31,7 @@ export default function useDeleteBook(book: UserBook) {
             setStatus( prev => ({...prev, isSuccess : true}) )
             setTimeout( () => {
                 setStatus(defaultStatus)
-                updateUser()
+                throw new Error('Update userBooks not implemented yet')
             }, 3000 )
         }
     }

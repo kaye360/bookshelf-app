@@ -3,11 +3,11 @@ import Header from "../components/layout/Header";
 import Nav from "../components/layout/Nav";
 import Wrapper from "../components/layout/Wrapper";
 import { ReactNode, useEffect } from "react";
-import { useAuth } from "../features/auth/hooks/useAuth";
+import { useStore } from "../store/store";
 
 export default function BaseLayout({children} : {children? : ReactNode}) {
 
-    const { user } = useAuth()
+    const { auth : { user } } = useStore()
 
     useEffect( () => {
         const html = document.querySelector('html') as HTMLHtmlElement

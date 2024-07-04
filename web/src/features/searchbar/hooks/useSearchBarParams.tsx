@@ -6,13 +6,13 @@ import { resolveBookList } from "../../bookshelf/services/resolveBookList"
 import BookCardList from "../../bookshelf/components/BookCardList"
 import BookCard from "../../bookshelf/components/BookCard"
 import { BookshelfParams } from "../../bookshelf/types/types"
-import { useAuth } from "../../auth/hooks/useAuth"
 import { BookTableComponent } from "../../bookshelf/components/BookTableComponents"
+import { useStore } from "../../../store/store"
 
 
 export default function useSearchBarParams() {
 
-    const { user } = useAuth()
+    const { auth : { user } } = useStore()
 
     const [searchParams, setSearchParams] = useSearchParams({
         viewAs        : user?.settings?.view || 'grid',

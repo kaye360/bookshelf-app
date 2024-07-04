@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
-import { BookShelfContext } from "../../../routes/bookshelf/Bookshelf";
+import { BookShelfContext } from "../../../routes/Bookshelf";
 import { AllIcon, BookmarkIcon, CheckIcon, FavouritesIcon, FileTextIcon, UncheckIcon } from "../../../components/common/Icon";
 
 export default function FilterOptions() {

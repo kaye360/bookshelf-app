@@ -1,10 +1,10 @@
-import { useAuth } from "../../auth/hooks/useAuth"
+import { useStore } from "../../../store/store"
 import { GoogleBook } from "../../book/types/types"
 
 
 export default function useUserHasBook(){
 
-    const { user }   = useAuth()
+    const { auth : { user } } = useStore()
 
     const isbn10List = user?.books.map( book => book.isbn.isbn10)
     const isbn13List = user?.books.map( book => book.isbn.isbn13)

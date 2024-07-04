@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import Error404 from "../../routes/error/Error404";
-import Dashboard from "../../routes/dashboard/Dashboard";
+import Dashboard from "../../routes/Dashboard";
 import Index from "../../routes/Index";
 import AuthRoute from "../auth/components/AuthRoute";
-import Book from "../../routes/book/Book";
-import BookShelf from "../../routes/bookshelf/Bookshelf";
-import Settings from "../../routes/settings/Settings";
-import User from "../../routes/user/User";
-import Community from "../../routes/community/Community";
-import AddBook from "../../routes/add/AddBook";
+import Book from "../../routes/Book";
+import BookShelf from "../../routes/Bookshelf";
+import Settings from "../../routes/Settings";
+import Community from "../../routes/Community";
+import AddBook from "../../routes/AddBook";
+import Profile from "../../routes/Profile";
 
 export const router = createBrowserRouter([
 	{
@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
 
 	{
 		path: '/user',
-		element : <User />
+		element : <Profile />
 	},
 
 	{

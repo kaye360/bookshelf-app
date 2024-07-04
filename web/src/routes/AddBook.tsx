@@ -1,12 +1,12 @@
-import BaseLayout from '../../layouts/BaseLayout'
-import Form from '../../features/addBook/components/Form'
-import Status from '../../features/addBook/components/Status'
+import BaseLayout from '../layouts/BaseLayout'
+import Form from '../features/addBook/components/Form'
+import Status from '../features/addBook/components/Status'
 import { useState } from 'react'
-import useExternalBookSearchForm from '../../features/externalBookApi/hooks/useSearchExternalBookForm'
-import useSearchExternalBookApi from '../../features/externalBookApi/hooks/useSearchExternalBookApi'
-import usePaginateResults from '../../features/externalBookApi/hooks/usePaginateResults'
-import Button from '../../components/form/Button'
-import Result from '../../features/addBook/components/Result'
+import useExternalBookSearchForm from '../features/externalBookApi/hooks/useSearchExternalBookForm'
+import useSearchExternalBookApi from '../features/externalBookApi/hooks/useSearchExternalBookApi'
+import usePaginateResults from '../features/externalBookApi/hooks/usePaginateResults'
+import Button from '../components/form/Button'
+import Result from '../features/addBook/components/Result'
 
 
 export default function AddBook() {

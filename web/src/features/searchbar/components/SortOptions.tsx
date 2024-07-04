@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
-import { BookShelfContext } from "../../../routes/bookshelf/Bookshelf";
+import { BookShelfContext } from "../../../routes/Bookshelf";
 import { ArrowDownIcon, ArrowUpIcon, ParagraphIcon, UserIcon } from "../../../components/common/Icon";
 
 

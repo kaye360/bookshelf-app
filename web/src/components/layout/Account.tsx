@@ -3,14 +3,12 @@ import { useState } from "react"
 import AccountModal from "./AccountModal"
 import { LogoutIcon, SettingsIcon, UserIcon } from "../common/Icon"
 import useToggleState from "../../hooks/useToggleState"
-import { useAuth } from "../../features/auth/hooks/useAuth"
-import { useAuthDispatch } from "../../features/auth/hooks/useAuthDispatch"
+import { useStore } from "../../store/store"
 
 
 export default function Account() {
 
-    const { isAuth, user } = useAuth()
-    const dispatch         = useAuthDispatch()
+    const { auth : { isAuth, user } } = useStore()
     
     const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false)
     const [showDropDown, _, toggleDropDown] = useToggleState(false)
@@ -63,7 +61,6 @@ export default function Account() {
             <AccountModal 
                 showLogoutModal={showLogoutModal}
                 setShowLogoutModal={setShowLogoutModal}
-                dispatch={dispatch}
             />
         </div>
     )

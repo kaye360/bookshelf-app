@@ -13,11 +13,11 @@ export default {
 				'theme' : ['Courgette', 'Helvetica', 'system-ui', 'sans-serif'],
 			},
 			colors : {
-				"primary-dark"  : "hsl( 210deg 23% 40% / <alpha-value> )",
-				"primary-light" : "hsl( 210deg 23% 85% / <alpha-value> )",
-				"accent"    	: "hsl( 0deg 65% 60% / <alpha-value> )",
-				"bg"	    	: "hsl( 30deg 38% 99% / <alpha-value> )",
-				"bg-accent" 	: "hsl( 30deg 38% 96% / <alpha-value> )"
+				"primary-dark"  : "hsl( var(--color-primary-dark) / <alpha-value> )",
+				"primary-light" : "hsl( var(--color-primary-light) / <alpha-value> )",
+				"accent"    	: "hsl( var(--color-accent) / <alpha-value> )",
+				"bg"	    	: "hsl( var(--color-bg) / <alpha-value> )",
+				"bg-accent" 	: "hsl( var(--color-bg-accent) / <alpha-value> )"
 			},
 			animation : {
 				'modal-bg' 		: 'modal-bg 200ms ease both',

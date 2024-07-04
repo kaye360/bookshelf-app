@@ -1,9 +1,9 @@
 import TextInput from "../../../components/form/TextInput";
-import { useAuth } from "../../auth/hooks/useAuth";
+import { useStore } from "../../../store/store";
 
 export default function PersonalSettings() {
 
-    const {user} = useAuth()
+    const { auth : { user } } = useStore()
 
     return (
         <div className="grid gap-3">

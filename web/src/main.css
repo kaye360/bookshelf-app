@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --color-primary-dark  : 210deg 23% 40%;
+    --color-primary-light : 210deg 23% 85%;
+    --color-accent        : 0deg 65% 60%;
+    --color-bg            : 30deg 38% 99%;
+    --color-bg-accent     : 30deg 38% 96%;
+}
+
+.dark {
+    --color-primary-dark  : 210deg 23% 90%;
+    --color-primary-light : 210deg 23% 35%;
+    --color-accent        : 0deg 45% 60%;
+    --color-bg            : 210deg 23% 10%;
+    --color-bg-accent     : 210deg 23% 7%;
+}
+
 @layer base {
 
     a {

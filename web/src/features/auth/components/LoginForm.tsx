@@ -1,13 +1,15 @@
 import { AlertIcon, CheckIcon, LoaderIcon } from "../../../components/common/Icon"
 import Button from "../../../components/form/Button"
 import TextInput from "../../../components/form/TextInput"
-import { useAuth } from "../hooks/useAuth"
+import { useStore } from "../../../store/store"
 import useLoginForm from "../hooks/useLoginForm"
 
 
 export default function LoginForm() {
 
-    const { loading : isLoading, errorMessage : isError, user } = useAuth()
+    const { auth } = useStore()
+
+    const { loading : isLoading, error : isError, user } = auth
     
     const { handleSubmit, onSubmit, register, errors } = useLoginForm()
 

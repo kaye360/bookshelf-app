@@ -1,12 +1,12 @@
-import BookGridItem from "../../features/bookshelf/components/BookGridItem";
-import BaseLayout from "../../layouts/BaseLayout";
-import DashboardSection from "../../features/dashboard/components/DashboardSection";
-import { useAuth } from "../../features/auth/hooks/useAuth";
+import BookGridItem from "../features/bookshelf/components/BookGridItem";
+import BaseLayout from "../layouts/BaseLayout";
+import DashboardSection from "../features/dashboard/components/DashboardSection";
+import { useStore } from "../store/store";
 
 
 export default function Dashboard() {
 
-    const {user} = useAuth()
+    const { auth : { user } } = useStore()
     const books  = user?.books ? user.books : []
 
     return (

@@ -1,12 +1,12 @@
 import { useState, SyntheticEvent } from "react"
 import { API_URL } from "../../../config"
 import { UserBook } from "../../book/types/types"
-import { useAuth } from "../../auth/hooks/useAuth"
 import { Req } from "../../../utils/req"
+import { useStore } from "../../../store/store"
 
 export default function useEditBookTags({book} : {book : UserBook}) {
 
-    const { updateUser, token } = useAuth()
+    const { auth : { token } } = useStore()
 
     const defaultStatus = { isLoading : false, isSuccess : false }
     const [status, setStatus] = useState(defaultStatus)
@@ -23,7 +23,7 @@ export default function useEditBookTags({book} : {book : UserBook}) {
         setStatus( prev => ({...prev, isLoading : false}))
 
         if( !query.error ) {
-            updateUser()
+            throw new Error('Update book function not implemented yet')
             setStatus( prev => ({...prev, isSuccess : true}) )
             setTimeout( () => setStatus(defaultStatus), 5000 )
         }

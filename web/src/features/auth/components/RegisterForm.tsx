@@ -1,5 +1,4 @@
 import { SubmitHandler, useForm } from "react-hook-form"
-import { register as registerUser } from "../services/actions"
 import Button from "../../../components/form/Button"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { registerSchema } from "../services/validation"
@@ -7,8 +6,8 @@ import useIsUserHandleAvailable from "../hooks/useIsUserHandleAvailable"
 import ValidatedTextInput from "../../../components/form/ValidatedTextInput"
 import { CheckIcon, AlertIcon, LoaderIcon } from "../../../components/common/Icon"
 import UniqueUsernameStatus from "./UniqueUsernameStatus"
-import { useAuthDispatch } from "../hooks/useAuthDispatch"
-import { useAuth } from "../hooks/useAuth"
+import { useStore } from "../../../store/store"
+import useRegister from "../api/useRegister"
 
 
 export interface RegisterFormInput {
@@ -22,8 +21,8 @@ export interface RegisterFormInput {
 
 export default function RegisterForm() {
 
-    const dispatch = useAuthDispatch()
-    const { loading : isLoading, errorMessage: isError, user } = useAuth()
+    const { auth :  { loading : isLoading, error: isError, user } } = useStore()
+    const registerUser = useRegister()
 
     const { register, handleSubmit, formState } = useForm<RegisterFormInput>({
         resolver : yupResolver(registerSchema),
@@ -34,16 +33,18 @@ export default function RegisterForm() {
 
     const onSubmit: SubmitHandler<RegisterFormInput> = async (formData) => {
 
-        const payload = {
-            handle          : formData.handle,
-            email           : formData.email,
-            name            : formData.name,
-            password        : formData.password,
-            password_confirmation : formData.password_confirmation,
-        }
-
+        
+        
         try {
-            await registerUser(dispatch, payload)
+            const payload = {
+                handle          : formData.handle,
+                email           : formData.email,
+                name            : formData.name,
+                password        : formData.password,
+                password_confirmation : formData.password_confirmation,
+            }
+            
+            await registerUser(payload)
         } catch (e) {}
     }
 

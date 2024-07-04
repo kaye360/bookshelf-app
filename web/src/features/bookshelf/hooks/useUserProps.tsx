@@ -2,12 +2,12 @@ import { useState } from "react"
 import { API_URL } from "../../../config"
 import { UserBook } from "../../book/types/types"
 import useToggleState from "../../../hooks/useToggleState"
-import { useAuth } from "../../auth/hooks/useAuth"
 import { Req } from "../../../utils/req"
+import { useStore } from "../../../store/store"
 
 export default function useUserProps(book : UserBook) {
 
-    const { updateUser, token }  = useAuth()
+    const { auth :  { token } }  = useStore()
 
     const [userProps, setUserProps] = useState({
         isRead : book.isRead,
@@ -34,7 +34,7 @@ export default function useUserProps(book : UserBook) {
 
         if(response.error) toggleBookIsFavourite()
 
-        updateUser()
+        throw new Error('update user book function not implemented')
     }
 
     async function handleIsReadClick() {
@@ -50,7 +50,7 @@ export default function useUserProps(book : UserBook) {
 
         if(response.error) toggleBookIsRead()
 
-        updateUser()
+        throw new Error('update user book function not implemented')
     }
 
     async function handleIsOwnedClick() {
@@ -66,7 +66,7 @@ export default function useUserProps(book : UserBook) {
 
         if(response.error) toggleBookIsOwned()
 
-        updateUser()
+        throw new Error('update user book function not implemented')
     }
 
 

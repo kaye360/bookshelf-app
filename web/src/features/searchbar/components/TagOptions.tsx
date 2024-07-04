@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
-import { BookShelfContext } from "../../../routes/bookshelf/Bookshelf";
+import { BookShelfContext } from "../../../routes/Bookshelf";
 import { HashIcon } from "../../../components/common/Icon";
 import { getTagsFromBookList } from "../../tags/services/getTagsFromBookList";
-import { useAuth } from "../../auth/hooks/useAuth";
+import { useStore } from "../../../store/store";
 
 
 export default function TagOptions() {
 
-    const { user } = useAuth()
+    const { auth : { user } } = useStore()
     const { searchParams, updateSearchParam } = useContext(BookShelfContext)
 
     const tags = getTagsFromBookList(user?.books || []).slice(0,8)

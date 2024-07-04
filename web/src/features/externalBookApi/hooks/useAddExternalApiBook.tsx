@@ -2,9 +2,9 @@ import { useState } from "react";
 import { GoogleBook } from "../../book/types/types";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../../config";
-import { useAuth } from "../../auth/hooks/useAuth";
 import { formatPayload } from "../services/formatPayload";
 import { Req } from "../../../utils/req";
+import { useStore } from "../../../store/store";
 
 
 export default function useAddExternalApiBook({
@@ -16,7 +16,7 @@ export default function useAddExternalApiBook({
     const [isBookAdded, setIsBookAdded]   = useState(false)
     const [errorMessage, setErorrMessage] = useState<string|null>(null)
 
-    const { user, updateUser, token } = useAuth()
+    const { auth : { user, token } } = useStore()
 
     const query = useQuery({
         queryKey : ['addGoogleBook', book.id, isBookAdded],
@@ -42,7 +42,7 @@ export default function useAddExternalApiBook({
                 token
             })
 
-            updateUser()
+            throw new Error('Function not implemeneted')
 
             return response
         } catch (e: any) {

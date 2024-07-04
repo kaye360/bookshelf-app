@@ -1,5 +1,5 @@
 import Error401 from "../../../routes/error/Error401"
-import { useAuth } from "../hooks/useAuth"
+import { useStore } from "../../../store/store"
 
 
 export default function AuthRoute({
@@ -8,7 +8,7 @@ export default function AuthRoute({
     children : any
 }) {
 
-    const { isAuth } = useAuth()
+    const { auth : { isAuth } } = useStore()
     
     if( isAuth ) {
         return <>{children}</>

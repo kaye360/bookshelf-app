@@ -1,13 +1,13 @@
-import BaseLayout from "../../layouts/BaseLayout";
-import SearchBar from "../../features/searchbar/components/SearchBar";
+import BaseLayout from "../layouts/BaseLayout";
+import SearchBar from "../features/searchbar/components/SearchBar";
 import { createContext } from "react";
-import { bookShelfContextInitialState } from "../../features/bookshelf/services/initialState";
-import FilterOptions from "../../features/searchbar/components/FilterOptions";
-import { BookShelfContextProps } from "../../features/bookshelf/types/types";
-import useSearchBarParams from "../../features/searchbar/hooks/useSearchBarParams";
-import TagOptions from "../../features/searchbar/components/TagOptions";
-import { BookIcon, PlusIcon } from "../../components/common/Icon";
-import Button from "../../components/form/Button";
+import { bookShelfContextInitialState } from "../features/bookshelf/services/initialState";
+import FilterOptions from "../features/searchbar/components/FilterOptions";
+import { BookShelfContextProps } from "../features/bookshelf/types/types";
+import useSearchBarParams from "../features/searchbar/hooks/useSearchBarParams";
+import TagOptions from "../features/searchbar/components/TagOptions";
+import { BookIcon, PlusIcon } from "../components/common/Icon";
+import Button from "../components/form/Button";
 import { useNavigate } from "react-router-dom";
 
 

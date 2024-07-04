@@ -1,18 +1,18 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import BaseLayout from "../layouts/BaseLayout";
 import { useEffect } from "react";
-import { useAuth } from "../features/auth/hooks/useAuth";
 import AccountForm from "../features/auth/components/AccountForm";
+import { useStore } from "../store/store";
 
 
 export default function Index() {
 
-    const navigate   = useNavigate()
-    const { isAuth } = useAuth()
+    const navigate = useNavigate()
+    const { auth } = useStore()
 
     useEffect( () => {
-        if( isAuth ) navigate('/dashboard')
-    },[isAuth])
+        if( auth.isAuth ) navigate('/dashboard')
+    },[auth.isAuth])
 
     const location    = useLocation()
     const pathName    = location.pathname.replaceAll('/', '')

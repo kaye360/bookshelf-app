@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { useAuth } from "../../auth/hooks/useAuth"
+import { useStore } from "../../../store/store"
 
 
 export default function useCurrentlyReading() {
 
-    const { user }            = useAuth()
+    const { auth : { user } } = useStore()
     const [bookId, setBookId] = useState<string>('')
 
     useEffect( () => {

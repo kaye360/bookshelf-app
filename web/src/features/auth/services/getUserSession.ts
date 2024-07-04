@@ -1,25 +1,44 @@
-import { AuthReducerState } from "../types/types"
+import { Auth } from "../../../types/types"
 
 
-export function getUserSession() : AuthReducerState {
+export function getUserSession() : Auth {
 
-    const userLocalStorage = localStorage.getItem("currentUser")
-    const isUserSet        = typeof userLocalStorage === 'string'
+    const userLocalStorage = localStorage.getItem("auth")
+    const isUserSet        = isValidSession(userLocalStorage)
     const userSession      = isUserSet ? JSON.parse( userLocalStorage ) : null
 
-    const user  = isUserSet ? userSession.user         : null
-    const token = isUserSet ? userSession.access_token : null
+    const user  = isUserSet && Object.hasOwn(userSession, 'user') 
+                    ? userSession.user 
+                    : null
+
+    const token = isUserSet && Object.hasOwn(userSession, 'token')  
+                    ? userSession.token
+                    : null
 
     const isAuth = user !== null && token !== null
 
-    const initialState : AuthReducerState = {
+    const initialState : Auth = {
         user,
         token,
-        loading: false,
-        errorMessage: null,
+        loading : false,
+        error   : null,
         isAuth,
-        updateUser : () => {}
     }
 
     return initialState
+}
+
+
+
+function isValidSession(userLocalStorage : string|null) : userLocalStorage is string {
+
+    if( typeof userLocalStorage !== 'string') return false
+
+    try {
+        const json = JSON.parse(userLocalStorage)
+        if( typeof json === 'object') return true
+    }
+    catch (e) {}
+
+    return false
 }

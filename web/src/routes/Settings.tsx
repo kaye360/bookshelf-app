@@ -1,13 +1,13 @@
-import Button from "../../components/form/Button";
-import BaseLayout from "../../layouts/BaseLayout";
-import CurrentlyReadingSettings from "../../features/settings/components/CurrentlyReadingSettings";
-import BookShelfSettings from "../../features/settings/components/BookShelfSettings";
-import PersonalSettings from "../../features/settings/components/PersonalSettings";
-import ThemeSettings from "../../features/settings/components/ThemeSettings";
-import useFormTouch from "../../hooks/useFormTouch";
-import useFormSubmit from "../../features/settings/hooks/useFormSubmit";
+import Button from "../components/form/Button";
+import BaseLayout from "../layouts/BaseLayout";
+import CurrentlyReadingSettings from "../features/settings/components/CurrentlyReadingSettings";
+import BookShelfSettings from "../features/settings/components/BookShelfSettings";
+import PersonalSettings from "../features/settings/components/PersonalSettings";
+import ThemeSettings from "../features/settings/components/ThemeSettings";
+import useFormTouch from "../hooks/useFormTouch";
+import useFormSubmit from "../features/settings/hooks/useFormSubmit";
 import { SyntheticEvent, useState } from "react";
-import { CheckIcon, LoaderIcon } from "../../components/common/Icon";
+import { CheckIcon, LoaderIcon } from "../components/common/Icon";
 
 export default function Settings() {
 
