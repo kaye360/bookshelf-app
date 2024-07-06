@@ -56,12 +56,10 @@ export default function Account() {
                     <Link to="/register">Register</Link>
                 </div>
             }
-
             
-            <AccountModal 
-                showLogoutModal={showLogoutModal}
-                setShowLogoutModal={setShowLogoutModal}
-            />
+            { showLogoutModal &&
+                <AccountModal closeModalFn={ () => setShowLogoutModal(false) } />
+            }
         </div>
     )
 }

@@ -51,16 +51,14 @@ export default function UserActionsMore({book, isOpen, setIsOpen} : UserActionsM
             { showEditTagsModal && (
                 <EditTagsModal 
                     book={book}
-                    showModal={showEditTagsModal} 
-                    setShowModal={setShowEditTagsModal}
+                    closeModalFn={ () => setShowEditTagsModal(false) }
                 />
             )}
 
             { showDeleteModal && (
                 <DeleteBookModal 
                     book={book}
-                    showDeleteModal={showDeleteModal}
-                    setShowDeleteModal={setShowDeleteModal}
+                    closeModalFn={ () => setShowDeleteModal(false)}
                 />
             )}
             

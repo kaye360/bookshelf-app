@@ -2,28 +2,25 @@ import Modal from "../../../components/common/Modal";
 import { AlertIcon, LoaderIcon } from "../../../components/common/Icon";
 import Button from "../../../components/form/Button";
 import { UserBook } from "../../../types/types";
-import { useDeleteUserBook } from "../../userBook/api/deleteUserBook";
-
+import useHandleDeleteBook from "../hooks/useHandleDeleteBook";
 
 
 export default function DeleteBookModal({
     book, 
-    showDeleteModal, 
-    setShowDeleteModal
+    closeModalFn
 } : {
     book : UserBook
-    showDeleteModal : boolean
-    setShowDeleteModal : React.Dispatch<React.SetStateAction<boolean>>
+    closeModalFn : Function
 }) {
 
-    const { handleSubmit, status } = useDeleteUserBook()
+    const { query, handleDeleteBook, hasClicked } = useHandleDeleteBook({book})
 
     const hasImage = book.image.url.includes('google')
 
     return (
-        <Modal showModal={showDeleteModal} setShowModal={setShowDeleteModal}>
+        <Modal closeModalFn={closeModalFn}>
                 
-            <form onSubmit={ (e) => handleSubmit(book,e) }>
+            <form onSubmit={ (e) => handleDeleteBook(e) }>
 
                 <div className="flex items-start gap-3">
 
@@ -47,12 +44,12 @@ export default function DeleteBookModal({
 
                 <div className="flex items-center gap-3">
                     <Button type="submit" variant="fill">
-                        { status.isLoading 
+                        { query.isRefetching
                             ? <> <LoaderIcon /> Deleting Book...</>
                             : 'Delete Book'
                         }
                     </Button>
-                    { status.isSuccess && 'Book Deleted.' }
+                    { hasClicked && !query.isRefetching && query.isSuccess && 'Book Deleted.' }
                 </div>
             
             </form>

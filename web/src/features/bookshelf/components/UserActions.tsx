@@ -3,9 +3,9 @@ import ToolTip from "../../../components/common/ToolTip";
 import ToolTipWrapper from "../../../components/common/ToolTipWrapper";
 import useToggleState from "../../../hooks/useToggleState";
 import { UserBook } from "../../../types/types";
-import { useUpdateUserBookIsFavourite } from "../../userBook/api/updateUserBookIsFavourite";
-import { useUpdateUserBookIsOwned } from "../../userBook/api/updateUserBookIsOwned";
-import { useUpdateUserBookIsRead } from "../../userBook/api/updateUserBookIsRead";
+import { useUpdateUserBookIsFavourite } from "../api/updateUserBookIsFavourite";
+import { useUpdateUserBookIsOwned } from "../api/updateUserBookIsOwned";
+import { useUpdateUserBookIsRead } from "../api/updateUserBookIsRead";
 import UserActionButton from "./UserActionButton";
 import UserActionsMore from "./UserActionsMore";
 

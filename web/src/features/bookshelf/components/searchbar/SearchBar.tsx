@@ -4,7 +4,7 @@ import FilterButton from "./FilterButton"
 import SearchInput from "./SearchInput"
 import ViewOptions from "./ViewOptions"
 import SortOptions from "./SortOptions"
-import { CloseIcon } from "../../../components/common/Icon"
+import { CloseIcon } from "../../../../components/common/Icon"
 
 
 export default function SearchBar() {

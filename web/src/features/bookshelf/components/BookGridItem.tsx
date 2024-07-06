@@ -1,7 +1,7 @@
 import UserActions from "./UserActions";
-import useSearchBarParams from "../../searchbar/hooks/useSearchBarParams";
 import { ComponentPropsWithoutRef } from "react";
 import { UserBook } from "../../../types/types";
+import useSearchBarParams from "../hooks/useSearchBarParams";
 
 
 interface BookGridItemProps extends ComponentPropsWithoutRef<'div'> {

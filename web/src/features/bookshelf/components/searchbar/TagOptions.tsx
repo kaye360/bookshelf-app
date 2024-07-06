@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
-import { HashIcon } from "../../../components/common/Icon";
-import { getTagsFromBookList } from "../../tags/services/getTagsFromBookList";
-import { useStore } from "../../../store/store";
-import { BookShelfContext } from "../../bookshelf/hooks/bookShelfContext";
+import { HashIcon } from "../../../../components/common/Icon";
+import { getTagsFromBookList } from "../../../tags/services/getTagsFromBookList";
+import { BookShelfContext } from "../../hooks/bookShelfContext";
+import { useStore } from "../../../../store/store";
 
 
 

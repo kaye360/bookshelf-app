@@ -1,6 +1,6 @@
 import { HashIcon } from "../../../components/common/Icon"
 import { UserBook } from "../../../types/types"
-import useSearchBarParams from "../../searchbar/hooks/useSearchBarParams"
+import useSearchBarParams from "../hooks/useSearchBarParams"
 import UserActions from "./UserActions"
 
 

@@ -2,18 +2,16 @@ import Modal from "../../../components/common/Modal";
 import { AlertIcon, LoaderIcon } from "../../../components/common/Icon";
 import Button from "../../../components/form/Button";
 import { UserBook } from "../../../types/types";
-import { useUpdateUserBookTags } from "../../userBook/api/updateUserBookTags";
+import { useUpdateUserBookTags } from "../api/updateUserBookTags";
 
 
 
 export default function EditTagsModal({
     book, 
-    showModal, 
-    setShowModal
+    closeModalFn
 } : {
     book         : UserBook
-    showModal    : boolean
-    setShowModal : React.Dispatch<React.SetStateAction<boolean>>
+    closeModalFn : Function
 }) {
 
     const { handleSubmit, status } = useUpdateUserBookTags()
@@ -21,7 +19,7 @@ export default function EditTagsModal({
     const hasImage = book.image.url.includes('google')
 
     return (
-        <Modal showModal={showModal} setShowModal={setShowModal}>
+        <Modal closeModalFn={closeModalFn} >
 
             <div className="flex items-stretch gap-3 mb-4">
 

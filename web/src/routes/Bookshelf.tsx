@@ -1,13 +1,13 @@
 import BaseLayout from "../layouts/BaseLayout";
-import SearchBar from "../features/searchbar/components/SearchBar";
-import FilterOptions from "../features/searchbar/components/FilterOptions";
-import useSearchBarParams from "../features/searchbar/hooks/useSearchBarParams";
-import TagOptions from "../features/searchbar/components/TagOptions";
 import { BookIcon, LoaderIcon, PlusIcon } from "../components/common/Icon";
 import Button from "../components/form/Button";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../store/store";
 import { BookShelfContext } from "../features/bookshelf/hooks/bookShelfContext";
+import useSearchBarParams from "../features/bookshelf/hooks/useSearchBarParams";
+import FilterOptions from "../features/bookshelf/components/searchbar/FilterOptions";
+import SearchBar from "../features/bookshelf/components/searchbar/SearchBar";
+import TagOptions from "../features/bookshelf/components/searchbar/TagOptions";
 
 
 

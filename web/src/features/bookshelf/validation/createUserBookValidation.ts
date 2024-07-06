@@ -23,17 +23,19 @@ export function createUserBookValidation({
     isRead 
 } : {
     book : GoogleBook
-    user : User
+    user : User|null
     isOwned : HTMLInputElement
     isRead : HTMLInputElement
 }) : CreateUserBookValidation {
+
+    if(!user) return
     
     const payload = {
         title       : book?.volumeInfo?.title || '',
         isbn10      : book?.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_10' )[0]?.identifier || '',
         isbn13      : book?.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_13' )[0]?.identifier || '',
         imageUrl    : book?.volumeInfo?.imageLinks?.thumbnail || book?.volumeInfo?.imageLinks?.smallThumbnail || '',
-        userId      : user.id,
+        userId      : user?.id,
         rating      : 0,
         group       : isOwned.checked ? 'owned' : 'wishlist',
         isRead      : isRead.checked,

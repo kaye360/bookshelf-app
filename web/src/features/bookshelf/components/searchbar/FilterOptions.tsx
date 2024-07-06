@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
-import { AllIcon, BookmarkIcon, CheckIcon, FavouritesIcon, FileTextIcon, UncheckIcon } from "../../../components/common/Icon";
-import { BookShelfContext } from "../../bookshelf/hooks/bookShelfContext";
+import { AllIcon, CheckIcon, UncheckIcon, FavouritesIcon, BookmarkIcon, FileTextIcon } from "../../../../components/common/Icon";
+import { BookShelfContext } from "../../hooks/bookShelfContext";
 
 
 

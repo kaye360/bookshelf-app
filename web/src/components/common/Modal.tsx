@@ -4,17 +4,16 @@ import { createPortal } from "react-dom"
 
 
 interface ModalProps {
-    showModal : boolean
-    setShowModal : Function
+    closeModalFn : Function
     children? : any
 }
 
-export default function Modal( {showModal, setShowModal, children} : ModalProps ) {
+export default function Modal( {closeModalFn, children} : ModalProps ) {
 
     useEffect(() => {
 
         function handleEsc(e: KeyboardEvent) {
-            if (e.key === 'Escape') setShowModal(false)
+            if (e.key === 'Escape') closeModalFn()
         }
 
         window.addEventListener('keydown', handleEsc);
@@ -24,32 +23,28 @@ export default function Modal( {showModal, setShowModal, children} : ModalProps 
 
     function handleClick(e: SyntheticEvent) {
         if( e.target instanceof HTMLElement && e.target.id === 'modal' ) {
-            setShowModal(false)
+            closeModalFn()
         }
     }
     
-    if (showModal) { 
-        return createPortal(
-            <div
-                id="modal"
-                onClick={handleClick}
-                className={`fixed inset-0 grid place-items-center bg-white/90 animate-modal-bg`}
-            >
-                <div className={`bg-bg-accent shadow-md p-12 max-w-xl relative animate-modal-content`}>
+    return createPortal(
+        <div
+            id="modal"
+            onClick={handleClick}
+            className={`fixed inset-0 grid place-items-center bg-white/90 animate-modal-bg`}
+        >
+            <div className={`bg-bg-accent shadow-md p-12 max-w-xl relative animate-modal-content`}>
 
-                    {children}
+                {children}
 
-                    <button 
-                        onClick={ () => setShowModal(false) } 
-                        className="absolute right-3 top-3"
-                    >
-                        <CloseIcon />
-                    </button>
+                <button 
+                    onClick={ () => closeModalFn() } 
+                    className="absolute right-3 top-3"
+                >
+                    <CloseIcon />
+                </button>
 
-                </div>
             </div>
-        , document.body)
-    } else {
-        return <></>
-    }
+        </div>
+    , document.body)
 }

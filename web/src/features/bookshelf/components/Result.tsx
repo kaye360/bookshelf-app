@@ -4,7 +4,7 @@ import { formatGoogleBookResult } from "../../externalBookApi/services/formatGoo
 import { useState } from "react"
 import useUserHasBook from "../hooks/useUserHasBook"
 import { GoogleBook } from "../../../types/types"
-import useCreateUserBook from "../../userBook/api/createUserBook"
+
 
 /**
  * 
@@ -17,13 +17,6 @@ export default function Result({
     book: GoogleBook, 
 }) {
 
-     const {
-        query,
-        isBookAdded,
-        setIsBookAdded,
-        errorMessage
-    } = useCreateUserBook({book})
-
     const googleBook  = formatGoogleBookResult(book)
     const userHasBook = useUserHasBook()
 
@@ -34,7 +27,7 @@ export default function Result({
 
             <div className="grid gap-2">
                 { googleBook.thumbnail && <img src={googleBook.thumbnail} /> }
-                { query.isSuccess && !userHasBook(book) ? (
+                { !userHasBook(book) ? (
                     <button 
                         onClick={ () => setIsModalOpen(true) }
                         className='flex gap-2 justify-center items-center min-w-max px-6 py-2 text-sm text-accent border border-accent/30 rounded-lg w-full hover:bg-accent hover:text-bg transition-colors'
@@ -78,13 +71,8 @@ export default function Result({
 
             { isModalOpen && (
                 <AddBookModal 
-                    isModalOpen={isModalOpen}
-                    setIsModalOpen={setIsModalOpen}
-                    book={book}
-                    isBookAdded={isBookAdded}
-                    setIsBookAdded={setIsBookAdded}
-                    query={query}
-                    errorMessage={errorMessage}
+                    book={book} 
+                    closeModalFn={ () => setIsModalOpen(false )}
                 />
             )}
             

@@ -1,9 +1,8 @@
 import Modal from "../../../components/common/Modal";
 import Button from "../../../components/form/Button";
-import { SyntheticEvent } from "react";
-import { UseQueryResult } from "@tanstack/react-query";
 import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon } from "../../../components/common/Icon";
 import { GoogleBook } from "../../../types/types";
+import useHandleCreateBook from "../hooks/useHandleSubmit";
 
 /**
  * 
@@ -12,36 +11,24 @@ import { GoogleBook } from "../../../types/types";
  */
 export default function AddBookModal({ 
     book, 
-    isModalOpen, 
-    setIsModalOpen, 
-    query, 
-    isBookAdded, 
-    setIsBookAdded, 
-    errorMessage
+    closeModalFn
 } : {
-    book            : GoogleBook
-    isModalOpen     : boolean
-    setIsModalOpen  : React.Dispatch<React.SetStateAction<boolean>>
-    query           : UseQueryResult<any, Error>
-    isBookAdded     : boolean
-    setIsBookAdded  : React.Dispatch<React.SetStateAction<boolean>>
-    errorMessage    : string | null
+    book         : GoogleBook
+    closeModalFn : Function
 }) {
 
-    function handleSubmit(e: SyntheticEvent) {
-        e.preventDefault()
-        query.refetch()
-        setIsBookAdded(true)
-    }
-
+    const {
+        handleSubmit,
+        query,
+        errorMessage,
+        isBookAdded,
+    } = useHandleCreateBook({book})
 
     const { isError, isFetching, isSuccess } = query
 
     return (
-        <Modal
-            showModal={ isModalOpen }
-            setShowModal={ setIsModalOpen }
-        >
+        <Modal closeModalFn={closeModalFn} >
+
             <div className="flex items-center gap-3 darklight">
                 <img src={book?.volumeInfo?.imageLinks?.thumbnail} />
                 <div className="grid gap-2">
@@ -131,7 +118,7 @@ export default function AddBookModal({
                                 Book Added! 
                             </div>
                             <button
-                                onClick={ () => setIsModalOpen(false) }
+                                onClick={ () => closeModalFn() }
                                 className="text-sm font-medium text-center hover:underline"
                             >
                                 Close
