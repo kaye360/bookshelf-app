@@ -1,7 +1,7 @@
 import { GoogleBook, User } from "../../../types/types";
 
 
-interface FormatPayload {
+interface CreateUserBookValidation {
     title: string;
     isbn10: string;
     isbn13: string;
@@ -16,15 +16,17 @@ interface FormatPayload {
 }
 
 
-interface FormatPayloadProps {
+export function createUserBookValidation({ 
+    book, 
+    user, 
+    isOwned, 
+    isRead 
+} : {
     book : GoogleBook
     user : User
     isOwned : HTMLInputElement
     isRead : HTMLInputElement
-}
-
-
-export function formatPayload({ book, user, isOwned, isRead } : FormatPayloadProps) : FormatPayload {
+}) : CreateUserBookValidation {
     
     const payload = {
         title       : book?.volumeInfo?.title || '',

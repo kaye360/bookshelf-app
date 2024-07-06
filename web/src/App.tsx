@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom"
-import { router } from "./features/router/routes"
+import { router } from "./lib/Router/routes"
 import { useSettings } from "./features/settings/api/getSettings"
 import { useUserBooks } from "./features/userBook/api/getUserBooks"
 import { useEffect } from "react"

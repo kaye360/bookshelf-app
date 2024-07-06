@@ -30,8 +30,10 @@ export default function AddBookModal({
 
     function handleSubmit(e: SyntheticEvent) {
         e.preventDefault()
+        query.refetch()
         setIsBookAdded(true)
     }
+
 
     const { isError, isFetching, isSuccess } = query
 
@@ -41,16 +43,16 @@ export default function AddBookModal({
             setShowModal={ setIsModalOpen }
         >
             <div className="flex items-center gap-3 darklight">
-                <img src={book.volumeInfo.imageLinks?.thumbnail} />
+                <img src={book?.volumeInfo?.imageLinks?.thumbnail} />
                 <div className="grid gap-2">
                     <h2 className="text-xl font-bold">
-                        {book.volumeInfo.title}
+                        {book?.volumeInfo?.title}
                     </h2>
                     <span className="font-semibold">
-                        {book.volumeInfo.subtitle}
+                        {book?.volumeInfo?.subtitle}
                     </span>
                     <span>
-                        {book.volumeInfo.authors?.slice(0,5).join(', ')}
+                        {book?.volumeInfo?.authors?.slice(0,5).join(', ')}
                     </span>
                 </div>
             </div>

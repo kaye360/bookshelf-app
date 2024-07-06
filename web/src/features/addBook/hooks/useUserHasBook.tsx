@@ -11,7 +11,7 @@ export default function useUserHasBook(){
 
     function userHasBook(book : GoogleBook) : boolean {
     
-        const ids = book.volumeInfo.industryIdentifiers
+        const ids = book?.volumeInfo?.industryIdentifiers
     
         const isbn10Id = ids?.filter(book => book.type === 'ISBN_10')[0]
         const isbn13Id = ids?.filter(book => book.type === 'ISBN_13')[0]

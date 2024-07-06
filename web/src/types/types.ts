@@ -208,10 +208,10 @@ export interface ApiBook {
 }
 
 export interface GoogleBook {
-    kind : string
-    id : string
-    selfLink : string
-    volumeInfo : {
+    kind? : string
+    id? : string
+    selfLink? : string
+    volumeInfo? : {
         title? : string
         subtitle? : string
         authors? : string[]

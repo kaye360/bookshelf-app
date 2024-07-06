@@ -1,13 +1,16 @@
 
 
+
 export function isString(data : any) : data is string {
     return typeof data === 'string'
 }
 
 
+
 export function isNumber(data : any) : data is number {
     return !isNaN(data)
 }
+
 
 
 export function isJson(data : string|null) : data is string {

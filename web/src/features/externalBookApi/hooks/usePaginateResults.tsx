@@ -12,7 +12,7 @@ export default function usePaginateResults({
     const nextPage = () => setPage( page + 1)
 
     const booksWithIsbn = data?.items.filter( book => 
-        book.volumeInfo.industryIdentifiers?.map( id => id.type === 'ISBN_10' || id.type === 'ISBN_13')
+        book?.volumeInfo?.industryIdentifiers?.map( id => id.type === 'ISBN_10' || id.type === 'ISBN_13')
     )
 
     const bookList     = booksWithIsbn ? booksWithIsbn.slice(0, page * 7) : []

@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Error404 from "../../routes/error/Error404";
 import Dashboard from "../../routes/Dashboard";
 import Index from "../../routes/Index";
-import AuthRoute from "../auth/components/AuthRoute";
+import AuthRoute from "../../features/auth/components/AuthRoute";
 import Book from "../../routes/Book";
 import BookShelf from "../../routes/Bookshelf";
 import Settings from "../../routes/Settings";
