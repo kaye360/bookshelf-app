@@ -9,6 +9,7 @@ interface OptionButtonProps {
 export default function OptionButton({isActive = false, onClick, children} : OptionButtonProps ) {
     return (
         <button 
+            type="button"
             className={`text-sm cursor-pointer transition-all hover:text-accent select-none
                 ${isActive ? 'text-accent font-bold' : 'bg-bg  font-semibold '}
             `}

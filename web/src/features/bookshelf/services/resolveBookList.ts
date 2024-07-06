@@ -1,4 +1,4 @@
-import { UserBook } from "../../book/types/types"
+import { UserBook } from "../../../types/types"
 
 export function resolveBookList(bookList : UserBook[], searchParams : URLSearchParams) : UserBook[] {
 

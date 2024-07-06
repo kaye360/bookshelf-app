@@ -4,12 +4,19 @@ import { getFormData } from "../../../utils/getFormData"
 import { Req } from "../../../utils/req"
 import { useStore } from "../../../store/store"
 
-export default function useFormSubmit() {
-    
-    const { auth : { user, token } } = useStore()
 
-    async function updateSettings(e : SyntheticEvent) {
+export default function useUpdateSettings() {
+    
+    const { auth : { user, token }, settingsActions : { updateSettings } } = useStore()
+
+    async function update(e : SyntheticEvent) {
         e.preventDefault()
+
+        if ( typeof token !== 'string' ) return {
+            data: null,
+            error: 'Invalid Token',
+            code: 401,
+        }
 
         const response = await Req.send({
             url : `${API_URL}/settings/${user?.id}`,
@@ -18,12 +25,13 @@ export default function useFormSubmit() {
             token
         })
 
-        if( !response.error ) { 
-            throw new Error('update settings function not implemented')
+        if (!response.error) {
+            updateSettings(response.data)
+            localStorage.setItem('settings', JSON.stringify(response.data) )
         }
 
         return response
     }
 
-    return updateSettings
+    return update
 }

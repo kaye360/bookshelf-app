@@ -5,19 +5,19 @@ import BookTable from "../../bookshelf/components/BookTable"
 import { resolveBookList } from "../../bookshelf/services/resolveBookList"
 import BookCardList from "../../bookshelf/components/BookCardList"
 import BookCard from "../../bookshelf/components/BookCard"
-import { BookshelfParams } from "../../bookshelf/types/types"
 import { BookTableComponent } from "../../bookshelf/components/BookTableComponents"
 import { useStore } from "../../../store/store"
+import { BookshelfParams } from "../../../types/types"
 
 
 export default function useSearchBarParams() {
 
-    const { auth : { user } } = useStore()
+    let { settings, books } = useStore()
 
     const [searchParams, setSearchParams] = useSearchParams({
-        viewAs        : user?.settings?.view || 'grid',
-        sortBy        : user?.settings?.sort || 'title',
-        filterBy      : user?.settings?.filter || "all",
+        viewAs        : settings?.view || 'grid',
+        sortBy        : settings?.sort || 'title',
+        filterBy      : settings?.filter || "all",
         searchQuery : "",
     })
 
@@ -29,8 +29,8 @@ export default function useSearchBarParams() {
         }, {replace : true} )
     } 
 
-    const allUsersBooks = user?.books ? user?.books : []
-    const books         = resolveBookList(allUsersBooks, searchParams)
+    const allUsersBooks = books ? books : []
+    books = resolveBookList(allUsersBooks, searchParams)
 
     let BookList = BookGrid
     if( searchParams.get('viewAs') === 'list' ) BookList = BookTable

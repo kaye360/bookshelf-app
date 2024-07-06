@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { GoogleBook } from "../../book/types/types";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../../config";
 import { formatPayload } from "../services/formatPayload";
 import { Req } from "../../../utils/req";
 import { useStore } from "../../../store/store";
+import { GoogleBook } from "../../../types/types";
 
 
 export default function useAddExternalApiBook({

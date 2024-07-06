@@ -1,10 +1,10 @@
-import { GoogleBook } from "../../book/types/types"
 import { PlusIcon, CheckIcon } from "../../../components/common/Icon"
 import AddBookModal from "./AddBookModal"
 import { formatGoogleBookResult } from "../../externalBookApi/services/formatGoogleBookResults"
 import useAddExternalApiBook from "../../externalBookApi/hooks/useAddExternalApiBook"
 import { useState } from "react"
 import useUserHasBook from "../hooks/useUserHasBook"
+import { GoogleBook } from "../../../types/types"
 
 /**
  * 

@@ -1,7 +1,7 @@
 import { Auth } from "../../../types/types"
 
 
-export function getUserSession() : Auth {
+export function getUserSessionFromLocalStorage() : Auth {
 
     const userLocalStorage = localStorage.getItem("auth")
     const isUserSet        = isValidSession(userLocalStorage)

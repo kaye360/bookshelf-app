@@ -1,27 +1,27 @@
 import { useState } from "react"
-import { BookshelfViews, BookshelfFilters, BookshelfSorts } from "../../bookshelf/types/types"
 import { useStore } from "../../../store/store"
+import { UserSettings } from "../../../types/types"
 
 
-interface BookShelfSettingsProps {
+export default function useBookshelfSettings({
+    isTouched, 
+    touchForm 
+} : {
     isTouched : boolean
     touchForm : () => void
-}
+}) {
 
+    const { settings } = useStore()
 
-export default function useBookshelfSettings({ isTouched, touchForm } : BookShelfSettingsProps) {
-
-    const { auth : { user } } = useStore()
-
-    const [view, setView]     = useState<BookshelfViews>(user?.settings?.view || 'grid')
-    const [filter, setFilter] = useState<BookshelfFilters>(user?.settings?.filter || 'all')
-    const [sort, setsort]     = useState<BookshelfSorts>(user?.settings?.sort || 'title')
+    const [view, setView]     = useState<UserSettings['view']>(settings?.view || 'grid')
+    const [filter, setFilter] = useState<UserSettings['filter']>(settings?.filter || 'all')
+    const [sort, setsort]     = useState<UserSettings['sort']>(settings?.sort || 'title')
     
-    function handleClick( setting : 'view', value : BookshelfViews) : void
-    function handleClick( setting : 'filter', value : BookshelfFilters) : void
-    function handleClick( setting : 'sort', value : BookshelfSorts) : void
+    function handleClick( setting : 'view', value : UserSettings['view']) : void
+    function handleClick( setting : 'filter', value : UserSettings['filter']) : void
+    function handleClick( setting : 'sort', value : UserSettings['sort']) : void
 
-    function handleClick( setting: 'view' | 'filter' | 'sort', value : BookshelfViews | BookshelfFilters | BookshelfSorts ) {
+    function handleClick( setting: 'view' | 'filter' | 'sort', value : UserSettings['view'] | UserSettings['filter'] | UserSettings['sort'] ) {
 
         if( !isTouched ) {
             touchForm()
@@ -29,13 +29,13 @@ export default function useBookshelfSettings({ isTouched, touchForm } : BookShel
 
         switch (setting) {
             case 'view': 
-                setView(value as BookshelfViews)
+                setView(value as UserSettings['view'])
                 break
             case 'filter':
-                setFilter(value as BookshelfFilters)
+                setFilter(value as UserSettings['filter'])
                 break
             case 'sort':
-                setsort(value as BookshelfSorts)
+                setsort(value as UserSettings['sort'])
         }
     }
     

@@ -5,13 +5,45 @@
  * 
  * 
  * All main types will be stored here.
- * Store types are in /src/store/types
  * 
  * 
  * 
  */
 
 
+
+/**
+ * 
+ * 
+ * Store
+ * 
+ */
+
+
+export interface Store {
+    auth        : Auth
+    authActions : {
+        updateAuth : (
+            action : AuthActions, 
+            user?  : User,
+            token? : string
+        ) => void
+    }
+    
+    books        : UserBook[],
+    booksStatus   : 'LOADING' | 'ERROR' | 'SUCCESS'
+    booksActions : {
+        updateBooks      : (newBooks : UserBook[]) => void
+        updateBookStatus : (newStatus : Store['booksStatus']) => void
+    }
+
+    settings        : Settings
+    settingsActions : {
+        updateSettings : (newSettings : Settings) => void
+    }
+}
+
+export type AuthActions = 'LOADING' | 'LOGIN' | 'LOGIN_ERROR' | 'REGISTER' | 'REGISTER_ERROR' | 'LOGOUT'
 
 
 /**
@@ -70,6 +102,7 @@ export interface RegisterPayload {
     password_confirmation : string
 }
 
+
 /**
  * 
  * 
@@ -80,7 +113,7 @@ export interface RegisterPayload {
 
 
 export interface User {
-    id          : string
+    id          : number
     name        : string
     handle      : string  
     email       : string 
@@ -98,7 +131,7 @@ export interface User {
 
 export type Settings = UserSettings | null
 
-interface UserSettings {
+export interface UserSettings {
     currentlyReadingId : string | null
     email              : string | null
     filter             : 'all' | 'read' | 'unread' | 'favourites' | 'wishlist' | 'owned'
@@ -120,14 +153,14 @@ interface UserSettings {
 
 
 interface Book {
-    id          : string
+    id          : number
     title       : string
     authors     : string
-    isbn        : {
+    isbn : {
         isbn10  : string
         isbn13  : string
     }
-    image       : {
+    image : {
         url     : string
     }
 }
@@ -201,4 +234,21 @@ export interface GoogleBook {
 export interface GoogleBookResponse {
     items : GoogleBook[]
     totalItems : number
+}
+
+
+
+/**
+ * 
+ * 
+ * BookShelf
+ * 
+ */
+
+
+export interface BookshelfParams {
+    viewAs      : UserSettings['view']
+    sortBy      : UserSettings['sort']
+    filterBy    : UserSettings['filter'] | string
+    searchQuery : string
 }

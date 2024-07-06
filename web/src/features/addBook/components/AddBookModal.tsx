@@ -1,9 +1,9 @@
 import Modal from "../../../components/common/Modal";
-import { GoogleBook } from "../../book/types/types";
 import Button from "../../../components/form/Button";
 import { SyntheticEvent } from "react";
 import { UseQueryResult } from "@tanstack/react-query";
 import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon } from "../../../components/common/Icon";
+import { GoogleBook } from "../../../types/types";
 
 /**
  * 

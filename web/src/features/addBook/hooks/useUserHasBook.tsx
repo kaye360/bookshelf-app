@@ -1,13 +1,13 @@
 import { useStore } from "../../../store/store"
-import { GoogleBook } from "../../book/types/types"
+import { GoogleBook } from "../../../types/types"
 
 
 export default function useUserHasBook(){
 
-    const { auth : { user } } = useStore()
+    const { books } = useStore()
 
-    const isbn10List = user?.books.map( book => book.isbn.isbn10)
-    const isbn13List = user?.books.map( book => book.isbn.isbn13)
+    const isbn10List = books.map( book => book.isbn.isbn10)
+    const isbn13List = books.map( book => book.isbn.isbn13)
 
     function userHasBook(book : GoogleBook) : boolean {
     

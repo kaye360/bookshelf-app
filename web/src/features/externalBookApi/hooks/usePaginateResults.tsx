@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { GoogleBookResponse } from "../../book/types/types"
+import { GoogleBookResponse } from "../../../types/types"
 
 
 export default function usePaginateResults({

@@ -7,8 +7,8 @@ export default function ThemeSettings({
     touchForm : () => void
 }) {
 
-    const { auth : { user } } = useStore()
-    const isLightTheme = user?.settings?.theme === 'light'
+    const { settings } = useStore()
+    const isLightTheme = settings?.theme === 'light'
 
     return (
         <div>

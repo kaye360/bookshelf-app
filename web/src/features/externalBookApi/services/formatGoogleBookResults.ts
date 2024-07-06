@@ -1,4 +1,4 @@
-import { GoogleBook } from "../../book/types/types"
+import { GoogleBook } from "../../../types/types"
 
 
 export function formatGoogleBookResult(book: GoogleBook) {

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
-import { BookShelfContext } from "../../../routes/Bookshelf";
 import { GridIcon, ListIcon, CardIcon } from "../../../components/common/Icon";
+import { BookShelfContext } from "../../bookshelf/hooks/bookShelfContext";
 
 export default function ViewOptions() {
 

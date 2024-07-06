@@ -1,25 +1,27 @@
 import Modal from "../../../components/common/Modal";
-import { UserBook } from "../../book/types/types";
 import { AlertIcon, LoaderIcon } from "../../../components/common/Icon";
 import Button from "../../../components/form/Button";
-import useEditBookTags from "../hooks/useEditBookTags";
+import { UserBook } from "../../../types/types";
+import { useUpdateUserBookTags } from "../../userBook/api/updateUserBookTags";
 
 
-interface EditTagsModalProps {
-    book : UserBook
-    showEditTagsModal : boolean
-    setShowEditTagsModal : React.Dispatch<React.SetStateAction<boolean>>
-}
 
+export default function EditTagsModal({
+    book, 
+    showModal, 
+    setShowModal
+} : {
+    book         : UserBook
+    showModal    : boolean
+    setShowModal : React.Dispatch<React.SetStateAction<boolean>>
+}) {
 
-export default function EditTagsModal({book, showEditTagsModal, setShowEditTagsModal} : EditTagsModalProps) {
-
-    const { handleSubmit, status } = useEditBookTags({book})
+    const { handleSubmit, status } = useUpdateUserBookTags()
 
     const hasImage = book.image.url.includes('google')
 
     return (
-        <Modal showModal={showEditTagsModal} setShowModal={setShowEditTagsModal}>
+        <Modal showModal={showModal} setShowModal={setShowModal}>
 
             <div className="flex items-stretch gap-3 mb-4">
 
@@ -47,7 +49,7 @@ export default function EditTagsModal({book, showEditTagsModal, setShowEditTagsM
 
 
                 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={ (e) => handleSubmit(book, e) }>
 
                 <textarea 
                     id="book-tags-textarea"

@@ -1,27 +1,29 @@
 import Modal from "../../../components/common/Modal";
-import { UserBook } from "../../book/types/types";
 import { AlertIcon, LoaderIcon } from "../../../components/common/Icon";
 import Button from "../../../components/form/Button";
-import useDeleteBook from "../hooks/useDeleteBook";
+import { UserBook } from "../../../types/types";
+import { useDeleteUserBook } from "../../userBook/api/deleteUserBook";
 
 
-interface DeleteBookModalProps {
+
+export default function DeleteBookModal({
+    book, 
+    showDeleteModal, 
+    setShowDeleteModal
+} : {
     book : UserBook
     showDeleteModal : boolean
     setShowDeleteModal : React.Dispatch<React.SetStateAction<boolean>>
-}
+}) {
 
-
-export default function DeleteBookModal({book, showDeleteModal, setShowDeleteModal} : DeleteBookModalProps) {
-
-    const { handleSubmit, status } = useDeleteBook(book)
+    const { handleSubmit, status } = useDeleteUserBook()
 
     const hasImage = book.image.url.includes('google')
 
     return (
         <Modal showModal={showDeleteModal} setShowModal={setShowDeleteModal}>
                 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={ (e) => handleSubmit(book,e) }>
 
                 <div className="flex items-start gap-3">
 
@@ -32,6 +34,7 @@ export default function DeleteBookModal({book, showDeleteModal, setShowDeleteMod
                             Are you sure you want to delete: <br />
                             <span className="font-bold ">
                                 {book.title}
+                                {book.id}
                             </span>
                         </h2>
                     </div>

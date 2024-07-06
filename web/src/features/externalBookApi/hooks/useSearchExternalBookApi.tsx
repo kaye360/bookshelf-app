@@ -1,7 +1,7 @@
     import { useQuery } from "@tanstack/react-query"
-import { GoogleBookResponse } from "../../book/types/types"
 import { GOOGLE_BOOKS_API_URL } from "../../../config"
 import { Req } from "../../../utils/req"
+import { GoogleBookResponse } from "../../../types/types"
 
 
 export default function useSearchExternalBookApi({

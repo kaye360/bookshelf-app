@@ -22,8 +22,6 @@ export default {
 			animation : {
 				'modal-bg' 		: 'modal-bg 200ms ease both',
 				'modal-content' : 'modal-content 200ms ease both',
-				'error-toast'   : 'error-toast 300ms ease both',
-				'error-toast-timer'   : 'error-toast-timer 4s linear both',
 				'scale-in'   	: 'scale-in 100ms ease both',
 			},
 			keyframes :{
@@ -45,7 +43,7 @@ export default {
 					'100%' : {width : '100%'},
 				},
 				'scale-in' : {
-					'0%' : {transform : 'scale(0)'},
+					'0%' : {transform : 'scale(0.9)'},
 					'100%' : {transform : 'scale(1)'}
 				}
 			}

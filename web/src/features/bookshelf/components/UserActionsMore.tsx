@@ -1,10 +1,10 @@
 import { ComponentPropsWithoutRef, useState } from "react";
 import { EditIcon, BookIcon, TrashIcon } from "../../../components/common/Icon";
 import UserActionsMoreButton from "./UserActionsMoreButton";
-import { UserBook } from "../../book/types/types";
 import EditTagsModal from "./EditTagsModal";
 import { useNavigate } from "react-router-dom";
 import DeleteBookModal from "./DeleteBookModal";
+import { UserBook } from "../../../types/types";
 
 
 interface UserActionsMoreProps extends ComponentPropsWithoutRef<'div'> {
@@ -51,8 +51,8 @@ export default function UserActionsMore({book, isOpen, setIsOpen} : UserActionsM
             { showEditTagsModal && (
                 <EditTagsModal 
                     book={book}
-                    showEditTagsModal={showEditTagsModal} 
-                    setShowEditTagsModal={setShowEditTagsModal}
+                    showModal={showEditTagsModal} 
+                    setShowModal={setShowEditTagsModal}
                 />
             )}
 

@@ -1,13 +1,9 @@
-import { API_URL } from "../../../config"
-import { Req } from "../../../utils/req"
-import { UserBook, ApiBook } from "../../book/types/types"
+import { ApiBook, UserBook } from "../../../types/types"
 
-export async function getUserBooks(userId : string) : Promise<UserBook[]> {
 
-    const response = await Req.send({
-        url : `${API_URL}/bookshelf/${userId}`
-    })
-    const bookDataValues = Object.values( response.data ) as unknown as ApiBook[]
+export function validateUserBook ( response : any ) {
+
+    const bookDataValues = Object.values( response ) as unknown as ApiBook[]
     const bookDataFormatted = bookDataValues.map( book => {
 
         const formattedBook =  {
@@ -15,8 +11,6 @@ export async function getUserBooks(userId : string) : Promise<UserBook[]> {
             tags: JSON.parse(book.tags || "[]"),
             image: {
                 url: book.imageUrl || '',
-                width: book.imageWidth || 0,
-                height: book.imageHeight || 0
             },
             isbn: {
                 isbn10: book.isbn10 || '',

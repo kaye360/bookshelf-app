@@ -6,8 +6,10 @@ import { useStore } from "../store/store";
 
 export default function Dashboard() {
 
-    const { auth : { user } } = useStore()
-    const books  = user?.books ? user.books : []
+    const { 
+        auth : { user },
+        books
+    } = useStore()
 
     return (
         <BaseLayout>

@@ -1,9 +1,13 @@
 import TextInput from "../../../components/form/TextInput";
 import { useStore } from "../../../store/store";
 
-export default function PersonalSettings() {
+export default function PersonalSettings({
+    touchForm
+} : {
+    touchForm : () => void
+}) {
 
-    const { auth : { user } } = useStore()
+    const { settings } = useStore()
 
     return (
         <div className="grid gap-3">
@@ -15,20 +19,23 @@ export default function PersonalSettings() {
             <TextInput
                 label="Name"
                 name="name"
-                defaultValue={user?.settings?.name || ''}
+                defaultValue={settings?.name || ''}
+                onChange={touchForm}
             />
 
             <TextInput
                 label="Email Address"
                 name="email"
                 type="email"
-                defaultValue={user?.settings?.email || ''}
+                defaultValue={settings?.email || ''}
+                onChange={touchForm}
             />
 
             <TextInput
                 label="Location"
                 name="location"
-                defaultValue={user?.settings?.location || ''}
+                defaultValue={settings?.location || ''}
+                onChange={touchForm}
             />
 
         </div>

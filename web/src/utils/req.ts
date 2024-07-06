@@ -1,4 +1,12 @@
 
+
+export interface ReqResponse {
+    data? : any, 
+    error : string|null, 
+    code : number|null
+}
+
+
 export class Req {
 
     static async send({ 
@@ -11,7 +19,7 @@ export class Req {
         method?: 'GET' | 'POST' | 'PUT' | 'DELETE',
         token? : string
         payload? : any
-    }) : Promise<{ data? : any, error : string|null, code : number|null }> {
+    }) : Promise<ReqResponse> {
     
         let { data, error, code } = this.returnProps()
 

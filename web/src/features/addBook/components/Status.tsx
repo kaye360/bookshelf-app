@@ -1,5 +1,5 @@
 import { LoaderIcon } from "../../../components/common/Icon"
-import { GoogleBookResponse } from "../../book/types/types"
+import { GoogleBookResponse } from "../../../types/types"
 
 
 /**

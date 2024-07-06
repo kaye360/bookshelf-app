@@ -5,7 +5,7 @@ import { Req } from "../../../utils/req"
 
 export default function useLogout() {
 
-    const { auth : { token }, actions : { updateAuth } } = useStore()
+    const { auth : { token }, authActions : { updateAuth } } = useStore()
 
     async function logout() {
 

@@ -7,12 +7,12 @@ import { useStore } from "../store/store";
 
 export default function BaseLayout({children} : {children? : ReactNode}) {
 
-    const { auth : { user } } = useStore()
+    const { settings } = useStore()
 
     useEffect( () => {
         const html = document.querySelector('html') as HTMLHtmlElement
-        html.classList.toggle('dark', user?.settings?.theme === 'dark')
-    }, [user?.settings?.theme])
+        html.classList.toggle('dark', settings?.theme === 'dark')
+    }, [settings?.theme])
 
     useEffect( () => {
         scrollTo({ top : 0, behavior : 'instant'})

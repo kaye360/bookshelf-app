@@ -1,4 +1,4 @@
-import { UseFormRegister, RegisterOptions, FieldErrors, FormState } from "react-hook-form";
+import { UseFormRegister, RegisterOptions, FormState } from "react-hook-form";
 import { CheckIcon, AlertIcon } from "../common/Icon";
 import TextInput from "./TextInput";
 import { ComponentPropsWithoutRef, FormEventHandler } from "react";

@@ -1,5 +1,5 @@
 import { HashIcon } from "../../../components/common/Icon"
-import { UserBook } from "../../book/types/types"
+import { UserBook } from "../../../types/types"
 import useSearchBarParams from "../../searchbar/hooks/useSearchBarParams"
 import UserActions from "./UserActions"
 

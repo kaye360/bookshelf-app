@@ -5,7 +5,7 @@ import { Req } from "../../../utils/req";
 
 export function useLogin() {
 
-    const { actions : { updateAuth } } = useStore()
+    const { authActions : { updateAuth } } = useStore()
     const url = `${API_URL}/login`
 
     async function login(payload : LoginPayload) {

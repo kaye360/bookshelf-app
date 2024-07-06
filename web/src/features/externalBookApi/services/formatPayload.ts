@@ -1,5 +1,4 @@
-import { User } from "../../auth/types/types";
-import { GoogleBook } from "../../book/types/types";
+import { GoogleBook, User } from "../../../types/types";
 
 
 interface FormatPayload {
@@ -7,7 +6,7 @@ interface FormatPayload {
     isbn10: string;
     isbn13: string;
     imageUrl: string;
-    userId: string;
+    userId: number;
     rating: number;
     group: string;
     isRead: boolean;

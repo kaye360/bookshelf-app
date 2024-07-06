@@ -6,7 +6,7 @@ import { Req } from "../../../utils/req";
 
 export default function useRegister() {
 
-    const { actions : { updateAuth } } = useStore()
+    const { authActions : { updateAuth } } = useStore()
 
     async function register(payload: RegisterPayload) {
 
