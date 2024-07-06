@@ -2,7 +2,7 @@ import debounce from "lodash.debounce"
 import { useRef, useState } from "react"
 import { API_URL } from "../../../config"
 import useFormTouch from "../../../hooks/useFormTouch"
-import { Req } from "../../../utils/req"
+import { Req } from "../../../lib/Req/Req"
 
 export default function useIsUserHandleAvailable() {
 
@@ -12,9 +12,7 @@ export default function useIsUserHandleAvailable() {
                 touchForm()
             }
 
-            const response = await Req.send({
-                url : `${API_URL}/register/isUserHandleAvailable/${e.target.value}`
-            })
+            const response = await Req.get( `${API_URL}/register/isUserHandleAvailable/${e.target.value}` )
 
             if( Object.hasOwn( response.data, 'isHandleAvailable' )) {
                 setIsUserHandleAvailable( response.data.isHandleAvailable )

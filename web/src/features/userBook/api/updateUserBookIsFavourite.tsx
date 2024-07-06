@@ -1,10 +1,10 @@
 import { UserBook } from "../../../types/types"
 import useToggleState from "../../../hooks/useToggleState"
 import { API_URL } from "../../../config"
-import { Req } from "../../../utils/req"
 import { useStore } from "../../../store/store"
 import { isString } from "../../../utils/validation"
 import { useUserBooks } from "./getUserBooks"
+import { Req } from "../../../lib/Req/Req"
 
 
 
@@ -59,9 +59,8 @@ async function updateIsFavourite({
         code  : 404
     }
 
-    const response = await Req.send({
-        url: `${API_URL}/book/${book.id}`,
-        method: 'PUT',
+    const response = await Req.put({
+        url     : `${API_URL}/book/${book.id}`,
         payload : {isFavourite : !isFavourite},
         token
     })

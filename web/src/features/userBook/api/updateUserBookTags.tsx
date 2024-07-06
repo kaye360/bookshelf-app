@@ -2,9 +2,9 @@ import { SyntheticEvent, useState } from "react"
 import { useStore } from "../../../store/store"
 import { useUserBooks } from "./getUserBooks"
 import { API_URL } from "../../../config"
-import { Req } from "../../../utils/req"
 import { UserBook } from "../../../types/types"
 import { isString } from "../../../utils/validation"
+import { Req } from "../../../lib/Req/Req"
 
 
 
@@ -71,9 +71,8 @@ async function updateTags({
         code  : 404
     }
 
-    const response = await Req.send({
-        url: `${API_URL}/book/${book.id}`,
-        method: 'PUT',
+    const response = await Req.put({
+        url     : `${API_URL}/book/${book.id}`,
         payload : { tags: JSON.stringify( tags ) },
         token
     })

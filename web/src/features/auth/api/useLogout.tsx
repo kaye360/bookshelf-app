@@ -1,6 +1,7 @@
 import { API_URL } from "../../../config"
+import { Req } from "../../../lib/Req/Req"
 import { useStore } from "../../../store/store"
-import { Req } from "../../../utils/req"
+
 
 
 export default function useLogout() {
@@ -11,11 +12,7 @@ export default function useLogout() {
 
         if ( !token ) return
         
-        await Req.send({
-            url : `${API_URL}/logout`,
-            method : 'POST',
-            token
-        })
+        await Req.post({ url : `${API_URL}/logout`, token })
 
         localStorage.clear()
         updateAuth('LOGOUT')

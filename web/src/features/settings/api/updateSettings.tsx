@@ -1,8 +1,8 @@
 import { SyntheticEvent } from "react"
 import { API_URL } from "../../../config"
 import { getFormData } from "../../../utils/getFormData"
-import { Req } from "../../../utils/req"
 import { useStore } from "../../../store/store"
+import { Req } from "../../../lib/Req/Req"
 
 
 export default function useUpdateSettings() {
@@ -18,9 +18,8 @@ export default function useUpdateSettings() {
             code: 401,
         }
 
-        const response = await Req.send({
+        const response = await Req.put({
             url : `${API_URL}/settings/${user?.id}`,
-            method : 'PUT',
             payload : getFormData('#settingsForm'),
             token
         })

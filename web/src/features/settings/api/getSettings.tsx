@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query"
 import { API_URL } from "../../../config"
 import { useStore } from "../../../store/store"
-import { Req } from "../../../utils/req"
 import { Settings, UserSettings } from "../../../types/types"
 import { isJson } from "../../../utils/validation"
+import { Req } from "../../../lib/Req/Req"
 
 
 export function useSettings() {
@@ -43,13 +43,9 @@ async function getSettingsFromApi(token : string | null) : Promise<Settings> {
 
     if( typeof token !== 'string' ) return getInitialSettings()
 
-    const response = await Req.send({
-        url : `${API_URL}/settings`,
-        token
-    })
-
-    const json = JSON.parse(response.data)
-    return json as Settings
+    const response = await Req.get({ url : `${API_URL}/settings`, token })
+    const json     = JSON.parse(response.data) as Settings
+    return json 
 }
 
 

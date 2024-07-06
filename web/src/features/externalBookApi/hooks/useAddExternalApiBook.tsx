@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "../../../config";
 import { formatPayload } from "../services/formatPayload";
-import { Req } from "../../../utils/req";
 import { useStore } from "../../../store/store";
 import { GoogleBook } from "../../../types/types";
+import { Req } from "../../../lib/Req/Req";
 
 
 export default function useAddExternalApiBook({
@@ -35,9 +35,8 @@ export default function useAddExternalApiBook({
                 throw new Error('User ID is not valid')
             }
 
-            const response = await Req.send({
+            const response = await Req.post({
                 url     : `${API_URL}/book`,
-                method  : 'POST',
                 payload : formatPayload({book, user, isOwned, isRead}),
                 token
             })

@@ -1,10 +1,11 @@
 import { useState, SyntheticEvent } from "react"
 import { API_URL } from "../../../config"
 import { UserBook } from "../../../types/types"
-import { Req, ReqResponse } from "../../../utils/req"
 import { isString } from "../../../utils/validation"
 import { useUserBooks } from "./getUserBooks"
 import { useStore } from "../../../store/store"
+import { Req } from "../../../lib/Req/Req"
+import { ReqResponse } from "../../../lib/Req/Req.type"
 
 
 export function useDeleteUserBook() {
@@ -48,11 +49,7 @@ async function deleteBook(book : UserBook, token : string|null) : Promise<ReqRes
         code  : 404
     }
 
-    const response  = Req.send({
-        url: `${API_URL}/book/${book.id}`,
-        method: 'DELETE',
-        token
-    })
+    const response  = await Req.delete({ url: `${API_URL}/book/${book.id}`, token })
 
     return response
 }

@@ -1,7 +1,7 @@
 import { API_URL } from "../../../config";
+import { Req } from "../../../lib/Req/Req";
 import { useStore } from "../../../store/store";
 import { LoginPayload } from "../../../types/types";
-import { Req } from "../../../utils/req";
 
 export function useLogin() {
 
@@ -12,11 +12,7 @@ export function useLogin() {
 
         updateAuth('LOADING')
     
-        const response = await Req.send({
-            url,
-            method : 'POST',
-            payload
-        })
+        const response = await Req.post({ url, payload })
 
         if( response.data?.user?.id && response.data?.access_token ) {
 

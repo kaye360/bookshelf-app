@@ -1,7 +1,7 @@
 import { API_URL } from "../../../config";
+import { Req } from "../../../lib/Req/Req";
 import { useStore } from "../../../store/store";
 import { RegisterPayload } from "../../../types/types";
-import { Req } from "../../../utils/req";
 
 
 export default function useRegister() {
@@ -14,11 +14,7 @@ export default function useRegister() {
 
             updateAuth('LOADING')
     
-            const response = await Req.send({
-                url     : `${API_URL}/register`,
-                method  : 'POST',
-                payload
-            })
+            const response = await Req.post({ url : `${API_URL}/register`, payload })
     
             if ( response.data.access_token ) {
 
@@ -27,7 +23,8 @@ export default function useRegister() {
                 localStorage.setItem('auth', JSON.stringify({
                     token : response.data.access_token,
                     user : response.data.user
-                }));
+                }))
+
                 return response.data
             }
     

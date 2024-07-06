@@ -1,10 +1,11 @@
 import { useStore } from "../../../store/store"
 import { API_URL } from "../../../config"
-import { Req, ReqResponse } from "../../../utils/req"
 import { isNumber } from "../../../utils/validation"
 import { UserBook } from "../../../types/types"
 import { validateUserBook } from "../validation/getUserBookValidation"
 import { useMutation } from "@tanstack/react-query"
+import { ReqResponse } from "../../../lib/Req/Req.type"
+import { Req } from "../../../lib/Req/Req"
 
 
 
@@ -49,7 +50,6 @@ export async function getUserBooksFromApi(userId : number | undefined) : Promise
             code  : 401
         }
     }
-
-    const response = await Req.send({ url : `${API_URL}/bookshelf/${userId}` })
+    const response = await Req.get(`${API_URL}/bookshelf/${userId}`)
     return response
 }
