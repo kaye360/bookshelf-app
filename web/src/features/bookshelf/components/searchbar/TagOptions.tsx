@@ -2,7 +2,7 @@ import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { HashIcon } from "../../../../components/common/Icon";
 import { getTagsFromBookList } from "../../../tags/services/getTagsFromBookList";
-import { BookShelfContext } from "../../hooks/bookShelfContext";
+import { BookShelfContext } from "../../hooks/useBookShelfContext";
 import { useStore } from "../../../../store/store";
 
 

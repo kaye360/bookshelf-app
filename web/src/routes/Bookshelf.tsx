@@ -3,12 +3,12 @@ import { BookIcon, LoaderIcon, PlusIcon } from "../components/common/Icon";
 import Button from "../components/form/Button";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../store/store";
-import { BookShelfContext } from "../features/bookshelf/hooks/bookShelfContext";
+import { BookShelfContext } from "../features/bookshelf/hooks/useBookShelfContext";
 import useSearchBarParams from "../features/bookshelf/hooks/useSearchBarParams";
 import FilterOptions from "../features/bookshelf/components/searchbar/FilterOptions";
 import SearchBar from "../features/bookshelf/components/searchbar/SearchBar";
 import TagOptions from "../features/bookshelf/components/searchbar/TagOptions";
-
+import useBookShelfView from "../features/bookshelf/hooks/useBookShelfView";
 
 
 export default function BookShelf() {
@@ -18,16 +18,19 @@ export default function BookShelf() {
 
     const {
         searchParams,
-        setSearchParams,
         updateSearchParam,
+        resolvedbooks
+    } = useSearchBarParams()
+
+    const {
         BookList,
         BookListItem
-    } = useSearchBarParams()
+    } = useBookShelfView(searchParams)
 
     return (
         <BaseLayout>
 
-            <BookShelfContext.Provider value={{searchParams, setSearchParams, updateSearchParam}}>
+            <BookShelfContext.Provider value={{searchParams, updateSearchParam}}>
                 <div className="grid gap-3 mt-2 mb-8">
                     <SearchBar />
                     <FilterOptions />
@@ -43,7 +46,7 @@ export default function BookShelf() {
 
                 { booksStatus === 'SUCCESS' && (
                     <BookList>
-                        {books.map( book => (
+                        {resolvedbooks.map( book => (
                             <BookListItem book={book} key={book.id} />
                         ))}
                     </BookList>
@@ -66,6 +69,7 @@ export default function BookShelf() {
                         </div>
                     </>
                 )}
+                
             </BookShelfContext.Provider>
 
         </BaseLayout>

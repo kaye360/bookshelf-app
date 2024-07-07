@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { ParagraphIcon, UserIcon, ArrowDownIcon, ArrowUpIcon } from "../../../../components/common/Icon";
-import { BookShelfContext } from "../../hooks/bookShelfContext";
+import { BookShelfContext } from "../../hooks/useBookShelfContext";
 
 
 export default function SortOptions() {

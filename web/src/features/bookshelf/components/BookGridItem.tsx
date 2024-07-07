@@ -1,7 +1,7 @@
 import UserActions from "./UserActions";
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef, useContext } from "react";
 import { UserBook } from "../../../types/types";
-import useSearchBarParams from "../hooks/useSearchBarParams";
+import { BookShelfContext } from "../hooks/useBookShelfContext";
 
 
 interface BookGridItemProps extends ComponentPropsWithoutRef<'div'> {
@@ -16,7 +16,7 @@ export default function BookGridItem({
 } : BookGridItemProps ) {
 
     const hasImage = book.image.url.includes('google')
-    const { updateSearchParam } = useSearchBarParams()
+    const { updateSearchParam } = useContext(BookShelfContext)
 
     return (
         <div className={` grid gap-1 text-primary-dark animate-scale-in ori `}>

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import UserActions from "./UserActions";
 import { UserBook } from "../../../types/types";
-import { BookShelfContext } from "../hooks/bookShelfContext";
+import { BookShelfContext } from "../hooks/useBookShelfContext";
 
 
 export default function BookCard({

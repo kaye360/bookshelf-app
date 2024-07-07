@@ -43,7 +43,7 @@ export default {
 					'100%' : {width : '100%'},
 				},
 				'scale-in' : {
-					'0%' : {transform : 'scale(0.9)'},
+					'0%' : {transform : 'scale(0.97)'},
 					'100%' : {transform : 'scale(1)'}
 				}
 			}
