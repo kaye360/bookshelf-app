@@ -44,12 +44,12 @@ export default function DeleteBookModal({
 
                 <div className="flex items-center gap-3">
                     <Button type="submit" variant="fill">
-                        { query.isRefetching
+                        { query.isPending
                             ? <> <LoaderIcon /> Deleting Book...</>
                             : 'Delete Book'
                         }
                     </Button>
-                    { hasClicked && !query.isRefetching && query.isSuccess && 'Book Deleted.' }
+                    { hasClicked && !query.isPending && query.isSuccess && 'Book Deleted.' }
                 </div>
             
             </form>

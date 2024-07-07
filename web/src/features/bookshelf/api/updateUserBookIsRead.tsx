@@ -1,57 +1,35 @@
 import { UserBook } from "../../../types/types"
-import useToggleState from "../../../hooks/useToggleState"
 import { API_URL } from "../../../config"
-import { useStore } from "../../../store/store"
 import { isString } from "../../../utils/validation"
-import { useUserBooks } from "./getUserBooks"
 import { Req } from "../../../lib/Req/Req"
+import { useQueryClient, useMutation } from "@tanstack/react-query"
 
 
-
-export function useUpdateUserBookIsRead({
-    book
-} : {
-    book : UserBook
-}) {
-
-    const { auth : { token } } = useStore()
-
-    const userBooks = useUserBooks()
-
-    const [isRead, _, toggleIsRead] = useToggleState(book.isRead)
-
-    async function handleClick () {
-
-        toggleIsRead()
-
-        const response = await updateIsRead({token, book, isRead})
-
-        if(!response.error)  {
-            userBooks.mutate()
-            return
-        } 
-
-        toggleIsRead()
-    }
-
-
-    return {
-        handleClick,
-        isRead
-    }
-}
-
-
-
-async function updateIsRead({
-    token,
-    book,
-    isRead
-} : {
+interface UpdateIsReadProps {
     token : string | null,
     book  : UserBook,
     isRead : boolean
-}) {
+}
+
+
+export function useUpdateUserBookIsRead() {
+
+    const client = useQueryClient()
+
+    return useMutation({
+        mutationKey : ['updateBookIsRead'],
+        mutationFn  : (props : UpdateIsReadProps) => updateIsRead({...props}),
+        onSuccess   : () => client.invalidateQueries({
+            queryKey : ['getUserBooks']
+        })
+    })
+
+}
+
+
+async function updateIsRead(props : UpdateIsReadProps) {
+
+    const { token, book, isRead }  = props
 
     if( !isString(token) ) return {
         error : "Invalid User Token",

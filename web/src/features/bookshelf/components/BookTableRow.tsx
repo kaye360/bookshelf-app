@@ -1,8 +1,8 @@
 import UserActions from "./UserActions";
 import { HashIcon } from "../../../components/common/Icon";
-import useSearchBarParams from "../../searchbar/hooks/useSearchBarParams";
 import { BookTableComponent } from "./BookTableComponents";
 import { UserBook } from "../../../types/types";
+import useSearchBarParams from "../hooks/useSearchBarParams";
 
 export default function BookTableRow({book} : {book : UserBook}) {
 

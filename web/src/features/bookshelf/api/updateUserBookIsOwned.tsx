@@ -1,57 +1,34 @@
 import { UserBook } from "../../../types/types"
-import useToggleState from "../../../hooks/useToggleState"
 import { API_URL } from "../../../config"
-import { useStore } from "../../../store/store"
 import { isString } from "../../../utils/validation"
-import { useUserBooks } from "./getUserBooks"
 import { Req } from "../../../lib/Req/Req"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 
-
-export function useUpdateUserBookIsOwned({
-    book
-} : {
-    book : UserBook
-}) {
-
-    const { auth : { token } } = useStore()
-
-    const userBooks = useUserBooks()
-
-    const [isOwned, _, toggleIsOwned] = useToggleState(book.group === 'owned')
-
-    async function handleClick () {
-
-        toggleIsOwned()
-
-        const response = await updateIsOwned({token, book, isOwned})
-
-        if(!response.error)  {
-            userBooks.mutate()
-            return
-        } 
-
-        toggleIsOwned()
-    }
-
-
-    return {
-        handleClick,
-        isOwned
-    }
-}
-
-
-
-async function updateIsOwned({
-    token,
-    book,
-    isOwned
-} : {
+interface UpdateBookIsOwnedProps {
     token : string | null,
     book  : UserBook,
     isOwned : boolean
-}) {
+}
+
+
+export function useUpdateUserBookIsOwned() {
+
+    const client = useQueryClient()
+
+    return useMutation({
+        mutationKey : ['updateBookIsOwned'],
+        mutationFn  : (props : UpdateBookIsOwnedProps) => updateIsOwned({...props}),
+        onSuccess   : () => client.invalidateQueries({
+            queryKey : ['getUserBooks']
+        })
+    })
+}
+
+
+async function updateIsOwned(props : UpdateBookIsOwnedProps) {
+
+    const { token, book, isOwned} = props
 
     if( !isString(token) ) return {
         error : "Invalid User Token",
@@ -61,7 +38,7 @@ async function updateIsOwned({
 
     const response = await Req.put({
         url: `${API_URL}/book/${book.id}`,
-        payload : {isOwned : !isOwned},
+        payload : { group : isOwned ? 'wishlist' : 'owned'},
         token
     })
 

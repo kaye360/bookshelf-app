@@ -2,7 +2,7 @@ import Modal from "../../../components/common/Modal";
 import { AlertIcon, LoaderIcon } from "../../../components/common/Icon";
 import Button from "../../../components/form/Button";
 import { UserBook } from "../../../types/types";
-import { useUpdateUserBookTags } from "../api/updateUserBookTags";
+import useHandleUpdateBookTags from "../hooks/useHandleUpdateBookTags";
 
 
 
@@ -14,7 +14,7 @@ export default function EditTagsModal({
     closeModalFn : Function
 }) {
 
-    const { handleSubmit, status } = useUpdateUserBookTags()
+    const { query, handleUpdateBookTags, hasClicked } = useHandleUpdateBookTags()
 
     const hasImage = book.image.url.includes('google')
 
@@ -47,7 +47,7 @@ export default function EditTagsModal({
 
 
                 
-            <form onSubmit={ (e) => handleSubmit(book, e) }>
+            <form onSubmit={ (e) => handleUpdateBookTags(book, e) }>
 
                 <textarea 
                     id="book-tags-textarea"
@@ -59,7 +59,7 @@ export default function EditTagsModal({
 
                 <div className="flex items-center gap-3">
 
-                    { status.isLoading && (
+                    { query.isPending && (
                         <>
                             <LoaderIcon /> 
                             <span className="text-lg font-semibold py-2">
@@ -68,13 +68,13 @@ export default function EditTagsModal({
                         </>
                     )}
 
-                    { !status.isLoading && (
+                    { !hasClicked && !query.isPending &&  (
                         <Button type="submit" variant="fill">
                             Update Tags
                         </Button>
                     )}
 
-                    { status.isSuccess && 'Changes saved.' }
+                    { query.isSuccess && 'Changes saved.' }
 
                 </div>
 

@@ -1,37 +1,31 @@
 import { SyntheticEvent, useState } from "react"
-import { useUserBooks } from "../api/getUserBooks"
 import { useStore } from "../../../store/store"
 import { useCreateUserBook } from "../api/createUserBook"
 import { GoogleBook } from "../../../types/types"
 
 
-export default function useHandleCreateBook({
-    book,
-} : {
-    book : GoogleBook,
-}) {
+export default function useHandleCreateBook() {
 
     const { auth : { user, token } } = useStore()
 
-    const userBooks = useUserBooks()
-    const isOwned = document.getElementById('isOwned') as HTMLInputElement
-    const isRead  = document.getElementById('isRead') as HTMLInputElement
-
-    const query = useCreateUserBook({user, book, isOwned, isRead, token})
+    const query = useCreateUserBook()
 
     const [isBookAdded, setIsBookAdded]   = useState(false)
     const [errorMessage, setErorrMessage] = useState<string|null>(null)
 
-    async function handleSubmit(e: SyntheticEvent) {
+    async function handleCreateBook(book: GoogleBook, e: SyntheticEvent) {
 
         e.preventDefault()
 
         if( isBookAdded || !user ) return null
-        
-        const response = await query.refetch()
 
-        if( response.error ) {
-            setErorrMessage( errorMessage )
+        const isOwned = document.getElementById('isOwned') as HTMLInputElement
+        const isRead  = document.getElementById('isRead') as HTMLInputElement
+        
+        query.mutate({user, book, isOwned, isRead, token})
+
+        if( query.isError ) {
+            setErorrMessage( query.error.message )
 
             setTimeout( () => { 
                 setIsBookAdded(false) 
@@ -40,14 +34,11 @@ export default function useHandleCreateBook({
             
         } else {
             setIsBookAdded(true)
-            userBooks.mutate()
         }
-
-        return response
     }
 
     return {
-        handleSubmit,
+        handleCreateBook,
         query,
         errorMessage,
         isBookAdded,

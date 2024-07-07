@@ -1,8 +1,8 @@
 import { create } from "zustand";
-import { getSettingsFromLocalStorage } from "../features/settings/api/getSettings";
 import { getUserSessionFromLocalStorage } from "../features/auth/services/getUserSession";
 import { authReducer } from "./authReducer";
 import { Store } from "../types/types";
+import { getSettingsFromLocalStorage } from "../features/settings/services/settingsService";
 
 
 export const useStore = create<Store>()((set => ({

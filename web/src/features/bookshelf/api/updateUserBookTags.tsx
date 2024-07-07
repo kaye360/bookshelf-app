@@ -1,69 +1,34 @@
-import { SyntheticEvent, useState } from "react"
-import { useStore } from "../../../store/store"
-import { useUserBooks } from "./getUserBooks"
 import { API_URL } from "../../../config"
 import { UserBook } from "../../../types/types"
 import { isString } from "../../../utils/validation"
 import { Req } from "../../../lib/Req/Req"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
+
+interface UpdateBookTagsProps {
+    token : string|null,
+    book  : UserBook,
+    tags  : string[]
+}
 
 
 export function useUpdateUserBookTags() {
 
-    const { auth : {token} } = useStore()
-    const userBooks = useUserBooks()
-    
-    const defaultStatus = { isLoading : false, isSuccess : false }
-    const [status, setStatus] = useState(defaultStatus)
+    const client = useQueryClient()
 
-    async function handleSubmit(book : UserBook, e: SyntheticEvent) {
-        e.preventDefault()
-
-        if( !isString(token) ) return
-
-        setStatus( prev => ({...prev, isLoading : true}) )
-
-        const tagsInput = document.querySelector('#book-tags-textarea') as HTMLTextAreaElement
-        const tags      = extractTagsFromInput(tagsInput)
-
-        const query     = await updateTags({token, tags, book})
-
-        setStatus( prev => ({...prev, isLoading : false}))
-        userBooks.mutate()
-
-        if( !query.error ) {
-            setStatus( prev => ({...prev, isSuccess : true}) )
-            setTimeout( () => setStatus(defaultStatus), 5000 )
-        }
-    }
-
-    return {
-        handleSubmit,
-        status
-    }
+    return useMutation({
+        mutationKey : ['updateBookTags'],
+        mutationFn  : ({token, book, tags} : UpdateBookTagsProps) => updateTags({token, book, tags}),
+        onSuccess   : () => client.invalidateQueries({
+            queryKey : ['getUserBooks']
+        })
+    })
 }
 
 
+async function updateTags(props : UpdateBookTagsProps) {
 
-function extractTagsFromInput(input : HTMLTextAreaElement) : string[] {
-
-    const tags      = new Set( input.value.trim().toLowerCase().split(' ').filter( tag => tag !== "") )
-    const tagsArray = Array.from( tags )
-
-    return tagsArray
-}
-
-
-
-async function updateTags({
-    token,
-    book,
-    tags,
-} : {
-    token : string,
-    book  : UserBook,
-    tags  : string[]
-}) {
+    const { token, book, tags } = props
 
     if( !isString(token) ) return {
         error : "Invalid User Token",

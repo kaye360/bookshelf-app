@@ -32,7 +32,10 @@ s               </span>
                     {book.tags.map( tag => (
                         <button
                             key={tag}
-                            onClick={() => updateSearchParam('filterBy', tag)}
+                            onClick={() => { 
+                                updateSearchParam('filterBy', tag)
+                                console.log('poopoopeepee')
+                            }}
                         >
                             #{tag}
                         </button>

@@ -2,7 +2,7 @@ import Modal from "../../../components/common/Modal";
 import Button from "../../../components/form/Button";
 import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon } from "../../../components/common/Icon";
 import { GoogleBook } from "../../../types/types";
-import useHandleCreateBook from "../hooks/useHandleSubmit";
+import useHandleCreateBook from "../hooks/useHandleCreateBook";
 
 /**
  * 
@@ -18,13 +18,13 @@ export default function AddBookModal({
 }) {
 
     const {
-        handleSubmit,
+        handleCreateBook,
         query,
         errorMessage,
         isBookAdded,
-    } = useHandleCreateBook({book})
+    } = useHandleCreateBook()
 
-    const { isError, isFetching, isSuccess } = query
+    const { isError, isPending, isSuccess } = query
 
     return (
         <Modal closeModalFn={closeModalFn} >
@@ -46,7 +46,7 @@ export default function AddBookModal({
 
             <form 
                 className="grid gap-3 mt-5 text-primary-dark"
-                onSubmit={ handleSubmit }
+                onSubmit={ (e) => handleCreateBook(book, e) }
                 id="addBookForm"
             >
 
@@ -98,20 +98,20 @@ export default function AddBookModal({
 
                 </label>
 
-                { !isFetching && !isBookAdded && (
+                { !isPending && !isBookAdded && (
                     <Button type="submit">
                         Add Book
                     </Button>
                 )}
 
                 <div className="flex items-center gap-2 justify-center text-xl font-semibold">
-                    { isFetching && (
+                    { isPending && (
                         <>
                             <LoaderIcon />
                             Adding Book...
                         </>
                     )}
-                    { !isFetching && isSuccess && isBookAdded && (
+                    { !isPending && isSuccess && isBookAdded && (
                         <div className="grid gap-1">
                             <div className="flex items-center gap-2">
                                 <CheckIcon />

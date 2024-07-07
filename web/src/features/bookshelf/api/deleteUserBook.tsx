@@ -1,13 +1,9 @@
-import { useState, SyntheticEvent } from "react"
 import { API_URL } from "../../../config"
 import { UserBook } from "../../../types/types"
 import { isString } from "../../../utils/validation"
-import { useUserBooks } from "./getUserBooks"
-import { useStore } from "../../../store/store"
 import { Req } from "../../../lib/Req/Req"
 import { ReqResponse } from "../../../lib/Req/Req.type"
-import { useQuery } from "@tanstack/react-query"
-
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 
 interface DeleteBookProps {
@@ -16,13 +12,16 @@ interface DeleteBookProps {
 }
 
 
-export function useDeleteUserBook(props : DeleteBookProps) {
+export function useDeleteUserBook() {
 
-    return useQuery({
-        queryKey : ['deleteBook'],
-        queryFn : () => deleteBook({...props}),
-        initialData : null,
-        enabled : false
+    const client = useQueryClient()
+
+    return useMutation({
+        mutationKey : ['deleteBook'],
+        mutationFn  : (props : DeleteBookProps) => deleteBook({...props}),
+        onSuccess   : () => client.invalidateQueries({
+            queryKey : ['getUserBooks']
+        })
     })
 }
 

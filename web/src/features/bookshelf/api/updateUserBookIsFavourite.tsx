@@ -1,57 +1,34 @@
 import { UserBook } from "../../../types/types"
-import useToggleState from "../../../hooks/useToggleState"
 import { API_URL } from "../../../config"
-import { useStore } from "../../../store/store"
 import { isString } from "../../../utils/validation"
-import { useUserBooks } from "./getUserBooks"
 import { Req } from "../../../lib/Req/Req"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 
-
-export function useUpdateUserBookIsFavourite({
-    book
-} : {
-    book : UserBook
-}) {
-
-    const { auth : { token } } = useStore()
-
-    const userBooks = useUserBooks()
-
-    const [isFavourite, _, toggleIsFavourite] = useToggleState(book.isFavourite)
-
-    async function handleClick () {
-
-        toggleIsFavourite()
-
-        const response = await updateIsFavourite({token, book, isFavourite})
-
-        if(!response.error)  {
-            userBooks.mutate()
-            return
-        } 
-
-        toggleIsFavourite()
-    }
-
-
-    return {
-        handleClick,
-        isFavourite
-    }
-}
-
-
-
-async function updateIsFavourite({
-    token,
-    book,
-    isFavourite
-} : {
+interface UpdateBookIsFavouriteProps {
     token : string | null,
     book  : UserBook,
     isFavourite : boolean
-}) {
+}
+
+
+export function useUpdateUserBookIsFavourite() {
+
+    const client = useQueryClient()
+
+    return useMutation({
+        mutationKey : ['updateBookIsFavourite'],
+        mutationFn  : (props : UpdateBookIsFavouriteProps) => updateIsFavourite({...props}),
+        onSuccess   : () => client.invalidateQueries({
+            queryKey : ['getUserBooks']
+        })
+    })
+}
+
+
+async function updateIsFavourite(props : UpdateBookIsFavouriteProps) {
+
+    const { token, book, isFavourite } = props
 
     if( !isString(token) ) return {
         error : "Invalid User Token",
