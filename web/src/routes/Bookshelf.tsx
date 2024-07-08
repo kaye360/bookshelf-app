@@ -3,7 +3,7 @@ import { BookIcon, LoaderIcon, PlusIcon } from "../components/common/Icon";
 import Button from "../components/form/Button";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../store/store";
-import { BookShelfContext } from "../features/bookshelf/hooks/useBookShelfContext";
+import { BookShelfContext } from "../features/bookshelf/hooks/useBookShelfParamsContext";
 import useSearchBarParams from "../features/bookshelf/hooks/useSearchBarParams";
 import FilterOptions from "../features/bookshelf/components/searchbar/FilterOptions";
 import SearchBar from "../features/bookshelf/components/searchbar/SearchBar";
@@ -19,7 +19,7 @@ export default function BookShelf() {
     const {
         searchParams,
         updateSearchParam,
-        resolvedbooks
+        resolvedBooks
     } = useSearchBarParams()
 
     const {
@@ -46,7 +46,7 @@ export default function BookShelf() {
 
                 { booksStatus === 'SUCCESS' && (
                     <BookList>
-                        {resolvedbooks.map( book => (
+                        {resolvedBooks.map( book => (
                             <BookListItem book={book} key={book.id} />
                         ))}
                     </BookList>

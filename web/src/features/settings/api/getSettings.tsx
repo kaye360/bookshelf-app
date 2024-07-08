@@ -4,6 +4,7 @@ import { useStore } from "../../../store/store"
 import { Settings } from "../../../types/types"
 import { Req } from "../../../lib/Req/Req"
 import { getInitialSettings } from "../services/settingsService"
+import { SettingsSchema } from "../validation/settingsValidation"
 
 
 export function useSettings() {
@@ -23,6 +24,10 @@ export function useSettings() {
         }
     })
 
+    if( query.isError) {
+        console.log(query.error)
+    }
+
     return query
 }
 
@@ -32,6 +37,12 @@ async function getSettingsFromApi(token : string | null) : Promise<Settings> {
     if( typeof token !== 'string' ) return getInitialSettings()
 
     const response = await Req.get({ url : `${API_URL}/settings`, token })
-    const json     = JSON.parse(response.data) as Settings
-    return json 
+
+    if( response.error ) {
+        throw new Error('Settings Validation Error')
+    }
+
+    const settings  = JSON.parse(response.data) as Settings
+    const validated = SettingsSchema.validateSync(settings)
+    return validated
 }

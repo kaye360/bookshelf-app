@@ -1,6 +1,16 @@
 import { UserBook } from "../../../types/types";
 
-
+/**
+ * @class BookListResolver
+ * 
+ * @description 
+ * Use this class to resolve any filtering and sorting applyed to a UserBooks Array.
+ * Used in useSearchBarParams.
+ * 
+ * @method resolve() : UserBook.
+ * Instantiate the class and then call it with the resolve() method to access sorted/filtered book list.
+ * 
+ */
 export class BookListResolver {
 
     books        : UserBook[]
@@ -34,7 +44,6 @@ export class BookListResolver {
         this.sort(sortBy)
 
         return this.books
-
     }
 
     private search(searchQuery : string) {

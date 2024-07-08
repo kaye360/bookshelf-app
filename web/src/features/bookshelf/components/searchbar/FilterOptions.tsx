@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { AllIcon, CheckIcon, UncheckIcon, FavouritesIcon, BookmarkIcon, FileTextIcon } from "../../../../components/common/Icon";
-import { BookShelfContext } from "../../hooks/useBookShelfContext";
+import { useBookshelfParams } from "../../hooks/useBookShelfParamsContext";
 
 
 
 export default function FilterOptions() {
 
-    const { searchParams, updateSearchParam } = useContext(BookShelfContext)
+    const { searchParams, updateSearchParam } = useBookshelfParams()
 
     return (
         <div className={`

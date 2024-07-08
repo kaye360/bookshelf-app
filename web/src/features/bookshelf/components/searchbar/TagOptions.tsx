@@ -1,8 +1,7 @@
-import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { HashIcon } from "../../../../components/common/Icon";
 import { getTagsFromBookList } from "../../../tags/services/getTagsFromBookList";
-import { BookShelfContext } from "../../hooks/useBookShelfContext";
+import { useBookshelfParams } from "../../hooks/useBookShelfParamsContext";
 import { useStore } from "../../../../store/store";
 
 
@@ -10,7 +9,7 @@ import { useStore } from "../../../../store/store";
 export default function TagOptions() {
 
     const { books } = useStore()
-    const { searchParams, updateSearchParam } = useContext(BookShelfContext)
+    const { searchParams, updateSearchParam } = useBookshelfParams()
 
     const tags = getTagsFromBookList(books || []).slice(0,8)
 

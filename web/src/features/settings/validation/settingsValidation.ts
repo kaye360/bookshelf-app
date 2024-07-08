@@ -1,21 +1,30 @@
-import { Settings, UserSettings } from "../../../types/types"
-import { isJson } from "../../../utils/validation"
-import { getInitialSettings } from "../services/settingsService"
+import { object, ObjectSchema, string } from "yup";
+import { UserSettings } from "../../../types/types";
 
 
-export function validSettings(data : any) : Settings {
+export const SettingsSchema : ObjectSchema<UserSettings> = object({
+    
+    currentlyReadingId : string().nullable().defined(),
 
-    const initialSettings = getInitialSettings()
+    email              : string().nullable().defined(), 
 
-    if( !isJson(data) ) {
-        return initialSettings
-    }
+    location           : string().nullable().defined(), 
 
-    const localStorageSettings = JSON.parse(data)
+    name               : string().nullable().defined(), 
 
-    const settingsProps : (keyof UserSettings)[] = ['currentlyReadingId', 'email', 'filter', 'location', 'name', 'sort', 'theme', 'view']
-
-    const isValidSettingsObj = settingsProps.every(prop => Object.hasOwn(localStorageSettings, prop))
-
-    return isValidSettingsObj ? localStorageSettings : initialSettings
-}
+    filter             : string().oneOf(
+                            ['all', 'read', 'unread', 'favourites', 'wishlist', 'owned']
+                        ).defined(),
+    
+    sort               : string().oneOf(
+                            ['title', 'authors', 'newest', 'oldest']
+                        ).defined(),
+    
+    theme              : string().oneOf(
+                            ['light', 'dark']
+                        ).defined(),
+    
+    view               : string().oneOf(
+                            ['grid', 'list', 'card']
+                        ).defined(),
+})

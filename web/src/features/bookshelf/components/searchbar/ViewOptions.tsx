@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import OptionButton from "./OptionButton";
-import { BookShelfContext } from "../../hooks/useBookShelfContext";
+import { useBookshelfParams } from "../../hooks/useBookShelfParamsContext";
 import { GridIcon, ListIcon, CardIcon } from "../../../../components/common/Icon";
 
 export default function ViewOptions() {
 
-    const { searchParams, updateSearchParam } = useContext(BookShelfContext)
+    const { searchParams, updateSearchParam } = useBookshelfParams()
 
     return (
         <div className="grid grid-cols-[55px_1fr] items-start">

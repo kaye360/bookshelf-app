@@ -24,12 +24,12 @@ export default function useSearchBarParams() {
     } 
 
     const bookListResolver = new BookListResolver({books, searchParams})
-    const resolvedbooks = bookListResolver.resolve()
+    const resolvedBooks = bookListResolver.resolve()
     
     return {
         searchParams,
         setSearchParams,
         updateSearchParam,
-        resolvedbooks,
+        resolvedBooks,
     }
 }

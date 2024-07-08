@@ -31,12 +31,13 @@ Each folder will contain these subfolders as needed.
 - /deleteFeature
 
 Each file in /api should have 2 functions, named after request type. For example:
-- useCreateBook(props : CreateBookProps) : useQuery/useMutation
-- async createBook : validated ReqResponse
+- useCreateFeature(props : CreateFeatureProps) : useQuery/useMutation
+- async createFeature : validated Resource (not ReqResponse)
 
 Each get request should be a useQuery. Other requests should be a useMutation, and invalidate the useQuery.
 
 Each file in /api should have 1 interface for the Props
+
 
 ### /validation
 - /createFeatureValidation

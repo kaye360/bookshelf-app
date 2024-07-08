@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import UserActions from "./UserActions";
 import { UserBook } from "../../../types/types";
-import { BookShelfContext } from "../hooks/useBookShelfContext";
+import { useBookshelfParams } from "../hooks/useBookShelfParamsContext";
 
 
 export default function BookCard({
@@ -10,7 +9,7 @@ export default function BookCard({
     book: UserBook
 }) {
 
-    const { updateSearchParam } = useContext(BookShelfContext)
+    const { updateSearchParam } = useBookshelfParams()
 
     return (
         <div className="grid grid-cols-[1fr_2fr] gap-3 text-sm">

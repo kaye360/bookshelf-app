@@ -134,9 +134,9 @@ export type Settings = UserSettings | null
 export interface UserSettings {
     currentlyReadingId : string | null
     email              : string | null
-    filter             : 'all' | 'read' | 'unread' | 'favourites' | 'wishlist' | 'owned'
     location           : string | null
     name               : string | null
+    filter             : 'all' | 'read' | 'unread' | 'favourites' | 'wishlist' | 'owned'
     sort               : 'title' | 'authors' | 'newest' | 'oldest'
     theme              : 'light' | 'dark'
     view               : 'grid' | 'list' | 'card'

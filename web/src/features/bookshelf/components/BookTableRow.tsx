@@ -2,12 +2,11 @@ import UserActions from "./UserActions";
 import { HashIcon } from "../../../components/common/Icon";
 import { BookTableComponent } from "./BookTableComponents";
 import { UserBook } from "../../../types/types";
-import { useContext } from "react";
-import { BookShelfContext } from "../hooks/useBookShelfContext";
+import { useBookshelfParams } from "../hooks/useBookShelfParamsContext";
 
 export default function BookTableRow({book} : {book : UserBook}) {
 
-    const { updateSearchParam } = useContext(BookShelfContext)
+    const { updateSearchParam } = useBookshelfParams()
 
     return (
         <tr className=" even:bg-bg-accent text-sm">

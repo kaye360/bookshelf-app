@@ -1,5 +1,5 @@
 import { Settings } from "../../../types/types";
-import { validSettings } from "../validation/settingsValidation";
+import { validSettings } from "../validation/settingsValidation_old";
 
 
 export const getInitialSettings = () : Settings => ({

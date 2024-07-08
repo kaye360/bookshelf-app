@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import OptionButton from "./OptionButton";
 import { ParagraphIcon, UserIcon, ArrowDownIcon, ArrowUpIcon } from "../../../../components/common/Icon";
-import { BookShelfContext } from "../../hooks/useBookShelfContext";
+import { useBookshelfParams } from "../../hooks/useBookShelfParamsContext";
 
 
 export default function SortOptions() {
 
-    const {searchParams, updateSearchParam } = useContext(BookShelfContext)
+    const {searchParams, updateSearchParam } = useBookshelfParams()
 
     return (
         <div className="grid grid-cols-[55px_1fr] items-start">

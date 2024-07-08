@@ -1,8 +1,7 @@
-import { useContext } from "react"
 import { HashIcon } from "../../../components/common/Icon"
 import { UserBook } from "../../../types/types"
 import UserActions from "./UserActions"
-import { BookShelfContext } from "../hooks/useBookShelfContext"
+import { useBookshelfParams } from "../hooks/useBookShelfParamsContext"
 
 
 export const BookTableComponent = {
@@ -29,7 +28,7 @@ function Cell({
 
 function Row({book} : {book : UserBook}) {
 
-    const { updateSearchParam } = useContext(BookShelfContext)
+    const { updateSearchParam } = useBookshelfParams()
 
     return (
         <tr className=" even:bg-bg-accent text-sm">

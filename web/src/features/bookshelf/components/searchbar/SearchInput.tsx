@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { BookShelfContext } from "../../hooks/useBookShelfContext";
+import { useBookshelfParams } from "../../hooks/useBookShelfParamsContext";
 
 export default function SearchInput() {
 
-    const { searchParams, updateSearchParam } = useContext(BookShelfContext)
+    const { searchParams, updateSearchParam } = useBookshelfParams()
 
     return (
         <input 
