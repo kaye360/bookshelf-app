@@ -60,7 +60,6 @@ export type Auth = AuthSuccess | AuthLoading | AuthError | WithoutAuth
 export interface AuthSuccess {
     user            : User,
     token           : string,
-    loading         : false,
     error           : null
     isAuth          : true
 }
@@ -68,7 +67,6 @@ export interface AuthSuccess {
 export interface AuthLoading {
     user            : null,
     token           : null,
-    loading         : true,
     error           : null
     isAuth          : false
 }
@@ -76,15 +74,13 @@ export interface AuthLoading {
 export interface AuthError {
     user            : null,
     token           : null,
-    loading         : false,
-    error           : 'LOGIN' | 'REGISTER'
+    error           : 'LOGIN' | 'REGISTER' | 'SESSION'
     isAuth          : false
 }
 
 export interface WithoutAuth {
     user    : null,
     token   : null,
-    loading : false,
     error   : null,
     isAuth  : false,
 }

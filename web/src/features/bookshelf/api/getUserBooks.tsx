@@ -4,7 +4,7 @@ import { isNumber } from "../../../utils/validation"
 import { validateUserBook } from "../validation/getUserBookValidation"
 import { useQuery } from "@tanstack/react-query"
 import { Req } from "../../../lib/Req/Req"
-import { ReqResponse } from "../../../lib/Req/Req.type"
+import { UserBook } from "../../../types/types"
 
 
 export function useUserBooks() {
@@ -18,7 +18,7 @@ export function useUserBooks() {
         queryKey : ['getUserBooks'],
         queryFn  : async () => {
             const books = await getUserBooksFromApi(user?.id)
-            updateBooks(books.data)
+            updateBooks(books)
             updateBookStatus('SUCCESS')
             return books
         }
@@ -28,22 +28,17 @@ export function useUserBooks() {
 }
 
 
-export async function getUserBooksFromApi(userId : number | undefined) : Promise<ReqResponse> {
+export async function getUserBooksFromApi(userId : number | undefined) : Promise<UserBook[]> {
 
     if( !isNumber(userId) ) {
-        return {
-            data  : null,
-            error : 'Invalid User ID',
-            code  : 401
-        }
+        throw new Error('Error getting books from API')
     }
     const response = await Req.get(`${API_URL}/bookshelf/${userId}`)
 
     if( response.error ) {
-        return response
+        throw new Error('Error getting books from API')
     }
 
-    response.data = validateUserBook(response.data)
-
-    return response
+    const validated = validateUserBook(response.data)
+    return validated
 }

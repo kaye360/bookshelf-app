@@ -10,11 +10,15 @@ export default function useLogout() {
 
     async function logout() {
 
+        localStorage.clear()
         if ( !token ) return
         
-        await Req.post({ url : `${API_URL}/logout`, token })
+        const response = await Req.post({ url : `${API_URL}/logout`, token })
+        
+        if( response.error ) {
+            window.location.reload()
+        }
 
-        localStorage.clear()
         updateAuth('LOGOUT')
     }
 

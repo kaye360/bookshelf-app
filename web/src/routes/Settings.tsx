@@ -10,7 +10,7 @@ import useSettingsFormState from "../features/settings/hooks/useSettingsFormStat
 
 export default function Settings() {
 
-    const { touchForm, isTouched, handleSubmit, isLoading, isSaved } = useSettingsFormState()
+    const { touchForm, isTouched, handleSubmit, isSaved, query } = useSettingsFormState()
 
     return (
         <BaseLayout>
@@ -55,13 +55,13 @@ export default function Settings() {
                         </Button>
 
                         <span className="flex items-center justify-center gap-2 mt-3 text-xl font-semibold">
-                            { isLoading && (
+                            { query.isPending && (
                                 <>
                                     <LoaderIcon />
                                     Saving
                                 </>
                             )}
-                            { isSaved && (
+                            { isSaved && !query.isPending && (
                                 <>
                                     <CheckIcon />
                                     Saved

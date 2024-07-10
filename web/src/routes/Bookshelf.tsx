@@ -16,6 +16,8 @@ export default function BookShelf() {
     const { books, booksStatus } = useStore()
     const navigate = useNavigate()
 
+    console.log(books)
+
     const {
         searchParams,
         updateSearchParam,

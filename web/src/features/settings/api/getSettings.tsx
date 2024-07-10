@@ -17,32 +17,28 @@ export function useSettings() {
     const query = useQuery({
         queryKey : ['getSettings'],
         queryFn : async () => {
-            const settings = await getSettingsFromApi(token)
+            const settings = await getSettings(token)
             updateSettings(settings)
             localStorage.setItem('settings', JSON.stringify(settings))
             return settings
         }
     })
 
-    if( query.isError) {
-        console.log(query.error)
-    }
-
     return query
 }
 
 
-async function getSettingsFromApi(token : string | null) : Promise<Settings> {
+async function getSettings(token : string|null) : Promise<Settings> {
 
     if( typeof token !== 'string' ) return getInitialSettings()
 
     const response = await Req.get({ url : `${API_URL}/settings`, token })
 
     if( response.error ) {
-        throw new Error('Settings Validation Error')
+        throw new Error('Settings Response Error')
     }
 
     const settings  = JSON.parse(response.data) as Settings
-    const validated = SettingsSchema.validateSync(settings)
+    const validated = await SettingsSchema.validate(settings)
     return validated
 }

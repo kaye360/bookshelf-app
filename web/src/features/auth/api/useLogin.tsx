@@ -1,34 +1,55 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { API_URL } from "../../../config";
 import { Req } from "../../../lib/Req/Req";
 import { useStore } from "../../../store/store";
-import { LoginPayload } from "../../../types/types";
+import { AuthSuccess, LoginPayload } from "../../../types/types";
+import { AuthSchema } from "../validation/authValidation";
+
+
+interface LoginProps extends LoginPayload {}
+
 
 export function useLogin() {
 
     const { authActions : { updateAuth } } = useStore()
-    const url = `${API_URL}/login`
+    const client = useQueryClient()
 
-    async function login(payload : LoginPayload) {
+    const query = useMutation({
+        mutationKey : ['login'],
+        mutationFn  : async(props : LoginProps) => {
+            updateAuth('LOADING')
+            const data = await login({...props})
+            return data
+        },
+        onSuccess : (data) => {
+            updateAuth('LOGIN', data.user, data.token)
+            client.invalidateQueries({
+                queryKey : ['getUserBooks']
+            })
+        },
+        onError : () => updateAuth('LOGIN_ERROR')
+    })
 
-        updateAuth('LOADING')
-    
-        const response = await Req.post({ url, payload })
+    return query
+}
 
-        if( response.data?.user?.id && response.data?.access_token ) {
 
-            localStorage.setItem('auth', JSON.stringify({
-                token : response.data.access_token,
-                user  : response.data.user
-            })); 
+async function login(payload : LoginPayload) : Promise<Pick<AuthSuccess, 'token' | 'user'>> {
 
-            updateAuth('LOGIN', response.data.user, response.data.access_token) 
+    const response = await Req.post({ 
+        url : `${API_URL}/login`, 
+        payload : payload
+    })
 
-        } else {
-            updateAuth('LOGIN_ERROR')
-        }
-
-        return response
+    if( response.error || !response.data?.user?.id || !response.data?.access_token ) {
+        throw new Error('Login Error')
     }
 
-    return login
+    const validated = AuthSchema.validateSync({
+        user : response.data.user,
+        token : response.data.access_token
+    })
+
+    localStorage.setItem('auth', JSON.stringify({...validated})); 
+    return validated
 }

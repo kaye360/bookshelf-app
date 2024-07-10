@@ -9,7 +9,7 @@ export default function AuthRoute({
 }) {
 
     const { auth : { isAuth } } = useStore()
-    
+
     if( isAuth ) {
         return <>{children}</>
     }

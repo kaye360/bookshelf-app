@@ -1,51 +1,37 @@
-import { SubmitHandler, useForm } from "react-hook-form"
+import { SubmitHandler } from "react-hook-form"
 import Button from "../../../components/form/Button"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { registerSchema } from "../services/validation"
 import useIsUserHandleAvailable from "../hooks/useIsUserHandleAvailable"
 import ValidatedTextInput from "../../../components/form/ValidatedTextInput"
 import { CheckIcon, AlertIcon, LoaderIcon } from "../../../components/common/Icon"
 import UniqueUsernameStatus from "./UniqueUsernameStatus"
-import { useStore } from "../../../store/store"
-import useRegister from "../api/useRegister"
-
-
-export interface RegisterFormInput {
-    handle             : string
-    email              : string
-    name               : string
-    password           : string
-    password_confirmation : string
-}
+import { useRegisterForm } from "../hooks/useRegisterForm"
+import { RegisterPayload } from "../../../types/types"
 
 
 export default function RegisterForm() {
 
-    const { auth :  { loading : isLoading, error: isError, user } } = useStore()
-    const registerUser = useRegister()
+    const { 
+        query,
+        handleSubmit, 
+        register, 
+        formState,
+        user
+    } = useRegisterForm()
 
-    const { register, handleSubmit, formState } = useForm<RegisterFormInput>({
-        resolver : yupResolver(registerSchema),
-        mode : 'onTouched'
-    })
+    const { 
+        handleUsernameOnChange, 
+        isUserHandleAvailable, 
+        isTouched 
+    } = useIsUserHandleAvailable()
 
-    const { handleUsernameOnChange, isUserHandleAvailable, isTouched } = useIsUserHandleAvailable()
-
-    const onSubmit: SubmitHandler<RegisterFormInput> = async (formData) => {
-
-        
-        
-        try {
-            const payload = {
-                handle          : formData.handle,
-                email           : formData.email,
-                name            : formData.name,
-                password        : formData.password,
-                password_confirmation : formData.password_confirmation,
-            }
-            
-            await registerUser(payload)
-        } catch (e) {}
+    const onSubmit: SubmitHandler<RegisterPayload> = async (formData) => {
+        query.mutate({
+            handle          : formData.handle,
+            email           : formData.email,
+            name            : formData.name,
+            password        : formData.password,
+            password_confirmation : formData.password_confirmation,
+        })
     }
 
     return (
@@ -88,7 +74,7 @@ export default function RegisterForm() {
                 <ValidatedTextInput
                     label="Password"
                     name="password"
-                    type="password"
+                    // type="password"
                     register={register}
                     formStateData={ [formState, 'password' ] }
                 />
@@ -96,7 +82,7 @@ export default function RegisterForm() {
                 <ValidatedTextInput
                     label="Confirm Password"
                     name="password_confirmation"
-                    type="password"
+                    // type="password"
                     register={register}
                     formStateData={ [formState, 'password_confirmation' ] }
                 />
@@ -109,17 +95,17 @@ export default function RegisterForm() {
 
             <div className={`
                 flex items-center gap-2 justify-center text-lg font-medium mt-3
-                ${isError === 'REGISTER' ? 'text-accent' : ''}
+                ${query.isError ? 'text-accent' : ''}
                 ${user ? 'text-emerald-400' : ''}
             `}>
 
-                { isLoading && (
+                { query.isPending && (
                     <>
                         <LoaderIcon />
                         Registering...
                     </>
                 )}
-                { isError === 'REGISTER' && (
+                { query.isError && (
                     <>
                         <AlertIcon />
                         Somthing went wrong, please check all fields.

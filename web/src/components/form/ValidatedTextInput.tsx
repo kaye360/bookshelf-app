@@ -2,7 +2,7 @@ import { UseFormRegister, RegisterOptions, FormState } from "react-hook-form";
 import { CheckIcon, AlertIcon } from "../common/Icon";
 import TextInput from "./TextInput";
 import { ComponentPropsWithoutRef, FormEventHandler } from "react";
-import { RegisterFormInput } from "../../features/auth/components/RegisterForm";
+import { RegisterPayload } from "../../types/types";
 
 
 interface ValidatedTextInputProps extends ComponentPropsWithoutRef<'input'> {
@@ -10,7 +10,7 @@ interface ValidatedTextInputProps extends ComponentPropsWithoutRef<'input'> {
     register?     : UseFormRegister<any>
     name          : string
     validation?   : RegisterOptions<any, string> | undefined
-    formStateData : [FormState<RegisterFormInput>, keyof RegisterFormInput]
+    formStateData : [FormState<RegisterPayload>, keyof RegisterPayload]
     onChange?     : FormEventHandler<HTMLInputElement>
 }
 

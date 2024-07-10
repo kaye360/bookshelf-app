@@ -11,7 +11,9 @@ export default function Index() {
     const { auth } = useStore()
 
     useEffect( () => {
-        if( auth.isAuth ) navigate('/dashboard')
+        if( auth.isAuth ) {
+            setTimeout( () => navigate('/dashboard'), 1000 )
+        }
     },[auth.isAuth])
 
     const location    = useLocation()

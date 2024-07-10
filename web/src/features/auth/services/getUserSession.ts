@@ -1,44 +1,39 @@
 import { Auth } from "../../../types/types"
+import { isJson, isString } from "../../../utils/validation"
+import { AuthSchema } from "../validation/authValidation"
 
 
 export function getUserSessionFromLocalStorage() : Auth {
 
-    const userLocalStorage = localStorage.getItem("auth")
-    const isUserSet        = isValidSession(userLocalStorage)
-    const userSession      = isUserSet ? JSON.parse( userLocalStorage ) : null
+    const currentSession = validatedSession()
 
-    const user  = isUserSet && Object.hasOwn(userSession, 'user') 
-                    ? userSession.user 
-                    : null
-
-    const token = isUserSet && Object.hasOwn(userSession, 'token')  
-                    ? userSession.token
-                    : null
-
-    const isAuth = user !== null && token !== null
-
-    const initialState : Auth = {
-        user,
-        token,
-        loading : false,
-        error   : null,
-        isAuth,
+    if( !currentSession || !currentSession.user || !currentSession.token ) {
+        return {
+            user   : null,
+            token  : null,
+            error  : 'SESSION',
+            isAuth : false
+        }
     }
 
-    return initialState
+    return  {
+        user   : currentSession.user,
+        token  : currentSession.token,
+        error  : null,
+        isAuth : true,
+    }
 }
 
 
-
-function isValidSession(userLocalStorage : string|null) : userLocalStorage is string {
-
-    if( typeof userLocalStorage !== 'string') return false
-
+function validatedSession() : Pick<Auth, "token" | "user"> | null {
     try {
-        const json = JSON.parse(userLocalStorage)
-        if( typeof json === 'object') return true
-    }
-    catch (e) {}
+        const userLocalStorage = localStorage.getItem("auth")
+        if( !isString(userLocalStorage || !isJson(userLocalStorage)) ) return null
 
-    return false
+        const validated = AuthSchema.validateSync( JSON.parse(userLocalStorage as string) )
+        return validated
+
+    } catch (e) {
+        return null
+    }
 }

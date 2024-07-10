@@ -1,5 +1,5 @@
 import { AuthActions, User } from "../types/types"
-import { isLoading, isLoggedIn, isRegistered, isLoginError, isRegisterError, isLoggedOut } from "./authActions"
+import { isLoading, isLoggedIn, isLoginError, isRegisterError, isLoggedOut } from "./authActions"
 
 
 export function authReducer(
@@ -20,12 +20,6 @@ export function authReducer(
             }
             break
 
-        case 'REGISTER':
-            if( user !== undefined && typeof token === 'string' ) {
-                set( () => ({ auth : isRegistered({user, token}) }))
-            }
-            break
-        
         case 'LOGIN_ERROR':
             set( () => ({ auth : isLoginError() }))
             break

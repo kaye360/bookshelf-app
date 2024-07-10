@@ -1,5 +1,6 @@
 import { Settings } from "../../../types/types";
-import { validSettings } from "../validation/settingsValidation_old";
+import { isString } from "../../../utils/validation";
+import { SettingsSchema } from "../validation/settingsValidation";
 
 
 export const getInitialSettings = () : Settings => ({
@@ -15,7 +16,10 @@ export const getInitialSettings = () : Settings => ({
 
 
 export function getSettingsFromLocalStorage() : Settings {
-    const userLocalStorage = localStorage.getItem("settings")
-    const settings         = validSettings(userLocalStorage)
+    const settingsLocalStorage = localStorage.getItem("settings")
+
+    if ( !isString(settingsLocalStorage) ) return getInitialSettings()
+
+    const settings = SettingsSchema.validateSync( JSON.parse(settingsLocalStorage) )
     return settings
 }
