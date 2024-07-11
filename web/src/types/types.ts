@@ -141,9 +141,17 @@ export interface UserSettings {
 
 /**
  * 
- * 
  * Book
  * 
+ * @type [UserBook, CommunityBook] extends Book
+ * These are the books used throughout the App
+ * 
+ * @type ExternalApiBook
+ * These are the books returned from the external API, such as Google Books
+ * 
+ * @type UserModelBook extends CreateUserModelBook
+ * These represent the UserBook db model
+ * UserModelBook will have extra properties such as Id
  * 
  */
 
@@ -178,32 +186,32 @@ export interface CommunityBook extends Book {
 }
 
 export interface BookReview {
-    id          : string
-    userId      : string
-    rating      : number
-    review      : string
+    id     : string
+    userId : string
+    rating : number
+    review : string
 }
 
-export interface ApiBook {
+export interface CreateUserModelBook {
     authors      : string
-    created_at   : string
     group        : 'wishlist' | 'owned'
-    id           : string
-    imageUrl?    : string
-    imageHeight? : number
-    imageWidth?  : number
+    imageUrl?    : string | null
     isFavourite  : boolean
     isRead       : boolean
-    isbn10?      : string
-    isbn13?      : string
+    isbn10       : string | null
+    isbn13       : string | null
     rating       : number
     tags         : string
     title        : string
-    updated_at   : string
     userId       : string
 }
 
-export interface GoogleBook {
+export interface UserModelBook extends CreateUserModelBook {
+    id         : string
+    created_at : string
+}
+
+export interface ExternalApiBook {
     kind? : string
     id? : string
     selfLink? : string
@@ -227,8 +235,8 @@ export interface GoogleBook {
     }
 }
 
-export interface GoogleBookResponse {
-    items : GoogleBook[]
+export interface ExternalApiBookResponse {
+    items : ExternalApiBook[]
     totalItems : number
 }
 

@@ -14,7 +14,7 @@ export default function useRegister() {
     const { authActions : { updateAuth } } = useStore()
     const client = useQueryClient()
 
-    const query = useMutation({
+    return useMutation({
         mutationKey : ['register'],
         mutationFn : async(props : RegisterProps) => {
             updateAuth('LOADING')
@@ -29,8 +29,6 @@ export default function useRegister() {
         },
         onError : () => updateAuth('REGISTER_ERROR') 
     })
-
-    return query
 }
 
 

@@ -8,9 +8,9 @@ export const UserBookSchema : ObjectSchema<UserBook> = object({
     authors     : string().defined(),
     userId      : string().defined(),
     rating      : number().defined(),
-    created_at  : string().defined(),
     isRead      : boolean().defined(),
     isFavourite : boolean().defined(),
+    created_at  : string().defined(),
     group       : string().oneOf(['wishlist', 'owned']).defined(),
     tags        : array(string().defined()).defined(),
     image       : object({

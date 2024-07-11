@@ -7,6 +7,11 @@ import { SettingsSchema } from "../validation/settingsValidation"
 import { useMutation } from "@tanstack/react-query"
 
 
+/**
+ * 
+ * The api query or mutation to be consumed across the app
+ * 
+ */
 export default function useUpdateSettings() {
     
     const { 
@@ -14,7 +19,7 @@ export default function useUpdateSettings() {
         settingsActions : { updateSettings } 
     } = useStore()
 
-    const query = useMutation({
+    return useMutation({
         mutationKey : ['updateSettings'],
         mutationFn : async () => {
             const settings = await updateSettingsToApi(user, token) 
@@ -23,11 +28,16 @@ export default function useUpdateSettings() {
         },
         onError : (error) => console.log(error.message)
     })
-
-    return query
 }
 
 
+/**
+ * 
+ * The function containing the request and response.
+ * Only to be used in the above hook
+ * @returns a validated response or throws an error
+ * 
+ */
 async function updateSettingsToApi(user: User | null, token : string|null) {
 
     if ( user  === null)  throw new Error('Invalid User')

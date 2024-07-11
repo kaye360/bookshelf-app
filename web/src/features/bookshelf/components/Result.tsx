@@ -3,7 +3,7 @@ import AddBookModal from "./AddBookModal"
 import { formatGoogleBookResult } from "../../externalBookApi/services/formatGoogleBookResults"
 import { useState } from "react"
 import useUserHasBook from "../hooks/useUserHasBook"
-import { GoogleBook } from "../../../types/types"
+import { ExternalApiBook } from "../../../types/types"
 
 
 /**
@@ -14,7 +14,7 @@ import { GoogleBook } from "../../../types/types"
 export default function Result({
     book, 
 } : {
-    book: GoogleBook, 
+    book: ExternalApiBook, 
 }) {
 
     const googleBook  = formatGoogleBookResult(book)

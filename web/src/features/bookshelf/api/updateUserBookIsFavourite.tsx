@@ -12,6 +12,11 @@ interface UpdateBookIsFavouriteProps {
 }
 
 
+/**
+ * 
+ * The api query or mutation to be consumed across the app
+ * 
+ */
 export function useUpdateUserBookIsFavourite() {
 
     const client = useQueryClient()
@@ -26,6 +31,13 @@ export function useUpdateUserBookIsFavourite() {
 }
 
 
+/**
+ * 
+ * The function containing the request and response.
+ * Only to be used in the above hook
+ * @returns a validated response or throws an error
+ * 
+ */
 async function updateIsFavourite(props : UpdateBookIsFavouriteProps) {
 
     const { token, book, isFavourite } = props

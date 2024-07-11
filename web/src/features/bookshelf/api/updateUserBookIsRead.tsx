@@ -12,6 +12,11 @@ interface UpdateIsReadProps {
 }
 
 
+/**
+ * 
+ * The api query or mutation to be consumed across the app
+ * 
+ */
 export function useUpdateUserBookIsRead() {
 
     const client = useQueryClient()
@@ -27,6 +32,13 @@ export function useUpdateUserBookIsRead() {
 }
 
 
+/**
+ * 
+ * The function containing the request and response.
+ * Only to be used in the above hook
+ * @returns a validated response or throws an error
+ * 
+ */
 async function updateIsRead(props : UpdateIsReadProps) {
 
     const { token, book, isRead }  = props

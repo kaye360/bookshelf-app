@@ -1,5 +1,5 @@
 import { useStore } from "../../../store/store"
-import { GoogleBook } from "../../../types/types"
+import { ExternalApiBook } from "../../../types/types"
 
 
 export default function useUserHasBook(){
@@ -9,7 +9,7 @@ export default function useUserHasBook(){
     const isbn10List = books.map( book => book.isbn.isbn10)
     const isbn13List = books.map( book => book.isbn.isbn13)
 
-    function userHasBook(book : GoogleBook) : boolean {
+    function userHasBook(book : ExternalApiBook) : boolean {
     
         const ids = book?.volumeInfo?.industryIdentifiers
     

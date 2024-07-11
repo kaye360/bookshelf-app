@@ -19,10 +19,12 @@ export default function Account() {
 
                     <button
                         onClick={ () => toggleDropDown() }
-                        className="flex gap-[2px] items-center hover:bg-accent hover:text-bg p-3 rounded-md font-semibold tracking-wider"
+                        className="flex gap-[2px] items-center hover:bg-accent hover:text-bg px-6 py-3 rounded-md font-semibold tracking-wider"
                     >
-                        <span className=" rounded-full bg-primary-dark/20 p-2 mr-1">
-                            <UserIcon size={18} />
+                        <span className="grid place-items-center w-9 h-9 rounded-full bg-primary-dark/50 text-white text-xl mr-1 font-medium">
+                            <span className="-translate-y-[1px]">
+                                {user.handle.charAt(0).toLocaleUpperCase()}
+                            </span>
                         </span>
                         {user.handle}
                     </button>

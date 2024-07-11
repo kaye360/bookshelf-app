@@ -12,6 +12,11 @@ interface UpdateBookIsOwnedProps {
 }
 
 
+/**
+ * 
+ * The api query or mutation to be consumed across the app
+ * 
+ */
 export function useUpdateUserBookIsOwned() {
 
     const client = useQueryClient()
@@ -26,6 +31,13 @@ export function useUpdateUserBookIsOwned() {
 }
 
 
+/**
+ * 
+ * The function containing the request and response.
+ * Only to be used in the above hook
+ * @returns a validated response or throws an error
+ * 
+ */
 async function updateIsOwned(props : UpdateBookIsOwnedProps) {
 
     const { token, book, isOwned} = props

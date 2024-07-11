@@ -1,19 +1,26 @@
 import { useState } from "react"
-import { GoogleBookResponse } from "../../../types/types"
+import { ExternalApiBookResponse } from "../../../types/types"
 
 
 export default function usePaginateResults({
     data
 } : {
-    data : GoogleBookResponse | null
+    data? : ExternalApiBookResponse | null
 }) {
 
     const [page, setPage] = useState<number>(1)
     const nextPage = () => setPage( page + 1)
 
-    const booksWithIsbn = data?.items.filter( book => 
-        book?.volumeInfo?.industryIdentifiers?.map( id => id.type === 'ISBN_10' || id.type === 'ISBN_13')
-    )
+    const booksWithIsbn = data?.items.filter( book => {
+        
+        const ids = book?.volumeInfo?.industryIdentifiers
+
+        if( ids?.some( id => id.type === 'ISBN_10' ) || ids?.some( id => id.type === 'ISBN_13' )) {
+            return book
+        }
+    })
+
+    console.log(booksWithIsbn?.map(book => `${book.volumeInfo?.authors?.toString()}`))
 
     const bookList     = booksWithIsbn ? booksWithIsbn.slice(0, page * 7) : []
     const totalBooks   = booksWithIsbn?.length || 0

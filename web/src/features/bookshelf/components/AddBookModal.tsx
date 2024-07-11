@@ -1,7 +1,7 @@
 import Modal from "../../../components/common/Modal";
 import Button from "../../../components/form/Button";
 import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon } from "../../../components/common/Icon";
-import { GoogleBook } from "../../../types/types";
+import { ExternalApiBook } from "../../../types/types";
 import useHandleCreateBook from "../hooks/useHandleCreateBook";
 
 /**
@@ -13,7 +13,7 @@ export default function AddBookModal({
     book, 
     closeModalFn
 } : {
-    book         : GoogleBook
+    book         : ExternalApiBook
     closeModalFn : Function
 }) {
 

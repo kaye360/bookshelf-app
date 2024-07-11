@@ -12,6 +12,11 @@ interface UpdateBookTagsProps {
 }
 
 
+/**
+ * 
+ * The api query or mutation to be consumed across the app
+ * 
+ */
 export function useUpdateUserBookTags() {
 
     const client = useQueryClient()
@@ -26,6 +31,13 @@ export function useUpdateUserBookTags() {
 }
 
 
+/**
+ * 
+ * The function containing the request and response.
+ * Only to be used in the above hook
+ * @returns a validated response or throws an error
+ * 
+ */
 async function updateTags(props : UpdateBookTagsProps) {
 
     const { token, book, tags } = props

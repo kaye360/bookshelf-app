@@ -7,6 +7,11 @@ import { getInitialSettings } from "../services/settingsService"
 import { SettingsSchema } from "../validation/settingsValidation"
 
 
+/**
+ * 
+ * The api query or mutation to be consumed across the app
+ * 
+ */
 export function useSettings() {
 
     const { 
@@ -14,20 +19,24 @@ export function useSettings() {
         settingsActions : { updateSettings } 
     } = useStore()
 
-    const query = useQuery({
-        queryKey : ['getSettings'],
+    return useQuery({
+        queryKey : ['getSettings', token],
         queryFn : async () => {
             const settings = await getSettings(token)
             updateSettings(settings)
-            localStorage.setItem('settings', JSON.stringify(settings))
             return settings
         }
     })
-
-    return query
 }
 
 
+/**
+ * 
+ * The function containing the request and response.
+ * Only to be used in the above hook
+ * @returns a validated response or throws an error
+ * 
+ */
 async function getSettings(token : string|null) : Promise<Settings> {
 
     if( typeof token !== 'string' ) return getInitialSettings()
@@ -40,5 +49,8 @@ async function getSettings(token : string|null) : Promise<Settings> {
 
     const settings  = JSON.parse(response.data) as Settings
     const validated = await SettingsSchema.validate(settings)
+
+    localStorage.setItem('settings', JSON.stringify(validated))
+    
     return validated
 }

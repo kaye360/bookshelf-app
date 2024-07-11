@@ -9,12 +9,17 @@ import { AuthSchema } from "../validation/authValidation";
 interface LoginProps extends LoginPayload {}
 
 
+/**
+ * 
+ * The api query or mutation to be consumed across the app
+ * 
+ */
 export function useLogin() {
 
     const { authActions : { updateAuth } } = useStore()
     const client = useQueryClient()
 
-    const query = useMutation({
+    return useMutation({
         mutationKey : ['login'],
         mutationFn  : async(props : LoginProps) => {
             updateAuth('LOADING')
@@ -24,16 +29,21 @@ export function useLogin() {
         onSuccess : (data) => {
             updateAuth('LOGIN', data.user, data.token)
             client.invalidateQueries({
-                queryKey : ['getUserBooks']
+                queryKey : ['getUserBooks', 'getSettings'],
             })
         },
         onError : () => updateAuth('LOGIN_ERROR')
     })
-
-    return query
 }
 
 
+/**
+ * 
+ * The function containing the request and response.
+ * Only to be used in the above hook
+ * @returns a validated response or throws an error
+ * 
+ */
 async function login(payload : LoginPayload) : Promise<Pick<AuthSuccess, 'token' | 'user'>> {
 
     const response = await Req.post({ 

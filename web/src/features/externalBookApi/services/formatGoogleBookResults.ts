@@ -1,7 +1,7 @@
-import { GoogleBook } from "../../../types/types"
+import { ExternalApiBook } from "../../../types/types"
 
 
-export function formatGoogleBookResult(book: GoogleBook) {
+export function formatGoogleBookResult(book: ExternalApiBook) {
     const thumbnail   = book?.volumeInfo?.imageLinks?.thumbnail || book?.volumeInfo?.imageLinks?.smallThumbnail || null
     const title       = book?.volumeInfo?.title || null
     const subTitle    = book?.volumeInfo?.subtitle || null

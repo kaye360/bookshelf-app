@@ -12,7 +12,7 @@ class UserBookController extends Controller
 
     public function index(string $userId)
     {
-        return UserBook::all()->where('userId', $userId);
+        return UserBook::all()->where('userId', $userId)->values()->all();
     }
 
 

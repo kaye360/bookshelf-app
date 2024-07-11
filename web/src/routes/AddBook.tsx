@@ -3,11 +3,10 @@ import { SyntheticEvent, useState } from 'react'
 import usePaginateResults from '../features/externalBookApi/hooks/usePaginateResults'
 import Button from '../components/form/Button'
 import Result from '../features/bookshelf/components/Result'
-import useGetApiBooks from '../features/externalBookApi/api/getApiBooks'
 import TextInput from '../components/form/TextInput'
 import { LoaderIcon } from '../components/common/Icon'
 import { useQueryClient } from '@tanstack/react-query'
-
+import useExternalApiBooks from '../features/externalBookApi/api/getExternalApiBooks'
 
 
 export default function AddBook() {
@@ -16,9 +15,11 @@ export default function AddBook() {
 
     const [hasSearched, setHasSearched] = useState<boolean>(false)
 
-    const { search, data, isError, isFetching, hasResults } = useGetApiBooks()
+    const query = useExternalApiBooks()
 
-    const { bookList, hasMoreBooks, nextPage } = usePaginateResults({ data })
+    const hasResults = query.isSuccess && !query.isPending && query.data?.totalItems !== 0
+
+    const { bookList, hasMoreBooks, nextPage } = usePaginateResults({ data : query.data })
 
     const searchQueryEl = document.querySelector('#search-query-input') as HTMLInputElement
     const searchQuery = searchQueryEl ? searchQueryEl.value : ''
@@ -26,7 +27,7 @@ export default function AddBook() {
     async function handleSubmit(e: SyntheticEvent) {
         e.preventDefault()
         setHasSearched(true)
-        search()
+        query.mutate()
     }
 
     function handleReset() {
@@ -74,18 +75,18 @@ export default function AddBook() {
                 id="search-status"
                 className='text-xl my-6'
             >
-                { isFetching && (
+                { query.isPending && (
                     <div className='flex items-center gap-2'>
                         <LoaderIcon />
                         Searching
                     </div>
                 )}
-                { isError && (
+                { query.isError && (
                     <>
                         Something went wrong, please try again.
                     </>
                 )}
-                { !hasResults && hasSearched && !isFetching && (
+                { !hasResults && hasSearched && !query.isPending && (
                     <>
                         No results were found. Please try another search
                     </>
@@ -94,7 +95,7 @@ export default function AddBook() {
                     <>
                         Search results for:  
                         <span className='font-bold'>{searchQuery}</span> <br />
-                        ({data?.totalItems} results)
+                        ({query.data?.totalItems} results)
                     </>
                 )}
             </div>

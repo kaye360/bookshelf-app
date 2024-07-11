@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from "react"
 import { useStore } from "../../../store/store"
 import { useCreateUserBook } from "../api/createUserBook"
-import { GoogleBook } from "../../../types/types"
+import { ExternalApiBook } from "../../../types/types"
 
 
 export default function useHandleCreateBook() {
@@ -13,7 +13,7 @@ export default function useHandleCreateBook() {
     const [isBookAdded, setIsBookAdded]   = useState(false)
     const [errorMessage, setErorrMessage] = useState<string|null>(null)
 
-    async function handleCreateBook(book: GoogleBook, e: SyntheticEvent) {
+    async function handleCreateBook(book: ExternalApiBook, e: SyntheticEvent) {
 
         e.preventDefault()
 

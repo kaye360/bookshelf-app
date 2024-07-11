@@ -12,6 +12,11 @@ interface DeleteBookProps {
 }
 
 
+/**
+ * 
+ * The api query or mutation to be consumed across the app
+ * 
+ */
 export function useDeleteUserBook() {
 
     const client = useQueryClient()
@@ -26,6 +31,13 @@ export function useDeleteUserBook() {
 }
 
 
+/**
+ * 
+ * The function containing the request and response.
+ * Only to be used in the above hook
+ * @returns a validated response or throws an error
+ * 
+ */
 async function deleteBook({token, book} : DeleteBookProps) : Promise<ReqResponse> {
 
     if( !isString(token) ) return {
