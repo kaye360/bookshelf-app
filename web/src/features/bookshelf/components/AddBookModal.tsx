@@ -1,7 +1,7 @@
 import Modal from "../../../components/common/Modal";
 import Button from "../../../components/form/Button";
 import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon } from "../../../components/common/Icon";
-import { ExternalApiBook } from "../../../types/types";
+import { CreateUserModelBook } from "../../../types/types";
 import useHandleCreateBook from "../hooks/useHandleCreateBook";
 
 /**
@@ -13,7 +13,7 @@ export default function AddBookModal({
     book, 
     closeModalFn
 } : {
-    book         : ExternalApiBook
+    book         : CreateUserModelBook
     closeModalFn : Function
 }) {
 
@@ -30,17 +30,23 @@ export default function AddBookModal({
         <Modal closeModalFn={closeModalFn} >
 
             <div className="flex items-center gap-3 darklight">
-                <img src={book?.volumeInfo?.imageLinks?.thumbnail} />
+
+                {book?.imageUrl && <img src={book.imageUrl} /> }
+
                 <div className="grid gap-2">
+
                     <h2 className="text-xl font-bold">
-                        {book?.volumeInfo?.title}
+                        {book?.title}
                     </h2>
-                    <span className="font-semibold">
-                        {book?.volumeInfo?.subtitle}
-                    </span>
+
+                    {/* <span className="font-semibold">
+                        {book?.subtitle}
+                    </span> */}
+
                     <span>
-                        {book?.volumeInfo?.authors?.slice(0,5).join(', ')}
+                        {book?.authors}
                     </span>
+
                 </div>
             </div>
 

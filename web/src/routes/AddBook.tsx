@@ -17,7 +17,7 @@ export default function AddBook() {
 
     const query = useExternalApiBooks()
 
-    const hasResults = query.isSuccess && !query.isPending && query.data?.totalItems !== 0
+    const hasResults = query.isSuccess && !query.isPending && query.data.length !== 0
 
     const { bookList, hasMoreBooks, nextPage } = usePaginateResults({ data : query.data })
 
@@ -95,7 +95,7 @@ export default function AddBook() {
                     <>
                         Search results for:  
                         <span className='font-bold'>{searchQuery}</span> <br />
-                        ({query.data?.totalItems} results)
+                        ({query.data.length} results)
                     </>
                 )}
             </div>

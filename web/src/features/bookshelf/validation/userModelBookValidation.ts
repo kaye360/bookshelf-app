@@ -12,8 +12,8 @@ export const CreateUserModelBookSchema : ObjectSchema<CreateUserModelBook> = obj
     group       : string().oneOf(['wishlist', 'owned']).defined(),
     tags        : string().defined(),
     imageUrl    : string().nullable().defined(),
-    isbn10      : string().nullable().defined(),
-    isbn13      : string().nullable().defined(),
+    isbn10      : string().defined(),
+    isbn13      : string().defined(),
 })
 
 

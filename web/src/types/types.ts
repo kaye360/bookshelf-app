@@ -146,11 +146,8 @@ export interface UserSettings {
  * @type [UserBook, CommunityBook] extends Book
  * These are the books used throughout the App
  * 
- * @type ExternalApiBook
- * These are the books returned from the external API, such as Google Books
- * 
  * @type UserModelBook extends CreateUserModelBook
- * These represent the UserBook db model
+ * These represent the UserBook DB model
  * UserModelBook will have extra properties such as Id
  * 
  */
@@ -198,8 +195,8 @@ export interface CreateUserModelBook {
     imageUrl?    : string | null
     isFavourite  : boolean
     isRead       : boolean
-    isbn10       : string | null
-    isbn13       : string | null
+    isbn10       : string
+    isbn13       : string
     rating       : number
     tags         : string
     title        : string
@@ -211,33 +208,31 @@ export interface UserModelBook extends CreateUserModelBook {
     created_at : string
 }
 
-export interface ExternalApiBook {
-    kind? : string
-    id? : string
-    selfLink? : string
-    volumeInfo? : {
-        title? : string
-        subtitle? : string
-        authors? : string[]
-        publisher? : string
-        publishedDate? : string
-        description? : string
-        industryIdentifiers? :  { 
-            type? : "ISBN_13" | "ISBN_10"
-            identifier? : string
-        }[]
-        pageCount? : number
-        categories? : string[]
-        imageLinks? :{
-            smallThumbnail? : string
-            thumbnail? : string
-        }
-    }
-}
-
 export interface ExternalApiBookResponse {
-    items : ExternalApiBook[]
     totalItems : number
+    items? : {
+        kind? : string
+        id? : string
+        selfLink? : string
+        volumeInfo? : {
+            title? : string
+            subtitle? : string
+            authors? : string[]
+            publisher? : string
+            publishedDate? : string
+            description? : string
+            industryIdentifiers? :  { 
+                type? : "ISBN_13" | "ISBN_10"
+                identifier? : string
+            }[]
+            pageCount? : number
+            categories? : string[]
+            imageLinks? :{
+                smallThumbnail? : string
+                thumbnail? : string
+            }
+        }
+    }[]
 }
 
 

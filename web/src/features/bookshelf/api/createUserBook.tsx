@@ -1,12 +1,12 @@
 import { API_URL } from "../../../config";
-import { ExternalApiBook, User, UserModelBook } from "../../../types/types";
+import { CreateUserModelBook, User, UserModelBook } from "../../../types/types";
 import { Req } from "../../../lib/Req/Req";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateUserModelBookSchema, UserModelBookSchema } from "../validation/userModelBookValidation";
 
 
 interface CreateBookProps {
-    book : ExternalApiBook,
+    book : CreateUserModelBook,
     user : User|null,
     isOwned : HTMLInputElement,
     isRead  : HTMLInputElement,
@@ -58,17 +58,17 @@ async function createBook(props : CreateBookProps ) : Promise<UserModelBook> {
      * 
      */
     const transform = CreateUserModelBookSchema.validateSync({
-        title       : props.book.volumeInfo?.title,
-        authors     : props.book.volumeInfo?.authors?.join(' ') || 'N/A',
+        title       : props.book.title,
+        authors     : props.book.authors || 'N/A',
         userId      : user.id,
         rating      : 0,
         isRead      : props.isRead.checked,
         group       : props.isOwned.checked ? 'owned' : 'wishlist',
         isFavourite : false,
         tags        : JSON.stringify([]),
-        imageUrl    : props.book.volumeInfo?.imageLinks?.thumbnail || props.book.volumeInfo?.imageLinks?.smallThumbnail || null,
-        isbn10      : props.book.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_10')[0].identifier || null,
-        isbn13      : props.book.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_13')[0].identifier || null,
+        imageUrl    : props.book.imageUrl,
+        isbn10      : props.book.isbn10,
+        isbn13      : props.book.isbn13,
     })
 
     const response = await Req.post({

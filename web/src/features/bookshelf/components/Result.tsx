@@ -1,9 +1,8 @@
 import { PlusIcon, CheckIcon } from "../../../components/common/Icon"
 import AddBookModal from "./AddBookModal"
-import { formatGoogleBookResult } from "../../externalBookApi/services/formatGoogleBookResults"
 import { useState } from "react"
 import useUserHasBook from "../hooks/useUserHasBook"
-import { ExternalApiBook } from "../../../types/types"
+import { CreateUserModelBook } from "../../../types/types"
 
 
 /**
@@ -14,10 +13,9 @@ import { ExternalApiBook } from "../../../types/types"
 export default function Result({
     book, 
 } : {
-    book: ExternalApiBook, 
+    book: CreateUserModelBook, 
 }) {
 
-    const googleBook  = formatGoogleBookResult(book)
     const userHasBook = useUserHasBook()
 
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -26,7 +24,7 @@ export default function Result({
         <div className='grid grid-cols-[auto_1fr] gap-3 items-start'>
 
             <div className="grid gap-2">
-                { googleBook.thumbnail && <img src={googleBook.thumbnail} /> }
+                { book.imageUrl && <img src={book.imageUrl} /> }
                 { !userHasBook(book) ? (
                     <button 
                         onClick={ () => setIsModalOpen(true) }
@@ -46,26 +44,26 @@ export default function Result({
             <div className='grid gap-4 justify-start'>
 
                 <div className="grid gap-1">
-                    { googleBook.title    && <h2 className="font-bold">{ googleBook.title } </h2> }
-                    { googleBook.subTitle && <span className="text-sm font-semibold">{ googleBook.subTitle }</span> }
-                    { googleBook.authors  && <span className="text-sm">{ googleBook.authors }</span> }
+                    { book.title    && <h2 className="font-bold">{ book.title } </h2> }
+                    {/* { book.subTitle && <span className="text-sm font-semibold">{ book.subTitle }</span> } */}
+                    { book.authors  && <span className="text-sm">{ book.authors }</span> }
                 </div>
 
                 <div className="grid text-primary-dark/80 text-sm">
 
-                    { googleBook.pageCount && <span>Pages: { googleBook.pageCount }</span> }
+                    {/* { book.pageCount && <span>Pages: { book.pageCount }</span> } */}
 
-                    { googleBook.identifiers && googleBook.identifiers.map( id => (
-                        <span className="block" key={id.type}>
-                            {id.type?.replaceAll('_', ' ')}: {id.identifier}
-                        </span>
-                    ))}
+                    <span className="block">
+                        ISBN10 : {book.isbn10}
+                    </span>
 
-                    { googleBook.categories && <span>Category: {googleBook.categories}</span> }
+                    <span className="block">
+                        ISBN13 : {book.isbn13}
+                    </span>
 
                 </div>
 
-                { googleBook.description && <p>{googleBook.description}</p> }
+                {/* { book.description && <p>{book.description}</p> } */}
 
             </div>
 
