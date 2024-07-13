@@ -11,11 +11,11 @@ export default function TagOptions() {
     const { books } = useStore()
     const { searchParams, updateSearchParam } = useBookshelfParams()
 
-    const tags = getTagsFromBookList(books || []).slice(0,8)
+    const tags = getTagsFromBookList(books).slice(0,15)
 
     return (
         <div className={`
-            flex items-center gap-3 overflow-x-auto scrollbar-hide text-primary-dark 
+            flex items-center gap-3 flex-wrap
             ${ searchParams.get('searchQuery') ? 'opacity-40' : ''} 
         `}>
 

@@ -8,45 +8,40 @@ export default function SortOptions() {
     const {searchParams, updateSearchParam } = useBookshelfParams()
 
     return (
-        <div className="grid grid-cols-[55px_1fr] items-start">
+        <div className="flex gap-3 flex-wrap">
 
-            <strong>Sort</strong>
+            <OptionButton
+                onClick={ () => updateSearchParam('sortBy', 'title') }
+                isActive={searchParams.get('sortBy') === 'title'}
+            >
+                <ParagraphIcon />
+                Title
+            </OptionButton>
 
-            <div className="flex gap-3 flex-wrap">
+            <OptionButton
+                onClick={ () => updateSearchParam('sortBy', 'authors') }
+                isActive={searchParams.get('sortBy') === 'authors'}
+            >
+                <UserIcon />
+                Author
+            </OptionButton>
 
-                <OptionButton
-                    onClick={ () => updateSearchParam('sortBy', 'title') }
-                    isActive={searchParams.get('sortBy') === 'title'}
-                >
-                    <ParagraphIcon />
-                    Title
-                </OptionButton>
+            <OptionButton
+                onClick={ () => updateSearchParam('sortBy', 'newest') }
+                isActive={searchParams.get('sortBy') === 'newest'}
+            >
+                <ArrowDownIcon />
+                Newest
+            </OptionButton>
 
-                <OptionButton
-                    onClick={ () => updateSearchParam('sortBy', 'authors') }
-                    isActive={searchParams.get('sortBy') === 'authors'}
-                >
-                    <UserIcon />
-                    Author
-                </OptionButton>
+            <OptionButton
+                onClick={ () => updateSearchParam('sortBy', 'oldest') }
+                isActive={searchParams.get('sortBy') === 'oldest'}
+            >
+                <ArrowUpIcon />
+                Oldest
+            </OptionButton>
 
-                <OptionButton
-                    onClick={ () => updateSearchParam('sortBy', 'newest') }
-                    isActive={searchParams.get('sortBy') === 'newest'}
-                >
-                    <ArrowDownIcon />
-                    Newest
-                </OptionButton>
-
-                <OptionButton
-                    onClick={ () => updateSearchParam('sortBy', 'oldest') }
-                    isActive={searchParams.get('sortBy') === 'oldest'}
-                >
-                    <ArrowUpIcon />
-                    Oldest
-                </OptionButton>
-
-            </div>
         </div>
     )
 }

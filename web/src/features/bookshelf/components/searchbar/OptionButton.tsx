@@ -10,12 +10,12 @@ export default function OptionButton({isActive = false, onClick, children} : Opt
     return (
         <button 
             type="button"
-            className={`text-sm cursor-pointer transition-all hover:text-accent select-none
-                ${isActive ? 'text-accent font-bold' : 'bg-bg  font-semibold '}
+            className={`text-md cursor-pointer transition-all hover:text-accent select-none
+                ${isActive ? 'text-accent font-medium' : ' font-normal '}
             `}
             onClick={onClick}
         >
-            <span className="flex items-center gap-[2px] md:gap-1 translate-y-[1px] min-w-max">
+            <span className="flex items-center gap-2 md:gap-1 translate-y-[1px] min-w-max">
                 {children}
             </span>
         </button>

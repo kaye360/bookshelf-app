@@ -45,7 +45,7 @@ async function searchGoogleBooks(userId : number|undefined) : Promise<CreateUser
 
     const searchQuery = getFormData('#search-external-book-api-form').query
     if(!searchQuery) {
-        throw new Error('Invalid search query')
+        return []
     }
 
     const result = await Req.get( `${GOOGLE_BOOKS_API_URL}?q=${searchQuery}&maxResults=40&orderBy=relevance&printType=books`)
@@ -58,9 +58,17 @@ async function searchGoogleBooks(userId : number|undefined) : Promise<CreateUser
         return []
     }
 
-    const books = result.data as ExternalApiBookResponse
+    const results       = result.data as ExternalApiBookResponse
+    const booksWithIsbn = results.items?.filter( book => {
 
-    const transform = books.items?.map( book => CreateUserModelBookSchema.cast({
+        const ids = book?.volumeInfo?.industryIdentifiers
+
+        if( ids?.some( id => id.type === 'ISBN_10' ) || ids?.some( id => id.type === 'ISBN_13' )) {
+            return book
+        }
+    }) || []
+
+    const transform = booksWithIsbn?.map( book => CreateUserModelBookSchema.cast({
         title       : book.volumeInfo?.title || '',
         authors     : book.volumeInfo?.authors?.join(', ') || 'N/A',
         userId      : userId,

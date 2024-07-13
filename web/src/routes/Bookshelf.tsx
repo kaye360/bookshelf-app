@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useStore } from "../store/store";
 import { BookShelfContext } from "../features/bookshelf/hooks/useBookShelfParamsContext";
 import useSearchBarParams from "../features/bookshelf/hooks/useSearchBarParams";
-import FilterOptions from "../features/bookshelf/components/searchbar/FilterOptions";
 import SearchBar from "../features/bookshelf/components/searchbar/SearchBar";
-import TagOptions from "../features/bookshelf/components/searchbar/TagOptions";
 import useBookShelfView from "../features/bookshelf/hooks/useBookShelfView";
 
 
@@ -33,8 +31,6 @@ export default function BookShelf() {
             <BookShelfContext.Provider value={{searchParams, updateSearchParam}}>
                 <div className="grid gap-3 mt-2 mb-8">
                     <SearchBar />
-                    <FilterOptions />
-                    <TagOptions />
                 </div>
 
                 { booksStatus === 'LOADING' && (

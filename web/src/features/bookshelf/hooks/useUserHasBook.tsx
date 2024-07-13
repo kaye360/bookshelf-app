@@ -2,7 +2,7 @@ import { useStore } from "../../../store/store"
 import { CreateUserModelBook } from "../../../types/types"
 
 
-export default function useUserHasBook(){
+export default function useUserHasBook() {
 
     const { books } = useStore()
 
