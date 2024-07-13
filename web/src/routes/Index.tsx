@@ -12,7 +12,7 @@ export default function Index() {
 
     useEffect( () => {
         if( auth.isAuth ) {
-            setTimeout( () => navigate('/dashboard'), 1000 )
+            navigate('/dashboard')
         }
     },[auth.isAuth])
 
