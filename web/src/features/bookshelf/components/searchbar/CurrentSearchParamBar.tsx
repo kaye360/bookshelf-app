@@ -1,3 +1,4 @@
+import { CloseIcon } from "../../../../components/common/Icon"
 import { UserSettings } from "../../../../types/types"
 import { useBookshelfParams } from "../../hooks/useBookShelfParamsContext"
 import FilterButton from "./FilterButton"
@@ -9,7 +10,7 @@ export default function CurrentSearchParamBar({
     setShowFilters : React.Dispatch<React.SetStateAction<boolean>>
 }) {
 
-    const {searchParams} = useBookshelfParams()
+    const {searchParams, updateSearchParam} = useBookshelfParams()
 
     const hasSearchQuery: boolean = searchParams.get('searchQuery') !== ''
 
@@ -47,13 +48,25 @@ export default function CurrentSearchParamBar({
 
             { hasSearchQuery &&
                 <SearchParamButton>
+
                     Search: {searchParams.get('searchQuery')}
+
+                    <button onClick={ () => updateSearchParam('searchQuery', '')}>
+                        <CloseIcon size={18} />
+                    </button>
+
                 </SearchParamButton>
             }
 
             { filterByParam !== 'all' && (
                 <SearchParamButton hasSearchQuery={hasSearchQuery}>
+
                     Filter: {filterIsTag && '#'}{filterBy}
+
+                    <button onClick={ () => updateSearchParam('filterBy', 'all')}>
+                        <CloseIcon size={18} />
+                    </button>
+
                 </SearchParamButton>
             )}
 
