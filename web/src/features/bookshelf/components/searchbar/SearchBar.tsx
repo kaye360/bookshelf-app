@@ -7,7 +7,7 @@ import EditSearchBarParams from "./EditSearchBarParams"
 
 export default function SearchBar() {
     
-    const [showFilters, setShowFilters] = useState<boolean>(false)
+    const [showFilters, setShowFilters] = useState<boolean>(true)
 
     return (
         <div className="grid gap-0 text-primary-dark mb-0">

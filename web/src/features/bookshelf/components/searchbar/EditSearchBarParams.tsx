@@ -8,7 +8,6 @@ import TagOptions from "./TagOptions"
 import { useNavigate } from "react-router-dom"
 import Button from "../../../../components/form/Button"
 import Divider from "../../../../components/common/Divider"
-import { set } from "react-hook-form"
 
 
 export default function EditSearchBarParams({
@@ -19,7 +18,8 @@ export default function EditSearchBarParams({
     setShowFilters: Dispatch<SetStateAction<boolean>>
 }) {
 
-    const navigate = useNavigate()
+    const navigate   = useNavigate()
+    const shiftRight = useShiftRight(showFilters)
 
     useEffect( () => {
 
@@ -48,8 +48,10 @@ export default function EditSearchBarParams({
             <div className={`
                 absolute top-0 bottom-0 w-full max-w-xs p-6 bg-bg-accent bg-opacity-[0.97] transition-all duration-200 pointer-events-auto
                 grid gap-6 content-start
-                ${showFilters ? 'right-0 opacity-1' : '-right-full opacity-0'}
-            `}>
+                ${showFilters ? 'opacity-1' : 'opacity-0'}
+            `}
+                id="edit-settings-modal"
+                style={{ right : shiftRight() }}>
 
                 <header className="flex justify-between items-center ">
 
@@ -106,4 +108,16 @@ export default function EditSearchBarParams({
         </div>
         , document.body
     )
+}
+
+
+function useShiftRight ( showFilters: boolean ) {
+
+    const innerContent = document.querySelector('#main-inner-content') as HTMLDivElement
+    const modal        = document.querySelector('#edit-settings-modal') as HTMLDivElement
+
+    const modalWidth    = modal ? modal.getBoundingClientRect().width : 0
+    const modalRightPos = innerContent ? (innerContent.getBoundingClientRect().left) : 0
+
+    return () => showFilters ? modalRightPos + 'px' : modalRightPos - modalWidth + 'px'
 }

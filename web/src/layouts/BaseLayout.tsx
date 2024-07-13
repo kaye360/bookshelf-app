@@ -23,7 +23,7 @@ export default function BaseLayout({children} : {children? : ReactNode}) {
             <Header />
             <Nav />
             <main className="relative z-0">
-                <Wrapper>
+                <Wrapper id="main-inner-content">
                     {children}
                 </Wrapper>
             </main>
