@@ -1,13 +1,30 @@
 import { useEffect, useRef } from "react"
 
 
-export const Tooltip = {
-    Text,
-    Wrapper
+export default function ToolTip({
+    title,
+    className='', 
+    children
+} : {
+    title      : string,
+    className? : string, 
+    children   : any
+}) {
+
+    return (
+        <div className={`relative z-50 pointer-events group/tooltip ${className}`}>
+            {children}
+            <Text title={title} />
+        </div>
+    )
 }
 
 
-function Text({title} : {title : string}) {
+function Text({
+    title
+} : {
+    title : string
+}) {
 
     const { innerRef, outerRef } = useTooltipBoundary()
 
@@ -24,16 +41,6 @@ function Text({title} : {title : string}) {
             </span>
 
             <div className="absolute left-1/2 -translate-x-1/2 -z-10 bottom-[-10px] w-[10px] h-[10px] rotate-45 bg-primary-dark/95 rounded-sm" />
-        </div>
-    )
-}
-
-
-function Wrapper({className='', children} : {className?: string, children : any}) {
-
-    return (
-        <div className={`relative z-50 pointer-events group/tooltip ${className}`}>
-            {children}
         </div>
     )
 }
