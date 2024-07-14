@@ -22,7 +22,7 @@ export default function BaseLayout({children} : {children? : ReactNode}) {
         <>
             <Header />
             <Nav />
-            <main className="relative z-0">
+            <main className="relative z-0 overflow-hidden">
                 <Wrapper id="main-inner-content">
                     {children}
                 </Wrapper>

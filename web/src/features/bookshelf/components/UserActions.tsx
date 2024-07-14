@@ -19,7 +19,7 @@ export default function UserActions({book} : {book : UserBook}) {
     const IsReadIcon = isRead ? CheckIcon : UncheckIcon
 
     return (
-        <div className="flex items-top gap-1 mt-auto group/menu">
+        <div className="flex items-top gap-1 mt-auto group/menu relative">
 
                 <Tooltip.Wrapper>
                     <UserActionButton 
