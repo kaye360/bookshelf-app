@@ -26,6 +26,9 @@ export const useStore = create<Store>()((set => ({
 
     settingsActions : {
         updateSettings : (newSettings) => set({ settings : newSettings })
-    }
+    },
+
+    tooltip : null,
+    updateTooltip : (newTooltip) => set({ tooltip : newTooltip })
 
 })))

@@ -19,7 +19,7 @@ export default function BookGridItem({
     const { updateSearchParam } = useBookshelfParams()
 
     return (
-        <div className={` relative z-0 grid gap-1 text-primary-dark animate-scale-in`}>
+        <div className={` grid gap-1 text-primary-dark`}>
 
             { hasImage ? (
                 <img 

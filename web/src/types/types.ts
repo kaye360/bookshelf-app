@@ -41,10 +41,18 @@ export interface Store {
     settingsActions : {
         updateSettings : (newSettings : Settings) => void
     }
+
+    tooltip : Tooltip
+    updateTooltip : (newTooltip : Tooltip) => void
 }
 
 export type AuthActions = 'LOADING' | 'LOGIN' | 'LOGIN_ERROR' | 'REGISTER' | 'REGISTER_ERROR' | 'LOGOUT'
 
+export type Tooltip = {
+    message : string,
+    x : string,
+    y : string
+} | null
 
 /**
  * 

@@ -1,6 +1,5 @@
 import { BookmarkIcon, CheckIcon, FavouritesIcon, MoreIcon, UncheckIcon } from "../../../components/common/Icon";
-import ToolTip from "../../../components/common/ToolTip";
-import ToolTipWrapper from "../../../components/common/ToolTipWrapper";
+import { Tooltip } from "../../../components/common/Tooltip";
 import useToggleState from "../../../hooks/useToggleState";
 import { UserBook } from "../../../types/types";
 import useHandleUpdateBookIsFavourite from "../hooks/useHandleUpdateBookIsFavourite";
@@ -20,35 +19,41 @@ export default function UserActions({book} : {book : UserBook}) {
     const IsReadIcon = isRead ? CheckIcon : UncheckIcon
 
     return (
-        <div className="flex items-top gap-1 mt-auto relative z-50 group/menu">
+        <div className="flex items-top gap-1 mt-auto group/menu">
 
-            <ToolTipWrapper>
-                <UserActionButton onClick={handleUpdateBookIsFavourite}>
-                    <FavouritesIcon size={20} className={isFavourite ? 'fill-accent/50 stroke-accent/50 ' : ''} />
-                    <ToolTip title="Favourite" />
-                </UserActionButton>
-            </ToolTipWrapper>
+                <Tooltip.Wrapper>
+                    <UserActionButton 
+                        onClick={handleUpdateBookIsFavourite}
+                    >
+                        <FavouritesIcon size={20} className={isFavourite ? 'fill-accent/50 stroke-accent/50 ' : ''} />
+                    </UserActionButton>
+                    <Tooltip.Text title="Favourites" />
+                </Tooltip.Wrapper>
 
-            <ToolTipWrapper>
-                <UserActionButton onClick={handleUpdateBookIsRead}>
-                    <IsReadIcon size={20} />
-                    <ToolTip title="Read" />
-                </UserActionButton>
-            </ToolTipWrapper>
+                <Tooltip.Wrapper>
+                    <UserActionButton 
+                        onClick={handleUpdateBookIsRead}
+                    >
+                        <IsReadIcon size={20} />
+                    </UserActionButton>
+                    <Tooltip.Text title="Read/Unread Status" />
+                </Tooltip.Wrapper>
 
-            <ToolTipWrapper>
-                <UserActionButton onClick={ handleUpdateBookIsOwned }>
-                    <BookmarkIcon size={20} className={isOwned ? 'fill-primary-dark/40 stroke-primary-light' : ''} />
-                    <ToolTip title="Owned" />
-                </UserActionButton>
-            </ToolTipWrapper>
+                <Tooltip.Wrapper>
+                    <UserActionButton 
+                        onClick={ handleUpdateBookIsOwned }
+                    >
+                        <BookmarkIcon size={20} className={isOwned ? 'fill-primary-dark/40 stroke-primary-light' : ''} />
+                    </UserActionButton>
+                    <Tooltip.Text title="Owned/Wishlist Status" />
+                </Tooltip.Wrapper>
 
-            <ToolTipWrapper className="ml-auto">
-                <UserActionButton onClick={ toggleIsMoreActionsOpen }>
-                    <MoreIcon size={18} />
-                    <ToolTip title="More" />
-                </UserActionButton>
-            </ToolTipWrapper>
+                <Tooltip.Wrapper className="ml-auto">
+                    <UserActionButton onClick={ toggleIsMoreActionsOpen }>
+                        <MoreIcon size={18} />
+                    </UserActionButton>
+                    <Tooltip.Text title="More Actions" />
+                </Tooltip.Wrapper>
 
             <UserActionsMore 
                 book={book} 
