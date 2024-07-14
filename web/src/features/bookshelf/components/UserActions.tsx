@@ -21,35 +21,29 @@ export default function UserActions({book} : {book : UserBook}) {
     return (
         <div className="flex items-top gap-1 mt-auto group/menu relative">
 
-                <Tooltip title="Favourites">
-                    <UserActionButton 
-                        onClick={handleUpdateBookIsFavourite}
-                    >
-                        <FavouritesIcon size={20} className={isFavourite ? 'fill-accent/50 stroke-accent/50 ' : ''} />
-                    </UserActionButton>
-                </Tooltip>
+            <Tooltip title="Favourites">
+                <UserActionButton onClick={handleUpdateBookIsFavourite}>
+                    <FavouritesIcon size={20} className={isFavourite ? 'fill-accent/50 stroke-accent/50 ' : ''} />
+                </UserActionButton>
+            </Tooltip>
 
-                <Tooltip title="Read/Unread Status">
-                    <UserActionButton 
-                        onClick={handleUpdateBookIsRead}
-                    >
-                        <IsReadIcon size={20} />
-                    </UserActionButton>
-                </Tooltip>
+            <Tooltip title="Read/Unread Status">
+                <UserActionButton onClick={handleUpdateBookIsRead}>
+                    <IsReadIcon size={20} />
+                </UserActionButton>
+            </Tooltip>
 
-                <Tooltip title="Owned/Wishlist Status">
-                    <UserActionButton 
-                        onClick={ handleUpdateBookIsOwned }
-                    >
-                        <BookmarkIcon size={20} className={isOwned ? 'fill-primary-dark/40 stroke-primary-light' : ''} />
-                    </UserActionButton>
-                </Tooltip>
+            <Tooltip title="Owned/Wishlist Status">
+                <UserActionButton onClick={ handleUpdateBookIsOwned }>
+                    <BookmarkIcon size={20} className={isOwned ? 'fill-primary-dark/40 stroke-primary-light' : ''} />
+                </UserActionButton>
+            </Tooltip>
 
-                <Tooltip title="More Actions" className="ml-auto">
-                    <UserActionButton onClick={ toggleIsMoreActionsOpen }>
-                        <MoreIcon size={18} />
-                    </UserActionButton>
-                </Tooltip>
+            <Tooltip title="More Actions" className="ml-auto">
+                <UserActionButton onClick={ toggleIsMoreActionsOpen }>
+                    <MoreIcon size={18} />
+                </UserActionButton>
+            </Tooltip>
 
             <UserActionsMore 
                 book={book} 
