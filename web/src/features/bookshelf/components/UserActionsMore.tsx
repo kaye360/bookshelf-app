@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, useState } from "react";
+import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useEffect, useState } from "react";
 import { EditIcon, BookIcon, TrashIcon } from "../../../components/common/Icon";
 import UserActionsMoreButton from "./UserActionsMoreButton";
 import EditTagsModal from "./EditTagsModal";
@@ -19,6 +19,9 @@ export default function UserActionsMore({book, isOpen, setIsOpen} : UserActionsM
 
     const [ showEditTagsModal, setShowEditTagsModal ] = useState(false)
     const [ showDeleteModal, setShowDeleteModal] = useState(false)
+    const id = 'bookShelfItem' + book.id
+
+    useEventHandler({id, isOpen, setIsOpen})
 
     function handleEditTags() {
         setShowEditTagsModal(true)
@@ -30,8 +33,17 @@ export default function UserActionsMore({book, isOpen, setIsOpen} : UserActionsM
         setIsOpen(false)
     }
 
+
+
     return (
-        <div className={`absolute bottom-[34px] -right-[0px] overflow-hidden py-0 max-h-0 grid gap-0 bg-bg/95 rounded shadow-md transition-all duration-300 ${isOpen ? 'py-2 max-h-[150px]' : ''}`}>
+        <div 
+            id={id}
+            className={`absolute bottom-[34px] left-0 w-full overflow-hidden py-0 max-h-0 grid gap-0 bg-bg/95 rounded shadow-md transition-all duration-300 ${isOpen ? 'py-2 max-h-[150px]' : ''}`}
+        >
+
+            {/* { isOpen && 
+                <EventHandler id={id} setIsOpen={setIsOpen} /> 
+            } */}
 
             <UserActionsMoreButton onClick={ handleEditTags }>
                 Edit Tags
@@ -64,4 +76,36 @@ export default function UserActionsMore({book, isOpen, setIsOpen} : UserActionsM
             
         </div>
     )
+}
+
+
+function useEventHandler({
+    id,
+    isOpen,
+    setIsOpen
+} : {
+    id : string
+    isOpen : boolean
+    setIsOpen : Dispatch<SetStateAction<boolean>>
+}) {
+    useEffect( () => {
+
+        if( !isOpen ) return 
+
+        function handleOutsideClick(e : MouseEvent) {
+
+            if( !(e.target instanceof HTMLElement) ) return
+            
+            const userActionsMoreEl = document.querySelector(`#${id}`)
+            if( !userActionsMoreEl ) return
+
+            const els = document.elementsFromPoint(e.pageX, e.pageY)
+
+            if( !els.some( el => el.id === id ) ) {
+                setIsOpen(false)
+            } 
+        }
+        document.addEventListener('click', handleOutsideClick)
+        return () => document.removeEventListener('click', handleOutsideClick)
+    }, [isOpen])
 }
