@@ -83,7 +83,7 @@ export default function CurrentlyReadingSettings({
 
             <div 
                 id="currently-reading-selector"
-                className={`overflow-hidden transition-all px-1 ${showEditForm ? 'max-h-[400px] pt-1' : 'max-h-[0px]'}`}
+                className={`overflow-hidden max-w-full transition-all px-1 ${showEditForm ? 'max-h-[400px] pt-1' : 'max-h-[0px]'}`}
             >
 
                 <TextInput 
@@ -96,26 +96,33 @@ export default function CurrentlyReadingSettings({
                     }}
                 />
 
-                <div className="w-full max-w-xl h-64 overflow-y-scroll">
-                    {books.map( (book,i) => (
-                        <button 
-                            type="button"
-                            onClick={ () => handleSelectBook(book) }
-                            className={`
-                                flex gap-4 items-center overflow-hidden w-full hover:bg-primary-light/50
-                                ${ bookId === book.id.toString() ? 'bg-primary-light/50' : ''}
-                            `}
-                            key={i}
-                        >
-                            <img src={book.image.url} className="h-16 w-10 object-cover" />
-                            <span className="font-bold min-w-max">
-                                {book.title}
-                            </span>
-                            <span className="min-w-max">
-                                {book.authors}
-                            </span>
-                        </button>
-                    ))}
+                <div className="w-full max-w-sm md:max-w-xl h-64 overflow-y-scroll">
+                    <div className="grid gap-2 overflow-x-hidden">
+                        { books.map( (book,i) => (
+                            <button 
+                                type="button"
+                                onClick={ () => handleSelectBook(book) }
+                                className={`
+                                    flex gap-4 items-center hover:bg-primary-light/50 text-left
+                                    ${ bookId === book.id.toString() ? 'bg-primary-light/50' : ''}
+                                `}
+                                key={i}
+                            >
+
+                                <img src={book.image.url} className="h-20 w-10 object-cover" />
+
+                                <div className="grid max-w-[70vw] overflow-hidden">
+                                    <span className="font-bold min-w-max">
+                                        {book.title}
+                                    </span>
+                                    <span className="min-w-max">
+                                        {book.authors}
+                                    </span>
+                                </div>
+
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 <input type="hidden" name="currentlyReadingId" value={bookId || undefined} />

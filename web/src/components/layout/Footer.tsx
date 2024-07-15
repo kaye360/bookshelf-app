@@ -8,7 +8,7 @@ export default function Footer() {
     }
 
     return (
-        <div className="py-24">
+        <div className="relative -z-10 pt-12 py-36">
             <Wrapper>
                 <div className="w-fit mx-auto">
                     <button onClick={handleClick}>

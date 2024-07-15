@@ -14,8 +14,10 @@ export default function useSettingsFormState() {
         e.preventDefault()
         query.mutate()
         setIsSaved(true)
-        resetTouch()
-        setTimeout( () => setIsSaved(false) , 3000)
+        setTimeout( () => {
+            setIsSaved(false) 
+            resetTouch()
+        }, 3000)
     }
 
     return {

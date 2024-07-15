@@ -24,11 +24,13 @@ export default function BookShelfSettings({
                 Bookshelf Default Settings
             </h2>
 
-            <div className="grid grid-cols-[auto_1fr] gap-4">
+            <div className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3">
 
-                <h3>View</h3>
+                <h3 className="font-semibold">
+                    View
+                </h3>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 flex-wrap">
                     <OptionButton 
                         onClick={ () => handleClick('view', 'grid') }
                         isActive={ view === 'grid' }
@@ -54,9 +56,11 @@ export default function BookShelfSettings({
                     </OptionButton>
                 </div>
 
-                <h3>Filters</h3>
+                <h3 className="font-semibold">
+                    Filters
+                </h3>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 flex-wrap">
 
                     <OptionButton
                             onClick={ () => handleClick('filter', 'all') }
@@ -108,9 +112,11 @@ export default function BookShelfSettings({
 
                 </div>
 
-                <h3>Sort</h3>
+                <h3 className="font-semibold">
+                    Sort
+                </h3>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 flex-wrap">
 
                     <OptionButton
                         onClick={ () => handleClick('sort', 'title') }

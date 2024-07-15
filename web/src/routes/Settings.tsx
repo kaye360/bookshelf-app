@@ -4,7 +4,7 @@ import CurrentlyReadingSettings from "../features/settings/components/CurrentlyR
 import BookShelfSettings from "../features/settings/components/BookShelfSettings";
 import PersonalSettings from "../features/settings/components/PersonalSettings";
 import ThemeSettings from "../features/settings/components/ThemeSettings";
-import { CheckIcon, LoaderIcon } from "../components/common/Icon";
+import { CheckIcon, LoaderIcon, SaveIcon } from "../components/common/Icon";
 import useSettingsFormState from "../features/settings/hooks/useSettingsFormState";
 
 
@@ -16,15 +16,17 @@ export default function Settings() {
         <BaseLayout>
 
             <form 
-                className="grid grid-cols-[1fr_350px] gap-3"
+                className="grid md:grid-cols-[1fr_350px] gap-6 relative"
                 onChange={touchForm}
                 onSubmit={handleSubmit}
                 id="settingsForm"
             >
 
-                <div className="grid gap-12">
+                <h1 className="text-xl font-semibold col-span-2">
+                    Settings
+                </h1>
 
-                    <h1 className="text-xl font-semibold">Settings</h1>
+                <div className="grid gap-12">
 
                     <CurrentlyReadingSettings 
                         touchForm={touchForm}
@@ -45,29 +47,33 @@ export default function Settings() {
 
                 </div>  
 
-                <div className="relative">
-                    <div className="sticky top-0">
+                <div className="fixed bottom-24 z-[9999] left-4 right-4 md:relative md:bottom-auto">
+                    <div className="md:sticky md:top-0">
 
-                        <img src="/illustrations/book_coffee_plant_2.webp" className="" />
+                        <img src="/illustrations/book_coffee_plant_2.webp" className="hidden md:block" />
 
-                        <Button variant="fill" className="w-full" disabled={!isTouched}>
-                            Save Changes
-                        </Button>
-
-                        <span className="flex items-center justify-center gap-2 mt-3 text-xl font-semibold">
-                            { query.isPending && (
-                                <>
-                                    <LoaderIcon />
-                                    Saving
-                                </>
-                            )}
-                            { isSaved && !query.isPending && (
+                        <Button 
+                            variant="fill" 
+                            className="w-full border-y-8 border-bg shadow-none" 
+                            disabled={isTouched === false}
+                        >
+                            { isSaved && !query.isPending ? (
                                 <>
                                     <CheckIcon />
                                     Saved
                                 </>
-                            ) }
-                        </span>
+                            ) : query.isPending ? (
+                                <>
+                                    <LoaderIcon />
+                                    Saving
+                                </>
+                            ) : (
+                                <>
+                                    <SaveIcon />
+                                    Save Changes
+                                </>
+                            )}
+                        </Button>
 
                     </div>
                 </div>
