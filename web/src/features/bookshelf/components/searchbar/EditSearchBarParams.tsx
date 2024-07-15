@@ -49,7 +49,7 @@ export default function EditSearchBarParams({
                 <div className={`
                     absolute top-0 bottom-0 w-full max-w-xs p-6 bg-bg transition-all duration-200 pointer-events-auto
                     grid gap-6 content-start
-                    ${showFilters ? 'right-0 opacity-1' : '-right-1/4 opacity-0'}
+                    ${showFilters ? 'right-0 opacity-1' : '-right-full opacity-0'}
                 `}>
 
                     <header className="flex justify-between items-center ">
