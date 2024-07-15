@@ -41,10 +41,6 @@ export default function UserActionsMore({book, isOpen, setIsOpen} : UserActionsM
             className={`absolute bottom-[34px] left-0 w-full overflow-hidden py-0 max-h-0 grid gap-0 bg-bg/95 rounded shadow-md transition-all duration-300 ${isOpen ? 'py-2 max-h-[150px]' : ''}`}
         >
 
-            {/* { isOpen && 
-                <EventHandler id={id} setIsOpen={setIsOpen} /> 
-            } */}
-
             <UserActionsMoreButton onClick={ handleEditTags }>
                 Edit Tags
                 <EditIcon size={18} />
