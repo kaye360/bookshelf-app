@@ -24,7 +24,7 @@ export default function useRegister() {
         onSuccess : (data) => {
             updateAuth('LOGIN', data.user, data.token)
             client.invalidateQueries({
-                queryKey : ['getUserBooks']
+                queryKey : ['getBooks']
             })
         },
         onError : () => updateAuth('REGISTER_ERROR') 

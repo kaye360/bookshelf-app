@@ -3,7 +3,7 @@ import { EditIcon } from "../../../components/common/Icon";
 import Button from "../../../components/form/Button";
 import { useStore } from "../../../store/store";
 import TextInput from "../../../components/form/TextInput";
-import { UserBook } from "../../../types/types";
+import { Book } from "../../../types/types";
 
 
 
@@ -26,7 +26,7 @@ export default function CurrentlyReadingSettings({
         ? books.filter( book => book.id === Number(bookId))[0]
         : null
     
-    function handleSelectBook(book : UserBook) {
+    function handleSelectBook(book : Book) {
         setBookId( book.id.toString() )
         touchForm()
     }
@@ -56,7 +56,7 @@ export default function CurrentlyReadingSettings({
                     className="flex items-start gap-4 mb-2"
                 >
 
-                    <img src={currentBook.image.url} className="w-24" />
+                    <img src={currentbook.imageUrl} className="w-24" />
         
                     <div className="grid gap-2">
                         
@@ -109,7 +109,7 @@ export default function CurrentlyReadingSettings({
                                 key={i}
                             >
 
-                                <img src={book.image.url} className="h-20 w-10 object-cover" />
+                                <img src={book.imageUrl} className="h-20 w-10 object-cover" />
 
                                 <div className="grid max-w-[70vw] overflow-hidden">
                                     <span className="font-bold min-w-max">

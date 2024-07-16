@@ -1,5 +1,5 @@
 import { HashIcon } from "../../../components/common/Icon"
-import { UserBook } from "../../../types/types"
+import { Book } from "../../../types/types"
 import UserActions from "./UserActions"
 import { useBookshelfParams } from "../hooks/useBookShelfParamsContext"
 
@@ -26,14 +26,14 @@ function Cell({
 }
 
 
-function Row({book} : {book : UserBook}) {
+function Row({book} : {book : Book}) {
 
     const { updateSearchParam } = useBookshelfParams()
 
     return (
         <tr className=" even:bg-bg-accent text-sm">
             <Cell>
-                <img src={book.image.url} />
+                <img src={book.imageUrl} />
             </Cell>
 
             <Cell className="font-semibold">

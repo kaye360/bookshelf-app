@@ -21,7 +21,6 @@ export default function AddBook() {
 
     const { bookList, hasMoreBooks, nextPage } = usePaginateResults({ data : query.data })
 
-    const formEl = document.querySelector('#search-external-book-api-form') as HTMLFormElement
     const searchQueryEl = document.querySelector('#search-query-input') as HTMLInputElement
     const searchQuery = searchQueryEl ? searchQueryEl.value : ''
     
@@ -29,7 +28,7 @@ export default function AddBook() {
         e.preventDefault()
         setHasSearched(true)
         query.mutate()
-        formEl.blur()
+        searchQueryEl.blur()
     }
 
     function handleReset() {

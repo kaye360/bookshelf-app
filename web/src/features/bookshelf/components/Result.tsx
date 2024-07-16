@@ -2,7 +2,7 @@ import { PlusIcon, CheckIcon } from "../../../components/common/Icon"
 import AddBookModal from "./AddBookModal"
 import { useState } from "react"
 import useUserHasBook from "../hooks/useUserHasBook"
-import { CreateUserModelBook } from "../../../types/types"
+import { CreateBook } from "../../../types/types"
 
 
 /**
@@ -13,7 +13,7 @@ import { CreateUserModelBook } from "../../../types/types"
 export default function Result({
     book, 
 } : {
-    book: CreateUserModelBook, 
+    book: CreateBook, 
 }) {
 
     const userHasBook = useUserHasBook()
@@ -53,12 +53,16 @@ export default function Result({
 
                     {/* { book.pageCount && <span>Pages: { book.pageCount }</span> } */}
 
-                    <span className="block">
+                    <span>
                         ISBN10 : {book.isbn10}
                     </span>
 
-                    <span className="block">
+                    <span>
                         ISBN13 : {book.isbn13}
+                    </span>
+
+                    <span>
+                        Categories : {book.tags}
                     </span>
 
                 </div>

@@ -1,14 +1,14 @@
-import { UserBook } from "../../../types/types"
+import { Book } from "../../../types/types"
 import { API_URL } from "../../../config"
 import { isString } from "../../../utils/validation"
 import { Req } from "../../../lib/Req/Req"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 
-interface UpdateBookIsFavouriteProps {
+interface UpdateBookIsOwnedProps {
     token : string | null,
-    book  : UserBook,
-    isFavourite : boolean
+    book  : Book,
+    isOwned : boolean
 }
 
 
@@ -17,15 +17,15 @@ interface UpdateBookIsFavouriteProps {
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useUpdateUserBookIsFavourite() {
+export function useUpdateBookIsOwned() {
 
     const client = useQueryClient()
 
     return useMutation({
-        mutationKey : ['updateBookIsFavourite'],
-        mutationFn  : (props : UpdateBookIsFavouriteProps) => updateIsFavourite({...props}),
+        mutationKey : ['updateBookIsOwned'],
+        mutationFn  : (props : UpdateBookIsOwnedProps) => updateIsOwned({...props}),
         onSuccess   : () => client.invalidateQueries({
-            queryKey : ['getUserBooks']
+            queryKey : ['getBooks']
         })
     })
 }
@@ -38,9 +38,9 @@ export function useUpdateUserBookIsFavourite() {
  * @returns a validated response or throws an error
  * 
  */
-async function updateIsFavourite(props : UpdateBookIsFavouriteProps) {
+async function updateIsOwned(props : UpdateBookIsOwnedProps) {
 
-    const { token, book, isFavourite } = props
+    const { token, book, isOwned} = props
 
     if( !isString(token) ) return {
         error : "Invalid User Token",
@@ -49,8 +49,8 @@ async function updateIsFavourite(props : UpdateBookIsFavouriteProps) {
     }
 
     const response = await Req.put({
-        url     : `${API_URL}/book/${book.id}`,
-        payload : {isFavourite : !isFavourite},
+        url: `${API_URL}/book/${book.id}`,
+        payload : { group : isOwned ? 'wishlist' : 'owned'},
         token
     })
 

@@ -1,14 +1,14 @@
 import { BookmarkIcon, CheckIcon, FavouritesIcon, MoreIcon, UncheckIcon } from "../../../components/common/Icon";
 import Tooltip from "../../../components/common/Tooltip";
 import useToggleState from "../../../hooks/useToggleState";
-import { UserBook } from "../../../types/types";
+import { Book } from "../../../types/types";
 import useHandleUpdateBookIsFavourite from "../hooks/useHandleUpdateBookIsFavourite";
 import useHandleUpdateBookIsOwned from "../hooks/useHandleUpdateBookIsOwned";
 import useHandleUpdateBookIsRead from "../hooks/useHandleUpdateBookIsRead";
 import UserActionButton from "./UserActionButton";
 import UserActionsMore from "./UserActionsMore";
 
-export default function UserActions({book} : {book : UserBook}) {
+export default function UserActions({book} : {book : Book}) {
 
     const { handleUpdateBookIsFavourite, isFavourite } = useHandleUpdateBookIsFavourite({book})
     const { handleUpdateBookIsOwned, isOwned }         = useHandleUpdateBookIsOwned({book})

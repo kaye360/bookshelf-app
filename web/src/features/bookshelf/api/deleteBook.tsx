@@ -1,14 +1,14 @@
-import { UserBook } from "../../../types/types"
 import { API_URL } from "../../../config"
+import { Book } from "../../../types/types"
 import { isString } from "../../../utils/validation"
 import { Req } from "../../../lib/Req/Req"
+import { ReqResponse } from "../../../lib/Req/Req.type"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 
-interface UpdateBookIsOwnedProps {
-    token : string | null,
-    book  : UserBook,
-    isOwned : boolean
+interface DeleteBookProps {
+    book  : Book, 
+    token : string|null
 }
 
 
@@ -17,15 +17,15 @@ interface UpdateBookIsOwnedProps {
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useUpdateUserBookIsOwned() {
+export function useDeleteBook() {
 
     const client = useQueryClient()
 
     return useMutation({
-        mutationKey : ['updateBookIsOwned'],
-        mutationFn  : (props : UpdateBookIsOwnedProps) => updateIsOwned({...props}),
+        mutationKey : ['deleteBook'],
+        mutationFn  : (props : DeleteBookProps) => deleteBook({...props}),
         onSuccess   : () => client.invalidateQueries({
-            queryKey : ['getUserBooks']
+            queryKey : ['getBooks']
         })
     })
 }
@@ -38,9 +38,7 @@ export function useUpdateUserBookIsOwned() {
  * @returns a validated response or throws an error
  * 
  */
-async function updateIsOwned(props : UpdateBookIsOwnedProps) {
-
-    const { token, book, isOwned} = props
+async function deleteBook({token, book} : DeleteBookProps) : Promise<ReqResponse> {
 
     if( !isString(token) ) return {
         error : "Invalid User Token",
@@ -48,11 +46,6 @@ async function updateIsOwned(props : UpdateBookIsOwnedProps) {
         code  : 404
     }
 
-    const response = await Req.put({
-        url: `${API_URL}/book/${book.id}`,
-        payload : { group : isOwned ? 'wishlist' : 'owned'},
-        token
-    })
-
+    const response  = await Req.delete({ url: `${API_URL}/book/${book.id}`, token })
     return response
 }

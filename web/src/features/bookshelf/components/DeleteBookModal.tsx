@@ -1,7 +1,7 @@
 import Modal from "../../../components/common/Modal";
 import { AlertIcon, LoaderIcon } from "../../../components/common/Icon";
 import Button from "../../../components/form/Button";
-import { UserBook } from "../../../types/types";
+import { Book } from "../../../types/types";
 import useHandleDeleteBook from "../hooks/useHandleDeleteBook";
 
 
@@ -9,13 +9,13 @@ export default function DeleteBookModal({
     book, 
     closeModalFn
 } : {
-    book : UserBook
+    book : Book
     closeModalFn : Function
 }) {
 
     const { query, handleDeleteBook, hasClicked } = useHandleDeleteBook({book})
 
-    const hasImage = book.image.url.includes('google')
+    const hasImage = book.imageUrl.includes('google')
 
     return (
         <Modal closeModalFn={closeModalFn}>
@@ -37,7 +37,7 @@ export default function DeleteBookModal({
                     </div>
 
                     { hasImage && (
-                        <img src={book.image.url} className="hidden md:block w-20 rounded" />
+                        <img src={book.imageUrl} className="hidden md:block w-20 rounded" />
                     )}
 
                 </div>

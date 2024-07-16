@@ -1,18 +1,18 @@
 import useToggleState from "../../../hooks/useToggleState";
 import { useStore } from "../../../store/store";
-import { UserBook } from "../../../types/types";
-import { useUpdateUserBookIsOwned } from "../api/updateUserBookIsOwned";
+import { Book } from "../../../types/types";
+import { useUpdateBookIsOwned } from "../api/updateBookIsOwned";
 
 
 export default function useHandleUpdateBookIsOwned( {
     book
 } : {
-    book : UserBook
+    book : Book
 }) {
 
     const { auth : { token } } = useStore()
 
-    const query = useUpdateUserBookIsOwned()
+    const query = useUpdateBookIsOwned()
 
     const [isOwned, _, toggleIsOwned] = useToggleState(book.group === 'owned')
 

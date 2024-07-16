@@ -3,8 +3,8 @@ import { API_URL } from "../../../config"
 import { isNumber } from "../../../utils/validation"
 import { useQuery } from "@tanstack/react-query"
 import { Req } from "../../../lib/Req/Req"
-import { UserBook, UserModelBook } from "../../../types/types"
-import { UserBookSchema } from "../validation/userBookValidation"
+import { Book, UserModelBook } from "../../../types/types"
+import { BookSchema } from "../validation/bookValidation"
 
 
 /**
@@ -12,7 +12,7 @@ import { UserBookSchema } from "../validation/userBookValidation"
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useUserBooks() {
+export function useBooks() {
 
     const { 
         booksActions : { updateBookStatus, updateBooks }, 
@@ -20,9 +20,9 @@ export function useUserBooks() {
     } = useStore()
 
     return useQuery({
-        queryKey : ['getUserBooks'],
+        queryKey : ['getBooks'],
         queryFn  : async () => {
-            const books = await getUserBooks(user?.id)
+            const books = await getBooks(user?.id)
             updateBooks(books)
             updateBookStatus('SUCCESS')
             return books
@@ -38,7 +38,7 @@ export function useUserBooks() {
  * @returns a validated response or throws an error
  * 
  */
-async function getUserBooks(userId : number | undefined) : Promise<UserBook[]> {
+async function getBooks(userId : number | undefined) : Promise<Book[]> {
 
     if( !isNumber(userId) ) {
         throw new Error('Error getting books from API')
@@ -51,7 +51,7 @@ async function getUserBooks(userId : number | undefined) : Promise<UserBook[]> {
 
     const books = response.data as unknown as UserModelBook[]
 
-    const transform = books.map( book => UserBookSchema.cast({
+    const transform = books.map( book => BookSchema.cast({
         id          : book.id,
         title       : book.title,
         authors     : book.authors,
@@ -62,13 +62,9 @@ async function getUserBooks(userId : number | undefined) : Promise<UserBook[]> {
         group       : book.group,
         created_at  : book.created_at,
         tags        : JSON.parse( book.tags ) || [],
-        image       : {
-            url : book.imageUrl || ''
-        },
-        isbn        : {
-            isbn10 : book.isbn10 || '',
-            isbn13 : book.isbn13 || ''
-        },
+        imageUrl    : book.imageUrl || '',
+        isbn10      : book.isbn10 || '',
+        isbn13      : book.isbn13 || ''
     }))
 
     return transform

@@ -1,18 +1,18 @@
 import useToggleState from "../../../hooks/useToggleState";
-import { UserBook } from "../../../types/types";
+import { Book } from "../../../types/types";
 import { useStore } from "../../../store/store";
-import { useUpdateUserBookIsRead } from "../api/updateUserBookIsRead";
+import { useUpdateBookIsRead } from "../api/updateBookIsRead";
 
 
 export default function useHandleUpdateBookIsRead({
     book
 } : {
-    book : UserBook
+    book : Book
 }) {
 
     const { auth : { token } } = useStore()
 
-    const query = useUpdateUserBookIsRead()
+    const query = useUpdateBookIsRead()
 
     const [isRead, _, toggleIsRead] = useToggleState(book.isRead)
 

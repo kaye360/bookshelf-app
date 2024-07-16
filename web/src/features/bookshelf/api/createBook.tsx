@@ -1,12 +1,13 @@
 import { API_URL } from "../../../config";
-import { CreateUserModelBook, User, UserModelBook } from "../../../types/types";
+import { Book,  CreateBook,  User } from "../../../types/types";
 import { Req } from "../../../lib/Req/Req";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { CreateUserModelBookSchema, UserModelBookSchema } from "../validation/userModelBookValidation";
+import { CreateBookSchema } from "../validation/createBookValidation";
+import { BookSchema } from "../validation/bookValidation";
 
 
 interface CreateBookProps {
-    book : CreateUserModelBook,
+    book : CreateBook,
     user : User|null,
     isOwned : HTMLInputElement,
     isRead  : HTMLInputElement,
@@ -19,7 +20,7 @@ interface CreateBookProps {
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useCreateUserBook() {
+export function useCreateBook() {
 
     const client = useQueryClient()
 
@@ -28,7 +29,7 @@ export function useCreateUserBook() {
         mutationFn  : (props : CreateBookProps) => createBook({...props}),
         onSuccess   : () => {
             client.invalidateQueries({
-                queryKey : ['getUserBooks']
+                queryKey : ['getBooks']
             })
         },
         onError : (error) => console.log({error})
@@ -43,21 +44,23 @@ export function useCreateUserBook() {
  * @returns a validated response or throws an error
  * 
  */
-async function createBook(props : CreateBookProps ) : Promise<UserModelBook> {
+async function createBook(props : CreateBookProps ) : Promise<Book> {
 
     const { user, token } = props
     if( !user || !token ) {
         throw new Error('Invalid user or token')
     }
 
+    console.log(props.book)
+
     /**
      * 
      * This pre-request validation is needed to transfrom the data from 
-     * the external book api format to the local UserBook DB API
+     * the external book api format to the local Book DB API
      * compatible format.
      * 
      */
-    const transform = CreateUserModelBookSchema.validateSync({
+    const transform = CreateBookSchema.validateSync({
         title       : props.book.title,
         authors     : props.book.authors || 'N/A',
         userId      : user.id,
@@ -65,7 +68,7 @@ async function createBook(props : CreateBookProps ) : Promise<UserModelBook> {
         isRead      : props.isRead.checked,
         group       : props.isOwned.checked ? 'owned' : 'wishlist',
         isFavourite : false,
-        tags        : JSON.stringify([]),
+        tags        : props.book.tags,
         imageUrl    : props.book.imageUrl,
         isbn10      : props.book.isbn10,
         isbn13      : props.book.isbn13,
@@ -77,7 +80,10 @@ async function createBook(props : CreateBookProps ) : Promise<UserModelBook> {
         token
     })
 
-    const validated = UserModelBookSchema.validateSync(response.data)
+    response.data.tags = JSON.parse( response.data.tags )
+    console.log(response)
+
+    const validated = BookSchema.validateSync(response.data)
 
     return validated
 }

@@ -1,18 +1,18 @@
 import { useStore } from "../../../store/store"
-import { UserBook } from "../../../types/types"
-import { useUpdateUserBookIsFavourite } from "../api/updateUserBookIsFavourite"
+import { Book } from "../../../types/types"
+import { useUpdateBookIsFavourite } from "../api/updateBookIsFavourite"
 import useToggleState from "../../../hooks/useToggleState"
 
 
 export default function useHandleUpdateBookIsFavourite({
     book
 } : {
-    book : UserBook
+    book : Book
 }) {
     
     const { auth : { token } } = useStore()
     
-    const query = useUpdateUserBookIsFavourite()
+    const query = useUpdateBookIsFavourite()
 
     const [isFavourite, _, toggleIsFavourite] = useToggleState(book.isFavourite)
 

@@ -1,7 +1,7 @@
 import { RouterProvider } from "react-router-dom"
 import { router } from "./lib/Router/routes"
 import { useSettings } from "./features/settings/api/getSettings"
-import { useUserBooks } from "./features/bookshelf/api/getUserBooks"
+import { useBooks } from "./features/bookshelf/api/getBooks"
 
 
 /**
@@ -16,7 +16,7 @@ import { useUserBooks } from "./features/bookshelf/api/getUserBooks"
 
 export default function App() {
 
-	useUserBooks()
+	useBooks()
 	useSettings()
 
 	return (

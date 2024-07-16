@@ -30,10 +30,10 @@ export interface Store {
         ) => void
     }
     
-    books        : UserBook[],
+    books        : Book[],
     booksStatus   : 'LOADING' | 'ERROR' | 'SUCCESS'
     booksActions : {
-        updateBooks      : (newBooks : UserBook[]) => void
+        updateBooks      : (newBooks : Book[]) => void
         updateBookStatus : (newStatus : Store['booksStatus']) => void
     }
 
@@ -151,30 +151,23 @@ export interface UserSettings {
  * 
  * Book
  * 
- * @type [UserBook, CommunityBook] extends Book
+ * @type [Book, CommunityBook] extends Book
  * These are the books used throughout the App
  * 
- * @type UserModelBook extends CreateUserModelBook
- * These represent the UserBook DB model
+ * @type UserModelBook extends CreateBook
+ * These represent the Book DB model
  * UserModelBook will have extra properties such as Id
  * 
  */
 
 
-interface Book {
+export interface Book {
     id          : number
     title       : string
     authors     : string
-    isbn : {
-        isbn10  : string
-        isbn13  : string
-    }
-    image : {
-        url     : string
-    }
-}
-
-export interface UserBook extends Book {
+    isbn10      : string
+    isbn13      : string
+    imageUrl    : string
     userId      : string
     rating      : number
     group       : 'wishlist' | 'owned'
@@ -183,6 +176,14 @@ export interface UserBook extends Book {
     isFavourite : boolean
     created_at  : string
 }
+
+export interface CreateBook extends Partial<Omit<Book, 'id' | 'created_at' | 'tags' | 'imageUrl' | 'isbn10' | 'isbn13'>> {
+    isbn10 : string | null
+    isbn13 : string | null
+    tags   : string
+    imageUrl : string | null
+}
+
 
 export interface CommunityBook extends Book {
     description : string
@@ -197,24 +198,6 @@ export interface BookReview {
     review : string
 }
 
-export interface CreateUserModelBook {
-    authors      : string
-    group        : 'wishlist' | 'owned'
-    imageUrl?    : string | null
-    isFavourite  : boolean
-    isRead       : boolean
-    isbn10       : string
-    isbn13       : string
-    rating       : number
-    tags         : string
-    title        : string
-    userId       : string
-}
-
-export interface UserModelBook extends CreateUserModelBook {
-    id         : string
-    created_at : string
-}
 
 export interface ExternalApiBookResponse {
     totalItems : number

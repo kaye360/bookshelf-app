@@ -1,9 +1,9 @@
 import { SyntheticEvent, useState } from "react"
 import { useStore } from "../../../store/store"
-import { UserBook } from "../../../types/types"
+import { Book } from "../../../types/types"
 import { isString } from "../../../utils/validation"
 import { extractTagsFromInput } from "../services/tagServices"
-import { useUpdateUserBookTags } from "../api/updateUserBookTags"
+import { useUpdateBookTags } from "../api/updateBookTags"
 
 
 export default function useHandleUpdateBookTags() {
@@ -11,9 +11,9 @@ export default function useHandleUpdateBookTags() {
     const { auth : {token} } = useStore()
     const [hasClicked, setHasClicked] = useState<boolean>(false)
 
-    const query = useUpdateUserBookTags()
+    const query = useUpdateBookTags()
 
-    async function handleUpdateBookTags(book : UserBook, e: SyntheticEvent) {
+    async function handleUpdateBookTags(book : Book, e: SyntheticEvent) {
         e.preventDefault()
 
         if( !isString(token) ) return

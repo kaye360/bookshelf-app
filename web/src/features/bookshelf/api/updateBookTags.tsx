@@ -1,5 +1,5 @@
 import { API_URL } from "../../../config"
-import { UserBook } from "../../../types/types"
+import { Book } from "../../../types/types"
 import { isString } from "../../../utils/validation"
 import { Req } from "../../../lib/Req/Req"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 interface UpdateBookTagsProps {
     token : string|null,
-    book  : UserBook,
+    book  : Book,
     tags  : string[]
 }
 
@@ -17,7 +17,7 @@ interface UpdateBookTagsProps {
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useUpdateUserBookTags() {
+export function useUpdateBookTags() {
 
     const client = useQueryClient()
 
@@ -25,7 +25,7 @@ export function useUpdateUserBookTags() {
         mutationKey : ['updateBookTags'],
         mutationFn  : ({token, book, tags} : UpdateBookTagsProps) => updateTags({token, book, tags}),
         onSuccess   : () => client.invalidateQueries({
-            queryKey : ['getUserBooks']
+            queryKey : ['getBooks']
         })
     })
 }

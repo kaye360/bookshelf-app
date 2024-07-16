@@ -2,9 +2,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { GOOGLE_BOOKS_API_URL } from "../../../config"
 import { Req } from "../../../lib/Req/Req"
 import { getFormData } from "../../../utils/getFormData"
-import { CreateUserModelBook, ExternalApiBookResponse } from "../../../types/types"
-import { CreateUserModelBookSchema } from "../../bookshelf/validation/userModelBookValidation"
+import { CreateBook, ExternalApiBookResponse } from "../../../types/types"
 import { useStore } from "../../../store/store"
+import { CreateBookSchema } from "../../bookshelf/validation/createBookValidation"
 
 
 /**
@@ -22,7 +22,7 @@ export default function useExternalApiBooks() {
         mutationFn  : () => searchGoogleBooks(user?.id),
         onSuccess   : () => {
             client.invalidateQueries({
-                queryKey : ['getUserBooks']
+                queryKey : ['getBooks']
             })
         },
         onError : (e) => console.log({e})
@@ -37,7 +37,7 @@ export default function useExternalApiBooks() {
  * @returns a validated response or throws an error
  * 
  */
-async function searchGoogleBooks(userId : number|undefined) : Promise<CreateUserModelBook[]> {
+async function searchGoogleBooks(userId : number|undefined) : Promise<CreateBook[]> {
 
     if( !userId) {
         throw new Error('Invalid user id')
@@ -59,6 +59,7 @@ async function searchGoogleBooks(userId : number|undefined) : Promise<CreateUser
     }
 
     const results       = result.data as ExternalApiBookResponse
+    console.log(results)
     const booksWithIsbn = results.items?.filter( book => {
 
         const ids = book?.volumeInfo?.industryIdentifiers
@@ -68,7 +69,7 @@ async function searchGoogleBooks(userId : number|undefined) : Promise<CreateUser
         }
     }) || []
 
-    const transform = booksWithIsbn?.map( book => CreateUserModelBookSchema.cast({
+    const transform = booksWithIsbn?.map( book => CreateBookSchema.cast({
         title       : book.volumeInfo?.title || '',
         authors     : book.volumeInfo?.authors?.join(', ') || 'N/A',
         userId      : userId,
@@ -76,11 +77,16 @@ async function searchGoogleBooks(userId : number|undefined) : Promise<CreateUser
         isRead      : false,
         isFavourite : false,
         group       : 'wishlist',
-        tags        : '',
         imageUrl    : book.volumeInfo?.imageLinks?.thumbnail || book.volumeInfo?.imageLinks?.thumbnail || null,
         isbn10      : book.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_10')[0]?.identifier || null,
         isbn13      : book.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_13')[0]?.identifier || null,
+        tags        : JSON.stringify( 
+                        book.volumeInfo?.categories?.map( 
+                            cat => cat = cat.replaceAll(' ', '').toLowerCase() 
+                        ) || [] 
+                    ),
     })) || []
 
     return transform
 }
+

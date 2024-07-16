@@ -29,7 +29,7 @@ export function useLogin() {
         onSuccess : (data) => {
             updateAuth('LOGIN', data.user, data.token)
             client.invalidateQueries({
-                queryKey : ['getUserBooks', 'getSettings'],
+                queryKey : ['getBooks', 'getSettings'],
             })
         },
         onError : () => updateAuth('LOGIN_ERROR')

@@ -1,14 +1,14 @@
+import { Book } from "../../../types/types"
 import { API_URL } from "../../../config"
-import { UserBook } from "../../../types/types"
 import { isString } from "../../../utils/validation"
 import { Req } from "../../../lib/Req/Req"
-import { ReqResponse } from "../../../lib/Req/Req.type"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useQueryClient, useMutation } from "@tanstack/react-query"
 
 
-interface DeleteBookProps {
-    book  : UserBook, 
-    token : string|null
+interface UpdateIsReadProps {
+    token : string | null,
+    book  : Book,
+    isRead : boolean
 }
 
 
@@ -17,17 +17,18 @@ interface DeleteBookProps {
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useDeleteUserBook() {
+export function useUpdateBookIsRead() {
 
     const client = useQueryClient()
 
     return useMutation({
-        mutationKey : ['deleteBook'],
-        mutationFn  : (props : DeleteBookProps) => deleteBook({...props}),
+        mutationKey : ['updateBookIsRead'],
+        mutationFn  : (props : UpdateIsReadProps) => updateIsRead({...props}),
         onSuccess   : () => client.invalidateQueries({
-            queryKey : ['getUserBooks']
+            queryKey : ['getBooks']
         })
     })
+
 }
 
 
@@ -38,7 +39,9 @@ export function useDeleteUserBook() {
  * @returns a validated response or throws an error
  * 
  */
-async function deleteBook({token, book} : DeleteBookProps) : Promise<ReqResponse> {
+async function updateIsRead(props : UpdateIsReadProps) {
+
+    const { token, book, isRead }  = props
 
     if( !isString(token) ) return {
         error : "Invalid User Token",
@@ -46,6 +49,11 @@ async function deleteBook({token, book} : DeleteBookProps) : Promise<ReqResponse
         code  : 404
     }
 
-    const response  = await Req.delete({ url: `${API_URL}/book/${book.id}`, token })
+    const response = await Req.put({
+        url     : `${API_URL}/book/${book.id}`,
+        payload : {isRead : !isRead},
+        token
+    })
+
     return response
 }

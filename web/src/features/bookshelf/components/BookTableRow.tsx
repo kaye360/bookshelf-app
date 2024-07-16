@@ -1,17 +1,17 @@
 import UserActions from "./UserActions";
 import { HashIcon } from "../../../components/common/Icon";
 import { BookTableComponent } from "./BookTableComponents";
-import { UserBook } from "../../../types/types";
+import { Book } from "../../../types/types";
 import { useBookshelfParams } from "../hooks/useBookShelfParamsContext";
 
-export default function BookTableRow({book} : {book : UserBook}) {
+export default function BookTableRow({book} : {book : Book}) {
 
     const { updateSearchParam } = useBookshelfParams()
 
     return (
         <tr className=" even:bg-bg-accent text-sm">
             <BookTableComponent.Cell>
-                <img src={book.image.url} />
+                <img src={book.imageUrl} />
             </BookTableComponent.Cell>
 
             <BookTableComponent.Cell className="font-semibold">

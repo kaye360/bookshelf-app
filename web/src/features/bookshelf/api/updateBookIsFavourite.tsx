@@ -1,14 +1,14 @@
-import { UserBook } from "../../../types/types"
+import { Book } from "../../../types/types"
 import { API_URL } from "../../../config"
 import { isString } from "../../../utils/validation"
 import { Req } from "../../../lib/Req/Req"
-import { useQueryClient, useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 
-interface UpdateIsReadProps {
+interface UpdateBookIsFavouriteProps {
     token : string | null,
-    book  : UserBook,
-    isRead : boolean
+    book  : Book,
+    isFavourite : boolean
 }
 
 
@@ -17,18 +17,17 @@ interface UpdateIsReadProps {
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useUpdateUserBookIsRead() {
+export function useUpdateBookIsFavourite() {
 
     const client = useQueryClient()
 
     return useMutation({
-        mutationKey : ['updateBookIsRead'],
-        mutationFn  : (props : UpdateIsReadProps) => updateIsRead({...props}),
+        mutationKey : ['updateBookIsFavourite'],
+        mutationFn  : (props : UpdateBookIsFavouriteProps) => updateIsFavourite({...props}),
         onSuccess   : () => client.invalidateQueries({
-            queryKey : ['getUserBooks']
+            queryKey : ['getBooks']
         })
     })
-
 }
 
 
@@ -39,9 +38,9 @@ export function useUpdateUserBookIsRead() {
  * @returns a validated response or throws an error
  * 
  */
-async function updateIsRead(props : UpdateIsReadProps) {
+async function updateIsFavourite(props : UpdateBookIsFavouriteProps) {
 
-    const { token, book, isRead }  = props
+    const { token, book, isFavourite } = props
 
     if( !isString(token) ) return {
         error : "Invalid User Token",
@@ -51,7 +50,7 @@ async function updateIsRead(props : UpdateIsReadProps) {
 
     const response = await Req.put({
         url     : `${API_URL}/book/${book.id}`,
-        payload : {isRead : !isRead},
+        payload : {isFavourite : !isFavourite},
         token
     })
 

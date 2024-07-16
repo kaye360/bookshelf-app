@@ -1,11 +1,11 @@
 import UserActions from "./UserActions";
 import { ComponentPropsWithoutRef } from "react";
-import { UserBook } from "../../../types/types";
+import { Book } from "../../../types/types";
 import { useBookshelfParams } from "../hooks/useBookShelfParamsContext";
 
 
 interface BookGridItemProps extends ComponentPropsWithoutRef<'div'> {
-    book : UserBook
+    book : Book
     hideUserActions? : boolean
 }
 
@@ -15,7 +15,7 @@ export default function BookGridItem({
     hideUserActions = false
 } : BookGridItemProps ) {
 
-    const hasImage = book.image.url.includes('google')
+    const hasImage = book.imageUrl.includes('google')
     const { updateSearchParam } = useBookshelfParams()
 
     return (
@@ -23,7 +23,7 @@ export default function BookGridItem({
 
             { hasImage ? (
                 <img 
-                    src={book.image.url} 
+                    src={book.imageUrl} 
                     className="w-full aspect-[2/3] object-cover rounded-md relative -z-10"
                 />
             ) : (

@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { CreateUserModelBook } from "../../../types/types"
+import { CreateBook } from "../../../types/types"
 
 
 export default function usePaginateResults({
     data
 } : {
-    data? : CreateUserModelBook[] | null
+    data? : CreateBook[] | null
 }) {
 
     const [page, setPage] = useState<number>(1)

@@ -1,7 +1,7 @@
 import Modal from "../../../components/common/Modal";
 import { AlertIcon, LoaderIcon } from "../../../components/common/Icon";
 import Button from "../../../components/form/Button";
-import { UserBook } from "../../../types/types";
+import { Book } from "../../../types/types";
 import useHandleUpdateBookTags from "../hooks/useHandleUpdateBookTags";
 
 
@@ -10,13 +10,13 @@ export default function EditTagsModal({
     book, 
     closeModalFn
 } : {
-    book         : UserBook
+    book         : Book
     closeModalFn : Function
 }) {
 
     const { query, handleUpdateBookTags, hasClicked } = useHandleUpdateBookTags()
 
-    const hasImage = book.image.url.includes('google')
+    const hasImage = book.imageUrl.includes('google')
 
     return (
         <Modal closeModalFn={closeModalFn} >
@@ -40,7 +40,7 @@ export default function EditTagsModal({
                 </div>
 
                 { hasImage && (
-                    <img src={book.image.url} className="hidden md:block w-20 rounded" />
+                    <img src={book.imageUrl} className="hidden md:block w-20 rounded" />
                 )}
 
             </div>

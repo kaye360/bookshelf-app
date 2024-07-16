@@ -1,12 +1,12 @@
 import UserActions from "./UserActions";
-import { UserBook } from "../../../types/types";
+import { Book } from "../../../types/types";
 import { useBookshelfParams } from "../hooks/useBookShelfParamsContext";
 
 
 export default function BookCard({
     book
 } : {
-    book: UserBook
+    book: Book
 }) {
 
     const { updateSearchParam } = useBookshelfParams()
@@ -15,7 +15,7 @@ export default function BookCard({
         <div className="grid grid-cols-[1fr_2fr] gap-3 text-sm">
             
             <div className="bg-slate-300 aspect-[1/1.6]">
-                <img src={book.image.url} className="w-full h-full object-cover" />
+                <img src={book.imageUrl} className="w-full h-full object-cover" />
             </div>
 
             <div className="flex flex-col gap-1">

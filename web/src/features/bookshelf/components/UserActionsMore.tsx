@@ -4,11 +4,11 @@ import UserActionsMoreButton from "./UserActionsMoreButton";
 import EditTagsModal from "./EditTagsModal";
 import { useNavigate } from "react-router-dom";
 import DeleteBookModal from "./DeleteBookModal";
-import { UserBook } from "../../../types/types";
+import { Book } from "../../../types/types";
 
 
 interface UserActionsMoreProps extends ComponentPropsWithoutRef<'div'> {
-    book : UserBook
+    book : Book
     isOpen : boolean
     setIsOpen : React.Dispatch<React.SetStateAction<boolean>>
 }

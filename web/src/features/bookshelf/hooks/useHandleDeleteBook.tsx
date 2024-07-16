@@ -1,18 +1,18 @@
 import { SyntheticEvent, useState } from "react"
 import { useStore } from "../../../store/store"
-import { UserBook } from "../../../types/types"
-import { useDeleteUserBook } from "../api/deleteUserBook"
+import { Book } from "../../../types/types"
+import { useDeleteBook } from "../api/deleteBook"
 
 
 export default function useHandleDeleteBook({
     book
 } : {
-    book : UserBook
+    book : Book
 }) {
     
     const { auth : {token} } = useStore()
     const [hasClicked, setHasClicked] = useState<boolean>(false)
-    const query = useDeleteUserBook()
+    const query = useDeleteBook()
 
     async function handleDeleteBook(e: SyntheticEvent) {
         e.preventDefault()

@@ -1,19 +1,19 @@
 import { SyntheticEvent, useState } from "react"
 import { useStore } from "../../../store/store"
-import { useCreateUserBook } from "../api/createUserBook"
-import { CreateUserModelBook } from "../../../types/types"
+import { CreateBook } from "../../../types/types"
+import { useCreateBook } from "../api/createBook"
 
 
 export default function useHandleCreateBook() {
 
     const { auth : { user, token } } = useStore()
 
-    const query = useCreateUserBook()
+    const query = useCreateBook()
 
     const [isBookAdded, setIsBookAdded]   = useState(false)
     const [errorMessage, setErorrMessage] = useState<string|null>(null)
 
-    async function handleCreateBook(book: CreateUserModelBook, e: SyntheticEvent) {
+    async function handleCreateBook(book: CreateBook, e: SyntheticEvent) {
 
         e.preventDefault()
 
