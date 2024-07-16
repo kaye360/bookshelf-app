@@ -1,4 +1,4 @@
-import useLogout from "../../features/auth/api/useLogout";
+import useLogout from "../../app/auth/api/useLogout";
 import Modal from "../common/Modal";
 import Button from "../form/Button";
 import { useNavigate } from "react-router-dom";

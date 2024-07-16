@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import Error404 from "../../routes/error/Error404";
-import Dashboard from "../../routes/Dashboard";
-import Index from "../../routes/Index";
-import AuthRoute from "../../features/auth/components/AuthRoute";
-import Book from "../../routes/Book";
-import BookShelf from "../../routes/Bookshelf";
-import Settings from "../../routes/Settings";
-import Community from "../../routes/Community";
-import AddBook from "../../routes/AddBook";
-import Profile from "../../routes/Profile";
+import Error404 from "../../app/error/Error404";
+import Dashboard from "../../app/dashboard/Dashboard";
+import Index from "../../app/Index";
+import AuthRoute from "../../app/auth/components/AuthRoute";
+import Book from "../../app/book/Book";
+import BookShelf from "../../app/bookshelf/Bookshelf";
+import Settings from "../../app/settings/Settings";
+import Community from "../../app/community/Community";
+import AddBook from "../../app/bookshelf/_add/AddBook";
+import Profile from "../../app/user/Profile";
 
 export const router = createBrowserRouter([
 	{

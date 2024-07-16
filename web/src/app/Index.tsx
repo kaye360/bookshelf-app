@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import BaseLayout from "../layouts/BaseLayout";
 import { useEffect } from "react";
-import AccountForm from "../features/auth/components/AccountForm";
+import AccountForm from "./auth/components/AccountForm";
 import { useStore } from "../store/store";
 
 

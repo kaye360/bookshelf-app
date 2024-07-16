@@ -1,12 +1,12 @@
-import BaseLayout from '../layouts/BaseLayout'
+import BaseLayout from '../../../layouts/BaseLayout'
 import { SyntheticEvent, useState } from 'react'
-import usePaginateResults from '../features/externalBookApi/hooks/usePaginateResults'
-import Button from '../components/form/Button'
-import Result from '../features/bookshelf/components/Result'
-import TextInput from '../components/form/TextInput'
-import { LoaderIcon } from '../components/common/Icon'
+import usePaginateResults from '../../externalBookApi/hooks/usePaginateResults'
+import Button from '../../../components/form/Button'
+import Result from './components/Result'
+import TextInput from '../../../components/form/TextInput'
+import { LoaderIcon } from '../../../components/common/Icon'
 import { useQueryClient } from '@tanstack/react-query'
-import useExternalApiBooks from '../features/externalBookApi/api/getExternalApiBooks'
+import useExternalApiBooks from '../../externalBookApi/api/getExternalApiBooks'
 
 
 export default function AddBook() {

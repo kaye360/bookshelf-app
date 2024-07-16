@@ -1,8 +1,8 @@
-import { PlusIcon, CheckIcon } from "../../../components/common/Icon"
+import { PlusIcon, CheckIcon } from "../../../../components/common/Icon"
 import AddBookModal from "./AddBookModal"
 import { useState } from "react"
-import useUserHasBook from "../hooks/useUserHasBook"
-import { CreateBook } from "../../../types/types"
+import useUserHasBook from "../../hooks/useUserHasBook"
+import { CreateBook } from "../../../../types/types"
 
 
 /**
@@ -62,7 +62,7 @@ export default function Result({
                     </span>
 
                     <span>
-                        Categories : {book.tags}
+                        Categories : {JSON.parse(book.tags)}
                     </span>
 
                 </div>

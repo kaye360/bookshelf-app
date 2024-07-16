@@ -1,14 +1,14 @@
-import BookGridItem from "../features/bookshelf/components/BookGridItem";
-import BaseLayout from "../layouts/BaseLayout";
-import { useStore } from "../store/store";
+import BookGridItem from "../bookshelf/components/BookGridItem";
+import BaseLayout from "../../layouts/BaseLayout";
+import { useStore } from "../../store/store";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../components/form/Button";
-import { BookIcon } from "../components/common/Icon";
-import Heading from "../features/dashboard/components/Heading";
-import Section from "../features/dashboard/components/Section";
-import Slider from "../features/dashboard/components/Slider";
-import Loader from "../features/dashboard/components/Loader";
-import { getTagsFromBookList } from "../features/tags/services/getTagsFromBookList";
+import Button from "../../components/form/Button";
+import { BookIcon } from "../../components/common/Icon";
+import Heading from "./components/Heading";
+import Section from "./components/Section";
+import Slider from "./components/Slider";
+import Loader from "./components/Loader";
+import { getTagsFromBookList } from "../tags/services/getTagsFromBookList";
 
 
 export default function Dashboard() {
@@ -65,7 +65,7 @@ export default function Dashboard() {
                 { currentlyReading ? (
                     <div className="grid grid-cols-[150px_1fr] gap-2">
                         
-                        <img src={currentlyReading.image.url} className="w-full" />
+                        <img src={currentlyReading.imageUrl} className="w-full" />
 
                         <div>
                             <h3 className="text-xl font-semibold">
@@ -99,7 +99,7 @@ export default function Dashboard() {
                         .sort( (a,b) => a.created_at < b.created_at ? 1 : -1 )
                         .slice(0,8)
                         .map( book => (
-                            <BookGridItem book={book} />
+                            <BookGridItem book={book} key={book.id} />
                     ))}
                 </Slider>
             </Section>
@@ -117,7 +117,7 @@ export default function Dashboard() {
                         .sort( () => Math.random() - 0.5 )
                         .slice(0,8)
                         .map( book => (
-                            <BookGridItem book={book} />
+                            <BookGridItem book={book} key={book.id} />
                     ))}
                 </Slider>
             </Section>
@@ -135,6 +135,7 @@ export default function Dashboard() {
                             <Link 
                                 to={`/bookshelf/tag/${tag.tag}`}
                                 className="p-3 md:p-8 hover:bg-primary-light/30 rounded-lg border border-primary-light/60 hover:border-primary-light text-center"
+                                key={tag.tag}
                             >
                                 <span className="text-lg md:text-xl">
                                     #{tag.tag} <br />

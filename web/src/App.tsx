@@ -1,7 +1,7 @@
 import { RouterProvider } from "react-router-dom"
 import { router } from "./lib/Router/routes"
-import { useSettings } from "./features/settings/api/getSettings"
-import { useBooks } from "./features/bookshelf/api/getBooks"
+import { useSettings } from "./app/settings/api/getSettings"
+import { useBooks } from "./app/bookshelf/api/getBooks"
 
 
 /**

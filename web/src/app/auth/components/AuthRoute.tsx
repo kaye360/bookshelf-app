@@ -1,4 +1,4 @@
-import Error401 from "../../../routes/error/Error401"
+import Error401 from "../../error/Error401"
 import { useStore } from "../../../store/store"
 
 

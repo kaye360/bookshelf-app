@@ -1,4 +1,4 @@
-import AccountForm from "../../features/auth/components/AccountForm";
+import AccountForm from "../auth/components/AccountForm";
 import BaseLayout from "../../layouts/BaseLayout";
 
 export default function Error401() {

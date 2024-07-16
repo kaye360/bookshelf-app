@@ -51,8 +51,6 @@ async function createBook(props : CreateBookProps ) : Promise<Book> {
         throw new Error('Invalid user or token')
     }
 
-    console.log(props.book)
-
     /**
      * 
      * This pre-request validation is needed to transfrom the data from 
@@ -81,7 +79,6 @@ async function createBook(props : CreateBookProps ) : Promise<Book> {
     })
 
     response.data.tags = JSON.parse( response.data.tags )
-    console.log(response)
 
     const validated = BookSchema.validateSync(response.data)
 

@@ -1,11 +1,11 @@
-import Button from "../components/form/Button";
-import BaseLayout from "../layouts/BaseLayout";
-import CurrentlyReadingSettings from "../features/settings/components/CurrentlyReadingSettings";
-import BookShelfSettings from "../features/settings/components/BookShelfSettings";
-import PersonalSettings from "../features/settings/components/PersonalSettings";
-import ThemeSettings from "../features/settings/components/ThemeSettings";
-import { CheckIcon, LoaderIcon, SaveIcon } from "../components/common/Icon";
-import useSettingsFormState from "../features/settings/hooks/useSettingsFormState";
+import Button from "../../components/form/Button";
+import BaseLayout from "../../layouts/BaseLayout";
+import CurrentlyReadingSettings from "./components/CurrentlyReadingSettings";
+import BookShelfSettings from "./components/BookShelfSettings";
+import PersonalSettings from "./components/PersonalSettings";
+import ThemeSettings from "./components/ThemeSettings";
+import { CheckIcon, LoaderIcon, SaveIcon } from "../../components/common/Icon";
+import useSettingsFormState from "./hooks/useSettingsFormState";
 
 
 export default function Settings() {
