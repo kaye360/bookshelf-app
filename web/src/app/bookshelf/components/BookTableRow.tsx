@@ -11,7 +11,9 @@ export default function BookTableRow({book} : {book : Book}) {
     return (
         <tr className=" even:bg-bg-accent text-sm">
             <BookTableComponent.Cell>
-                <img src={book.imageUrl} />
+                { book.imageUrl && (
+                    <img src={book.imageUrl} />
+                )}
             </BookTableComponent.Cell>
 
             <BookTableComponent.Cell className="font-semibold">

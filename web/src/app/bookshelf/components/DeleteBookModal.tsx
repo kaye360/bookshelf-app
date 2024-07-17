@@ -15,8 +15,6 @@ export default function DeleteBookModal({
 
     const { query, handleDeleteBook, hasClicked } = useHandleDeleteBook({book})
 
-    const hasImage = book.imageUrl.includes('google')
-
     return (
         <Modal closeModalFn={closeModalFn}>
                 
@@ -36,7 +34,7 @@ export default function DeleteBookModal({
                         </h2>
                     </div>
 
-                    { hasImage && (
+                    { book.imageUrl && (
                         <img src={book.imageUrl} className="hidden md:block w-20 rounded" />
                     )}
 

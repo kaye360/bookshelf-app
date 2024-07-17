@@ -11,14 +11,11 @@ export default function Index() {
     const { auth } = useStore()
 
     useEffect( () => {
-        if( auth.isAuth ) {
-            navigate('/dashboard')
-        }
+        if( auth.isAuth ) navigate('/dashboard')
     },[auth.isAuth])
 
     const location    = useLocation()
-    const pathName    = location.pathname.replaceAll('/', '')
-    const defaultForm = pathName === 'register' ? 'register' : 'login'
+    const defaultForm = location.pathname.includes('register') ? 'register' : 'login'
 
     return (
         <BaseLayout>

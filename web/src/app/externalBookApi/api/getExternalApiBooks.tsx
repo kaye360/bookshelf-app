@@ -59,7 +59,6 @@ async function searchGoogleBooks(userId : number|undefined) : Promise<CreateBook
     }
 
     const results       = result.data as ExternalApiBookResponse
-    console.log(results)
     const booksWithIsbn = results.items?.filter( book => {
 
         const ids = book?.volumeInfo?.industryIdentifiers
@@ -70,23 +69,33 @@ async function searchGoogleBooks(userId : number|undefined) : Promise<CreateBook
     }) || []
 
     const transform = booksWithIsbn?.map( book => CreateBookSchema.cast({
-        title       : book.volumeInfo?.title || '',
-        authors     : book.volumeInfo?.authors?.join(', ') || 'N/A',
-        userId      : userId,
-        rating      : 0,
-        isRead      : false,
-        isFavourite : false,
-        group       : 'wishlist',
-        imageUrl    : book.volumeInfo?.imageLinks?.thumbnail || book.volumeInfo?.imageLinks?.thumbnail || null,
-        isbn10      : book.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_10')[0]?.identifier || null,
-        isbn13      : book.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_13')[0]?.identifier || null,
-        tags        : JSON.stringify( 
-                        book.volumeInfo?.categories?.map( 
-                            cat => cat = cat.replaceAll(' ', '').toLowerCase() 
-                        ) || [] 
-                    ),
+        title         : book.volumeInfo?.title || '',
+        authors       : book.volumeInfo?.authors?.join(', ') || 'N/A',
+        userId        : userId,
+        rating        : 0,
+        isRead        : false,
+        isFavourite   : false,
+        group         : 'wishlist',
+        imageUrl      : book.volumeInfo?.imageLinks?.thumbnail || book.volumeInfo?.imageLinks?.thumbnail || null,
+        isbn10        : book.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_10')[0]?.identifier || null,
+        isbn13        : book.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_13')[0]?.identifier || null,
+        description   : book.volumeInfo?.description || null,
+        pageCount     : book.volumeInfo?.pageCount || null,
+        subTitle      : book.volumeInfo?.subtitle || null,
+        publishedDate : book.volumeInfo?.publishedDate || null,
+        tags          : formatTags( book.volumeInfo?.categories )
     })) || []
 
     return transform
 }
 
+
+function formatTags( categories : string[] | undefined) {
+    if( !categories || !Array.isArray(categories) ) return JSON.stringify([])
+
+    const tags = categories.map( 
+        cat => cat.replaceAll(' ', '').toLowerCase().split('&') 
+    ).flat()
+
+    return JSON.stringify(tags)
+}

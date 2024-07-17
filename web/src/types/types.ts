@@ -118,7 +118,6 @@ export interface RegisterPayload {
 
 export interface User {
     id          : number
-    name        : string
     handle      : string  
     email       : string 
 }
@@ -154,36 +153,32 @@ export interface UserSettings {
  * @type [Book, CommunityBook] extends Book
  * These are the books used throughout the App
  * 
- * @type UserModelBook extends CreateBook
- * These represent the Book DB model
- * UserModelBook will have extra properties such as Id
- * 
  */
 
 
 export interface Book {
-    id          : number
-    title       : string
-    authors     : string
-    isbn10      : string
-    isbn13      : string
-    imageUrl    : string
-    userId      : string
-    rating      : number
-    group       : 'wishlist' | 'owned'
-    isRead      : boolean
-    tags        : string[]
-    isFavourite : boolean
-    created_at  : string
+    id            : number
+    title         : string
+    authors       : string
+    isbn10        : string
+    isbn13        : string
+    imageUrl      : string | null
+    userId        : string
+    rating        : number
+    group         : 'wishlist' | 'owned'
+    isRead        : boolean
+    tags          : string[]
+    isFavourite   : boolean
+    description   : string | null
+    pageCount     : number | null
+    subTitle      : string | null
+    publishedDate : string | null
+    created_at    : string
 }
 
-export interface CreateBook extends Partial<Omit<Book, 'id' | 'created_at' | 'tags' | 'imageUrl' | 'isbn10' | 'isbn13'>> {
-    isbn10 : string | null
-    isbn13 : string | null
-    tags   : string
-    imageUrl : string | null
+export interface CreateBook extends Omit<Book, 'id' | 'created_at' | 'tags'>  {
+    tags : string
 }
-
 
 export interface CommunityBook extends Book {
     description : string

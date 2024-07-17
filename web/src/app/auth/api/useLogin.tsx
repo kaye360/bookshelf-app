@@ -32,7 +32,10 @@ export function useLogin() {
                 queryKey : ['getBooks', 'getSettings'],
             })
         },
-        onError : () => updateAuth('LOGIN_ERROR')
+        onError : (e) => {
+            updateAuth('LOGIN_ERROR')
+            console.log({e})
+        }
     })
 }
 

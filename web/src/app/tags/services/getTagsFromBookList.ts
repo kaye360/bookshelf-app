@@ -1,4 +1,4 @@
-import { UserBook } from "../../../types/types"
+import { Book } from "../../../types/types"
 
 
 interface SortedTagsWithCounts {
@@ -6,7 +6,7 @@ interface SortedTagsWithCounts {
     count : number
 }
 
-export function getTagsFromBookList(books : UserBook[]) : SortedTagsWithCounts[]  {
+export function getTagsFromBookList(books : Book[]) : SortedTagsWithCounts[]  {
 
     const tags = books.map( book => book.tags ).flat()
 

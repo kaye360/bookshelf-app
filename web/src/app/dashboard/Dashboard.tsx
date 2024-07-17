@@ -14,7 +14,6 @@ import { getTagsFromBookList } from "../tags/services/getTagsFromBookList";
 export default function Dashboard() {
 
     const { 
-        auth : { user },
         books,
         settings
     } = useStore()
@@ -29,11 +28,11 @@ export default function Dashboard() {
         <BaseLayout>
 
 
-            <Section className="grid md:grid-cols-2 gap-6 md:gap-24 items-center md:mt-6 mb-8 md:mb-16 mx-auto w-fit">
+            <Section className="grid md:grid-cols-2 gap-6 md:gap-24 items-center md:mt-12 mb-8 md:mb-28 mx-auto w-fit">
 
                 <div>
-                    <p className="text-xl mb-5 italic self-center">
-                        Welcome back <strong>{user?.name} </strong>
+                    <p className="text-xl mb-3 italic text-center">
+                        Welcome back <strong>{settings?.name} </strong>
                     </p>
 
                     <Button 
@@ -65,7 +64,9 @@ export default function Dashboard() {
                 { currentlyReading ? (
                     <div className="grid grid-cols-[150px_1fr] gap-2">
                         
-                        <img src={currentlyReading.imageUrl} className="w-full" />
+                        { currentlyReading.imageUrl && (
+                            <img src={currentlyReading.imageUrl} className="w-full" />
+                        )}
 
                         <div>
                             <h3 className="text-xl font-semibold">
@@ -133,7 +134,7 @@ export default function Dashboard() {
                         .slice(0,20)
                         .map( tag => (
                             <Link 
-                                to={`/bookshelf/tag/${tag.tag}`}
+                                to={`/bookshelf?filterBy=${tag.tag}`}
                                 className="p-3 md:p-8 hover:bg-primary-light/30 rounded-lg border border-primary-light/60 hover:border-primary-light text-center"
                                 key={tag.tag}
                             >

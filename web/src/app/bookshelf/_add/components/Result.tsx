@@ -19,6 +19,12 @@ export default function Result({
     const userHasBook = useUserHasBook()
 
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [expandDescription, setExpandDescription] = useState(false)
+
+    const tagsArray = JSON.parse( book.tags )
+    const tags = Array.isArray( tagsArray ) 
+        ? tagsArray.map( (tag : string) => tag.split('&') ).flat()
+        : []
 
     return (
         <div className='grid grid-cols-[auto_1fr] gap-3 items-start'>
@@ -45,13 +51,13 @@ export default function Result({
 
                 <div className="grid gap-1">
                     { book.title    && <h2 className="font-bold">{ book.title } </h2> }
-                    {/* { book.subTitle && <span className="text-sm font-semibold">{ book.subTitle }</span> } */}
+                    { book.subTitle && <span className="text-sm font-semibold">{ book.subTitle }</span> }
                     { book.authors  && <span className="text-sm">{ book.authors }</span> }
                 </div>
 
                 <div className="grid text-primary-dark/80 text-sm">
 
-                    {/* { book.pageCount && <span>Pages: { book.pageCount }</span> } */}
+                    { book.pageCount && <span>Pages: { book.pageCount }</span> }
 
                     <span>
                         ISBN10 : {book.isbn10}
@@ -62,12 +68,35 @@ export default function Result({
                     </span>
 
                     <span>
-                        Categories : {JSON.parse(book.tags)}
+                        Categories : {tags.map( tag => tag + ' ')}
                     </span>
 
                 </div>
 
-                {/* { book.description && <p>{book.description}</p> } */}
+                { book.description && (
+                    <p>
+                        { expandDescription ? (
+                            <>
+                                {book.description}
+                            </>
+                        ) : (
+                            <>
+                                {book.description.slice(0,200)}
+                                {book.description.length > 200 && (
+                                    <>
+                                        ...
+                                        <button 
+                                            onClick={ () => setExpandDescription(true) }
+                                            className="mx-4 border-b border-accent"
+                                        >
+                                            Read More
+                                        </button>
+                                    </>
+                                )}
+                            </>
+                        )}
+                    </p> 
+                )}
 
             </div>
 

@@ -10,25 +10,25 @@ import useExternalApiBooks from '../../externalBookApi/api/getExternalApiBooks'
 
 
 export default function AddBook() {
-
+    
     const client = useQueryClient()
-
+    
     const [hasSearched, setHasSearched] = useState<boolean>(false)
-
+    
     const query = useExternalApiBooks()
-
+    
     const hasResults = query.isSuccess && !query.isPending && query.data.length !== 0
-
+    
     const { bookList, hasMoreBooks, nextPage } = usePaginateResults({ data : query.data })
-
+    
     const searchQueryEl = document.querySelector('#search-query-input') as HTMLInputElement
     const searchQuery = searchQueryEl ? searchQueryEl.value : ''
-    
+
     async function handleSubmit(e: SyntheticEvent) {
         e.preventDefault()
         setHasSearched(true)
         query.mutate()
-        searchQueryEl.blur()
+        searchQueryEl && searchQueryEl.blur()
     }
 
     function handleReset() {

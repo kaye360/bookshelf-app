@@ -22,19 +22,23 @@ class UpdateBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id'       => ['prohibited'],
-            'userId'   => ['prohibited'],
-            'isbn10'   => ['prohibited'],
-            'isbn13'   => ['prohibited'],
-            'userId'   => ['prohibited'],
-            'title'    => ['string'],
-            'imageUrl' => ['string', 'nullable'],
-            'rating'   => ['numeric'],
-            'group'    => ['string'],
-            'isRead'   => ['boolean'],
-            'tags'     => ['json'],
-            'authors'  => ['string'],
-            'isFavourite' => ['boolean'],
+            'id'            => ['prohibited'],
+            'userId'        => ['prohibited'],
+            'isbn10'        => ['prohibited'],
+            'isbn13'        => ['prohibited'],
+            'userId'        => ['prohibited'],
+            'title'         => ['string'],
+            'imageUrl'      => ['string', 'nullable'],
+            'rating'        => ['numeric'],
+            'group'         => ['string'],
+            'isRead'        => ['boolean'],
+            'tags'          => ['json'],
+            'authors'       => ['string'],
+            'isFavourite'   => ['boolean'],
+            'description'   => ['string', 'nullable'],
+            'pageCount'     => ['numeric', 'nullable'],
+            'publishedDate' => ['string', 'nullable'],
+            'subTitle'      => ['string', 'nullable']
         ];
     }
 }

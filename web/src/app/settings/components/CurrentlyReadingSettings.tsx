@@ -56,7 +56,9 @@ export default function CurrentlyReadingSettings({
                     className="flex items-start gap-4 mb-2"
                 >
 
-                    <img src={currentbook.imageUrl} className="w-24" />
+                    { currentBook.imageUrl && (
+                        <img src={currentBook.imageUrl} className="w-24" />
+                    )}
         
                     <div className="grid gap-2">
                         
@@ -109,7 +111,9 @@ export default function CurrentlyReadingSettings({
                                 key={i}
                             >
 
-                                <img src={book.imageUrl} className="h-20 w-10 object-cover" />
+                                { book.imageUrl && (
+                                    <img src={book.imageUrl} className="h-20 w-10 object-cover" />
+                                )}
 
                                 <div className="grid max-w-[70vw] overflow-hidden">
                                     <span className="font-bold min-w-max">

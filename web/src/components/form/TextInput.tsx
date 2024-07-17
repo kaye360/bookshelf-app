@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef } from "react"
 import { UseFormRegister } from "react-hook-form"
 
 
-interface TextInputProps extends ComponentPropsWithoutRef<"input"> {
+export interface TextInputProps extends ComponentPropsWithoutRef<"input"> {
     label?      : string
     register?   : UseFormRegister<any>
     name        : string

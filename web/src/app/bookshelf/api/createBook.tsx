@@ -58,18 +58,25 @@ async function createBook(props : CreateBookProps ) : Promise<Book> {
      * compatible format.
      * 
      */
+
+    const { title, authors, rating, tags, imageUrl, isbn10, isbn13, description, pageCount, subTitle, publishedDate, isFavourite } =  props.book
+
     const transform = CreateBookSchema.validateSync({
-        title       : props.book.title,
-        authors     : props.book.authors || 'N/A',
-        userId      : user.id,
-        rating      : 0,
-        isRead      : props.isRead.checked,
-        group       : props.isOwned.checked ? 'owned' : 'wishlist',
-        isFavourite : false,
-        tags        : props.book.tags,
-        imageUrl    : props.book.imageUrl,
-        isbn10      : props.book.isbn10,
-        isbn13      : props.book.isbn13,
+        userId        : user.id,
+        isRead        : props.isRead.checked,
+        group         : props.isOwned.checked ? 'owned'   : 'wishlist',
+        title,
+        authors,
+        rating,
+        isFavourite,
+        tags,
+        imageUrl,
+        isbn10,
+        isbn13,
+        description,
+        pageCount,
+        subTitle,
+        publishedDate
     })
 
     const response = await Req.post({

@@ -16,8 +16,6 @@ export default function EditTagsModal({
 
     const { query, handleUpdateBookTags, hasClicked } = useHandleUpdateBookTags()
 
-    const hasImage = book.imageUrl.includes('google')
-
     return (
         <Modal closeModalFn={closeModalFn} >
 
@@ -39,7 +37,7 @@ export default function EditTagsModal({
 
                 </div>
 
-                { hasImage && (
+                { book.imageUrl && (
                     <img src={book.imageUrl} className="hidden md:block w-20 rounded" />
                 )}
 

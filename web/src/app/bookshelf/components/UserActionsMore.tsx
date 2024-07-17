@@ -46,7 +46,7 @@ export default function UserActionsMore({book, isOpen, setIsOpen} : UserActionsM
                 <EditIcon size={18} />
             </UserActionsMoreButton>
 
-            <UserActionsMoreButton onClick={ () => navigate(`/book/${book.isbn.isbn13}`)}>
+            <UserActionsMoreButton onClick={ () => navigate(`/book/${book.isbn13}`)}>
                 Book Info
                 <BookIcon size={18} />
             </UserActionsMoreButton>

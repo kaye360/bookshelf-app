@@ -3,7 +3,7 @@ import { API_URL } from "../../../config"
 import { isNumber } from "../../../utils/validation"
 import { useQuery } from "@tanstack/react-query"
 import { Req } from "../../../lib/Req/Req"
-import { Book, UserModelBook } from "../../../types/types"
+import { Book } from "../../../types/types"
 import { BookSchema } from "../validation/bookValidation"
 
 
@@ -49,22 +49,26 @@ async function getBooks(userId : number | undefined) : Promise<Book[]> {
         throw new Error('Error getting books from API')
     }
 
-    const books = response.data as unknown as UserModelBook[]
+    const books = response.data as any[]
 
-    const transform = books.map( book => BookSchema.cast({
-        id          : book.id,
-        title       : book.title,
-        authors     : book.authors,
-        userId      : book.userId,
-        rating      : book.rating,
-        isRead      : book.isRead,
-        isFavourite : book.isFavourite,
-        group       : book.group,
-        created_at  : book.created_at,
-        tags        : JSON.parse( book.tags ) || [],
-        imageUrl    : book.imageUrl || '',
-        isbn10      : book.isbn10 || '',
-        isbn13      : book.isbn13 || ''
+    const transform = books.map( (book : any) => BookSchema.cast({
+        id            : book.id,
+        title         : book.title,
+        authors       : book.authors,
+        userId        : book.userId,
+        rating        : book.rating,
+        isRead        : book.isRead,
+        isFavourite   : book.isFavourite,
+        group         : book.group,
+        created_at    : book.created_at,
+        tags          : JSON.parse( book.tags ) || [],
+        imageUrl      : book.imageUrl,
+        isbn10        : book.isbn10 || '',
+        isbn13        : book.isbn13 || '',
+        publishedDate : book.publishedDate,
+        description   : book.description,
+        pageCount     : book.pageCount,
+        subTitle      : book.subTitle
     }))
 
     return transform

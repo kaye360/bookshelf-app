@@ -15,7 +15,9 @@ export default function BookCard({
         <div className="grid grid-cols-[1fr_2fr] gap-3 text-sm">
             
             <div className="bg-slate-300 aspect-[1/1.6]">
-                <img src={book.imageUrl} className="w-full h-full object-cover" />
+                { book.imageUrl && (
+                    <img src={book.imageUrl} className="w-full h-full object-cover" />
+                )}
             </div>
 
             <div className="flex flex-col gap-1">
@@ -31,10 +33,7 @@ s               </span>
                     {book.tags.map( tag => (
                         <button
                             key={tag}
-                            onClick={() => { 
-                                updateSearchParam('filterBy', tag)
-                                console.log('poopoopeepee')
-                            }}
+                            onClick={ () => updateSearchParam('filterBy', tag) }
                         >
                             #{tag}
                         </button>

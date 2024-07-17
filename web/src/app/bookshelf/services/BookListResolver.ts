@@ -1,4 +1,4 @@
-import { UserBook } from "../../../types/types";
+import { Book } from "../../../types/types"
 
 /**
  * @class BookListResolver
@@ -13,14 +13,14 @@ import { UserBook } from "../../../types/types";
  */
 export class BookListResolver {
 
-    books        : UserBook[]
+    books        : Book[]
     searchParams : URLSearchParams
 
     public constructor({
         books,
         searchParams
     } : {
-        books        : UserBook[],
+        books        : Book[],
         searchParams : URLSearchParams
     }) {
         this.books     = books

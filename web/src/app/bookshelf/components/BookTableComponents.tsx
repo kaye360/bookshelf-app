@@ -33,7 +33,9 @@ function Row({book} : {book : Book}) {
     return (
         <tr className=" even:bg-bg-accent text-sm">
             <Cell>
-                <img src={book.imageUrl} />
+                { book.imageUrl && (
+                    <img src={book.imageUrl} />
+                )}
             </Cell>
 
             <Cell className="font-semibold">
