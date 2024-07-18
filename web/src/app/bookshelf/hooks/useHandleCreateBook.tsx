@@ -2,6 +2,7 @@ import { SyntheticEvent, useState } from "react"
 import { useStore } from "../../../store/store"
 import { CreateBook } from "../../../types/types"
 import { useCreateBook } from "../api/createBook"
+import { useCreateCommunityPost } from "../../community/api/createCommunityPost"
 
 
 export default function useHandleCreateBook() {
@@ -9,6 +10,8 @@ export default function useHandleCreateBook() {
     const { auth : { user, token } } = useStore()
 
     const query = useCreateBook()
+
+    const communityQuery = useCreateCommunityPost()
 
     const [isBookAdded, setIsBookAdded]   = useState(false)
     const [errorMessage, setErorrMessage] = useState<string|null>(null)
@@ -23,6 +26,17 @@ export default function useHandleCreateBook() {
         const isRead  = document.getElementById('isRead') as HTMLInputElement
         
         query.mutate({user, book, isOwned, isRead, token})
+
+        communityQuery.mutate({
+            userId     : user.id,
+            userHandle : user.handle,
+            type       : 'CREATE_BOOK',
+            imageUrl   : book.imageUrl,
+            title      : book.title || '',
+            token
+        })
+
+        console.log(communityQuery.error)
 
         if( query.isError ) {
             setErorrMessage( query.error.message )

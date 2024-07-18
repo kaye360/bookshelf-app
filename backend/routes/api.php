@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommunityBookController;
+use App\Http\Controllers\CommunityPostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserBookController;
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -57,9 +56,14 @@ Route::delete('book/{id}', [UserBookController::class, 'delete'])->middleware('a
 /**
  * Community Book Routes
  */
-Route::get('community', [CommunityBookController::class, 'index']);
 Route::get('community/book/{id}', [CommunityBookController::class, 'show']);
 Route::post('community/book', [CommunityBookController::class, 'store']);
+
+/**
+ * Community Post Routes
+ */
+Route::get('community', [CommunityPostController::class, 'index']);
+Route::post('community', [CommunityPostController::class, 'store'])->middleware('auth:sanctum');
 
 /**
  * Error Routes

@@ -1,6 +1,6 @@
 import useLogout from "../../app/auth/api/useLogout";
-import Modal from "../common/Modal";
-import Button from "../form/Button";
+import Modal from "../../components/common/Modal";
+import Button from "../../components/form/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function AccountModal({ 

@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('user_books', function (Blueprint $table) {
-            // $table->dropColumn(['imageWidth', 'imageHeight']);
+        Schema::create('community_posts', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->integer('userId');
+            $table->string('userHandle');
+            $table->string('type');
+            $table->string('imageUrl')->nullable();
         });
     }
 
@@ -21,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('community_posts');
     }
 };

@@ -21,7 +21,7 @@
 @layer base {
 
     a {
-        @apply border-b-2 border-transparent transition-all
+        @apply border-b-2 border-accent/40 transition-all
     }
 
     a:hover {

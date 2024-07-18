@@ -79,7 +79,6 @@ export class Req {
         try {
             const response = await fetch( url, options )
             code = response.status
-    
             if( !response.ok ) {
                 throw new Error(`Error ${response.status}: ${response.statusText}`)
             }

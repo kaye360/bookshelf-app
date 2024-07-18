@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('user_books', function (Blueprint $table) {
-            // $table->dropColumn(['imageWidth', 'imageHeight']);
+        Schema::table('community_posts', function (Blueprint $table) {
+            $table->string('title');
         });
     }
 
@@ -21,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('community_posts', function (Blueprint $table) {
+            //
+        });
     }
 };

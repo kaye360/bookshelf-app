@@ -8,7 +8,7 @@ import TagOptions from "./TagOptions"
 import { useNavigate } from "react-router-dom"
 import Button from "../../../../components/form/Button"
 import Divider from "../../../../components/common/Divider"
-import Wrapper from "../../../../components/layout/Wrapper"
+import Wrapper from "../../../../layouts/components/Wrapper"
 
 
 export default function EditSearchBarParams({

@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import AccountModal from "./AccountModal"
-import { LogoutIcon, SettingsIcon, UserIcon } from "../common/Icon"
+import { LogoutIcon, SettingsIcon, UserIcon } from "../../components/common/Icon"
 import useToggleState from "../../hooks/useToggleState"
 import { useStore } from "../../store/store"
+import Avatar from "../../components/common/Avatar"
 
 
 export default function Account() {
@@ -21,11 +22,7 @@ export default function Account() {
                         onClick={ () => toggleDropDown() }
                         className="flex gap-[2px] items-center hover:bg-accent hover:text-bg px-6 py-3 rounded-md font-semibold tracking-wider"
                     >
-                        <span className="relative w-9 h-9 rounded-full bg-primary-dark/50 text-white text-xl mr-1 font-medium">
-                            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                                {user.handle.charAt(0).toLocaleUpperCase()}
-                            </span>
-                        </span>
+                        <Avatar handle={user.handle} />
                         {user.handle}
                     </button>
 

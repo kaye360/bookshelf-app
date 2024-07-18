@@ -237,3 +237,21 @@ export interface BookshelfParams {
     filterBy    : UserSettings['filter'] | string
     searchQuery : string
 }
+
+
+/** 
+ * 
+ * 
+ * Community Feed
+ * 
+ */
+
+export interface CommunityPost {
+    id         : number
+    userId     : number
+    userHandle : string
+    type       : 'CREATE_BOOK' | 'FAVOURITE_BOOK' | 'READ_BOOK' | 'CREATE_REVIEW' | 'JOIN'
+    title      : string
+    imageUrl   : string | null
+    created_at : string
+}
