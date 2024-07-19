@@ -3,7 +3,8 @@ import { Book } from "../../../types/types"
 
 
 export const BookSchema : ObjectSchema<Book> = object({
-    id            : number().defined(),
+    id            : number().defined().required(),
+    key           : string().nullable().notRequired(),
     title         : string().defined(),
     authors       : string().defined(),
     userId        : string().defined(),
@@ -14,10 +15,6 @@ export const BookSchema : ObjectSchema<Book> = object({
     group         : string().oneOf(['wishlist', 'owned']).defined(),
     tags          : array(string().defined()).defined(),
     imageUrl      : string().nullable().defined(),
-    isbn10        : string().defined(),
-    isbn13        : string().defined(),
-    description   : string().nullable().defined(),
     pageCount     : number().nullable().defined(),
-    subTitle      : string().nullable().defined(),
     publishedDate : string().nullable().defined()
 })

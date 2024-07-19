@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import Avatar from "../../../components/common/Avatar"
 import { CommunityPost as Post } from "../../../types/types"
+import Tooltip from "../../../components/common/Tooltip"
 
 type Action = {
     [key in Post['type']]: string
@@ -44,17 +45,18 @@ export default function CommunityPost({
             <div className="flex items-stretch gap-4 flex-wrap">
 
                 { post.map( singlePost => (
-                    <div className="grid gap-1" key={singlePost.id}>
-                        {singlePost.imageUrl && (
-                            <img 
-                                src={singlePost.imageUrl} 
-                                className="max-w-[100px] h-full object-cover"
-                            />
-                        )}
-                        <span className="text-sm">
-                            {singlePost.title}
-                        </span>
-                    </div>
+                    <Tooltip title={singlePost.title}>
+                        <Link to={`/book/${singlePost.id}`}>
+                            <div className="grid gap-1" key={singlePost.id}>
+                                {singlePost.imageUrl && (
+                                    <img 
+                                        src={singlePost.imageUrl} 
+                                        className="max-w-[65px] md:max-w-[80px] h-full object-cover"
+                                    />
+                                )}
+                            </div>
+                        </Link>
+                    </Tooltip>
                 ))}
 
             </div>

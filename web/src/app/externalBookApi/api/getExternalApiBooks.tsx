@@ -1,10 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { GOOGLE_BOOKS_API_URL } from "../../../config"
-import { Req } from "../../../lib/Req/Req"
 import { getFormData } from "../../../utils/getFormData"
 import { CreateBook, ExternalApiBookResponse } from "../../../types/types"
 import { useStore } from "../../../store/store"
 import { CreateBookSchema } from "../../bookshelf/validation/createBookValidation"
+
+
+/**
+ * This API URL should not be used anywhere else in this app
+ */
+const  EXTERNAL_BOOK_API_URL = 'https://openlibrary.org/search.json?q='
+const EXTERNAL_BOOK_PARAMS   = '&lang=en&sort=rating desc'
 
 
 /**
@@ -43,59 +48,35 @@ async function searchGoogleBooks(userId : number|undefined) : Promise<CreateBook
         throw new Error('Invalid user id')
     }
 
-    const searchQuery = getFormData('#search-external-book-api-form').query
+    const searchQuery = getFormData('#search-external-book-api-form').query.toString().replaceAll(' ', '+')
+    console.log(searchQuery)
     if(!searchQuery) {
         return []
     }
 
-    const result = await Req.get( `${GOOGLE_BOOKS_API_URL}?q=${searchQuery}&maxResults=40&orderBy=relevance&printType=books`)
+    const response = await fetch( EXTERNAL_BOOK_API_URL + searchQuery + EXTERNAL_BOOK_PARAMS )
+    const results = await response.json() as ExternalApiBookResponse
 
-    if( result.error ) {
-        throw new Error('Error searching Google Books')
-    }
+    console.log(results)
 
-    if( result.data.totalItems === 0 ) {
-        return []
-    }
-
-    const results       = result.data as ExternalApiBookResponse
-    const booksWithIsbn = results.items?.filter( book => {
-
-        const ids = book?.volumeInfo?.industryIdentifiers
-
-        if( ids?.some( id => id.type === 'ISBN_10' ) || ids?.some( id => id.type === 'ISBN_13' )) {
-            return book
-        }
-    }) || []
-
-    const transform = booksWithIsbn?.map( book => CreateBookSchema.cast({
-        title         : book.volumeInfo?.title || '',
-        authors       : book.volumeInfo?.authors?.join(', ') || 'N/A',
+    const transform = results.docs?.map( book => CreateBookSchema.cast({
+        key           : book.key.replace('/works/', ''),
+        title         : book.title,
+        authors       : book.author_name ? book.author_name.join(', ') : 'N/A',
         userId        : userId,
         rating        : 0,
         isRead        : false,
         isFavourite   : false,
         group         : 'wishlist',
-        imageUrl      : book.volumeInfo?.imageLinks?.thumbnail || book.volumeInfo?.imageLinks?.thumbnail || null,
-        isbn10        : book.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_10')[0]?.identifier || '',
-        isbn13        : book.volumeInfo?.industryIdentifiers?.filter( id => id.type === 'ISBN_13')[0]?.identifier || '',
-        description   : book.volumeInfo?.description || null,
-        pageCount     : book.volumeInfo?.pageCount || null,
-        subTitle      : book.volumeInfo?.subtitle || null,
-        publishedDate : book.volumeInfo?.publishedDate || null,
-        tags          : formatTags( book.volumeInfo?.categories )
+        imageUrl      : book.cover_edition_key ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}.jpg` : null,
+        pageCount     : book.number_of_pages_median || 0,
+        publishedDate : book.first_publish_year || '',
+        tags          : book.subject 
+            ? JSON.stringify( book.subject.sort( (a,b) => a.length > b.length ? 1 : -1).slice(0,3) )
+            : JSON.stringify( [] ),
     })) || []
+    
+    console.log(transform)
 
     return transform
-}
-
-
-function formatTags( categories : string[] | undefined) {
-    if( !categories || !Array.isArray(categories) ) return JSON.stringify([])
-
-    const tags = categories.map( 
-        cat => cat.replaceAll(' ', '').toLowerCase().split('&') 
-    ).flat()
-
-    return JSON.stringify(tags)
 }

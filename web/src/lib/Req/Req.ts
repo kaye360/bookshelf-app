@@ -70,10 +70,10 @@ export class Req {
     
         let { data, error, code } = this.returnProps()
 
-        const options = { 
+        const options: RequestInit = { 
             method, 
             headers : this.headers({token}), 
-            body    : payload ? JSON.stringify(payload) : null
+            body    : payload ? JSON.stringify(payload) : null,
         }
     
         try {
@@ -82,7 +82,7 @@ export class Req {
             if( !response.ok ) {
                 throw new Error(`Error ${response.status}: ${response.statusText}`)
             }
-    
+            
             data = await response.json()
     
         } catch (e : any) {

@@ -17,7 +17,6 @@ export default function useHandleCreateBook() {
     const [errorMessage, setErorrMessage] = useState<string|null>(null)
 
     async function handleCreateBook(book: CreateBook, e: SyntheticEvent) {
-
         e.preventDefault()
 
         if( isBookAdded || !user ) return null
@@ -35,8 +34,6 @@ export default function useHandleCreateBook() {
             title      : book.title || '',
             token
         })
-
-        console.log(communityQuery.error)
 
         if( query.isError ) {
             setErorrMessage( query.error.message )

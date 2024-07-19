@@ -17,6 +17,7 @@
  * 
  * Store
  * 
+ * 
  */
 
 
@@ -158,10 +159,9 @@ export interface UserSettings {
 
 export interface Book {
     id            : number
+    key?          : string | null
     title         : string
     authors       : string
-    isbn10        : string
-    isbn13        : string
     imageUrl      : string | null
     userId        : string
     rating        : number
@@ -169,9 +169,7 @@ export interface Book {
     isRead        : boolean
     tags          : string[]
     isFavourite   : boolean
-    description   : string | null
     pageCount     : number | null
-    subTitle      : string | null
     publishedDate : string | null
     created_at    : string
 }
@@ -193,33 +191,45 @@ export interface BookReview {
     review : string
 }
 
-
 export interface ExternalApiBookResponse {
-    totalItems : number
-    items? : {
-        kind? : string
-        id? : string
-        selfLink? : string
-        volumeInfo? : {
-            title? : string
-            subtitle? : string
-            authors? : string[]
-            publisher? : string
-            publishedDate? : string
-            description? : string
-            industryIdentifiers? :  { 
-                type? : "ISBN_13" | "ISBN_10"
-                identifier? : string
-            }[]
-            pageCount? : number
-            categories? : string[]
-            imageLinks? :{
-                smallThumbnail? : string
-                thumbnail? : string
-            }
-        }
+    numFound : number
+    docs : {
+        author_name        : string[]
+        first_publish_year : number
+        key                : string
+        title              : string
+        number_of_pages_median : number
+        cover_edition_key  : string
+        cover_i            : number
+        subject            : string[]
     }[]
 }
+// export interface ExternalApiBookResponse {
+//     totalItems : number
+//     items? : {
+//         kind? : string
+//         id? : string
+//         selfLink? : string
+//         volumeInfo? : {
+//             title? : string
+//             subtitle? : string
+//             authors? : string[]
+//             publisher? : string
+//             publishedDate? : string
+//             description? : string
+//             industryIdentifiers? :  { 
+//                 type? : "ISBN_13" | "ISBN_10"
+//                 identifier? : string
+//             }[]
+//             pageCount? : number
+//             categories? : string[]
+//             imageLinks? :{
+//                 smallThumbnail? : string
+//                 thumbnail? : string
+//             }
+//         }
+//     }[]
+// }
 
 
 

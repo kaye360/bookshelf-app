@@ -19,7 +19,6 @@ export default function Result({
     const userHasBook = useUserHasBook()
 
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const [expandDescription, setExpandDescription] = useState(false)
 
     const tagsArray = JSON.parse( book.tags )
     const tags = Array.isArray( tagsArray ) 
@@ -27,10 +26,20 @@ export default function Result({
         : []
 
     return (
-        <div className='grid grid-cols-[auto_1fr] gap-3 items-start'>
+        <div className='grid grid-cols-[auto_1fr] gap-4 items-start'>
 
-            <div className="grid gap-2">
-                { book.imageUrl && <img src={book.imageUrl} /> }
+            <div className="grid gap-2 w-[150px]">
+                { book.imageUrl ? (
+                    <img 
+                        src={book.imageUrl} 
+                        loading="lazy"
+                        className="w-full h-auto rounded-md"
+                    />
+                ) : (
+                    <div className="px-2 pt-6 pb-36 bg-primary-light/30 rounded-md text-center">
+                        No cover available
+                    </div>
+                )}
                 { !userHasBook(book) ? (
                     <button 
                         onClick={ () => setIsModalOpen(true) }
@@ -49,54 +58,30 @@ export default function Result({
 
             <div className='grid gap-4 justify-start'>
 
-                <div className="grid gap-1">
+                <div className="grid gap-1 text-2xl">
                     { book.title    && <h2 className="font-bold">{ book.title } </h2> }
-                    { book.subTitle && <span className="text-sm font-semibold">{ book.subTitle }</span> }
-                    { book.authors  && <span className="text-sm">{ book.authors }</span> }
+                    { book.authors  && <span className="text-lg">{ book.authors }</span> }
                 </div>
 
-                <div className="grid text-primary-dark/80 text-sm">
+                <div className="grid text-primary-dark/80 text-base">
 
-                    { book.pageCount && <span>Pages: { book.pageCount }</span> }
+                    { book.pageCount 
+                        ? <span>Pages: { book.pageCount }</span> 
+                        : '' 
+                    }
+
+                    { book.publishedDate 
+                        ? <span>Published: { book.publishedDate }</span>
+                        : ''
+                    }
 
                     <span>
-                        ISBN10 : {book.isbn10}
+                        Categories : {tags.map( tag => '#' + tag + ' ')}
                     </span>
 
-                    <span>
-                        ISBN13 : {book.isbn13}
-                    </span>
-
-                    <span>
-                        Categories : {tags.map( tag => tag + ' ')}
-                    </span>
+                    {book.key}
 
                 </div>
-
-                { book.description && (
-                    <p>
-                        { expandDescription ? (
-                            <>
-                                {book.description}
-                            </>
-                        ) : (
-                            <>
-                                {book.description.slice(0,200)}
-                                {book.description.length > 200 && (
-                                    <>
-                                        ...
-                                        <button 
-                                            onClick={ () => setExpandDescription(true) }
-                                            className="mx-4 border-b border-accent"
-                                        >
-                                            Read More
-                                        </button>
-                                    </>
-                                )}
-                            </>
-                        )}
-                    </p> 
-                )}
 
             </div>
 

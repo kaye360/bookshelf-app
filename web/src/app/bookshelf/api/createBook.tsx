@@ -59,23 +59,20 @@ async function createBook(props : CreateBookProps ) : Promise<Book> {
      * 
      */
 
-    const { title, authors, rating, tags, imageUrl, isbn10, isbn13, description, pageCount, subTitle, publishedDate, isFavourite } =  props.book
+    const { title, authors, rating, tags, imageUrl, pageCount, publishedDate, isFavourite, key } =  props.book
 
     const transform = CreateBookSchema.validateSync({
         userId        : user.id,
         isRead        : props.isRead.checked,
         group         : props.isOwned.checked ? 'owned'   : 'wishlist',
+        key,
         title,
         authors,
         rating,
         isFavourite,
         tags,
         imageUrl,
-        isbn10,
-        isbn13,
-        description,
         pageCount,
-        subTitle,
         publishedDate
     })
 
@@ -84,6 +81,8 @@ async function createBook(props : CreateBookProps ) : Promise<Book> {
         payload : transform,
         token
     })
+
+    console.log(response)
 
     response.data.tags = JSON.parse( response.data.tags )
 
