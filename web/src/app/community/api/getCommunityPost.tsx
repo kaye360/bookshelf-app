@@ -10,7 +10,7 @@ import { bundlePosts } from "../utils/bundlePosts"
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useCommunityPosts(page : number) {
+export function useCommunityPosts(page : number = 1) {
 
     return useQuery({
         queryKey : ['getCommunityPosts', page],

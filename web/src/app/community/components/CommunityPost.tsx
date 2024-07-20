@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import Avatar from "../../../components/common/Avatar"
 import { CommunityPost as Post } from "../../../types/types"
 import Tooltip from "../../../components/common/Tooltip"
+import BookCover from "../../../components/common/BookCover"
 
 
 type Action = {
@@ -52,20 +53,7 @@ export default function CommunityPost({
                 { post.slice(0,MAX_POSTS).map( singlePost => (
                     <Tooltip title={singlePost.title} key={singlePost.id}>
                         <Link to={`/book/${singlePost.key}`}>
-                            <div className="grid gap-1 h-full">
-                                {singlePost.imageUrl && (
-                                    <div className="relative h-full">
-                                        <img 
-                                            src={singlePost.imageUrl} 
-                                            className="max-w-[65px] md:max-w-[80px] h-full object-cover"
-                                            loading="lazy"
-                                            width={80}
-                                            height={130}
-                                        />
-                                        <div className="absolute inset-0 -z-30 bg-primary-light/60 animate-pulse" />
-                                    </div>
-                                )}
-                            </div>
+                            <BookCover size='md' src={singlePost.imageUrl} title={singlePost.title} />
                         </Link>
                     </Tooltip>
                 ))}

@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout";
 import useSingleExternalApiBook from "../externalBookApi/api/getSingleExternalApiBook";
 import { LoaderIcon } from "../../components/common/Icon";
 import useSingleExternalApiAuthors from "../externalBookApi/api/getSingleExternalApiAuthors";
+import BookCover from "../../components/common/BookCover";
 
 export default function Book() {
 
@@ -22,8 +23,11 @@ export default function Book() {
                         </h1>
 
                         { Array.isArray( book.data?.covers ) && book.data?.covers[0] && (
-                            <img 
-                                src={`https://covers.openlibrary.org/b/id/${book.data?.covers[0]}-M.jpg`} 
+                            <BookCover 
+                                size="lg" 
+                                autoHeight
+                                title={book.data.title}
+                                src={`https://covers.openlibrary.org/b/id/${book.data?.covers[0]}-M.jpg`}
                             />
                         )}
 

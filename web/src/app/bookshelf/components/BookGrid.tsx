@@ -6,7 +6,7 @@ export default function BookGrid({
 }) {
     
     return (
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-x-5 gap-y-8">
+        <div className="grid grid-cols-[repeat(auto-fill,175px)] gap-x-5 gap-y-8">
             {children}
         </div>
     )

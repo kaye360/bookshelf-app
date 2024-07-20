@@ -30,16 +30,12 @@ export default function EditTagsModal({
                         </span>
                     </h2>
 
-                    <div className="flex items-center gap-2 p-3 rounded border border-primary-light text-primary-dark text-sm">
-                        <AlertIcon className="min-w-[24px]" />
+                    <div className="flex items-start gap-2 p-3 rounded border border-primary-light text-primary-dark text-sm">
+                        <AlertIcon size={28} />
                         Note: Separate each tag with a space. No hashtag is required.
                     </div>
 
                 </div>
-
-                { book.imageUrl && (
-                    <img src={book.imageUrl} className="hidden md:block w-20 rounded" />
-                )}
 
             </div>
 

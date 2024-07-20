@@ -3,6 +3,7 @@ import Button from "../../../../components/form/Button";
 import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon } from "../../../../components/common/Icon";
 import { CreateBook } from "../../../../types/types";
 import useHandleCreateBook from "../../hooks/useHandleCreateBook";
+import BookCover from "../../../../components/common/BookCover";
 
 /**
  * 
@@ -31,7 +32,12 @@ export default function AddBookModal({
 
             <div className="flex items-center gap-3 darklight">
 
-                {book?.imageUrl && <img src={book.imageUrl} /> }
+                <BookCover
+                    size="md"
+                    autoHeight
+                    title={book.title}
+                    src={book.imageUrl}
+                />
 
                 <div className="grid gap-2">
 

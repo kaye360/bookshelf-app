@@ -4,6 +4,7 @@ import Button from "../../../components/form/Button";
 import { useStore } from "../../../store/store";
 import TextInput from "../../../components/form/TextInput";
 import { Book } from "../../../types/types";
+import BookCover from "../../../components/common/BookCover";
 
 
 
@@ -57,7 +58,12 @@ export default function CurrentlyReadingSettings({
                 >
 
                     { currentBook.imageUrl && (
-                        <img src={currentBook.imageUrl} className="w-24" />
+                        <BookCover
+                            size="sm"
+                            autoHeight
+                            title={currentBook.title}
+                            src={currentBook.imageUrl}
+                        />
                     )}
         
                     <div className="grid gap-2">
@@ -105,24 +111,25 @@ export default function CurrentlyReadingSettings({
                                 type="button"
                                 onClick={ () => handleSelectBook(book) }
                                 className={`
-                                    flex gap-4 items-center hover:bg-primary-light/50 text-left
+                                    flex gap-2 items-center hover:bg-primary-light/50 text-left
                                     ${ bookId === book.id.toString() ? 'bg-primary-light/50' : ''}
                                 `}
                                 key={i}
                             >
 
-                                { book.imageUrl && (
-                                    <img src={book.imageUrl} className="h-20 w-10 object-cover" />
-                                )}
+                            <BookCover
+                                size="xs"
+                                src={book.imageUrl}
+                            />
 
-                                <div className="grid max-w-[70vw] overflow-hidden">
-                                    <span className="font-bold min-w-max">
-                                        {book.title}
-                                    </span>
-                                    <span className="min-w-max">
-                                        {book.authors}
-                                    </span>
-                                </div>
+                            <div className="grid max-w-[70vw] overflow-hidden">
+                                <span className="font-bold min-w-max">
+                                    {book.title}
+                                </span>
+                                <span className="min-w-max">
+                                    {book.authors}
+                                </span>
+                            </div>
 
                             </button>
                         ))}

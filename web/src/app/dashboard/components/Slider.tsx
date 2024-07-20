@@ -5,7 +5,7 @@ export default function Slider({
     children: any
 }) {
     return (
-        <div className="flex gap-5 [&>div]:min-w-[150px] py-2 overflow-x-scroll">
+        <div className="flex gap-5 py-2 overflow-x-scroll">
             {children}
         </div>
     )

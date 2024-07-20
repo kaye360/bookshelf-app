@@ -13,7 +13,7 @@ export default function DeleteBookModal({
     closeModalFn : Function
 }) {
 
-    const { query, handleDeleteBook, hasClicked } = useHandleDeleteBook({book})
+    const { query, handleDeleteBook } = useHandleDeleteBook({book})
 
     return (
         <Modal closeModalFn={closeModalFn}>
@@ -22,34 +22,28 @@ export default function DeleteBookModal({
 
                 <div className="flex items-start gap-3">
 
-                    <AlertIcon className="min-w-[24px]" />
+                    <AlertIcon size={28} />
 
-                    <div className="grid gap-2">
-                        <h2 className="mb-4 text-md">
+                    <div className="grid gap-4 text-md">
+                        <span>
                             Are you sure you want to delete: <br />
                             <span className="font-bold ">
                                 {book.title}
-                                {book.id}
                             </span>
-                        </h2>
+                        </span>
+
+                        <Button type="submit" variant="outline">
+                            { query.isPending
+                                ? <> <LoaderIcon /> Deleting Book...</>
+                                : 'Delete Book'
+                            }
+                        </Button>
                     </div>
 
-                    { book.imageUrl && (
-                        <img src={book.imageUrl} className="hidden md:block w-20 rounded" />
-                    )}
+                    <div className="w-[24px]" />
 
                 </div>
-
-                <div className="flex items-center gap-3">
-                    <Button type="submit" variant="fill">
-                        { query.isPending
-                            ? <> <LoaderIcon /> Deleting Book...</>
-                            : 'Delete Book'
-                        }
-                    </Button>
-                    { hasClicked && !query.isPending && query.isSuccess && 'Book Deleted.' }
-                </div>
-            
+        
             </form>
 
         </Modal>

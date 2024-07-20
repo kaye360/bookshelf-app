@@ -2,6 +2,7 @@ import { HashIcon } from "../../../components/common/Icon"
 import { Book } from "../../../types/types"
 import UserActions from "./UserActions"
 import { useBookshelfParams } from "../hooks/useBookShelfParamsContext"
+import BookCover from "../../../components/common/BookCover"
 
 
 export const BookTableComponent = {
@@ -33,9 +34,11 @@ function Row({book} : {book : Book}) {
     return (
         <tr className=" even:bg-bg-accent text-sm">
             <Cell>
-                { book.imageUrl && (
-                    <img src={book.imageUrl} />
-                )}
+                <BookCover 
+                    size="sm"
+                    title={book.title}
+                    src={book.imageUrl}
+                />
             </Cell>
 
             <Cell className="font-semibold">

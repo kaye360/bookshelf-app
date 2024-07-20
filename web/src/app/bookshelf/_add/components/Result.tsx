@@ -3,6 +3,7 @@ import AddBookModal from "./AddBookModal"
 import { useState } from "react"
 import useUserHasBook from "../../hooks/useUserHasBook"
 import { CreateBook } from "../../../../types/types"
+import BookCover from "../../../../components/common/BookCover"
 
 
 /**
@@ -18,8 +19,6 @@ export default function Result({
 
     const userHasBook = useUserHasBook()
 
-    // console.log(book.title, book.key, userHasBook(book))
-
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const tagsArray = JSON.parse( book.tags )
@@ -30,12 +29,12 @@ export default function Result({
     return (
         <div className='grid grid-cols-[auto_1fr] gap-4 items-start'>
 
-            <div className="grid gap-2 w-[150px]">
+            <div className="grid gap-2">
                 { book.imageUrl ? (
-                    <img 
-                        src={book.imageUrl} 
-                        loading="lazy"
-                        className="w-full h-auto rounded-md"
+                    <BookCover 
+                        size="lg"
+                        title={book.title}
+                        src={book.imageUrl}
                     />
                 ) : (
                     <div className="px-2 pt-6 pb-36 bg-primary-light/30 rounded-md text-center">

@@ -1,6 +1,7 @@
 import UserActions from "./UserActions";
 import { Book } from "../../../types/types";
 import { useBookshelfParams } from "../hooks/useBookShelfParamsContext";
+import BookCover from "../../../components/common/BookCover";
 
 
 export default function BookCard({
@@ -12,13 +13,13 @@ export default function BookCard({
     const { updateSearchParam } = useBookshelfParams()
 
     return (
-        <div className="grid grid-cols-[1fr_2fr] gap-3 text-sm">
+        <div className="grid grid-cols-[auto_1fr] gap-3 text-sm">
             
-            <div className="bg-slate-300 aspect-[1/1.6]">
-                { book.imageUrl && (
-                    <img src={book.imageUrl} className="w-full h-full object-cover" />
-                )}
-            </div>
+            <BookCover
+                size="md"
+                title={book.title}
+                src={book.imageUrl}
+            />
 
             <div className="flex flex-col gap-1">
                 <span className="font-semibold">

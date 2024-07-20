@@ -10,6 +10,8 @@ import Slider from "./components/Slider";
 import Loader from "./components/Loader";
 import { getTagsFromBookList } from "../tags/services/getTagsFromBookList";
 import { useCommunityPosts } from "../community/api/getCommunityPost";
+import Tooltip from "../../components/common/Tooltip";
+import BookCover from "../../components/common/BookCover";
 
 
 export default function Dashboard() {
@@ -17,11 +19,14 @@ export default function Dashboard() {
     const { books, settings } = useStore()
 
     const community = useCommunityPosts()
-    const communityNewestPosts = community.data?.filter( post => post.type === 'CREATE_BOOK').slice(0,10) || []
+    const communityNewestPosts = community.data ? community.data
+        .filter( post => post.type === 'CREATE_BOOK')
+        .slice(0,10) : []
 
     const navigate = useNavigate()
 
-    const currentlyReading = books.filter( book => book.id.toString() === settings?.currentlyReadingId)[0]
+    const currentlyReading = books
+        .filter( book => book.id.toString() === settings?.currentlyReadingId)[0]
 
     const tags = getTagsFromBookList(books)
 
@@ -63,11 +68,16 @@ export default function Dashboard() {
                 </Heading>
 
                 { currentlyReading ? (
-                    <div className="grid grid-cols-[150px_1fr] gap-2">
+                    <div className="grid grid-cols-[auto_1fr] gap-2">
                         
                         { currentlyReading.imageUrl && (
-                            <img src={currentlyReading.imageUrl} className="w-full" />
+                            <BookCover
+                                size="md"
+                                title={currentlyReading.title}
+                                src={currentlyReading.imageUrl}
+                            />
                         )}
+
 
                         <div>
                             <h3 className="text-xl font-semibold">
@@ -159,12 +169,14 @@ export default function Dashboard() {
                 <Slider>
 
                     { communityNewestPosts.map( post => (
-                        <div key={post.id}>
-                            { post.imageUrl && (
-                                <img src={post.imageUrl} />
-                            )}
-                            { post.title }
-                        </div>
+                        <Link to={`/book/${post.key}`}>
+                            <BookCover 
+                                size="lg"
+                                title={post.title}
+                                src={post.imageUrl}
+                                key={post.id}
+                            />
+                        </Link>
                     ))}
 
                 </Slider>
