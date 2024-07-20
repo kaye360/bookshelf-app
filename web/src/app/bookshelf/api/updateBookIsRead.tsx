@@ -3,10 +3,10 @@ import { API_URL } from "../../../config"
 import { isString } from "../../../utils/validation"
 import { Req } from "../../../lib/Req/Req"
 import { useQueryClient, useMutation } from "@tanstack/react-query"
+import { useStore } from "../../../store/store"
 
 
 interface UpdateIsReadProps {
-    token : string | null,
     book  : Book,
     isRead : boolean
 }
@@ -41,13 +41,12 @@ export function useUpdateBookIsRead() {
  */
 async function updateIsRead(props : UpdateIsReadProps) {
 
-    const { token, book, isRead }  = props
-
-    if( !isString(token) ) return {
-        error : "Invalid User Token",
-        data  : null,
-        code  : 404
+    const token = useStore.getState().auth.token
+    if( !isString(token) ) {
+        throw new Error("Invalid User Token")
     }
+
+    const { book, isRead }  = props
 
     const response = await Req.put({
         url     : `${API_URL}/book/${book.id}`,

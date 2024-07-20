@@ -49,7 +49,8 @@ async function getSingleExternalApiAuthors(authors: ExternalApiBook['authors']) 
 
     const apiAuthors = apiAuthorsPromise
         .filter( promise => promise.status === 'fulfilled' )
-        .map( promise => promise.value )
+        // @ts-ignore
+        .map( promise => promise.value ) 
 
     return apiAuthors
 }

@@ -1,5 +1,4 @@
 import { SyntheticEvent, useState } from "react"
-import { useStore } from "../../../store/store"
 import { CreateBook } from "../../../types/types"
 import { useCreateBook } from "../api/createBook"
 import { useCreateCommunityPost } from "../../community/api/createCommunityPost"
@@ -7,10 +6,7 @@ import { useCreateCommunityPost } from "../../community/api/createCommunityPost"
 
 export default function useHandleCreateBook() {
 
-    const { auth : { user, token } } = useStore()
-
-    const query = useCreateBook()
-
+    const query     = useCreateBook()
     const community = useCreateCommunityPost()
 
     const [isBookAdded, setIsBookAdded]   = useState(false)
@@ -19,12 +15,12 @@ export default function useHandleCreateBook() {
     async function handleCreateBook(book: CreateBook, e: SyntheticEvent) {
         e.preventDefault()
 
-        if( isBookAdded || !user ) return null
+        if( isBookAdded ) return null
 
         const isOwned = document.getElementById('isOwned') as HTMLInputElement
         const isRead  = document.getElementById('isRead') as HTMLInputElement
         
-        query.mutate({user, book, isOwned, isRead, token})
+        query.mutate({ book, isOwned, isRead})
 
         if( query.isError ) {
             setErorrMessage( query.error.message )
@@ -38,7 +34,7 @@ export default function useHandleCreateBook() {
             setIsBookAdded(true)
         }
 
-        community.mutate({ user, book, type : 'CREATE_BOOK' })
+        community.mutate({ book, type : 'CREATE_BOOK' })
     }
 
     return {

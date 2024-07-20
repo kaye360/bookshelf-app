@@ -1,12 +1,11 @@
 import { API_URL } from "../../../config";
-import { Book, CommunityPost, CreateBook, User } from "../../../types/types";
+import { Book, CommunityPost, CreateBook } from "../../../types/types";
 import { Req } from "../../../lib/Req/Req";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useStore } from "../../../store/store";
 
 
 interface CreateCommunityPostProps {
-    user : User
     book : Book | CreateBook
     type : CommunityPost['type']
 }
@@ -44,13 +43,14 @@ export function useCreateCommunityPost() {
 async function createCommunityPost(props : CreateCommunityPostProps ) : Promise<CommunityPost> {
 
     const token = useStore.getState().auth.token
-    if( !token ) {
+    const user = useStore.getState().auth.user
+    if( !token || !user ) {
         throw new Error('Invalid user or token')
     }
 
     const payload = {
-        userId     : props.user.id,
-        userHandle : props.user.handle,
+        userId     : user.id,
+        userHandle : user.handle,
         type       : props.type,
         key        : props.book.key,
         title      : props.book.title,

@@ -1,17 +1,16 @@
 import { API_URL } from "../../../config";
-import { Book,  CreateBook,  User } from "../../../types/types";
+import { Book,  CreateBook } from "../../../types/types";
 import { Req } from "../../../lib/Req/Req";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateBookSchema } from "../validation/createBookValidation";
 import { BookSchema } from "../validation/bookValidation";
+import { useStore } from "../../../store/store";
 
 
 interface CreateBookProps {
     book : CreateBook,
-    user : User|null,
     isOwned : HTMLInputElement,
     isRead  : HTMLInputElement,
-    token? : string|null
 }
 
  
@@ -46,9 +45,10 @@ export function useCreateBook() {
  */
 async function createBook(props : CreateBookProps ) : Promise<Book> {
 
-    const { user, token } = props
+    const user  = useStore.getState().auth.user
+    const token = useStore.getState().auth.token
     if( !user || !token ) {
-        throw new Error('Invalid user or token')
+        throw new Error('Invalid auth credentials')
     }
 
     /**

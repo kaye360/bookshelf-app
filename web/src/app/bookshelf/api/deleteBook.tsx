@@ -4,11 +4,11 @@ import { isString } from "../../../utils/validation"
 import { Req } from "../../../lib/Req/Req"
 import { ReqResponse } from "../../../lib/Req/Req.type"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useStore } from "../../../store/store"
 
 
 interface DeleteBookProps {
     book  : Book, 
-    token : string|null
 }
 
 
@@ -38,12 +38,11 @@ export function useDeleteBook() {
  * @returns a validated response or throws an error
  * 
  */
-async function deleteBook({token, book} : DeleteBookProps) : Promise<ReqResponse> {
+async function deleteBook({book} : DeleteBookProps) : Promise<ReqResponse> {
 
-    if( !isString(token) ) return {
-        error : "Invalid User Token",
-        data  : null,
-        code  : 404
+    const token = useStore.getState().auth.token
+    if( !isString(token) ) {
+        throw new Error('Invalid user token')
     }
 
     const response  = await Req.delete({ url: `${API_URL}/book/${book.id}`, token })

@@ -22,7 +22,7 @@ export function useSettings() {
     return useQuery({
         queryKey : ['getSettings', token],
         queryFn : async () => {
-            const settings = await getSettings(token)
+            const settings = await getSettings()
             updateSettings(settings)
             return settings
         }
@@ -37,8 +37,9 @@ export function useSettings() {
  * @returns a validated response or throws an error
  * 
  */
-async function getSettings(token : string|null) : Promise<Settings> {
+async function getSettings() : Promise<Settings> {
 
+    const token = useStore.getState().auth.token
     if( typeof token !== 'string' ) return getInitialSettings()
 
     const response = await Req.get({ url : `${API_URL}/settings`, token })

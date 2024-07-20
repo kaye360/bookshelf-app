@@ -3,10 +3,10 @@ import { Book } from "../../../types/types"
 import { isString } from "../../../utils/validation"
 import { Req } from "../../../lib/Req/Req"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useStore } from "../../../store/store"
 
 
 interface UpdateBookTagsProps {
-    token : string|null,
     book  : Book,
     tags  : string[]
 }
@@ -23,7 +23,7 @@ export function useUpdateBookTags() {
 
     return useMutation({
         mutationKey : ['updateBookTags'],
-        mutationFn  : ({token, book, tags} : UpdateBookTagsProps) => updateTags({token, book, tags}),
+        mutationFn  : ({book, tags} : UpdateBookTagsProps) => updateTags({book, tags}),
         onSuccess   : () => client.invalidateQueries({
             queryKey : ['getBooks']
         })
@@ -40,13 +40,12 @@ export function useUpdateBookTags() {
  */
 async function updateTags(props : UpdateBookTagsProps) {
 
-    const { token, book, tags } = props
-
-    if( !isString(token) ) return {
-        error : "Invalid User Token",
-        data  : null,
-        code  : 404
+    const token = useStore.getState().auth.token
+    if( !isString(token) ) {
+        throw new Error("Invalid User Token")
     }
+
+    const { book, tags } = props
 
     const response = await Req.put({
         url     : `${API_URL}/book/${book.id}`,
