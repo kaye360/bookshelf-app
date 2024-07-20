@@ -24,6 +24,7 @@ export default function BookGridItem({
                 <img 
                     src={book.imageUrl} 
                     className="w-full aspect-[2/3] object-cover rounded-md relative -z-10"
+                    loading="lazy"
                 />
             ) : (
                 <div className="bg-primary-light text-primary-dark/80 text-lg font-medium rounded min-h-64 p-4">

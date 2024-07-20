@@ -2,7 +2,6 @@ import { API_URL } from "../../../config"
 import { getFormData } from "../../../utils/getFormData"
 import { useStore } from "../../../store/store"
 import { Req } from "../../../lib/Req/Req"
-import { User } from "../../../types/types"
 import { SettingsSchema } from "../validation/settingsValidation"
 import { useMutation } from "@tanstack/react-query"
 
@@ -14,15 +13,12 @@ import { useMutation } from "@tanstack/react-query"
  */
 export default function useUpdateSettings() {
     
-    const { 
-        auth : { user, token }, 
-        settingsActions : { updateSettings } 
-    } = useStore()
+    const {  settingsActions : { updateSettings } } = useStore()
 
     return useMutation({
         mutationKey : ['updateSettings'],
         mutationFn : async () => {
-            const settings = await updateSettingsToApi(user, token) 
+            const settings = await updateSettingsToApi() 
             updateSettings(settings)
             localStorage.setItem('settings', JSON.stringify(settings))
         },
@@ -38,10 +34,14 @@ export default function useUpdateSettings() {
  * @returns a validated response or throws an error
  * 
  */
-async function updateSettingsToApi(user: User | null, token : string|null) {
+async function updateSettingsToApi() {
 
-    if ( user  === null)  throw new Error('Invalid User')
-    if ( token === null)  throw new Error('Invalid Token')
+    const token = useStore.getState().auth.token
+    const user  = useStore.getState().auth.user
+
+    if ( !user || !token ) {
+        throw new Error('Invalid auth credentials')
+    }
 
     const response = await Req.put({
         url : `${API_URL}/settings/${user?.id}`,

@@ -9,8 +9,6 @@ export default function Book() {
     const params = useParams()
     const book = useSingleExternalApiBook(params.id)
     const authors = useSingleExternalApiAuthors(book.data?.authors)
-
-    console.log(authors.data)
     
     return (
         <BaseLayout>

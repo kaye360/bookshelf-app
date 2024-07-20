@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { ExternalApiAuthor, ExternalApiBook } from "../../../types/types"
 
 
@@ -17,7 +17,7 @@ const  EXTERNAL_BOOK_API_URL = 'https://openlibrary.org'
 export default function useSingleExternalApiAuthors(authors: ExternalApiBook['authors']) {
 
     return useQuery({
-        queryKey : ['getSingleExternalApiAuthors'],
+        queryKey : ['getSingleExternalApiAuthors', authors],
         queryFn  : () => getSingleExternalApiAuthors(authors),
         refetchOnMount : 'always'
     })
