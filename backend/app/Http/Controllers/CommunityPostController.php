@@ -11,7 +11,7 @@ class CommunityPostController extends Controller
 
     public function index()
     {
-        return CommunityPost::all()->reverse()->values()->all();
+        return CommunityPost::latest()->paginate(25)->values()->all();
     }
 
 

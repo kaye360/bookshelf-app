@@ -2,6 +2,7 @@ import { API_URL } from "../../../config"
 import { useQuery } from "@tanstack/react-query"
 import { Req } from "../../../lib/Req/Req"
 import { CommunityPost } from "../../../types/types"
+import { bundlePosts } from "../utils/bundlePosts"
 
 
 /**
@@ -9,12 +10,25 @@ import { CommunityPost } from "../../../types/types"
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useCommunityPosts() {
+export function useCommunityPosts(page : number) {
 
     return useQuery({
-        queryKey : ['getCommunityPosts'],
-        queryFn  : getCommunityPosts
+        queryKey : ['getCommunityPosts', page],
+        queryFn  : () => getCommunityPosts(page),
+        refetchOnMount : 'always'
     })
+}
+
+
+/**
+ * 
+ * The api query for infinite scrolling
+ * 
+ */
+export async function infiniteCommunityPosts(page : number) {
+    const posts   = await getCommunityPosts(page)
+    const bundled = bundlePosts(posts)
+    return bundled
 }
 
 
@@ -25,9 +39,9 @@ export function useCommunityPosts() {
  * @returns a validated response or throws an error
  * 
  */
-async function getCommunityPosts() : Promise<CommunityPost[]> {
+async function getCommunityPosts( page : number ) : Promise<CommunityPost[]> {
 
-    const response = await Req.get(`${API_URL}/community`)
+    const response = await Req.get(`${API_URL}/community?page=${page}`)
 
     if( response.error || !Array.isArray( response.data ) ) {
         throw new Error('Error getting community posts from API')
