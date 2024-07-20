@@ -39,10 +39,6 @@ export default function AddBookModal({
                         {book?.title}
                     </h2>
 
-                    <span className="font-semibold">
-                        {book.key}
-                    </span>
-
                     <span>
                         {book?.authors}
                     </span>

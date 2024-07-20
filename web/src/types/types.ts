@@ -159,7 +159,7 @@ export interface UserSettings {
 
 export interface Book {
     id            : number
-    key?          : string | null
+    key           : string
     title         : string
     authors       : string
     imageUrl      : string | null
@@ -204,32 +204,28 @@ export interface ExternalApiBookResponse {
         subject            : string[]
     }[]
 }
-// export interface ExternalApiBookResponse {
-//     totalItems : number
-//     items? : {
-//         kind? : string
-//         id? : string
-//         selfLink? : string
-//         volumeInfo? : {
-//             title? : string
-//             subtitle? : string
-//             authors? : string[]
-//             publisher? : string
-//             publishedDate? : string
-//             description? : string
-//             industryIdentifiers? :  { 
-//                 type? : "ISBN_13" | "ISBN_10"
-//                 identifier? : string
-//             }[]
-//             pageCount? : number
-//             categories? : string[]
-//             imageLinks? :{
-//                 smallThumbnail? : string
-//                 thumbnail? : string
-//             }
-//         }
-//     }[]
-// }
+
+export interface ExternalApiBook {
+    authors? : {
+        author? : {
+            key : string
+        }
+    }[]
+    covers? : number[]
+    description? : {
+        value? : string
+    },
+    title : string
+}
+
+export interface ExternalApiAuthor {
+    birth_date : string
+    death_date : string
+    name : string
+    photos : number[]
+    bio? : string
+    key : string
+}
 
 
 
@@ -262,6 +258,7 @@ export interface CommunityPost {
     userHandle : string
     type       : 'CREATE_BOOK' | 'FAVOURITE_BOOK' | 'READ_BOOK' | 'CREATE_REVIEW' | 'JOIN'
     title      : string
+    key        : string
     imageUrl   : string | null
     created_at : string
 }

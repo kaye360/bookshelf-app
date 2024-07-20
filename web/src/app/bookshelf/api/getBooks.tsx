@@ -53,6 +53,7 @@ async function getBooks(userId : number | undefined) : Promise<Book[]> {
 
     const transform = books.map( (book : any) => BookSchema.cast({
         id            : book.id,
+        key           : book.key,
         title         : book.title,
         authors       : book.authors,
         userId        : book.userId,

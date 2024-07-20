@@ -23,8 +23,8 @@ export default function useExternalApiBooks() {
     const client = useQueryClient()
 
     return useMutation({
-        mutationKey : ['searchGoogleBooks'],
-        mutationFn  : () => searchGoogleBooks(user?.id),
+        mutationKey : ['searchExternalApiBooks'],
+        mutationFn  : () => searchExternalApiBooks(user?.id),
         onSuccess   : () => {
             client.invalidateQueries({
                 queryKey : ['getBooks']
@@ -42,22 +42,19 @@ export default function useExternalApiBooks() {
  * @returns a validated response or throws an error
  * 
  */
-async function searchGoogleBooks(userId : number|undefined) : Promise<CreateBook[]> {
+async function searchExternalApiBooks(userId : number|undefined) : Promise<CreateBook[]> {
 
     if( !userId) {
         throw new Error('Invalid user id')
     }
 
     const searchQuery = getFormData('#search-external-book-api-form').query.toString().replaceAll(' ', '+')
-    console.log(searchQuery)
     if(!searchQuery) {
         return []
     }
 
     const response = await fetch( EXTERNAL_BOOK_API_URL + searchQuery + EXTERNAL_BOOK_PARAMS )
     const results = await response.json() as ExternalApiBookResponse
-
-    console.log(results)
 
     const transform = results.docs?.map( book => CreateBookSchema.cast({
         key           : book.key.replace('/works/', ''),
@@ -76,7 +73,5 @@ async function searchGoogleBooks(userId : number|undefined) : Promise<CreateBook
             : JSON.stringify( [] ),
     })) || []
     
-    console.log(transform)
-
     return transform
 }

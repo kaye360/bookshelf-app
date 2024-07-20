@@ -4,7 +4,7 @@ import { Book } from "../../../types/types"
 
 export const BookSchema : ObjectSchema<Book> = object({
     id            : number().defined().required(),
-    key           : string().nullable().notRequired(),
+    key           : string().defined(),
     title         : string().defined(),
     authors       : string().defined(),
     userId        : string().defined(),

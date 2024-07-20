@@ -11,7 +11,7 @@ export default function useHandleCreateBook() {
 
     const query = useCreateBook()
 
-    const communityQuery = useCreateCommunityPost()
+    const community = useCreateCommunityPost()
 
     const [isBookAdded, setIsBookAdded]   = useState(false)
     const [errorMessage, setErorrMessage] = useState<string|null>(null)
@@ -26,15 +26,6 @@ export default function useHandleCreateBook() {
         
         query.mutate({user, book, isOwned, isRead, token})
 
-        communityQuery.mutate({
-            userId     : user.id,
-            userHandle : user.handle,
-            type       : 'CREATE_BOOK',
-            imageUrl   : book.imageUrl,
-            title      : book.title || '',
-            token
-        })
-
         if( query.isError ) {
             setErorrMessage( query.error.message )
 
@@ -46,6 +37,8 @@ export default function useHandleCreateBook() {
         } else {
             setIsBookAdded(true)
         }
+
+        community.mutate({ user, book, type : 'CREATE_BOOK' })
     }
 
     return {

@@ -18,6 +18,8 @@ export default function Result({
 
     const userHasBook = useUserHasBook()
 
+    // console.log(book.title, book.key, userHasBook(book))
+
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const tagsArray = JSON.parse( book.tags )
@@ -40,7 +42,12 @@ export default function Result({
                         No cover available
                     </div>
                 )}
-                { !userHasBook(book) ? (
+                { userHasBook(book) ? (
+                    <span className="flex gap-2 justify-center items-center min-w-max px-6 py-2 text-sm text-accent border border-accent/30 rounded-lg w-full select-none">
+                        <CheckIcon />
+                        Added
+                    </span>
+                ):(
                     <button 
                         onClick={ () => setIsModalOpen(true) }
                         className='flex gap-2 justify-center items-center min-w-max px-6 py-2 text-sm text-accent border border-accent/30 rounded-lg w-full hover:bg-accent hover:text-bg transition-colors'
@@ -48,11 +55,6 @@ export default function Result({
                         <PlusIcon />
                         Add
                     </button>
-                ):(
-                    <span className="flex gap-2 justify-center items-center min-w-max px-6 py-2 text-sm text-accent border border-accent/30 rounded-lg w-full select-none">
-                        <CheckIcon />
-                        Added
-                    </span>
                 )}
             </div>
 

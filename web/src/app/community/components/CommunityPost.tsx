@@ -3,9 +3,14 @@ import Avatar from "../../../components/common/Avatar"
 import { CommunityPost as Post } from "../../../types/types"
 import Tooltip from "../../../components/common/Tooltip"
 
+
 type Action = {
     [key in Post['type']]: string
 }
+
+
+const MAX_POSTS = 8
+
 
 export default function CommunityPost({
     post
@@ -17,14 +22,14 @@ export default function CommunityPost({
 
     const action : Action = {
         'CREATE_BOOK'    : `added ${post.length === 1 ? 'a new book' : `${post.length} new books`}`,
-        'CREATE_REVIEW'  : 'reviewd a book',
-        'FAVOURITE_BOOK' : 'favourited a book',
+        'CREATE_REVIEW'  : `reviewed ${post.length === 1 ?  'a book' : `${post.length} books`}`,
+        'FAVOURITE_BOOK' : `favourited ${post.length === 1 ? 'a book' : `${post.length} books`}`,
+        'READ_BOOK'      : `read ${post.length === 1 ? 'a book' : `${post.length} books`}`,
         'JOIN'           : 'joined BookShelf!',
-        'READ_BOOK'      : 'read a book'
     }
 
     return (
-        <div className="border border-primary-light/70 rounded-lg p-5 shadow-sm shadow-primary-light/50">
+        <div className="border border-primary-light/50 rounded-lg px-5 py-8 shadow-sm shadow-primary-light/50">
             <h3 
                 className="flex items-center gap-1 mb-3 font-medium"
             >
@@ -44,20 +49,27 @@ export default function CommunityPost({
 
             <div className="flex items-stretch gap-4 flex-wrap">
 
-                { post.map( singlePost => (
-                    <Tooltip title={singlePost.title}>
-                        <Link to={`/book/${singlePost.id}`}>
-                            <div className="grid gap-1" key={singlePost.id}>
+                { post.slice(0,MAX_POSTS).map( singlePost => (
+                    <Tooltip title={singlePost.title} key={singlePost.id}>
+                        <Link to={`/book/${singlePost.key}`}>
+                            <div className="grid gap-1">
                                 {singlePost.imageUrl && (
                                     <img 
                                         src={singlePost.imageUrl} 
                                         className="max-w-[65px] md:max-w-[80px] h-full object-cover"
+                                        loading="lazy"
                                     />
                                 )}
                             </div>
                         </Link>
                     </Tooltip>
                 ))}
+
+                { post.length > MAX_POSTS && (
+                    <div className=" flex items-center px-8 rounded-md">
+                        + {post.length - MAX_POSTS} more
+                    </div>
+                )}
 
             </div>
         </div>

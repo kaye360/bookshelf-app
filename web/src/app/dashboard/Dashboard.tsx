@@ -9,14 +9,15 @@ import Section from "./components/Section";
 import Slider from "./components/Slider";
 import Loader from "./components/Loader";
 import { getTagsFromBookList } from "../tags/services/getTagsFromBookList";
+import { useCommunityPosts } from "../community/api/getCommunityPost";
 
 
 export default function Dashboard() {
 
-    const { 
-        books,
-        settings
-    } = useStore()
+    const { books, settings } = useStore()
+
+    const community = useCommunityPosts()
+    const communityNewestPosts = community.data?.filter( post => post.type === 'CREATE_BOOK').slice(0,10) || []
 
     const navigate = useNavigate()
 
@@ -100,7 +101,7 @@ export default function Dashboard() {
                         .sort( (a,b) => a.created_at < b.created_at ? 1 : -1 )
                         .slice(0,8)
                         .map( book => (
-                            <BookGridItem book={book} key={book.id} />
+                            <BookGridItem book={book} key={book.id} hideUserActions />
                     ))}
                 </Slider>
             </Section>
@@ -118,7 +119,7 @@ export default function Dashboard() {
                         .sort( () => Math.random() - 0.5 )
                         .slice(0,8)
                         .map( book => (
-                            <BookGridItem book={book} key={book.id} />
+                            <BookGridItem book={book} key={book.id} hideUserActions />
                     ))}
                 </Slider>
             </Section>
@@ -155,9 +156,19 @@ export default function Dashboard() {
                     New in the Community
                 </Heading>
 
-                <p>
-                    Coming soon
-                </p>
+                <Slider>
+
+                    { communityNewestPosts.map( post => (
+                        <div key={post.id}>
+                            { post.imageUrl && (
+                                <img src={post.imageUrl} />
+                            )}
+                            { post.title }
+                        </div>
+                    ))}
+
+                </Slider>
+
             </Section>
 
 

@@ -27,7 +27,8 @@ class CommunityPostRequest extends FormRequest
             'userHandle' => ['string', 'required'],
             'type'       => ['string', Rule::in(['CREATE_BOOK', 'FAVOURITE_BOOK', 'READ_BOOK', 'CREATE_REVIEW', 'JOIN']), 'required'],
             'imageUrl'   => ['string', 'nullable'],
-            'title'      => ['string', 'required']
+            'title'      => ['string', 'required'],
+            'key'        => ['string', 'required']
         ];
     }
 }
