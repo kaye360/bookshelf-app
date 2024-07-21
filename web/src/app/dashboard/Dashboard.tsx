@@ -10,7 +10,6 @@ import Slider from "./components/Slider";
 import Loader from "./components/Loader";
 import { getTagsFromBookList } from "../tags/services/getTagsFromBookList";
 import { useCommunityPosts } from "../community/api/getCommunityPost";
-import Tooltip from "../../components/common/Tooltip";
 import BookCover from "../../components/common/BookCover";
 
 
@@ -32,7 +31,6 @@ export default function Dashboard() {
 
     return (
         <BaseLayout>
-
 
             <Section className="grid md:grid-cols-2 gap-6 md:gap-24 items-center md:mt-12 mb-8 md:mb-28 mx-auto w-fit">
 
@@ -59,7 +57,6 @@ export default function Dashboard() {
                 />
 
             </Section>
-
 
             <Section>
 
@@ -142,7 +139,7 @@ export default function Dashboard() {
 
                 <div className="flex items-center justify-center gap-4 flex-wrap">
                     { tags
-                        .slice(0,20)
+                        .slice(0,15)
                         .map( tag => (
                             <Link 
                                 to={`/bookshelf?filterBy=${tag.tag}`}
@@ -169,12 +166,15 @@ export default function Dashboard() {
                 <Slider>
 
                     { communityNewestPosts.map( post => (
-                        <Link to={`/book/${post.key}`}>
+                        <Link 
+                            to={`/book/${post.key}`} 
+                            className="border-b-0"
+                            key={post.id}
+                        >
                             <BookCover 
                                 size="lg"
                                 title={post.title}
                                 src={post.imageUrl}
-                                key={post.id}
                             />
                         </Link>
                     ))}
