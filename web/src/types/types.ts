@@ -215,7 +215,8 @@ export interface ExternalApiBook {
     description? : {
         value? : string
     },
-    title : string
+    title : string,
+    first_publish_date? : string
 }
 
 export interface ExternalApiAuthor {
@@ -223,7 +224,9 @@ export interface ExternalApiAuthor {
     death_date : string
     name : string
     photos : number[]
-    bio? : string
+    bio? : {
+        value? : string
+    }
     key : string
 }
 

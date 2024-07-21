@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { getFormData } from "../../../utils/getFormData"
 import { CreateBook, ExternalApiBookResponse } from "../../../types/types"
 import { useStore } from "../../../store/store"
 import { CreateBookSchema } from "../../bookshelf/validation/createBookValidation"
@@ -17,14 +16,13 @@ const EXTERNAL_BOOK_PARAMS   = '&lang=en&sort=rating desc'
  * The api query or mutation to be consumed across the app
  * 
  */
-export default function useExternalApiBooks() {
+export default function useExternalApiBooks(searchQueryParam : string | null) {
 
-    const { auth : { user }} = useStore()
     const client = useQueryClient()
 
     return useMutation({
-        mutationKey : ['searchExternalApiBooks'],
-        mutationFn  : () => searchExternalApiBooks(user?.id),
+        mutationKey : ['searchExternalApiBooks', searchQueryParam],
+        mutationFn  : () => searchExternalApiBooks(searchQueryParam),
         onSuccess   : () => {
             client.invalidateQueries({
                 queryKey : ['getBooks']
@@ -42,18 +40,20 @@ export default function useExternalApiBooks() {
  * @returns a validated response or throws an error
  * 
  */
-async function searchExternalApiBooks(userId : number|undefined) : Promise<CreateBook[]> {
+async function searchExternalApiBooks(searchQueryParam : string | null) : Promise<CreateBook[]> {
 
-    if( !userId) {
-        throw new Error('Invalid user id')
-    }
 
-    const searchQuery = getFormData('#search-external-book-api-form').query.toString().replaceAll(' ', '+')
-    if(!searchQuery) {
+    if( !searchQueryParam ) {
         return []
     }
 
-    const response = await fetch( EXTERNAL_BOOK_API_URL + searchQuery + EXTERNAL_BOOK_PARAMS )
+    const userId = useStore.getState().auth?.user?.id
+
+    if( !userId ) {
+        throw new Error('Invalid user id')
+    }
+
+    const response = await fetch( EXTERNAL_BOOK_API_URL + searchQueryParam + EXTERNAL_BOOK_PARAMS )
     const results = await response.json() as ExternalApiBookResponse
 
     const transform = results.docs?.map( book => CreateBookSchema.cast({

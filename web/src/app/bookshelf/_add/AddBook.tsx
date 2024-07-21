@@ -1,40 +1,24 @@
 import BaseLayout from '../../../layouts/BaseLayout'
-import { SyntheticEvent, useState } from 'react'
-import usePaginateResults from '../../externalBookApi/hooks/usePaginateResults'
 import Button from '../../../components/form/Button'
 import Result from './components/Result'
 import TextInput from '../../../components/form/TextInput'
 import { LoaderIcon } from '../../../components/common/Icon'
-import { useQueryClient } from '@tanstack/react-query'
-import useExternalApiBooks from '../../externalBookApi/api/getExternalApiBooks'
+import useFormHandlers from './hooks/useFormHandlers'
 
 
 export default function AddBook() {
     
-    const client = useQueryClient()
-    
-    const [hasSearched, setHasSearched] = useState<boolean>(false)
-    
-    const query = useExternalApiBooks()
-    
-    const hasResults = query.isSuccess && !query.isPending && query.data.length !== 0
-    
-    const { bookList, hasMoreBooks, nextPage } = usePaginateResults({ data : query.data })
-    
-    const searchQueryEl = document.querySelector('#search-query-input') as HTMLInputElement
-    const searchQuery = searchQueryEl ? searchQueryEl.value : ''
-
-    async function handleSubmit(e: SyntheticEvent) {
-        e.preventDefault()
-        setHasSearched(true)
-        query.mutate()
-        searchQueryEl && searchQueryEl.blur()
-    }
-
-    function handleReset() {
-        setHasSearched(false)
-        client.setQueryData(['searchGoogleBooks'], null)
-    }
+    const {
+        handleReset,
+        handleSubmit,
+        query,
+        hasResults,
+        hasSearched,
+        hasMoreBooks,
+        nextPage,
+        bookList,
+        searchQueryParam
+    } = useFormHandlers()
 
     return (
         <BaseLayout>
@@ -47,8 +31,7 @@ export default function AddBook() {
 
                 <TextInput
                     label='Find your books'
-                    name="query"
-                    id="search-query-input"
+                    name="q"
                     type='search'
                     placeholder='Enter an author, book title, category, or isbn'
                     autoComplete="off"
@@ -95,8 +78,8 @@ export default function AddBook() {
                 { hasResults && (
                     <>
                         Search results for:  
-                        <span className='font-bold'>{searchQuery}</span> <br />
-                        ({query.data.length} results)
+                        <span className='font-bold'> {searchQueryParam}</span>
+                        <span className='text-sm'> ({query.data?.length} results) </span>
                     </>
                 )}
             </div>
