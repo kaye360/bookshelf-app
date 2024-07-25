@@ -66,9 +66,8 @@ Route::get('community', [CommunityPostController::class, 'index']);
 Route::post('community', [CommunityPostController::class, 'store'])->middleware('auth:sanctum');
 
 /**
- * Error Routes
+ * Testing Route
  */
-// Route::fallback( function(){
-//     return response()->json([
-//         'message' => 'Page Not Found.'], 404);
-// });
+Route::get('test', function() {
+    return 'Hello!';
+});

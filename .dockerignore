@@ -1,0 +1,124 @@
+# flyctl launch added from .gitignore
+dev
+
+# flyctl launch added from backend\.gitignore
+backend\.phpunit.cache
+backend\node_modules
+backend\public\build
+backend\public\hot
+backend\public\storage
+backend\storage\*.key
+backend\vendor
+backend\**\.env
+backend\**\.env.backup
+backend\**\.env.production
+backend\**\.phpunit.result.cache
+backend\**\Homestead.json
+backend\**\Homestead.yaml
+backend\**\auth.json
+backend\**\npm-debug.log
+backend\**\yarn-error.log
+backend\.fleet
+backend\.idea
+backend\.vscode
+
+# flyctl launch added from backend\bootstrap\cache\.gitignore
+backend\bootstrap\cache\**\*
+!backend\bootstrap\cache\**\.gitignore
+
+# flyctl launch added from backend\database\.gitignore
+backend\database\**\*.sqlite*
+
+# flyctl launch added from backend\storage\app\.gitignore
+backend\storage\app\**\*
+!backend\storage\app\**\public
+!backend\storage\app\**\.gitignore
+
+# flyctl launch added from backend\storage\app\public\.gitignore
+backend\storage\app\public\**\*
+!backend\storage\app\public\**\.gitignore
+
+# flyctl launch added from backend\storage\framework\.gitignore
+backend\storage\framework\**\compiled.php
+backend\storage\framework\**\config.php
+backend\storage\framework\**\down
+backend\storage\framework\**\events.scanned.php
+backend\storage\framework\**\maintenance.php
+backend\storage\framework\**\routes.php
+backend\storage\framework\**\routes.scanned.php
+backend\storage\framework\**\schedule-*
+backend\storage\framework\**\services.json
+
+# flyctl launch added from backend\storage\framework\cache\.gitignore
+backend\storage\framework\cache\**\*
+!backend\storage\framework\cache\**\data
+!backend\storage\framework\cache\**\.gitignore
+
+# flyctl launch added from backend\storage\framework\cache\data\.gitignore
+backend\storage\framework\cache\data\**\*
+!backend\storage\framework\cache\data\**\.gitignore
+
+# flyctl launch added from backend\storage\framework\sessions\.gitignore
+backend\storage\framework\sessions\**\*
+!backend\storage\framework\sessions\**\.gitignore
+
+# flyctl launch added from backend\storage\framework\testing\.gitignore
+backend\storage\framework\testing\**\*
+!backend\storage\framework\testing\**\.gitignore
+
+# flyctl launch added from backend\storage\framework\views\.gitignore
+backend\storage\framework\views\**\*
+!backend\storage\framework\views\**\.gitignore
+
+# flyctl launch added from backend\storage\logs\.gitignore
+backend\storage\logs\**\*
+!backend\storage\logs\**\.gitignore
+
+# flyctl launch added from backend\vendor\hamcrest\hamcrest-php\.gitignore
+backend\vendor\hamcrest\hamcrest-php\**\composer.lock
+backend\vendor\hamcrest\hamcrest-php\**\vendor
+
+# flyctl launch added from backend\vendor\mockery\mockery\docs\.gitignore
+backend\vendor\mockery\mockery\docs\**\_build
+
+# flyctl launch added from backend\vendor\psr\container\.gitignore
+backend\vendor\psr\container\**\composer.lock
+backend\vendor\psr\container\**\composer.phar
+backend\vendor\psr\container\vendor
+
+# flyctl launch added from backend\vendor\psr\event-dispatcher\.gitignore
+backend\vendor\psr\event-dispatcher\vendor
+backend\vendor\psr\event-dispatcher\**\composer.lock
+
+# flyctl launch added from backend\vendor\spatie\ignition\resources\compiled\.gitignore
+backend\vendor\spatie\ignition\resources\compiled\**\*
+!backend\vendor\spatie\ignition\resources\compiled\**\.gitignore
+!backend\vendor\spatie\ignition\resources\compiled\**\ignition.css
+!backend\vendor\spatie\ignition\resources\compiled\**\ignition.js
+
+# flyctl launch added from web\.gitignore
+# Logs
+web\**\logs
+web\**\*.log
+web\**\npm-debug.log*
+web\**\yarn-debug.log*
+web\**\yarn-error.log*
+web\**\pnpm-debug.log*
+web\**\lerna-debug.log*
+
+web\**\node_modules
+web\**\dist
+web\**\dist-ssr
+web\**\*.local
+
+# Editor directories and files
+web\**\.vscode\*
+!web\**\.vscode\extensions.json
+web\**\.idea
+web\**\.DS_Store
+web\**\*.suo
+web\**\*.ntvs*
+web\**\*.njsproj
+web\**\*.sln
+web\**\*.sw?
+fly.toml
