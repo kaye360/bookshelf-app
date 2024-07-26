@@ -164,7 +164,6 @@ export interface Book {
     authors       : string
     imageUrl      : string | null
     userId        : string
-    rating        : number
     group         : 'wishlist' | 'owned'
     isRead        : boolean
     tags          : string[]

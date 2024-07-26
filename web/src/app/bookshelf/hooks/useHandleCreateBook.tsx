@@ -19,6 +19,8 @@ export default function useHandleCreateBook() {
 
         const isOwned = document.getElementById('isOwned') as HTMLInputElement
         const isRead  = document.getElementById('isRead') as HTMLInputElement
+
+        console.log('handleCreateBook', book)
         
         query.mutate({ book, isOwned, isRead})
 

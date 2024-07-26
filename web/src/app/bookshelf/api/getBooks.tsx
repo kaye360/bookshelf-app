@@ -57,7 +57,6 @@ async function getBooks(userId : number | undefined) : Promise<Book[]> {
         title         : book.title,
         authors       : book.authors,
         userId        : book.userId,
-        rating        : book.rating,
         isRead        : book.isRead,
         isFavourite   : book.isFavourite,
         group         : book.group,

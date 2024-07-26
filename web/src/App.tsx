@@ -16,7 +16,9 @@ import { useBooks } from "./app/bookshelf/api/getBooks"
 
 export default function App() {
 
-	useBooks()
+	// useBooks()
+	const b = useBooks()
+	console.log(b.error)
 	useSettings()
 
 	return (

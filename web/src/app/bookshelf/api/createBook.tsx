@@ -58,9 +58,7 @@ async function createBook(props : CreateBookProps ) : Promise<Book> {
      * compatible format.
      * 
      */
-
-    const { title, authors, rating, tags, imageUrl, pageCount, publishedDate, isFavourite, key } =  props.book
-
+    const { title, authors, tags, imageUrl, pageCount, publishedDate, isFavourite, key } =  props.book
     const transform = CreateBookSchema.validateSync({
         userId        : user.id,
         isRead        : props.isRead.checked,
@@ -68,7 +66,6 @@ async function createBook(props : CreateBookProps ) : Promise<Book> {
         key,
         title,
         authors,
-        rating,
         isFavourite,
         tags,
         imageUrl,
@@ -83,6 +80,8 @@ async function createBook(props : CreateBookProps ) : Promise<Book> {
     })
 
     response.data.tags = JSON.parse( response.data.tags )
+
+    console.log(response.data)
 
     const validated = BookSchema.validateSync(response.data)
 

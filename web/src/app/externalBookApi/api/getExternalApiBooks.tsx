@@ -61,7 +61,6 @@ async function searchExternalApiBooks(searchQueryParam : string | null) : Promis
         title         : book.title,
         authors       : book.author_name ? book.author_name.join(', ') : 'N/A',
         userId        : userId,
-        rating        : 0,
         isRead        : false,
         isFavourite   : false,
         group         : 'wishlist',

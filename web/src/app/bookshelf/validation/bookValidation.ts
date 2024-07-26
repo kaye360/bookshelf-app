@@ -8,7 +8,6 @@ export const BookSchema : ObjectSchema<Book> = object({
     title         : string().defined(),
     authors       : string().defined(),
     userId        : string().defined(),
-    rating        : number().defined(),
     isRead        : boolean().defined(),
     isFavourite   : boolean().defined(),
     created_at    : string().defined(),
