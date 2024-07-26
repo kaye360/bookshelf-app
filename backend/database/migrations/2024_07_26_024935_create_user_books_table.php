@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('user_books', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('isbn10');
-            $table->string('isbn13');
-            $table->string('imageUrl');
-            $table->integer('imageWidth');
-            $table->integer('imageHeight');
-            $table->string('userId');
-            $table->integer('rating');
+            $table->string('key');
+            $table->string('title')->nullable();
+            $table->string('imageUrl')->nullable();
+            $table->integer('userId');
             $table->string('group');
             $table->boolean('isRead');
             $table->string('tags');
+            $table->string('authors')->nullable();
+            $table->boolean('isFavourite');
+            $table->integer('pageCount');
+            $table->string('publishedDate')->nullable();
             $table->timestamps();
         });
     }

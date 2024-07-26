@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('userHandle');
             $table->string('type');
             $table->string('imageUrl')->nullable();
+            $table->string('title');
+            $table->string('key');
         });
     }
 

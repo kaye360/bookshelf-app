@@ -2,12 +2,12 @@ id: 63707
 name: Bookshelf
 environments:
     production:
-        database: bookshelf
+        database: bookshelf_db
         memory: 1024
         cli-memory: 512
         runtime: 'php-8.3:al2'
-        # deploy:
-            #- "php artisan migrate --force"
+        deploy:
+            - "php artisan migrate --force"
         build:
             - 'composer install --no-dev'
             - 'php artisan event:cache'
