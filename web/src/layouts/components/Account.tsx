@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import AccountModal from "./AccountModal"
-import { LogoutIcon, SettingsIcon, UserIcon } from "../../components/common/Icon"
+import { ChevronDownIcon, LogoutIcon, SettingsIcon, UserIcon } from "../../components/common/Icon"
 import useToggleState from "../../hooks/useToggleState"
 import { useStore } from "../../store/store"
 import Avatar from "../../components/common/Avatar"
@@ -24,6 +24,7 @@ export default function Account() {
                     >
                         <Avatar handle={user.handle} />
                         {user.handle}
+                        <ChevronDownIcon size={18} />
                     </button>
 
                     <div className={`
