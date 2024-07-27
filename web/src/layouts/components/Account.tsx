@@ -20,7 +20,7 @@ export default function Account() {
 
                     <button
                         onClick={ () => toggleDropDown() }
-                        className="flex gap-[2px] items-center hover:bg-accent hover:text-bg px-6 py-3 rounded-md font-semibold tracking-wider"
+                        className="flex gap-[2px] items-center hover:bg-accent hover:text-bg px-6 py-3 rounded-md text-sm font-semibold tracking-wider"
                     >
                         <Avatar handle={user.handle} />
                         {user.handle}
