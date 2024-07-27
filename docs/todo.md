@@ -1,8 +1,6 @@
 # TODO
 
 ## Front end
-- Book Page: Add book button to query &title={book.title}
-- Auth: Improve logout modal UI on mobile screens
 - Account Dropdown: outerclick close menu
 - AddBookModal: Book cover needs proper aspect ratio if no cover available
 - Bookshelf: Make books clickable in list view, add info button
@@ -10,6 +8,7 @@
 - Community Page: Add new users to community feed
 - Dashboard: Make books clickable
 
+- Book Page: Add book button to query &title={book.title}
 - Footer: improve footer UI
 - Book Page: Improve UI, make responsive
 - Auth: guest login feature
