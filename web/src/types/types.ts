@@ -214,6 +214,7 @@ export interface ExternalApiBook {
     description? : {
         value? : string
     },
+    key : string
     title : string,
     first_publish_date? : string
 }

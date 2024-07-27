@@ -30,7 +30,7 @@ function Text({
     return (
         <div 
             ref={outerRef}
-            className="hidden sm:block absolute left-1/2 -translate-x-1/2 z-[9999] bottom-full group-hover/tooltip:bottom-[135%] text-bg text-xs transition-all delay-700 pointer-events-none opacity-0 group-hover/tooltip:opacity-100 min-w-max" 
+            className="hidden sm:block absolute left-1/2 -translate-x-1/2 z-[9999] bottom-full group-hover/tooltip:bottom-[calc(100%+20px)] text-bg text-xs transition-all delay-700 pointer-events-none opacity-0 group-hover/tooltip:opacity-100 min-w-max" 
         >
             <span 
                 ref={innerRef}

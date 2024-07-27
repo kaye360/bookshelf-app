@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import BaseLayout from "../../layouts/BaseLayout";
 import useSingleExternalApiBook from "../externalBookApi/api/getSingleExternalApiBook";
-import { LoaderIcon, PlusIcon } from "../../components/common/Icon";
+import { CheckIcon, LoaderIcon, PlusIcon } from "../../components/common/Icon";
 import useSingleExternalApiAuthors from "../externalBookApi/api/getSingleExternalApiAuthors";
 import BookCover from "../../components/common/BookCover";
 import Button from "../../components/form/Button";
+import useUserHasBook from "../bookshelf/hooks/useUserHasBook";
 
 export default function Book() {
 
@@ -12,9 +13,9 @@ export default function Book() {
     const book = useSingleExternalApiBook(params.id)
     const authors = useSingleExternalApiAuthors(book.data?.authors)
     const navigate = useNavigate()
+    const userHasBook = useUserHasBook()
+    const key = book.data?.key.replaceAll('/works/', '')
 
-    console.log(book)
-    
     return (
         <BaseLayout>
 
@@ -45,17 +46,31 @@ export default function Book() {
                             {book.data?.description?.value}
                         </p>
 
-                        <Button 
-                            variant="outline"
-                            onClick={ () => navigate(`/add?q=${book.data.title}`) }
-                        >
-                            <PlusIcon />
-                            Add to my bookshelf
-                        </Button>
+                        <div>
+                            { userHasBook(key) ? (                            
+                                <span className="flex gap-2 justify-center items-center min-w-max px-6 py-2 text-sm text-accent border border-accent/30 rounded-lg w-fit select-none">
+                                    <CheckIcon />
+                                    Added
+                                </span>
+                            ) : (
+                                <Button 
+                                    variant="outline"
+                                    className="w-fit"
+                                    onClick={ () => navigate(`/add?q=${book.data.title}`) }
+                                >
+                                    <PlusIcon />
+                                    Add to my bookshelf
+                                </Button>
+                            )}
+                        </div>
 
                     </div>
 
                     <div className="grid gap-3">
+
+                        <h2 className="font-semibold">
+                            Authors
+                        </h2>
 
                         { authors.data?.map( author => (
                             <div className="flex items-start gap-4 border border-primary-light/50 rounded-lg p-6 shadow-sm shadow-primary-light/50" key={author.key}>

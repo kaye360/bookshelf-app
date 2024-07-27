@@ -4,7 +4,11 @@ import { API_URL } from "../../../config"
 import useFormTouch from "../../../hooks/useFormTouch"
 import { Req } from "../../../lib/Req/Req"
 
+export type UserHandleStatus = 'initial' | 'fetching' | 'available' | 'unavailable'
+
 export default function useIsUserHandleAvailable() {
+
+    const [status, setStatus] = useState<UserHandleStatus>('initial')
 
     const handleUsernameOnChange = useRef (
         debounce( async (e) => {
@@ -12,21 +16,26 @@ export default function useIsUserHandleAvailable() {
                 touchForm()
             }
 
+            setStatus('fetching')
+
             const response = await Req.get( `${API_URL}/register/isUserHandleAvailable/${e.target.value}` )
 
-            if( Object.hasOwn( response.data, 'isHandleAvailable' )) {
-                setIsUserHandleAvailable( response.data.isHandleAvailable )
+            if( 
+                Object.hasOwn( response.data, 'isHandleAvailable' ) &&
+                response.data.isHandleAvailable
+            ) {
+                setStatus('available')
+            } else {
+                setStatus('unavailable')
             }
         }, 1000) 
     ).current
-
-    const [isUserHandleAvailable, setIsUserHandleAvailable] = useState<boolean>(true)
 
     const { isTouched, touchForm } = useFormTouch()
     
     return {
         handleUsernameOnChange,
-        isUserHandleAvailable,
-        isTouched
+        isTouched,
+        status
     }
 }

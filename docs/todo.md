@@ -1,23 +1,35 @@
 # TODO
 
 ## Front end
-- improve book page UI, make responsive
-- improve footer UI
-- guest login feature
-- Make proper landing page
-- forgot password
-- user profile
-- Account component outerclick close menu
+- Book Page: Add book button to query &title={book.title}
+- Auth: Improve logout modal UI on mobile screens
+- Account Dropdown: outerclick close menu
+- AddBookModal: Book cover needs proper aspect ratio if no cover available
+- Bookshelf: Make books clickable in list view, add info button
+- Bookshelf: Update sort by clicking on heading
+- Community Page: Add new users to community feed
+- Dashboard: Make books clickable
+
+- Footer: improve footer UI
+- Book Page: Improve UI, make responsive
+- Auth: guest login feature
+- Auth: forgot password
+- Homepage: Make proper landing page
+- Profile: Improve user profile Page
+- Bookshelf: Tooltip cut off in list view. Overflow issue
+- Layout: Make favicon
 
 ## Back end
 - guest login feature
-- forgot passworduser profile
+- forgot password
+- user profile
 
 ## Upcoming feature ideas
 - Add book via camera
 - Recomended books, authors, topics
 - leave reviews on books
 - follow users
+- follow topics
 - add avatar color picker
 - add a /help feature that explains the app
 - Statistics - most read authors, most read topics, longest book

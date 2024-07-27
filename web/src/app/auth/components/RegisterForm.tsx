@@ -20,8 +20,8 @@ export default function RegisterForm() {
 
     const { 
         handleUsernameOnChange, 
-        isUserHandleAvailable, 
-        isTouched 
+        isTouched,
+        status
     } = useIsUserHandleAvailable()
 
     const onSubmit: SubmitHandler<RegisterPayload> = async (formData) => {
@@ -41,7 +41,6 @@ export default function RegisterForm() {
                 onSubmit={handleSubmit( onSubmit ) }
                 className="grid gap-4"
             >
-        
                 <ValidatedTextInput 
                     label="Username"
                     name="handle"
@@ -50,9 +49,9 @@ export default function RegisterForm() {
                     formStateData={ [formState, 'handle'] }
                 />     
 
-                { !formState.errors.handle && (
+                { status !== 'initial' && (
                     <UniqueUsernameStatus 
-                        isUserHandleAvailable={isUserHandleAvailable}
+                        status={status}
                         isTouched={isTouched}
                     />
                 )}
@@ -74,7 +73,7 @@ export default function RegisterForm() {
                 <ValidatedTextInput
                     label="Password"
                     name="password"
-                    // type="password"
+                    type="password"
                     register={register}
                     formStateData={ [formState, 'password' ] }
                 />
@@ -82,7 +81,7 @@ export default function RegisterForm() {
                 <ValidatedTextInput
                     label="Confirm Password"
                     name="password_confirmation"
-                    // type="password"
+                    type="password"
                     register={register}
                     formStateData={ [formState, 'password_confirmation' ] }
                 />

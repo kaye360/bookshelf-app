@@ -80,10 +80,6 @@ async function createBook(props : CreateBookProps ) : Promise<Book> {
     })
 
     response.data.tags = JSON.parse( response.data.tags )
-
-    console.log(response.data)
-
     const validated = BookSchema.validateSync(response.data)
-
     return validated
 }

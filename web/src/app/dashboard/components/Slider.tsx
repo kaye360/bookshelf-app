@@ -54,7 +54,7 @@ export default function Slider({
 
             <div 
                 ref={scrollerRef}
-                className="flex gap-5 px-8 relative overflow-x-scroll md:scrollbar-hide"
+                className="flex gap-5 px-0 md:px-8 relative overflow-x-scroll md:scrollbar-hide"
             >
                 {children}
             </div>

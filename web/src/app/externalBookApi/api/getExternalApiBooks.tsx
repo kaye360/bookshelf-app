@@ -68,7 +68,11 @@ async function searchExternalApiBooks(searchQueryParam : string | null) : Promis
         pageCount     : book.number_of_pages_median || 0,
         publishedDate : book.first_publish_year || '',
         tags          : book.subject 
-            ? JSON.stringify( book.subject.sort( (a,b) => a.length > b.length ? 1 : -1).slice(0,3) )
+            ? JSON.stringify( book.subject
+                .sort( (a,b) => a.length > b.length ? 1 : -1)
+                .slice(0,3) 
+                .map(tag => tag.toLowerCase())
+            )
             : JSON.stringify( [] ),
     })) || []
     

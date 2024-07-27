@@ -38,7 +38,7 @@ async function register(payload : RegisterProps) : Promise<Pick<AuthSuccess, 'to
         url : `${API_URL}/register`, 
         payload 
     })
-
+    
     if( response.error) {
         throw new Error('Register Error')
     }

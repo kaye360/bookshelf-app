@@ -1,14 +1,15 @@
 import { useStore } from "../../../store/store"
-import { CreateBook } from "../../../types/types"
 
 
 export default function useUserHasBook() {
 
     const { books } = useStore()
 
-    function userHasBook(book : CreateBook) : boolean {
+    function userHasBook(key : string|undefined) : boolean {
 
-        if( books.some( b => b.key === book.key ) ) {
+        if( !key ) return false
+
+        if( books.some( b => b.key === key ) ) {
             return true
         }
         return false

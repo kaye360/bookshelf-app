@@ -14,10 +14,22 @@ class AuthController extends Controller
     {
             $validated = $request->validated();
 
+            $settings = (object) [
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'sort' => 'title',
+                'view' => 'grid',
+                'theme' => 'light',
+                'filter' => 'all',
+                'location' => null,
+                'currentlyReadingId' => null
+            ];
+
             $user = User::create([
                 'handle' => $validated['handle'],
                 'email' => $validated['email'],
-                'password' => Hash::make($validated['password'])
+                'password' => Hash::make($validated['password']),
+                'settings' => json_encode($settings)
             ]);
 
             $token = $user->createToken('auth_token')->plainTextToken;
