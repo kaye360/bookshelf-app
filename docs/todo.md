@@ -2,7 +2,6 @@
 
 ## Front end
 - Book Page: Add book button to query &title={book.title}
-- Footer: improve footer UI
 - Book Page: Improve UI, make responsive
 - Auth: guest login feature
 - Auth: forgot password
