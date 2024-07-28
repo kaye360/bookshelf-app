@@ -1,9 +1,6 @@
 # TODO
 
 ## Front end
-- Community Page: Add new users to community feed
-- Dashboard: Make books clickable
-
 - Book Page: Add book button to query &title={book.title}
 - Footer: improve footer UI
 - Book Page: Improve UI, make responsive

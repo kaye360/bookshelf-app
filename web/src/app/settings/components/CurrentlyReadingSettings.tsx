@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EditIcon } from "../../../components/common/Icon";
 import Button from "../../../components/form/Button";
 import { useStore } from "../../../store/store";
@@ -9,9 +9,11 @@ import BookCover from "../../../components/common/BookCover";
 
 
 export default function CurrentlyReadingSettings({
-    touchForm
+    touchForm,
+    isSaved
 } : {
-    touchForm : () => void
+    touchForm : () => void,
+    isSaved : boolean
 }) {
 
     const { settings, books } = useStore()
@@ -22,6 +24,11 @@ export default function CurrentlyReadingSettings({
 
     const [bookId, setBookId] = useState<string|null|undefined>(settings?.currentlyReadingId)
  
+    useEffect( () => {
+        if( isSaved ) {
+            setShowEditForm(false)
+        }
+    }, [isSaved])
     
     let currentBook = books
         ? books.filter( book => book.id === Number(bookId))[0]
@@ -51,7 +58,7 @@ export default function CurrentlyReadingSettings({
 
             </div>
 
-            { currentBook && (
+            { currentBook ? (
                 <div 
                     id="currently-reading-preview"
                     className="flex items-start gap-4 mb-2"
@@ -87,11 +94,15 @@ export default function CurrentlyReadingSettings({
                     </div>
         
                 </div>
+            ) : (
+                <div className="border border-primary-light/50 rounded p-4">
+                    You are not currently reading anything
+                </div>
             )}
 
             <div 
                 id="currently-reading-selector"
-                className={`overflow-hidden max-w-full transition-all px-1 ${showEditForm ? 'max-h-[400px] pt-1' : 'max-h-[0px]'}`}
+                className={`overflow-hidden max-w-full transition-all duration-300 px-1 ${showEditForm ? 'max-h-[400px] pt-1' : 'max-h-[0px]'}`}
             >
 
                 <TextInput 

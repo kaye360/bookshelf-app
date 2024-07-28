@@ -30,6 +30,7 @@ export default function Settings() {
 
                     <CurrentlyReadingSettings 
                         touchForm={touchForm}
+                        isSaved={isSaved}
                     /> 
 
                     <BookShelfSettings  

@@ -108,7 +108,13 @@ export default function Dashboard() {
                         .sort( (a,b) => a.created_at < b.created_at ? 1 : -1 )
                         .slice(0,8)
                         .map( book => (
-                            <BookGridItem book={book} key={book.id} hideUserActions />
+                            <Link 
+                                to={`/book/${book.key}`} 
+                                key={book.id}
+                                className="border-0 hover:scale-105 duration-200"
+                            >
+                                <BookGridItem book={book} hideUserActions />
+                            </Link>
                     ))}
                 </Slider>
             </Section>
@@ -126,7 +132,13 @@ export default function Dashboard() {
                         .sort( () => Math.random() - 0.5 )
                         .slice(0,8)
                         .map( book => (
-                            <BookGridItem book={book} key={book.id} hideUserActions />
+                            <Link 
+                                to={`/book/${book.key}`} 
+                                key={book.id}
+                                className="border-0 hover:scale-105 duration-200"
+                            >
+                                <BookGridItem book={book} hideUserActions />
+                            </Link>
                     ))}
                 </Slider>
             </Section>
@@ -166,10 +178,10 @@ export default function Dashboard() {
                 <Slider>
 
                     { communityNewestPosts.map( post => (
-                        <Link 
+                            <Link 
                             to={`/book/${post.key}`} 
-                            className="border-b-0"
                             key={post.id}
+                            className="border-0 hover:scale-105 duration-200"
                         >
                             <BookCover 
                                 size="lg"
