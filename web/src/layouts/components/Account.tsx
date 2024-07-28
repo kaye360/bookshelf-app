@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import LogoutModal from "./LogoutModal"
-import { ChevronDownIcon, LogoutIcon, SettingsIcon, UserIcon } from "../../components/common/Icon"
+import { ChevronDownIcon, HelpIcon, LogoutIcon, SettingsIcon, UserIcon } from "../../components/common/Icon"
 import useToggleState from "../../hooks/useToggleState"
 import { useStore } from "../../store/store"
 import Avatar from "../../components/common/Avatar"
@@ -58,6 +58,11 @@ export default function Account() {
                         <AccountDropDownLink to="/settings">
                             <SettingsIcon />
                             Settings
+                        </AccountDropDownLink>
+
+                        <AccountDropDownLink to="/help">
+                            <HelpIcon />
+                            Help
                         </AccountDropDownLink>
 
                         <AccountDropDownLink onClick={ () => setShowLogoutModal(true) }>

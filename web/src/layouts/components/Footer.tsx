@@ -1,19 +1,30 @@
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import Wrapper from "./Wrapper";
+import Divider from "../../components/common/Divider";
 
 export default function Footer() {
 
-    function handleClick() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
     return (
-        <div className="relative -z-10 pt-12 py-36">
+        <div className="relative pb-12">
             <Wrapper>
-                <div className="w-fit mx-auto">
-                    <button onClick={handleClick}>
+                <div className="flex flex-col items-center gap-6">
+
+                    <Divider />
+
+                    <button 
+                        onClick={ () => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        className="cursor-pointer hover:underline mt-6"
+                    >
                         Back to Top
                     </button>
+
+                    <div className="flex gap-6">
+                        <Link to="/">Home</Link>
+                        <Link to="/about">About</Link>
+                        <Link to="/help">Help</Link>
+                    </div>
+
                     <Logo />
                 </div>
             </Wrapper>
