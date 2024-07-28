@@ -42,7 +42,10 @@ export default function Account() {
                     >
                         <Avatar handle={user.handle} />
                         {user.handle}
-                        <ChevronDownIcon size={18} />
+                        <ChevronDownIcon 
+                            size={18} 
+                            className={` ${showDropDown ? 'rotate-180' : ''} transition-all duration-300 `} 
+                        />
                     </button>
 
                     <AccountDropDown showDropDown={showDropDown}>

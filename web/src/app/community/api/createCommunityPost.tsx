@@ -6,7 +6,7 @@ import { useStore } from "../../../store/store";
 
 
 interface CreateCommunityPostProps {
-    book : Book | CreateBook
+    book? : Book | CreateBook
     type : CommunityPost['type']
 }
 
@@ -52,9 +52,9 @@ async function createCommunityPost(props : CreateCommunityPostProps ) : Promise<
         userId     : user.id,
         userHandle : user.handle,
         type       : props.type,
-        key        : props.book.key,
-        title      : props.book.title,
-        imageUrl   : props.book.imageUrl
+        key        : props.book?.key,
+        title      : props.book?.title,
+        imageUrl   : props.book?.imageUrl
     }
 
     const response = await Req.post({

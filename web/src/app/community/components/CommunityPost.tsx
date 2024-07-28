@@ -3,6 +3,7 @@ import Avatar from "../../../components/common/Avatar"
 import { CommunityPost as Post } from "../../../types/types"
 import Tooltip from "../../../components/common/Tooltip"
 import BookCover from "../../../components/common/BookCover"
+import { UserPlusIcon } from "../../../components/common/Icon"
 
 
 type Action = {
@@ -48,23 +49,30 @@ export default function CommunityPost({
                 </span>
             </h3>
 
-            <div className="flex items-stretch gap-4 flex-wrap">
+            { post[0].type !== 'JOIN' ? (
+                <div className="flex items-stretch gap-4 flex-wrap">
 
-                { post.slice(0,MAX_POSTS).map( singlePost => (
-                    <Tooltip title={singlePost.title} key={singlePost.id}>
-                        <Link to={`/book/${singlePost.key}`}>
-                            <BookCover size='md' src={singlePost.imageUrl} title={singlePost.title} />
-                        </Link>
-                    </Tooltip>
-                ))}
+                    { post.slice(0,MAX_POSTS).map( singlePost => (
+                        <Tooltip title={singlePost.title} key={singlePost.id}>
+                            <Link to={`/book/${singlePost.key}`}>
+                                <BookCover size='md' src={singlePost.imageUrl} title={singlePost.title} />
+                            </Link>
+                        </Tooltip>
+                    ))}
 
-                { post.length > MAX_POSTS && (
-                    <div className=" flex items-center px-8 rounded-md">
-                        + {post.length - MAX_POSTS} more
-                    </div>
-                )}
+                    { post.length > MAX_POSTS && (
+                        <div className=" flex items-center px-8 rounded-md">
+                            + {post.length - MAX_POSTS} more
+                        </div>
+                    )}
 
-            </div>
+                </div>
+            ) : (
+                <div className="px-8 py-5 rounded-md w-fit bg-primary-light/30">
+                    <UserPlusIcon size={36} className=" stroke-primary-dark/50" />
+                </div>
+            )}
+
         </div>
     )
 }

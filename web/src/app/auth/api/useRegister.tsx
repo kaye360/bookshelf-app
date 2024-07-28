@@ -4,6 +4,7 @@ import { Req } from "../../../lib/Req/Req";
 import { useStore } from "../../../store/store";
 import { AuthSuccess, RegisterPayload } from "../../../types/types";
 import { AuthSchema } from "../validation/authValidation";
+import { useCreateCommunityPost } from "../../community/api/createCommunityPost";
 
 
 interface RegisterProps extends RegisterPayload {}
@@ -13,6 +14,7 @@ export default function useRegister() {
 
     const { authActions : { updateAuth } } = useStore()
     const client = useQueryClient()
+    const community = useCreateCommunityPost()
 
     return useMutation({
         mutationKey : ['register'],
@@ -26,6 +28,7 @@ export default function useRegister() {
             client.invalidateQueries({
                 queryKey : ['getBooks']
             })
+            community.mutate({type : 'JOIN'})
         },
         onError : () => updateAuth('REGISTER_ERROR') 
     })

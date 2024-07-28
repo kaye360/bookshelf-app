@@ -88,19 +88,16 @@ export default function AddBook() {
             { hasResults && (
                 <div 
                     id="search-results"
-                    className='grid gap-16 w-full max-w-3xl'
+                    className='grid gap-12 w-full max-w-3xl'
                 >
-
                     { bookList.map( (book, i) => (
                         <Result book={book} key={i} />
                     ))}
-        
                     { hasMoreBooks && (
                         <Button variant="ghost" onClick={ nextPage }>
                             Load More Results
                         </Button>
                     )}
-        
                 </div>
             )}
 

@@ -1,10 +1,6 @@
 # TODO
 
 ## Front end
-- Account Dropdown: outerclick close menu
-- AddBookModal: Book cover needs proper aspect ratio if no cover available
-- Bookshelf: Make books clickable in list view, add info button
-- Bookshelf: Update sort by clicking on heading
 - Community Page: Add new users to community feed
 - Dashboard: Make books clickable
 

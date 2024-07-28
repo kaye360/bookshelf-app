@@ -5,11 +5,6 @@ import { CreateBook } from "../../../../types/types";
 import useHandleCreateBook from "../../hooks/useHandleCreateBook";
 import BookCover from "../../../../components/common/BookCover";
 
-/**
- * 
- * @parent <Result />
- * 
- */
 export default function AddBookModal({ 
     book, 
     closeModalFn
@@ -30,14 +25,15 @@ export default function AddBookModal({
     return (
         <Modal closeModalFn={closeModalFn} >
 
-            <div className="flex items-center gap-3 darklight">
+            <div className="flex items-center gap-3 md:min-w-[350px]">
 
-                <BookCover
-                    size="md"
-                    autoHeight
-                    title={book.title}
-                    src={book.imageUrl}
-                />
+                { book.imageUrl && (
+                    <BookCover
+                        size="md"
+                        title={book.title}
+                        src={book.imageUrl}
+                    />
+                )}
 
                 <div className="grid gap-2">
 

@@ -1,30 +1,61 @@
+import { ChevronDownIcon } from "../../../components/common/Icon"
+import { useBookshelfParams } from "../hooks/useBookShelfParamsContext"
 import { BookTableComponent } from "./BookTableComponents"
 
 export default function BookTable({
     children
-} : {
-    children?:any
+}: {
+    children?: any
 }) {
 
-  return (
-    <div className="max-w-[100vw] overflow-x-auto">
-        <table className="w-full">
+    const { searchParams, updateSearchParam } = useBookshelfParams()
+    console.log(searchParams.get('sortBy'))
 
-            <thead>
-                <tr className="font-semibold">
-                    <BookTableComponent.Cell>Cover</BookTableComponent.Cell>
-                    <BookTableComponent.Cell>Title</BookTableComponent.Cell>
-                    <BookTableComponent.Cell>Authors</BookTableComponent.Cell>
-                    <BookTableComponent.Cell>Tags</BookTableComponent.Cell>
-                    <BookTableComponent.Cell>Actions</BookTableComponent.Cell>
-                </tr>
-            </thead>
+    return (
+        <div className="max-w-[100vw] overflow-x-auto">
+            <table className="w-full">
 
-            <tbody>
-                {children}
-            </tbody>
-        
-        </table>
-    </div>
-  )
+                <thead>
+                    <tr className="font-semibold">
+                        <BookTableComponent.Cell>
+                            Cover
+                        </BookTableComponent.Cell>
+                        <BookTableComponent.Cell>
+                            <button 
+                                onClick={ () => updateSearchParam('sortBy', 'title')}
+                                className="hover:underline flex items-center gap-1"
+                            >
+                                Title
+                                { searchParams.get('sortBy') === 'title' && (
+                                    <ChevronDownIcon />
+                                )}
+                            </button>
+                        </BookTableComponent.Cell>
+                        <BookTableComponent.Cell>
+                            <button 
+                                onClick={ () => updateSearchParam('sortBy', 'authors')}
+                                className="hover:underline flex items-center gap-1"
+                            >
+                                Authors
+                                { searchParams.get('sortBy') === 'authors' && (
+                                    <ChevronDownIcon />
+                                )}
+                            </button>
+                        </BookTableComponent.Cell>
+                        <BookTableComponent.Cell>
+                            Tags
+                        </BookTableComponent.Cell>
+                        <BookTableComponent.Cell>
+                            Actions
+                        </BookTableComponent.Cell>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {children}
+                </tbody>
+
+            </table>
+        </div>
+    )
 }
