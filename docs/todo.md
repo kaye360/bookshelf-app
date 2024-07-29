@@ -8,7 +8,6 @@
 - Homepage: Make proper landing page
 - Profile: Improve user profile Page
 - Bookshelf: Tooltip cut off in list view. Overflow issue
-- Layout: Make favicon
 
 ## Back end
 - guest login feature

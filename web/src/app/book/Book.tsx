@@ -1,49 +1,56 @@
-import { useNavigate, useParams } from "react-router-dom";
 import BaseLayout from "../../layouts/BaseLayout";
-import useSingleExternalApiBook from "../externalBookApi/api/getSingleExternalApiBook";
 import { CheckIcon, LoaderIcon, PlusIcon } from "../../components/common/Icon";
-import useSingleExternalApiAuthors from "../externalBookApi/api/getSingleExternalApiAuthors";
 import BookCover from "../../components/common/BookCover";
 import Button from "../../components/form/Button";
 import useUserHasBook from "../bookshelf/hooks/useUserHasBook";
+import AddBookModal from "../bookshelf/_add/components/AddBookModal";
+import useCreateBook from "./hooks/useCreateBook";
+import useBookData from "./hooks/useBookData";
 
 export default function Book() {
 
-    const params = useParams()
-    const book = useSingleExternalApiBook(params.id)
-    const authors = useSingleExternalApiAuthors(book.data?.authors)
-    const navigate = useNavigate()
-    const userHasBook = useUserHasBook()
-    const key = book.data?.key.replaceAll('/works/', '')
+    const { key, bookQuery, authors} = useBookData()
+    
+    const {
+        createBook,
+        isAddModalOpen,
+        setIsModalOpen,
+        handleAddBook
+    } = useCreateBook({
+        key,
+        bookQuery
+    })
 
+    const userHasBook = useUserHasBook()
+    
     return (
         <BaseLayout>
 
-            { book.isSuccess && !book.isRefetching && (
+            { bookQuery.isSuccess && !bookQuery.isRefetching && (
                 <div className="grid grid-cols-[auto_auto] items-start gap-6 w-fit mx-auto">
 
                     <div className="grid gap-2">
                         <h1 className="font-semibold text-2xl">
-                            { book.data?.title}
+                            { bookQuery.data?.title}
                         </h1>
 
-                        {book.data.first_publish_date && (
+                        {bookQuery.data.first_publish_date && (
                             <p>
-                                First published: {book.data.first_publish_date}
+                                First published: {bookQuery.data.first_publish_date}
                             </p>
                         )}
 
-                        { Array.isArray( book.data?.covers ) && book.data?.covers[0] && (
+                        { Array.isArray( bookQuery.data?.covers ) && bookQuery.data?.covers[0] && (
                             <BookCover 
                                 size="lg" 
                                 autoHeight
-                                title={book.data.title}
-                                src={`https://covers.openlibrary.org/b/id/${book.data?.covers[0]}-M.jpg`}
+                                title={bookQuery.data.title}
+                                src={`https://covers.openlibrary.org/b/id/${bookQuery.data?.covers[0]}-M.jpg`}
                             />
                         )}
 
                         <p>
-                            {book.data?.description?.value}
+                            {bookQuery.data?.description?.value}
                         </p>
 
                         <div>
@@ -56,7 +63,7 @@ export default function Book() {
                                 <Button 
                                     variant="outline"
                                     className="w-fit"
-                                    onClick={ () => navigate(`/add?q=${book.data.title}`) }
+                                    onClick={ handleAddBook }
                                 >
                                     <PlusIcon />
                                     Add to my bookshelf
@@ -102,11 +109,15 @@ export default function Book() {
                 </div>
             )}
 
-            { book.isRefetching || book.isFetching && (
+            { bookQuery.isRefetching || bookQuery.isFetching && (
                 <div>
                     <LoaderIcon />
                     Loading
                 </div>
+            )}
+
+            { isAddModalOpen && createBook && (
+                <AddBookModal book={ createBook } closeModalFn={ () => setIsModalOpen(false) } />
             )}
         </BaseLayout>
     )
