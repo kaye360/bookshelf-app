@@ -1,9 +1,9 @@
 import { PlusIcon, CheckIcon } from "../../../../components/common/Icon"
 import AddBookModal from "./AddBookModal"
 import { useState } from "react"
-import useUserHasBook from "../../hooks/useUserHasBook"
 import { CreateBook } from "../../../../types/types"
 import BookCover from "../../../../components/common/BookCover"
+import { userHasBook } from "../../services/userHasBook"
 
 
 /**
@@ -16,8 +16,6 @@ export default function Result({
 } : {
     book: CreateBook, 
 }) {
-
-    const userHasBook = useUserHasBook()
 
     const [isModalOpen, setIsModalOpen] = useState(false)
 
