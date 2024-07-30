@@ -8,7 +8,7 @@ import BookShelf from "../../app/bookshelf/Bookshelf";
 import Settings from "../../app/settings/Settings";
 import Community from "../../app/community/Community";
 import AddBook from "../../app/bookshelf/_add/AddBook";
-import Profile from "../../app/user/Profile";
+import Profile from "../../app/profile/Profile";
 
 export const router = createBrowserRouter([
 	{

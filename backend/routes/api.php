@@ -36,8 +36,7 @@ Route::get('register/isUserHandleAvailable/{handle}', [AuthController::class, 'i
 /**
  * User Profile Routes
  */
-Route::get('profile/{id}', [ProfileController::class, 'show']);
-Route::put('profile/{id}', [ProfileController::class, 'update'])->middleware('auth:sanctum');;
+Route::get('profile/{userHandle}', [ProfileController::class, 'show']);
 
 /**
  * User Settings Routes
@@ -48,7 +47,8 @@ Route::put('settings/{id}', [SettingsController::class, 'update'])->middleware('
 /**
  * User Bookshelf Routes
  */
-Route::get('bookshelf/{userId}', [UserBookController::class, 'index']);
+Route::get('bookshelf/id/{userId}', [UserBookController::class, 'indexById']);
+Route::get('bookshelf/handle/{userHandle}', [UserBookController::class, 'indexByHandle']);
 Route::post('book', [UserBookController::class, 'store'])->middleware('auth:sanctum');
 Route::put('book/{id}', [UserBookController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('book/{id}', [UserBookController::class, 'delete'])->middleware('auth:sanctum');

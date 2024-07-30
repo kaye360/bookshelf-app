@@ -111,7 +111,7 @@ export interface RegisterPayload {
 /**
  * 
  * 
- * User
+ * User, Profile
  * 
  * 
  */
@@ -123,6 +123,19 @@ export interface User {
     email       : string 
 }
 
+export interface Profile {
+    userId   : string,
+    location : string,
+    tags     : string[],
+    joined   : string,
+    books    : {
+        key: string
+        title: string
+        imageUrl: string
+        authors: string[]
+        pageCount: number
+    }[]
+}
 
 /**
  * 

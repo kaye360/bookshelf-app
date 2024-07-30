@@ -16,7 +16,7 @@ import { useBooks } from "./app/bookshelf/api/getBooks"
 
 export default function App() {
 
-	useBooks()
+	useBooks({})
 	useSettings()
 
 	return (

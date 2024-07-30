@@ -6,13 +6,23 @@ import { Req } from "../../../lib/Req/Req"
 import { Book } from "../../../types/types"
 import { BookSchema } from "../validation/bookValidation"
 
+type UserIdentifier = string | number | undefined
+type By = 'id' | 'handle'
+
+interface UseBooksProps {
+    userId? : UserIdentifier
+    by? : By
+}
 
 /**
  * 
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useBooks() {
+export function useBooks({
+    userId = undefined,
+    by = 'id'
+} : UseBooksProps) {
 
     const { 
         booksActions : { updateBookStatus, updateBooks }, 
@@ -22,7 +32,7 @@ export function useBooks() {
     return useQuery({
         queryKey : ['getBooks'],
         queryFn  : async () => {
-            const books = await getBooks(user?.id)
+            const books = await getBooks(userId || user?.id, by)
             updateBooks(books)
             updateBookStatus('SUCCESS')
             return books
@@ -38,12 +48,15 @@ export function useBooks() {
  * @returns a validated response or throws an error
  * 
  */
-async function getBooks(userId : number | undefined) : Promise<Book[]> {
+async function getBooks(
+    userId : UserIdentifier,
+    by : By
+) : Promise<Book[]> {
 
     if( !isNumber(userId) ) {
         throw new Error('Error getting books from API')
     }
-    const response = await Req.get(`${API_URL}/bookshelf/${userId}`)
+    const response = await Req.get(`${API_URL}/bookshelf/${by}/${userId}`)
 
     if( response.error || !Array.isArray( response.data ) ) {
         throw new Error('Error getting books from API')

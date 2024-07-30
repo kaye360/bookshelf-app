@@ -54,7 +54,7 @@ export default function AddBookModal({
                 id="addBookForm"
             >
 
-                <label className="flex items-center gap-2 group relative">
+                <label className="flex items-center gap-2 group relative hover:text-accent">
 
                     <span className="hidden group-has-[:checked]:block">
                         <CheckIcon />
@@ -78,7 +78,7 @@ export default function AddBookModal({
 
                 </label>
 
-                <label className="flex items-center gap-2 group relative">
+                <label className="flex items-center gap-2 group relative hover:text-accent">
 
                     <span className="hidden group-has-[:checked]:block">
                         <CheckIcon />

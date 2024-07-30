@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Models\User;
 use App\Models\UserBook;
 use Exception;
 
 class UserBookController extends Controller
 {
 
-    public function index(string $userId)
+    public function indexById(string $userId)
     {
+        return UserBook::all()->where('userId', $userId)->values()->all();
+    }
+
+    public function indexByHandle(string $userHandle)
+    {
+        $userId = User::where('handle', $userHandle)->first();
         return UserBook::all()->where('userId', $userId)->values()->all();
     }
 
