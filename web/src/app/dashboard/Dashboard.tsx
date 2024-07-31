@@ -26,6 +26,9 @@ export default function Dashboard() {
 
     const currentlyReading = books
         .filter( book => book.id.toString() === settings?.currentlyReadingId)[0]
+    
+    const favouriteBooks = books
+        .filter( book => !!book.isFavourite )
 
     const tags = getTagsFromBookList(books)
 
@@ -103,20 +106,28 @@ export default function Dashboard() {
 
                 <Loader />
 
-                <Slider>
-                    { books
-                        .sort( (a,b) => a.created_at < b.created_at ? 1 : -1 )
-                        .slice(0,8)
-                        .map( book => (
-                            <Link 
-                                to={`/book/${book.key}`} 
-                                key={book.id}
-                                className="border-0 hover:scale-105 duration-200"
-                            >
-                                <BookGridItem book={book} hideUserActions />
-                            </Link>
-                    ))}
-                </Slider>
+                { books.length > 0 && (
+                    <Slider>
+                        { books
+                            .sort( (a,b) => a.created_at < b.created_at ? 1 : -1 )
+                            .slice(0,8)
+                            .map( book => (
+                                <Link 
+                                    to={`/book/${book.key}`} 
+                                    key={book.id}
+                                    className="border-0 hover:scale-105 duration-200"
+                                >
+                                    <BookGridItem book={book} hideUserActions />
+                                </Link>
+                        ))}
+                    </Slider>
+                )}
+
+                { books.length === 0 && (
+                    <div className="py-8">
+                        No books to show
+                    </div>
+                )}
             </Section>
 
             <Section>
@@ -126,21 +137,28 @@ export default function Dashboard() {
 
                 <Loader />
 
-                <Slider>
-                    { books
-                        .filter( book => !!book.isFavourite )
-                        .sort( () => Math.random() - 0.5 )
-                        .slice(0,8)
-                        .map( book => (
-                            <Link 
-                                to={`/book/${book.key}`} 
-                                key={book.id}
-                                className="border-0 hover:scale-105 duration-200"
-                            >
-                                <BookGridItem book={book} hideUserActions />
-                            </Link>
-                    ))}
-                </Slider>
+                { favouriteBooks.length > 0 && (
+                    <Slider>
+                        { favouriteBooks
+                            .sort( () => Math.random() - 0.5 )
+                            .slice(0,8)
+                            .map( book => (
+                                <Link 
+                                    to={`/book/${book.key}`} 
+                                    key={book.id}
+                                    className="border-0 hover:scale-105 duration-200"
+                                >
+                                    <BookGridItem book={book} hideUserActions />
+                                </Link>
+                        ))}
+                    </Slider>
+                )}
+
+                { favouriteBooks.length === 0 && (
+                    <div className="py-8">
+                        No books to show
+                    </div>
+                )}
             </Section>
 
 
