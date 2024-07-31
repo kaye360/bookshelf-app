@@ -63,7 +63,7 @@ export default function AddBookModal({
                 id="addBookForm"
             >
 
-                <label className="flex items-center gap-2 group relative hover:text-accent">
+                <label className="flex items-center gap-2 group relative hover:text-accent cursor-pointer">
 
                     <span className="hidden group-has-[:checked]:block">
                         <CheckIcon />
@@ -81,13 +81,13 @@ export default function AddBookModal({
                         className="opacity-0 absolute" 
                     />
 
-                    <span className="select-none cursor-pointer">
+                    <span className="select-none">
                         I have read this book
                     </span>
 
                 </label>
 
-                <label className="flex items-center gap-2 group relative hover:text-accent">
+                <label className="flex items-center gap-2 group relative hover:text-accent cursor-pointer">
 
                     <span className="hidden group-has-[:checked]:block">
                         <CheckIcon />
@@ -105,7 +105,7 @@ export default function AddBookModal({
                         className="opacity-0 absolute" 
                     />
 
-                    <span className="select-none cursor-pointer">
+                    <span className="select-none">
                         I own this book
                     </span>
 

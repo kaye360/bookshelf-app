@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import BaseLayout from "../../layouts/BaseLayout";
 import H1 from "../../components/common/H1";
 import { useStore } from "../../store/store";
-import { AlertIcon, LoaderIcon, LocationIcon, UserIcon } from "../../components/common/Icon";
+import { AlertIcon, BookIcon, LoaderIcon, LocationIcon, UserIcon } from "../../components/common/Icon";
 import { useProfile } from "./api/getProfile";
 import { useEffect } from "react";
 import BookCover from "../../components/common/BookCover";
@@ -31,12 +31,15 @@ export default function Profile() {
 
             { profileQuery.isSuccess && (
                 <>
-                    <section className="grid gap-2">
+                    <section className="grid gap-3">
                         <div className="flex items-center gap-1">
                             <LocationIcon /> {profileQuery.data?.location || 'None'}
                         </div>
                         <div className="flex items-center gap-1">
                             <UserIcon /> Joined { profileQuery.data?.joined }
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <BookIcon /> { profileQuery.data.totalBooks } books
                         </div>
                     </section>
 

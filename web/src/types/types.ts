@@ -124,10 +124,11 @@ export interface User {
 }
 
 export interface Profile {
-    userId   : string,
-    location : string,
-    tags     : string[],
-    joined   : string,
+    userId     : string,
+    location   : string,
+    tags       : string[],
+    joined     : string,
+    totalBooks : number
     books    : {
         key: string
         title: string

@@ -12,11 +12,12 @@ class ProfileController extends Controller
         $user = User::where('handle', $userHandle)->first();
 
         $response = (object) [
-            'userId'   => $user->id,
-            'location' => ( json_decode( $user->settings ) )->location,
-            'books'    => $profileService->getBooks($user),
-            'tags'     => $profileService->getTags($user),
-            'joined'   => $user->created_at->format('M d, Y'),
+            'userId'     => $user->id,
+            'joined'     => $user->created_at->format('M d, Y'),
+            'location'   => ( json_decode( $user->settings ) )->location,
+            'books'      => $profileService->getBooks($user),
+            'totalBooks' => $profileService->getTotalBooks($user),
+            'tags'       => $profileService->getTags($user),
         ];
 
         return response()->json($response);

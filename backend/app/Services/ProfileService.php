@@ -31,7 +31,12 @@ class ProfileService {
         return UserBook::select(['key', 'title', 'imageUrl', 'authors', 'pageCount'])
             ->where('userId', $user->id)
             ->inRandomOrder()
-            ->take(20)
+            ->take(18)
             ->get();
+    }
+
+    public function getTotalBooks(mixed $user)
+    {
+        return UserBook::where('userId', $user->id)->count();
     }
 }

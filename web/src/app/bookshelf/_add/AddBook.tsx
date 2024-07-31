@@ -35,6 +35,7 @@ export default function AddBook() {
                     type='search'
                     placeholder='Enter an author, book title, category, or isbn'
                     autoComplete="off"
+                    defaultValue={searchQueryParam || ''}
                 />
 
                 <div className='flex items-center gap-4 mt-4'>
