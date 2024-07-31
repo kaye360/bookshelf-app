@@ -1,11 +1,12 @@
 import BaseLayout from "../../layouts/BaseLayout";
-import { CheckIcon, LoaderIcon, PlusIcon } from "../../components/common/Icon";
+import { CheckIcon, PlusIcon } from "../../components/common/Icon";
 import BookCover from "../../components/common/BookCover";
 import Button from "../../components/form/Button";
 import AddBookModal from "../bookshelf/_add/components/AddBookModal";
 import useCreateBook from "./hooks/useCreateBook";
 import useBookData from "./hooks/useBookData";
 import { userHasBook } from "../bookshelf/services/userHasBook";
+import Loader from "../../components/common/Loader";
 
 export default function Book() {
 
@@ -122,10 +123,7 @@ export default function Book() {
             )}
 
             { bookQuery.isRefetching || bookQuery.isFetching && (
-                <div>
-                    <LoaderIcon />
-                    Loading
-                </div>
+                <Loader message="Loading book" />
             )}
 
             { isAddModalOpen && createBook && (

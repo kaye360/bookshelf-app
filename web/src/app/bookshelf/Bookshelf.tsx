@@ -1,5 +1,5 @@
 import BaseLayout from "../../layouts/BaseLayout";
-import { BookIcon, LoaderIcon, PlusIcon } from "../../components/common/Icon";
+import { BookIcon, PlusIcon } from "../../components/common/Icon";
 import Button from "../../components/form/Button";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../store/store";
@@ -7,6 +7,7 @@ import { BookShelfContext } from "./hooks/useBookShelfParamsContext";
 import useSearchBarParams from "./hooks/useSearchBarParams";
 import SearchBar from "./components/searchbar/SearchBar";
 import useBookShelfView from "./hooks/useBookShelfView";
+import Loader from "../../components/common/Loader";
 
 
 export default function BookShelf() {
@@ -29,15 +30,13 @@ export default function BookShelf() {
         <BaseLayout>
 
             <BookShelfContext.Provider value={{searchParams, updateSearchParam}}>
+
                 <div className="grid gap-3 mt-2 mb-8">
                     <SearchBar />
                 </div>
 
                 { booksStatus === 'LOADING' && (
-                    <div className="flex items-center gap-3 bg-primary-light/25 px-6 py-12 text-2xl rounded-lg ">
-                        <LoaderIcon size={32} />
-                        Loading your library...
-                    </div>
+                    <Loader message="Loading your bookshelf" />
                 )}
 
                 { booksStatus === 'SUCCESS' && (
@@ -47,7 +46,6 @@ export default function BookShelf() {
                         ))}
                     </BookList>
                 )}
-
 
                 { booksStatus === 'SUCCESS' && books.length === 0 && (
                     <>

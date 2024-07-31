@@ -7,15 +7,14 @@ import { BookIcon } from "../../components/common/Icon";
 import Heading from "./components/Heading";
 import Section from "./components/Section";
 import Slider from "./components/Slider";
-import Loader from "./components/Loader";
 import { getTagsFromBookList } from "../tags/services/getTagsFromBookList";
 import { useCommunityPosts } from "../community/api/getCommunityPost";
 import BookCover from "../../components/common/BookCover";
-
+import Loader from "../../components/common/Loader";
 
 export default function Dashboard() {
 
-    const { books, settings } = useStore()
+    const { books, booksStatus, settings } = useStore()
 
     const community = useCommunityPosts()
     const communityNewestPosts = community.data ? community.data
@@ -104,7 +103,9 @@ export default function Dashboard() {
                     New to Your Bookshelf
                 </Heading>
 
-                <Loader />
+                { booksStatus === 'LOADING' && (
+                    <Loader />
+                )}
 
                 { books.length > 0 && (
                     <Slider>
@@ -135,7 +136,9 @@ export default function Dashboard() {
                     Your Favourite Reads
                 </Heading>
 
-                <Loader />
+                { booksStatus === 'LOADING' && (
+                    <Loader />
+                )}
 
                 { favouriteBooks.length > 0 && (
                     <Slider>

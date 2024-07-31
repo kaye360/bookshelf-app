@@ -21,6 +21,7 @@ export default {
 				'modal-bg' 		: 'modal-bg 200ms ease both',
 				'modal-content' : 'modal-content 200ms ease both',
 				'scale-in'   	: 'scale-in 100ms ease both',
+				'spinner'       : 'spinner 1.8s linear infinite'
 			},
 			keyframes :{
 				'modal-bg' : {
@@ -43,6 +44,10 @@ export default {
 				'scale-in' : {
 					'0%' : {transform : 'scale(0.97)'},
 					'100%' : {transform : 'scale(1)'}
+				},
+				'spinner' : {
+					'from' : {transform : 'rotate(0deg)'},
+					'to' : {transform : 'rotate(360deg)'}
 				}
 			}
 		},

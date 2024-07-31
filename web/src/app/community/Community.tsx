@@ -1,8 +1,8 @@
 import H1 from "../../components/common/H1";
 import BaseLayout from "../../layouts/BaseLayout";
 import CommunityPost from "./components/CommunityPost";
-import { LoaderIcon } from "../../components/common/Icon";
 import useInfiniteCommunityPosts from "./hooks/useInfiniteCommunityPosts";
+import Loader from "../../components/common/Loader";
 
 
 export default function Community() {
@@ -30,8 +30,7 @@ export default function Community() {
                     ref={containerRef}
                     className="flex items-center gap-2 text-xl pt-12"
                 >
-                <LoaderIcon />
-                Loading...
+                <Loader message="Loading more" />
             </div>
             )}
 

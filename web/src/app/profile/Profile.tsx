@@ -2,11 +2,12 @@ import { Link, useLocation } from "react-router-dom";
 import BaseLayout from "../../layouts/BaseLayout";
 import H1 from "../../components/common/H1";
 import { useStore } from "../../store/store";
-import { AlertIcon, BookIcon, LoaderIcon, LocationIcon, UserIcon } from "../../components/common/Icon";
+import { AlertIcon, BookIcon, LocationIcon, UserIcon } from "../../components/common/Icon";
 import { useProfile } from "./api/getProfile";
 import { useEffect } from "react";
 import BookCover from "../../components/common/BookCover";
 import SectionHeading from "../../components/common/SectionHeading";
+import Loader from "../../components/common/Loader";
 
 export default function Profile() {
 
@@ -82,10 +83,7 @@ export default function Profile() {
             ) }
 
             { profileQuery.isLoading && (
-                <div className="flex items-center gap-3 bg-primary-light/25 px-6 py-12 text-2xl rounded-lg ">
-                    <LoaderIcon size={32} />
-                    Loading profile...
-                </div>
+                <Loader message="Loading profile..." />
             )}
 
             { profileQuery.isError && (
