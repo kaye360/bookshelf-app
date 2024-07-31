@@ -69,8 +69,9 @@ async function searchExternalApiBooks(searchQueryParam : string | null) : Promis
         publishedDate : book.first_publish_year || '',
         tags          : book.subject 
             ? JSON.stringify( book.subject
+                .filter( sub => sub.length > 4 && !/\d/.test(sub) )
                 .sort( (a,b) => a.length > b.length ? 1 : -1)
-                .slice(0,3) 
+                .slice(0,5) 
                 .map(tag => tag.toLowerCase())
             )
             : JSON.stringify( [] ),

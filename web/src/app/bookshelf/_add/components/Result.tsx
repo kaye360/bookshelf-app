@@ -4,6 +4,7 @@ import { useState } from "react"
 import { CreateBook } from "../../../../types/types"
 import BookCover from "../../../../components/common/BookCover"
 import { userHasBook } from "../../services/userHasBook"
+import { getAuthors } from "../services/getAuthors"
 
 
 /**
@@ -18,6 +19,8 @@ export default function Result({
 }) {
 
     const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const authors = getAuthors(book.authors)
 
     const tagsArray = JSON.parse( book.tags )
     const tags = Array.isArray( tagsArray ) 
@@ -59,7 +62,7 @@ export default function Result({
 
                 <div className="grid gap-1 text-2xl">
                     { book.title    && <h2 className="font-bold">{ book.title } </h2> }
-                    { book.authors  && <span className="text-lg">{ book.authors }</span> }
+                    { authors  && <span className="text-lg">{ authors }</span> }
                 </div>
 
                 <div className="grid text-primary-dark/80 text-base">
@@ -75,10 +78,10 @@ export default function Result({
                     }
 
                     <span>
-                        Categories : {tags.map( tag => '#' + tag + ' ')}
+                        Categories : 
+                        {tags.map( tag => '#' + tag + ' ')}
+                        {tags.length === 0 && ' N/A'} 
                     </span>
-
-                    {book.key}
 
                 </div>
 

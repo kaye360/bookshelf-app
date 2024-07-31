@@ -78,8 +78,8 @@ export default function AddBook() {
                 { hasResults && (
                     <>
                         Search results for:  
-                        <span className='font-bold'> {searchQueryParam}</span>
-                        <span className='text-sm'> ({query.data?.length} results) </span>
+                        <span className='font-bold'> {searchQueryParam}</span><br />
+                        <span className='text-sm'> ({query.data?.length} results from OpenLibrary.org)</span>
                     </>
                 )}
             </div>

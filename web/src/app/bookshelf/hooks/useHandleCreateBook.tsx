@@ -19,10 +19,9 @@ export default function useHandleCreateBook() {
 
         const isOwned = document.getElementById('isOwned') as HTMLInputElement
         const isRead  = document.getElementById('isRead') as HTMLInputElement
+        const tags    = document.getElementById('tags') as HTMLInputElement
 
-        console.log('handleCreateBook', book)
-        
-        query.mutate({ book, isOwned, isRead})
+        query.mutate({ book, isOwned, isRead, tags})
 
         if( query.isError ) {
             setErorrMessage( query.error.message )

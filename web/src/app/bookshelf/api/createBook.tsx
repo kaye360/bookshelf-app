@@ -11,6 +11,7 @@ interface CreateBookProps {
     book : CreateBook,
     isOwned : HTMLInputElement,
     isRead  : HTMLInputElement,
+    tags    : HTMLInputElement,
 }
 
  
@@ -45,6 +46,8 @@ export function useCreateBook() {
  */
 async function createBook(props : CreateBookProps ) : Promise<Book> {
 
+    console.log(props)
+
     const user  = useStore.getState().auth.user
     const token = useStore.getState().auth.token
     if( !user || !token ) {
@@ -58,16 +61,16 @@ async function createBook(props : CreateBookProps ) : Promise<Book> {
      * compatible format.
      * 
      */
-    const { title, authors, tags, imageUrl, pageCount, publishedDate, isFavourite, key } =  props.book
+    const { title, authors, imageUrl, pageCount, publishedDate, isFavourite, key } =  props.book
     const transform = CreateBookSchema.validateSync({
-        userId        : user.id,
-        isRead        : props.isRead.checked,
-        group         : props.isOwned.checked ? 'owned'   : 'wishlist',
+        userId : user.id,
+        isRead : props.isRead.checked,
+        group  : props.isOwned.checked ? 'owned'   : 'wishlist',
+        tags   : props.tags.value || JSON.stringify( [] ),
         key,
         title,
         authors,
         isFavourite,
-        tags,
         imageUrl,
         pageCount,
         publishedDate

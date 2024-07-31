@@ -33,7 +33,7 @@ export default function Modal( {closeModalFn, children} : ModalProps ) {
             onClick={handleClick}
             className={`fixed inset-0 grid place-items-center bg-white/90 animate-modal-bg`}
         >
-            <div className={`bg-bg-accent shadow-md p-12 max-w-xl relative animate-modal-content`}>
+            <div className={`bg-bg-accent shadow-md p-8 w-full max-w-xl relative animate-modal-content`}>
 
                 {children}
 

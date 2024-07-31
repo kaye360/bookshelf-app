@@ -1,9 +1,11 @@
 import Modal from "../../../../components/common/Modal";
 import Button from "../../../../components/form/Button";
-import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon } from "../../../../components/common/Icon";
+import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon, CloseIcon } from "../../../../components/common/Icon";
 import { CreateBook } from "../../../../types/types";
 import useHandleCreateBook from "../../hooks/useHandleCreateBook";
 import BookCover from "../../../../components/common/BookCover";
+import { getAuthors } from "../services/getAuthors";
+import { useState } from "react";
 
 export default function AddBookModal({ 
     book, 
@@ -21,6 +23,13 @@ export default function AddBookModal({
     } = useHandleCreateBook()
 
     const { isError, isPending, isSuccess } = query
+
+    const [tags, setTags] = useState<string[]>( JSON.parse(book.tags) ) 
+    const authors         = getAuthors(book.authors)
+
+    function handleRemoveTag(tag: string) {
+        setTags( prev => prev.filter( prevTag => prevTag !== tag))
+    }
 
     return (
         <Modal closeModalFn={closeModalFn} >
@@ -42,7 +51,7 @@ export default function AddBookModal({
                     </h2>
 
                     <span>
-                        {book?.authors}
+                        {authors}
                     </span>
 
                 </div>
@@ -101,6 +110,29 @@ export default function AddBookModal({
                     </span>
 
                 </label>
+
+                <div>
+                    Suggested tags:
+                    <div className="flex flex-wrap gap-2 mt-1 text-sm">
+                        {tags.map( tag => (
+                            <span 
+                                className="flex items-center gap-1 min-w-max py-1 px-2 border border-primary-light rounded select-none"
+                                key={tag}
+                            >
+                                #{tag}
+                                <button
+                                    onClick={ () => handleRemoveTag(tag) }
+                                    type="button"
+                                    className="hover:text-accent"
+                                >
+                                    <CloseIcon size={18} />
+                                </button>
+                            </span>
+                        ))}
+                        {tags.length === 0 && 'N/A'}
+                    </div>
+                    <input type="hidden" name="tags" id="tags" value={ JSON.stringify( tags )} />
+                </div>
 
                 { !isPending && !isBookAdded && (
                     <Button type="submit">
