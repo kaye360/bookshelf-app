@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import BaseLayout from "../../layouts/BaseLayout";
 import H1 from "../../components/common/H1";
 import { useStore } from "../../store/store";
-import { LoaderIcon, LocationIcon, UserIcon } from "../../components/common/Icon";
+import { AlertIcon, LoaderIcon, LocationIcon, UserIcon } from "../../components/common/Icon";
 import { useProfile } from "./api/getProfile";
 import { useEffect } from "react";
 import BookCover from "../../components/common/BookCover";
@@ -29,7 +29,7 @@ export default function Profile() {
                 {user}
             </H1>
 
-            { !profileQuery.isLoading && (
+            { profileQuery.isSuccess && (
                 <>
                     <section className="grid gap-2">
                         <div className="flex items-center gap-1">
@@ -82,6 +82,12 @@ export default function Profile() {
                 <div className="flex items-center gap-3 bg-primary-light/25 px-6 py-12 text-2xl rounded-lg ">
                     <LoaderIcon size={32} />
                     Loading profile...
+                </div>
+            )}
+
+            { profileQuery.isError && (
+                <div className="flex items-center gap-2 text-xl py-8">
+                    <AlertIcon /> Error: User not found
                 </div>
             )}
 

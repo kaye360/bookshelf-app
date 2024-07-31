@@ -3,35 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\UserBook;
 use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {
-    public function show($userHandle)
+    public function show($userHandle, ProfileService $profileService)
     {
-        $profileService = new ProfileService();
-
-        $user     = User::where('handle', $userHandle)->first();
-        $location = ( json_decode( $user->settings ) )->location;
-        $books    = UserBook::select(['key', 'title', 'imageUrl', 'authors', 'pageCount'])
-            ->where('userId', $user->id)
-            ->inRandomOrder()
-            ->take(20)
-            ->get();
-
-        $dbTags = UserBook::select(['tags'])
-            ->where('userId', $user->id)
-            ->get();
-
-        $tags = $profileService->getTags($dbTags);
+        $user = User::where('handle', $userHandle)->first();
 
         $response = (object) [
-            'userId' => $user->id,
-            'location' => $location,
-            'books' => $books,
-            'joined' => $user->created_at->format('M d, Y'),
-            'tags' => $tags,
+            'userId'   => $user->id,
+            'location' => ( json_decode( $user->settings ) )->location,
+            'books'    => $profileService->getBooks($user),
+            'tags'     => $profileService->getTags($user),
+            'joined'   => $user->created_at->format('M d, Y'),
         ];
 
         return response()->json($response);
