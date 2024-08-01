@@ -1,22 +1,20 @@
-import UserActions from "./UserActions";
 import { ComponentPropsWithoutRef } from "react";
-import { Book } from "../../../types/types";
-import { useBookshelfParams } from "../hooks/useBookShelfParamsContext";
-import BookCover from "../../../components/common/BookCover";
-
+import { Book } from "../../../../types/types";
+import BookCover from "../../../../components/common/BookCover";
+import UserActions from "../book/UserActions";
+import { useBookshelfContext } from "../../hooks/useBookShelfContext";
 
 interface BookGridItemProps extends ComponentPropsWithoutRef<'div'> {
     book : Book
     hideUserActions? : boolean
 }
 
-
 export default function BookGridItem({
     book, 
     hideUserActions = false
 } : BookGridItemProps ) {
 
-    const { updateSearchParam } = useBookshelfParams()
+    const { updateSearchParam } = useBookshelfContext()
 
     return (
         <div className={`flex flex-col gap-2 text-primary-dark`}>

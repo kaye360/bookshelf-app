@@ -3,11 +3,11 @@ import { BookIcon, PlusIcon } from "../../components/common/Icon";
 import Button from "../../components/form/Button";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../store/store";
-import { BookShelfContext } from "./hooks/useBookShelfParamsContext";
-import useSearchBarParams from "./hooks/useSearchBarParams";
+import { BookShelfContext } from "./hooks/useBookShelfContext";
 import SearchBar from "./components/searchbar/SearchBar";
 import useBookShelfView from "./hooks/useBookShelfView";
 import Loader from "../../components/common/Loader";
+import useBookshelfParams from "./hooks/useBookShelfParams";
 
 
 export default function BookShelf() {
@@ -19,7 +19,7 @@ export default function BookShelf() {
         searchParams,
         updateSearchParam,
         resolvedBooks
-    } = useSearchBarParams()
+    } = useBookshelfParams()
 
     const {
         BookList,
@@ -31,9 +31,7 @@ export default function BookShelf() {
 
             <BookShelfContext.Provider value={{searchParams, updateSearchParam}}>
 
-                <div className="grid gap-3 mt-2 mb-8">
-                    <SearchBar />
-                </div>
+                <SearchBar />
 
                 { booksStatus === 'LOADING' && (
                     <Loader message="Loading your bookshelf" />

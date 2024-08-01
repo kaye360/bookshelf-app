@@ -1,10 +1,10 @@
-import { BookmarkIcon, CheckIcon, FavouritesIcon, MoreIcon, UncheckIcon } from "../../../components/common/Icon";
-import Tooltip from "../../../components/common/Tooltip";
-import useToggleState from "../../../hooks/useToggleState";
-import { Book } from "../../../types/types";
-import useHandleUpdateBookIsFavourite from "../hooks/useHandleUpdateBookIsFavourite";
-import useHandleUpdateBookIsOwned from "../hooks/useHandleUpdateBookIsOwned";
-import useHandleUpdateBookIsRead from "../hooks/useHandleUpdateBookIsRead";
+import { CheckIcon, UncheckIcon, FavouritesIcon, BookmarkIcon, MoreIcon } from "../../../../components/common/Icon";
+import Tooltip from "../../../../components/common/Tooltip";
+import useToggleState from "../../../../hooks/useToggleState";
+import { Book } from "../../../../types/types";
+import useHandleUpdateBookIsFavourite from "../../hooks/useHandleUpdateBookIsFavourite";
+import useHandleUpdateBookIsOwned from "../../hooks/useHandleUpdateBookIsOwned";
+import useHandleUpdateBookIsRead from "../../hooks/useHandleUpdateBookIsRead";
 import UserActionButton from "./UserActionButton";
 import UserActionsMore from "./UserActionsMore";
 

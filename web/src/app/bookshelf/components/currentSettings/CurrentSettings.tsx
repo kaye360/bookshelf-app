@@ -1,32 +1,38 @@
 import { CloseIcon } from "../../../../components/common/Icon"
 import { UserSettings } from "../../../../types/types"
 import { StringUtils } from "../../../../utils/string"
-import { useBookshelfParams } from "../../hooks/useBookShelfParamsContext"
-import FilterButton from "./FilterButton"
+import SettingsMenuButton from "./SettingsMenuButton"
 import SearchParamButton from "./SearchParamButton"
+import { useStore } from "../../../../store/store"
+import { useBookshelfContext } from "../../hooks/useBookShelfContext"
 
-export default function CurrentSearchParamBar({
+export default function CurrentSettings({
     setShowFilters
 } : {
     setShowFilters : React.Dispatch<React.SetStateAction<boolean>>
 }) {
 
-    const {searchParams, updateSearchParam} = useBookshelfParams()
+    const { settings } = useStore()
+    const {searchParams, updateSearchParam} = useBookshelfContext()
 
-    const hasSearchQuery: boolean = searchParams.get('searchQuery') !== '' || !!searchParams.get('searchQuery')
-    console.log(searchParams.get('searchQuery'))
+    const currentParams = {
+        search : searchParams.get('searchQuery') || '',
+        view   : searchParams.get('viewAs'),
+        sort   : searchParams.get('sortBy') || settings?.sort,
+        filter : searchParams.get('filterBy') || settings?.filter
+    }
 
-    const filterIsTag = !['all', 'read', 'unread', 'favourites', 'owned', 'wishlist'].includes(searchParams.get('filterBy'))
+    const hasSearchQuery = typeof currentParams.search === 'string' && currentParams.search.length > 0
 
-    const viewAsParam : string = searchParams.get('viewAs') as string
-    const viewAs = StringUtils.capitalize(viewAsParam)
+    const viewAs = StringUtils.capitalize( currentParams.view )
+    const sortBy = currentParams.sort as UserSettings['sort']
 
-    const sortBy = searchParams.get('sortBy') as UserSettings['sort']
+    const filterIsTag = !['all', 'read', 'unread', 'favourites', 'owned', 'wishlist']
+        .includes( currentParams.filter )
 
-    const filterByParam : string = searchParams.get('filterBy') || ''
     const filterBy = filterIsTag 
-        ? filterByParam
-        : StringUtils.capitalize(filterByParam)
+        ? currentParams.filter
+        : StringUtils.capitalize(currentParams.filter)
         
     const sortTitles : { [key in UserSettings['sort']] : string } = {
         title   : 'Title A-Z',
@@ -38,7 +44,7 @@ export default function CurrentSearchParamBar({
     return (
         <div className="flex items-stretch gap-2 flex-wrap mt-1">
 
-            <FilterButton setShowFilters={setShowFilters} />
+            <SettingsMenuButton setShowFilters={setShowFilters} />
 
             <SearchParamButton>
                 View: { viewAs }
@@ -60,7 +66,7 @@ export default function CurrentSearchParamBar({
                 </SearchParamButton>
             }
 
-            { filterByParam !== 'all' && (
+            { currentParams.filter !== 'all' && (
                 <SearchParamButton hasSearchQuery={hasSearchQuery}>
 
                     Filter: {filterIsTag && '#'}{filterBy}

@@ -2,7 +2,7 @@ import { createContext, useContext } from "react"
 import { BookshelfParams } from "../../../types/types"
 
 
-export function useBookshelfParams() { 
+export function useBookshelfContext() { 
     return useContext(BookShelfContext)
 }
 

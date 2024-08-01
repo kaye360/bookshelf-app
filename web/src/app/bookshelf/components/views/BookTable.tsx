@@ -1,5 +1,5 @@
-import { ChevronDownIcon } from "../../../components/common/Icon"
-import { useBookshelfParams } from "../hooks/useBookShelfParamsContext"
+import { ChevronDownIcon } from "../../../../components/common/Icon"
+import { useBookshelfContext } from "../../hooks/useBookShelfContext"
 import { BookTableComponent } from "./BookTableComponents"
 
 export default function BookTable({
@@ -8,8 +8,7 @@ export default function BookTable({
     children?: any
 }) {
 
-    const { searchParams, updateSearchParam } = useBookshelfParams()
-    console.log(searchParams.get('sortBy'))
+    const { searchParams, updateSearchParam } = useBookshelfContext()
 
     return (
         <div className="max-w-[100vw] overflow-x-auto">

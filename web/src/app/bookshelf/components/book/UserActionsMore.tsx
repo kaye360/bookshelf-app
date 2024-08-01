@@ -1,10 +1,10 @@
 import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useEffect, useState } from "react";
-import { EditIcon, BookIcon, TrashIcon } from "../../../components/common/Icon";
 import UserActionsMoreButton from "./UserActionsMoreButton";
 import EditTagsModal from "./EditTagsModal";
 import { useNavigate } from "react-router-dom";
 import DeleteBookModal from "./DeleteBookModal";
-import { Book } from "../../../types/types";
+import { EditIcon, BookIcon, TrashIcon } from "../../../../components/common/Icon";
+import { Book } from "../../../../types/types";
 
 
 interface UserActionsMoreProps extends ComponentPropsWithoutRef<'div'> {

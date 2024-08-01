@@ -1,8 +1,8 @@
-import Modal from "../../../components/common/Modal";
-import { AlertIcon, LoaderIcon } from "../../../components/common/Icon";
-import Button from "../../../components/form/Button";
-import { Book } from "../../../types/types";
-import useHandleDeleteBook from "../hooks/useHandleDeleteBook";
+import { AlertIcon, LoaderIcon } from "../../../../components/common/Icon"
+import Modal from "../../../../components/common/Modal"
+import Button from "../../../../components/form/Button"
+import { Book } from "../../../../types/types"
+import useHandleDeleteBook from "../../hooks/useHandleDeleteBook"
 
 
 export default function DeleteBookModal({

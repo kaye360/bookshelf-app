@@ -1,15 +1,13 @@
-import { HashIcon } from "../../../components/common/Icon"
-import { Book } from "../../../types/types"
-import UserActions from "./UserActions"
-import { useBookshelfParams } from "../hooks/useBookShelfParamsContext"
-import BookCover from "../../../components/common/BookCover"
-
+import { HashIcon } from "../../../../components/common/Icon"
+import { Book } from "../../../../types/types"
+import BookCover from "../../../../components/common/BookCover"
+import UserActions from "../book/UserActions"
+import { useBookshelfContext } from "../../hooks/useBookShelfContext"
 
 export const BookTableComponent = {
     Cell,
     Row
 }
-
 
 function Cell({
     className, 
@@ -26,10 +24,9 @@ function Cell({
     )
 }
 
-
 function Row({book} : {book : Book}) {
 
-    const { updateSearchParam } = useBookshelfParams()
+    const { updateSearchParam } = useBookshelfContext()
 
     return (
         <tr className=" even:bg-bg-accent text-sm">
@@ -70,4 +67,3 @@ function Row({book} : {book : Book}) {
         </tr>
     )
 }
-

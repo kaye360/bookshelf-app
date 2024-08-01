@@ -5,7 +5,6 @@
 - Homepage: Make proper landing page
 - Bookshelf: Tooltip cut off in list view. Overflow issue
 - ErrorBoundary
-- split up searchBar into searchBar, settings, paramBar, etc
 
 ## Back end
 - forgot password

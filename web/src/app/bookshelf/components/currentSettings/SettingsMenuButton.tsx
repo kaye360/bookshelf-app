@@ -1,7 +1,6 @@
 import Tooltip from "../../../../components/common/Tooltip"
 
-
-export default function FilterButton({setShowFilters} : {
+export default function SettingsMenuButton({setShowFilters} : {
     setShowFilters : React.Dispatch<React.SetStateAction<boolean>>
 }) {
     return (

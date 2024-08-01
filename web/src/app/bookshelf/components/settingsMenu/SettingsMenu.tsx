@@ -1,17 +1,14 @@
 import { Dispatch, SetStateAction, useEffect } from "react"
 import { createPortal } from "react-dom"
 import { CloseIcon } from "../../../../components/common/Icon"
-import SortOptions from "./SortOptions"
-import ViewOptions from "./ViewOptions"
-import FilterOptions from "./FilterOptions"
-import TagOptions from "./TagOptions"
 import { useNavigate } from "react-router-dom"
 import Button from "../../../../components/form/Button"
 import Divider from "../../../../components/common/Divider"
 import Wrapper from "../../../../layouts/components/Wrapper"
+import Options from "./Options"
 
 
-export default function EditSearchBarParams({
+export default function SettingsMenu({
     showFilters,
     setShowFilters
 }: {
@@ -69,14 +66,14 @@ export default function EditSearchBarParams({
 
                     <div>
                         <h3 className="font-semibold mb-4">View</h3>
-                        <ViewOptions />
+                        <Options.ViewOptions />
                     </div>
 
                     <Divider />
 
                     <div>
                         <h3 className="font-semibold mb-4">Sort</h3>
-                        <SortOptions />
+                        <Options.SortOptions />
                     </div>
 
                     <Divider />
@@ -85,14 +82,14 @@ export default function EditSearchBarParams({
                         <h3 className="font-semibold mb-4">
                             Filter
                         </h3>
-                        <FilterOptions />
+                        <Options.FilterOptions />
                     </div>
 
                     <Divider />
 
                     <div>
                         <h3 className="font-semibold mb-4">Tags</h3>
-                        <TagOptions />
+                        <Options.TagOptions />
                     </div>
 
                     <Button 

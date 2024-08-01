@@ -1,4 +1,4 @@
-import BookGridItem from "../bookshelf/components/BookGridItem";
+import BookGridItem from "../bookshelf/components/views/BookGridItem";
 import BaseLayout from "../../layouts/BaseLayout";
 import { useStore } from "../../store/store";
 import { Link, useNavigate } from "react-router-dom";

@@ -1,5 +1,5 @@
 import { AllIcon, CheckIcon, UncheckIcon, FavouritesIcon, BookmarkIcon, FileTextIcon, ParagraphIcon, UserIcon, ArrowDownIcon, ArrowUpIcon, CardIcon, GridIcon, ListIcon } from "../../../components/common/Icon";
-import OptionButton from "../../bookshelf/components/searchbar/OptionButton";
+import OptionButton from "../../bookshelf/components/settingsMenu/OptionButton";
 import useBookshelfSettings from "../hooks/useBookshelfSettings";
 
 

@@ -2,9 +2,9 @@ import { useSearchParams } from "react-router-dom"
 import { useStore } from "../../../store/store"
 import { BookshelfParams } from "../../../types/types"
 import { BookListResolver } from "../services/BookListResolver"
+import { useEffect } from "react"
 
-
-export default function useSearchBarParams() {
+export default function useBookshelfParams() {
 
     let { settings, books } = useStore()
 
@@ -14,6 +14,18 @@ export default function useSearchBarParams() {
         filterBy      : settings?.filter || "all",
         searchQuery : "",
     })
+
+    useEffect( () => {
+        if( searchParams.get('viewAs') === null ) {
+            updateSearchParam('viewAs', settings?.view || 'grid')
+        }
+        if( searchParams.get('sortBy') === null ) {
+            updateSearchParam('sortBy', settings?.sort || 'title')
+        }
+        if( searchParams.get('filterBy') === null ) {
+            updateSearchParam('filterBy', settings?.filter || 'all')
+        }
+    }, [searchParams])
 
     function updateSearchParam<K extends keyof BookshelfParams>(param : K, value: BookshelfParams[K]) {
         if( typeof param !== 'string') return

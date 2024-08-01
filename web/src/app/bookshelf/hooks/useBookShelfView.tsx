@@ -1,10 +1,9 @@
-import BookCard from "../components/BookCard"
-import BookCardList from "../components/BookCardList"
-import BookGrid from "../components/BookGrid"
-import BookGridItem from "../components/BookGridItem"
-import BookTable from "../components/BookTable"
-import { BookTableComponent } from "../components/BookTableComponents"
-
+import BookCard from "../components/views/BookCard"
+import BookCardList from "../components/views/BookCardList"
+import BookGrid from "../components/views/BookGrid"
+import BookGridItem from "../components/views/BookGridItem"
+import BookTable from "../components/views/BookTable"
+import { BookTableComponent } from "../components/views/BookTableComponents"
 
 export default function useBookShelfView(searchParams : URLSearchParams) {
 
