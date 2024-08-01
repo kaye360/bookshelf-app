@@ -2,7 +2,7 @@ import { SubmitHandler } from "react-hook-form"
 import Button from "../../../components/form/Button"
 import useIsUserHandleAvailable from "../hooks/useIsUserHandleAvailable"
 import ValidatedTextInput from "../../../components/form/ValidatedTextInput"
-import { CheckIcon, AlertIcon, LoaderIcon } from "../../../components/common/Icon"
+import { CheckIcon, AlertIcon, LoaderIcon, LoginIcon } from "../../../components/common/Icon"
 import UniqueUsernameStatus from "./UniqueUsernameStatus"
 import { useRegisterForm } from "../hooks/useRegisterForm"
 import { RegisterPayload } from "../../../types/types"
@@ -88,6 +88,7 @@ export default function RegisterForm() {
             
                 <Button type="submit">
                     Register
+                    <LoginIcon />
                 </Button>
         
             </form>

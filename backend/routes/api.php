@@ -28,10 +28,11 @@ use Illuminate\Support\Facades\Route;
 /**
  * Authentication Routes
  */
-Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::post('register', [AuthController::class, 'register']);
-Route::get('register/isUserHandleAvailable/{handle}', [AuthController::class, 'isUserHandleAvailable']);
+Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('auth/register', [AuthController::class, 'register']);
+Route::get('auth/register/isUserHandleAvailable/{handle}', [AuthController::class, 'isUserHandleAvailable']);
+Route::post('auth/guest', [AuthController::class, 'guest']);
 
 /**
  * User Profile Routes

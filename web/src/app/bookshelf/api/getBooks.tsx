@@ -30,7 +30,7 @@ export function useBooks({
     } = useStore()
 
     return useQuery({
-        queryKey : ['getBooks'],
+        queryKey : ['getBooks', user],
         queryFn  : async () => {
             const books = await getBooks(userId || user?.id, by)
             updateBooks(books)

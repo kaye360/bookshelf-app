@@ -1,5 +1,6 @@
 import { CloseIcon } from "../../../../components/common/Icon"
 import { UserSettings } from "../../../../types/types"
+import { StringUtils } from "../../../../utils/string"
 import { useBookshelfParams } from "../../hooks/useBookShelfParamsContext"
 import FilterButton from "./FilterButton"
 import SearchParamButton from "./SearchParamButton"
@@ -12,20 +13,21 @@ export default function CurrentSearchParamBar({
 
     const {searchParams, updateSearchParam} = useBookshelfParams()
 
-    const hasSearchQuery: boolean = searchParams.get('searchQuery') !== ''
+    const hasSearchQuery: boolean = searchParams.get('searchQuery') !== '' || !!searchParams.get('searchQuery')
+    console.log(searchParams.get('searchQuery'))
 
     const filterIsTag = !['all', 'read', 'unread', 'favourites', 'owned', 'wishlist'].includes(searchParams.get('filterBy'))
 
     const viewAsParam : string = searchParams.get('viewAs') as string
-    const viewAs = viewAsParam.slice(0,1).toUpperCase() + viewAsParam.slice(1)
+    const viewAs = StringUtils.capitalize(viewAsParam)
 
     const sortBy = searchParams.get('sortBy') as UserSettings['sort']
 
-    const filterByParam : string = searchParams.get('filterBy') as string
+    const filterByParam : string = searchParams.get('filterBy') || ''
     const filterBy = filterIsTag 
         ? filterByParam
-        : filterByParam.slice(0,1).toUpperCase() + filterByParam.slice(1)
-
+        : StringUtils.capitalize(filterByParam)
+        
     const sortTitles : { [key in UserSettings['sort']] : string } = {
         title   : 'Title A-Z',
         authors : 'Authors A-Z',

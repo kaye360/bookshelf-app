@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout";
 import { useStore } from "../../store/store";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/form/Button";
-import { BookIcon } from "../../components/common/Icon";
+import { BookIcon, PlusIcon } from "../../components/common/Icon";
 import Heading from "./components/Heading";
 import Section from "./components/Section";
 import Slider from "./components/Slider";
@@ -16,12 +16,12 @@ export default function Dashboard() {
 
     const { books, booksStatus, settings } = useStore()
 
+    const navigate = useNavigate()
+
     const community = useCommunityPosts()
     const communityNewestPosts = community.data ? community.data
         .filter( post => post.type === 'CREATE_BOOK')
         .slice(0,10) : []
-
-    const navigate = useNavigate()
 
     const currentlyReading = books
         .filter( book => book.id.toString() === settings?.currentlyReadingId)[0]
@@ -125,8 +125,12 @@ export default function Dashboard() {
                 )}
 
                 { books.length === 0 && (
-                    <div className="py-8">
-                        No books to show
+                    <div className="flex items-start flex-wrap gap-2 py-8 bg-primary-light/20 rounded-md px-2">
+                        Your Library is empty.
+                        <Link to="/add" className="flex items-center gap-1 w-fit"> 
+                            <PlusIcon size={16} />
+                            Add some books
+                        </Link>
                     </div>
                 )}
             </Section>
@@ -158,8 +162,12 @@ export default function Dashboard() {
                 )}
 
                 { favouriteBooks.length === 0 && (
-                    <div className="py-8">
-                        No books to show
+                    <div className="flex items-start flex-wrap gap-2 py-8 bg-primary-light/20 rounded-md px-2">
+                        You don't have any favourite books.
+                        <Link to="/bookshelf" className="flex items-center gap-1 w-fit"> 
+                            <BookIcon size={16} />
+                            View your bookshelf
+                        </Link>
                     </div>
                 )}
             </Section>
@@ -188,6 +196,15 @@ export default function Dashboard() {
                             </Link>
                     ))}
                 </div>
+                { tags.length === 0 && (
+                    <div className="flex items-start flex-wrap gap-2 py-8 bg-primary-light/20 rounded-md px-2">
+                        You don't have any favourite topics.
+                        <Link to="/bookshelf" className="flex items-center gap-1 w-fit"> 
+                            <BookIcon size={16} />
+                            View your bookshelf
+                        </Link>
+                    </div>
+                )}
             </Section>
 
 

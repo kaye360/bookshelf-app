@@ -7,38 +7,24 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\AuthService;
 
 class AuthController extends Controller
 {
+
+    public function __construct(private AuthService $authService) {}
+
     public function register(RegisterRequest $request)
     {
             $validated = $request->validated();
-
-            $settings = (object) [
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'sort' => 'title',
-                'view' => 'grid',
-                'theme' => 'light',
-                'filter' => 'all',
-                'location' => null,
-                'currentlyReadingId' => null
-            ];
-
-            $user = User::create([
-                'handle' => $validated['handle'],
-                'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
-                'settings' => json_encode($settings)
-            ]);
-
-            $token = $user->createToken('auth_token')->plainTextToken;
+            $user      = $this->authService->createUser($validated);
+            $token     = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
-                'message' => 'User Account Created Successfully',
-                'user' => $user,
+                'message'      => 'User Account Created Successfully',
+                'user'         => $user,
                 'access_token' => $token,
-                'token_type' => 'Bearer',
+                'token_type'   => 'Bearer',
             ], 201);
     }
 
@@ -52,21 +38,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $handle = strtolower($request->input('handle'));
-        $password = $request->input('password');
-
-        $credentials = [
-            'handle' => $handle,
-            'password' => $password
-        ];
-        if (!Auth::attempt($credentials)) {
-            return response()->json([
-                'message' => 'Invalid login credentials'
-            ], 401);
+        if (!Auth::attempt( $this->authService->createLoginCredentials($request) )) {
+            return response()->json([ 'message' => 'Invalid login credentials' ], 401);
         }
 
         $user = User::where('handle', $request['handle'])->firstOrFail();
-
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
@@ -76,11 +52,22 @@ class AuthController extends Controller
         ],200);
     }
 
+    public function guest() {
+        $guest = $this->authService->createGuest();
+        $user  = $this->authService->createUser($guest);
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'message'      => 'User Account Created Successfully',
+            'user'         => $user,
+            'access_token' => $token,
+            'token_type'   => 'Bearer',
+        ], 201);
+    }
 
     public function logout()
     {
         request()->user()->tokens()->delete();
-
         return response()->json([
             'message' => 'Succesfully Logged out'
         ], 200);

@@ -2,11 +2,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { API_URL } from "../../../config";
 import { Req } from "../../../lib/Req/Req";
 import { useStore } from "../../../store/store";
-import { AuthSuccess, LoginPayload } from "../../../types/types";
+import { AuthSuccess } from "../../../types/types";
 import { AuthSchema } from "../validation/authValidation";
-
-
-interface LoginProps extends LoginPayload {}
+import { useCreateCommunityPost } from "../../community/api/createCommunityPost";
 
 
 /**
@@ -14,23 +12,29 @@ interface LoginProps extends LoginPayload {}
  * The api query or mutation to be consumed across the app
  * 
  */
-export function useLogin() {
+export function useGuest() {
 
-    const { authActions : { updateAuth } } = useStore()
+    const { 
+        authActions : { updateAuth }, 
+        booksActions : { updateBooks },
+    } = useStore()
+    const community = useCreateCommunityPost()
     const client = useQueryClient()
 
     return useMutation({
-        mutationKey : ['login'],
-        mutationFn  : async(props : LoginProps) => {
+        mutationKey : ['guest'],
+        mutationFn  : async () => {
             updateAuth('LOADING')
-            const data = await login({...props})
+            const data = await guest()
             return data
         },
         onSuccess : (data) => {
             updateAuth('LOGIN', data.user, data.token)
+            updateBooks([])
             client.invalidateQueries({
                 queryKey : ['getBooks', 'getSettings'],
             })
+            community.mutate({type : 'JOIN'})
         },
         onError : (e) => {
             updateAuth('LOGIN_ERROR')
@@ -47,12 +51,13 @@ export function useLogin() {
  * @returns a validated response or throws an error
  * 
  */
-async function login(payload : LoginPayload) : Promise<Pick<AuthSuccess, 'token' | 'user'>> {
+async function guest() : Promise<Pick<AuthSuccess, 'token' | 'user'>> {
 
     const response = await Req.post({ 
-        url : `${API_URL}/auth/login`, 
-        payload : payload
+        url : `${API_URL}/auth/guest`, 
     })
+
+    console.log(response)
 
     if( response.error || !response.data?.user?.id || !response.data?.access_token ) {
         throw new Error('Login Error')

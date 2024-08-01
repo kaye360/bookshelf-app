@@ -1,15 +1,13 @@
 # TODO
 
 ## Front end
-- common: common loader component
-- common: tag component
-- Auth: guest login feature
 - Auth: forgot password
 - Homepage: Make proper landing page
 - Bookshelf: Tooltip cut off in list view. Overflow issue
+- ErrorBoundary
+- split up searchBar into searchBar, settings, paramBar, etc
 
 ## Back end
-- guest login feature
 - forgot password
 
 ## Upcoming feature ideas

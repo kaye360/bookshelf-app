@@ -38,7 +38,7 @@ export default function useRegister() {
 async function register(payload : RegisterProps) : Promise<Pick<AuthSuccess, 'token' | 'user'>> { 
 
     const response = await Req.post({ 
-        url : `${API_URL}/register`, 
+        url : `${API_URL}/auth/register`, 
         payload 
     })
     
