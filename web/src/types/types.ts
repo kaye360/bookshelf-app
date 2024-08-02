@@ -206,16 +206,18 @@ export interface BookReview {
 
 export interface ExternalApiBookResponse {
     numFound : number
-    docs : {
-        author_name        : string[]
-        first_publish_year : number
-        key                : string
-        title              : string
-        number_of_pages_median : number
-        cover_edition_key  : string
-        cover_i            : number
-        subject            : string[]
-    }[]
+    docs : ExternalApiDoc[]
+}
+
+export interface ExternalApiDoc {
+    author_name        : string[]
+    first_publish_year : number
+    key                : string
+    title              : string
+    number_of_pages_median : number
+    cover_edition_key  : string
+    cover_i            : number
+    subject            : string[]
 }
 
 export interface ExternalApiBook {

@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { CreateBook, ExternalApiBookResponse } from "../../../types/types"
 import { useStore } from "../../../store/store"
 import { CreateBookSchema } from "../../bookshelf/validation/createBookValidation"
+import { formatExternalApiTags } from "../services/tags"
 
 
 /**
@@ -68,12 +69,7 @@ async function searchExternalApiBooks(searchQueryParam : string | null) : Promis
         pageCount     : book.number_of_pages_median || 0,
         publishedDate : book.first_publish_year || '',
         tags          : book.subject 
-            ? JSON.stringify( book.subject
-                .filter( sub => sub.length > 4 && !/\d/.test(sub) )
-                .sort( (a,b) => a.length > b.length ? 1 : -1)
-                .slice(0,5) 
-                .map(tag => tag.toLowerCase())
-            )
+            ? JSON.stringify( formatExternalApiTags(book.subject) )
             : JSON.stringify( [] ),
     })) || []
     

@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef } from "react";
 import { Book } from "../../../../types/types";
 import BookCover from "../../../../components/common/BookCover";
 import UserActions from "../book/UserActions";
-import { useBookshelfContext } from "../../hooks/useBookShelfContext";
+import TagList from "./TagList";
 
 interface BookGridItemProps extends ComponentPropsWithoutRef<'div'> {
     book : Book
@@ -14,8 +14,6 @@ export default function BookGridItem({
     hideUserActions = false
 } : BookGridItemProps ) {
 
-    const { updateSearchParam } = useBookshelfContext()
-
     return (
         <div className={`flex flex-col gap-2 text-primary-dark`}>
 
@@ -25,18 +23,7 @@ export default function BookGridItem({
                 src={book.imageUrl}
             />
 
-            { !hideUserActions && 
-                <div className="flex flex-wrap items-center gap-x-2 text-xs overflow-hidden">
-                    {book.tags.map( (tag, i) => (
-                        <button 
-                            key={i}
-                            onClick={ () => updateSearchParam('filterBy', tag)}
-                        >
-                            #{tag}
-                        </button>
-                    ))}
-                </div>
-            }
+            { !hideUserActions && <TagList tags={book.tags} /> }
 
             { !hideUserActions && <UserActions book={book} /> }
 

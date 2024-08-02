@@ -2,6 +2,8 @@ import { Book } from "../../../../types/types";
 import BookCover from "../../../../components/common/BookCover";
 import UserActions from "../book/UserActions";
 import { useBookshelfContext } from "../../hooks/useBookShelfContext";
+import TagButton from "./TagButton";
+import TagList from "./TagList";
 
 export default function BookCard({
     book
@@ -29,16 +31,7 @@ s               </span>
                     {book.authors}
                 </div>
 
-                <div className="flex flex-wrap gap-3 text-sm">
-                    {book.tags.map( tag => (
-                        <button
-                            key={tag}
-                            onClick={ () => updateSearchParam('filterBy', tag) }
-                        >
-                            #{tag}
-                        </button>
-                    ))}
-                </div>
+                <TagList tags={book.tags } />
 
                 <UserActions book={book} />
             </div>

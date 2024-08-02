@@ -6,12 +6,6 @@ import BookCover from "../../../../components/common/BookCover"
 import { userHasBook } from "../../services/userHasBook"
 import { getAuthors } from "../services/getAuthors"
 
-
-/**
- * 
- * @parent routes/add/<AddBook />
- * 
- */
 export default function Result({
     book, 
 } : {

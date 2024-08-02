@@ -1,8 +1,7 @@
-import { HashIcon } from "../../../../components/common/Icon"
 import { Book } from "../../../../types/types"
 import BookCover from "../../../../components/common/BookCover"
 import UserActions from "../book/UserActions"
-import { useBookshelfContext } from "../../hooks/useBookShelfContext"
+import TagList from "./TagList"
 
 export const BookTableComponent = {
     Cell,
@@ -26,8 +25,6 @@ function Cell({
 
 function Row({book} : {book : Book}) {
 
-    const { updateSearchParam } = useBookshelfContext()
-
     return (
         <tr className=" even:bg-bg-accent text-sm">
             <Cell>
@@ -47,18 +44,7 @@ function Row({book} : {book : Book}) {
             </Cell>
 
             <Cell>
-                <div className="flex items-center gap-x-2 flex-wrap">
-                    {book.tags.map( tag => (
-                        <button 
-                            key={tag}
-                            onClick={ () => updateSearchParam('filterBy', tag) }
-                            className="flex items-center"
-                        >
-                            <HashIcon size={18} />
-                            {tag}
-                        </button>
-                    ))}
-                </div>
+                <TagList tags={book.tags} />
             </Cell>
             
             <Cell>
