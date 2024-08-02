@@ -1,8 +1,6 @@
 import { Book } from "../../../../types/types";
 import BookCover from "../../../../components/common/BookCover";
 import UserActions from "../book/UserActions";
-import { useBookshelfContext } from "../../hooks/useBookShelfContext";
-import TagButton from "./TagButton";
 import TagList from "./TagList";
 
 export default function BookCard({
@@ -10,8 +8,6 @@ export default function BookCard({
 } : {
     book: Book
 }) {
-
-    const { updateSearchParam } = useBookshelfContext()
 
     return (
         <div className="grid grid-cols-[auto_1fr] gap-3 text-sm">
