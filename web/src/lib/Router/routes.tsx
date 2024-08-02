@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import Error404 from "../../app/error/Error404";
 import Dashboard from "../../app/dashboard/Dashboard";
 import Index from "../../app/Index";
 import AuthRoute from "../../app/auth/components/AuthRoute";
@@ -9,52 +8,63 @@ import Settings from "../../app/settings/Settings";
 import Community from "../../app/community/Community";
 import AddBook from "../../app/bookshelf/_add/AddBook";
 import Profile from "../../app/profile/Profile";
+import Error from "../../app/error/Error";
+
+const errorElement = <Error />
 
 export const router = createBrowserRouter([
 	{
 		path: '/',
 		element : <Index />,
-		errorElement : <Error404 />
+		errorElement,
 	},
 
 	{
 		path: '/login',
 		element : <Index />,
+		errorElement
 	},
 
 	{
 		path: '/register',
 		element : <Index />,
+		errorElement
 	},
 	
 	{
 		path: '/dashboard',
 		element : <AuthRoute><Dashboard /></AuthRoute>,
+		errorElement
 	},
 
 	{
 		path: '/book/:id',
-		element : <Book />
+		element : <Book />,
+		errorElement
 	},
 
 	{
 		path: '/bookshelf',
-		element : <AuthRoute><BookShelf /></AuthRoute>
+		element : <AuthRoute><BookShelf /></AuthRoute>,
+		errorElement
 	},
 
 	{
 		path: '/add',
-		element : <AuthRoute><AddBook /></AuthRoute>
+		element : <AuthRoute><AddBook /></AuthRoute>,
+		errorElement
 	},
 
 	{
 		path: '/settings',
-		element : <AuthRoute><Settings /></AuthRoute>
+		element : <AuthRoute><Settings /></AuthRoute>,
+		errorElement
 	},
 
 	{
 		path: '/user',
 		element : <Profile />,
+		errorElement,
 		children : [
 			{
 				path : '/user/:handle',
@@ -62,9 +72,10 @@ export const router = createBrowserRouter([
 			}
 		]
 	},
-
+	
 	{
 		path: '/community',
-		element : <Community />
+		element : <Community />,
+		errorElement
 	},
 ])

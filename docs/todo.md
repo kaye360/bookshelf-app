@@ -4,7 +4,7 @@
 - Auth: forgot password
 - Homepage: Make proper landing page
 - Bookshelf: Tooltip cut off in list view. Overflow issue
-- ErrorBoundary
+- Add Book tags - remove commas. Change space to dashes
 
 ## Back end
 - forgot password

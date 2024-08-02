@@ -9,7 +9,6 @@ import useBookShelfView from "./hooks/useBookShelfView";
 import Loader from "../../components/common/Loader";
 import useBookshelfParams from "./hooks/useBookShelfParams";
 
-
 export default function BookShelf() {
 
     const { books, booksStatus } = useStore()

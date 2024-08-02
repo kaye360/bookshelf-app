@@ -4,7 +4,6 @@ import CommunityPost from "./components/CommunityPost";
 import useInfiniteCommunityPosts from "./hooks/useInfiniteCommunityPosts";
 import Loader from "../../components/common/Loader";
 
-
 export default function Community() {
 
     const {

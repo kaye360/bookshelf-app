@@ -1,6 +1,4 @@
-import Error401 from "../../error/Error401"
 import { useStore } from "../../../store/store"
-
 
 export default function AuthRoute({
     children
@@ -10,9 +8,9 @@ export default function AuthRoute({
 
     const { auth : { isAuth } } = useStore()
 
-    if( isAuth ) {
-        return <>{children}</>
+    if( !isAuth ) {
+        throw new Response("Unauthorized", { status : 401 })
     }
-        
-    return <Error401 />
+    
+    return <>{children}</>
 }
