@@ -20,7 +20,7 @@ export default function Error() {
     }
 
     return (
-        <BaseLayout>
+        <BaseLayout title="Error">
             <div className="grid gap-4">
 
                 <div className=" max-w-xl mx-auto p-4">

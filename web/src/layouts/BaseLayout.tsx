@@ -4,8 +4,19 @@ import Nav from "./components/Nav";
 import Wrapper from "./components/Wrapper";
 import { ReactNode, useEffect } from "react";
 import { useStore } from "../store/store";
+import { HTML_TITLE } from "../config";
 
-export default function BaseLayout({children} : {children? : ReactNode}) {
+export default function BaseLayout({
+    title,
+    children
+} : {
+    title : string
+    children? : ReactNode
+}) {
+
+    document.title = title === ''
+        ? HTML_TITLE
+        : `${title} - ${HTML_TITLE}`
 
     const { settings } = useStore()
 

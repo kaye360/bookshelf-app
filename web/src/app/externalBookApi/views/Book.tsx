@@ -23,7 +23,7 @@ export default function Book() {
     })
 
     return (
-        <BaseLayout>
+        <BaseLayout title={bookQuery.data?.title || ''}>
 
             { bookQuery.isSuccess && !bookQuery.isRefetching && (
 

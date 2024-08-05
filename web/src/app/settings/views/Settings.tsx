@@ -13,7 +13,7 @@ export default function Settings() {
     const { touchForm, isTouched, handleSubmit, isSaved, query } = useSettingsFormState()
 
     return (
-        <BaseLayout>
+        <BaseLayout title="Settings">
 
             <form 
                 className="grid md:grid-cols-[1fr_350px] gap-6 relative"

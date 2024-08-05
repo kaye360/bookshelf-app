@@ -29,7 +29,7 @@ export default function SearchBooks() {
     } = useSearchForm({query, setSearchParams})
 
     return (
-        <BaseLayout>
+        <BaseLayout title="Search Books">
 
             <form 
                 id="search-external-book-api-form"

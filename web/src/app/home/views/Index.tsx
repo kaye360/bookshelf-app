@@ -17,7 +17,7 @@ export default function Index() {
     const defaultForm = location.pathname.includes('register') ? 'register' : 'login'
 
     return (
-        <BaseLayout>
+        <BaseLayout title="">
             <AccountForm defaultForm={defaultForm} />
         </BaseLayout>
     )

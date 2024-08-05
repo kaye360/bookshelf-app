@@ -25,7 +25,7 @@ export default function Profile() {
     }, [user])
 
     return (
-        <BaseLayout>
+        <BaseLayout title={ user || 'User Profile' }>
             <H1>
                 {user}
             </H1>

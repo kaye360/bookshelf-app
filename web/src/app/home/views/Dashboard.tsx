@@ -32,7 +32,7 @@ export default function Dashboard() {
     const tags = getTagsFromBookList(books)
 
     return (
-        <BaseLayout>
+        <BaseLayout title="Dashboard">
 
             <Section className="grid md:grid-cols-2 gap-6 md:gap-24 items-center md:mt-12 mb-8 md:mb-28 mx-auto w-fit">
 

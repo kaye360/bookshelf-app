@@ -13,7 +13,7 @@ export default function Community() {
     } = useInfiniteCommunityPosts()
 
     return (
-        <BaseLayout>
+        <BaseLayout title="Browse the community">
             <H1>
                 Browse the Community
             </H1>

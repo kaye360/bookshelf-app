@@ -26,7 +26,7 @@ export default function BookShelf() {
     } = useBookShelfView(searchParams)
 
     return (
-        <BaseLayout>
+        <BaseLayout title="My Bookshelf">
 
             <BookShelfContext.Provider value={{searchParams, updateSearchParam}}>
 

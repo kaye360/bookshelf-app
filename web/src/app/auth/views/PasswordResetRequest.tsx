@@ -16,7 +16,7 @@ export default function PasswordResetRequest() {
     }
 
     return (
-        <BaseLayout>
+        <BaseLayout title="Reset Password">
 
             <form
                 onSubmit={handlePasswordResetRequest}

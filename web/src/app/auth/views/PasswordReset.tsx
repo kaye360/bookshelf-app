@@ -33,7 +33,7 @@ export default function PasswordReset() {
         query.mutate()
     }
     return (
-        <BaseLayout>
+        <BaseLayout title="Reset Password">
 
             <form 
                 id="reset-password-form"
