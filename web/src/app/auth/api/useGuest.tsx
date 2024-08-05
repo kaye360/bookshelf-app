@@ -6,7 +6,6 @@ import { AuthSuccess } from "../../../types/types";
 import { AuthSchema } from "../validation/authValidation";
 import { useCreateCommunityPost } from "../../community/api/createCommunityPost";
 
-
 /**
  * 
  * The api query or mutation to be consumed across the app

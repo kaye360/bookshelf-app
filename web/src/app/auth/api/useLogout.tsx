@@ -3,8 +3,6 @@ import { API_URL } from "../../../config"
 import { Req } from "../../../lib/Req/Req"
 import { useStore } from "../../../store/store"
 
-
-
 export default function useLogout() {
 
     const { 

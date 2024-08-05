@@ -5,6 +5,7 @@
 - Homepage: Make proper landing page
 - Bookshelf: Tooltip cut off in list view. Overflow issue
 - meta, titles
+- Make each feature have a /views folder. Flatten features where possible
 
 ## Back end
 - forgot password

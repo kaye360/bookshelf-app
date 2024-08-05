@@ -26,7 +26,7 @@ export default function TextInput({label, register, name, ...props} : TextInputP
                 name={ name }
                 {...(register &&  register(name) ) }
                 {...props}
-                className="bg-bg outline outline-1 outline-primary-light w-full max-w-xl rounded-md p-4 transition-all" 
+                className="bg-bg outline outline-1 outline-primary-light w-full sm:min-w-[400px] max-w-xl rounded-md p-4 transition-all" 
             />
         </Wrapper>
     )

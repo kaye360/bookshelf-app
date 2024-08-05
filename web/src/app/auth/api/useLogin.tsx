@@ -5,9 +5,7 @@ import { useStore } from "../../../store/store";
 import { AuthSuccess, LoginPayload } from "../../../types/types";
 import { AuthSchema } from "../validation/authValidation";
 
-
 interface LoginProps extends LoginPayload {}
-
 
 /**
  * 

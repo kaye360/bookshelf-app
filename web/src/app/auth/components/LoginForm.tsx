@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { AlertIcon, CheckIcon, LoaderIcon, LoginIcon } from "../../../components/common/Icon"
 import Button from "../../../components/form/Button"
 import TextInput from "../../../components/form/TextInput"
@@ -50,8 +51,14 @@ export default function LoginForm() {
                     </Button>
                 )}
 
+                <div>
+                    <Link to="/password-reset-request">
+                        Forgot Password?
+                    </Link>
+                </div>
+
                 <div className={`
-                    flex items-center gap-2 justify-center text-lg font-medium
+                    flex items-center gap-2 justify-center text-lg font-medium 
                     ${query.isError ? 'text-accent' : ''}
                     ${user ? 'text-emerald-500' : ''}
                 `}>
@@ -76,10 +83,6 @@ export default function LoginForm() {
                     )}
                 </div>
 
-                <p>
-                    Forgot Password?
-                </p>
-        
             </form>
 
         </div>

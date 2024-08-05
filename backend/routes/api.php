@@ -33,6 +33,8 @@ Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:
 Route::post('auth/register', [AuthController::class, 'register']);
 Route::get('auth/register/isUserHandleAvailable/{handle}', [AuthController::class, 'isUserHandleAvailable']);
 Route::post('auth/guest', [AuthController::class, 'guest']);
+Route::post('auth/resetPasswordRequest', [AuthController::class, 'resetPasswordRequest']);
+Route::post('auth/updatePassword', [AuthController::class, 'updatePassword']);
 
 /**
  * User Profile Routes

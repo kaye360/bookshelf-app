@@ -6,16 +6,16 @@ import { CheckIcon, AlertIcon, LoaderIcon, LoginIcon } from "../../../components
 import UniqueUsernameStatus from "./UniqueUsernameStatus"
 import { useRegisterForm } from "../hooks/useRegisterForm"
 import { RegisterPayload } from "../../../types/types"
-
+import useRegister from "../api/useRegister"
 
 export default function RegisterForm() {
 
+    const query = useRegister()
+    
     const { 
-        query,
         handleSubmit, 
         register, 
         formState,
-        user
     } = useRegisterForm()
 
     const { 
@@ -26,10 +26,10 @@ export default function RegisterForm() {
 
     const onSubmit: SubmitHandler<RegisterPayload> = async (formData) => {
         query.mutate({
-            handle          : formData.handle,
-            email           : formData.email,
-            name            : formData.name,
-            password        : formData.password,
+            handle   : formData.handle,
+            email    : formData.email,
+            name     : formData.name,
+            password : formData.password,
             password_confirmation : formData.password_confirmation,
         })
     }
@@ -96,7 +96,7 @@ export default function RegisterForm() {
             <div className={`
                 flex items-center gap-2 justify-center text-lg font-medium mt-3
                 ${query.isError ? 'text-accent' : ''}
-                ${user ? 'text-emerald-400' : ''}
+                ${query.isSuccess ? 'text-emerald-400' : ''}
             `}>
 
                 { query.isPending && (
@@ -111,7 +111,7 @@ export default function RegisterForm() {
                         Somthing went wrong, please check all fields.
                     </>
                 )}
-                { user && (
+                { query.isSuccess && (
                     <>
                         <CheckIcon />
                         Success! Redirecting...

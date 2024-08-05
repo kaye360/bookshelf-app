@@ -6,9 +6,7 @@ import { AuthSuccess, RegisterPayload } from "../../../types/types";
 import { AuthSchema } from "../validation/authValidation";
 import { useCreateCommunityPost } from "../../community/api/createCommunityPost";
 
-
 interface RegisterProps extends RegisterPayload {}
-
 
 export default function useRegister() {
 

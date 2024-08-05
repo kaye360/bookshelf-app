@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Services\AuthService;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -71,5 +74,62 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Succesfully Logged out'
         ], 200);
+    }
+
+    public function resetPasswordRequest(Request $request)
+    {
+        $validated = $request->validate(['username' => 'required']);
+        $user      = User::where('handle', $validated['username'])->first();
+
+        if( !$user ) {
+            return response()->json([
+                'message' => 'User not found',
+                'status' => 'user.invalid'
+            ], 400);
+        }
+
+        $status  = Password::sendResetLink( ['email' => $user->email] );
+
+        return response()->json([
+            'message' => $status === Password::RESET_LINK_SENT
+                ? 'Password reset link sent'
+                : 'Error with password reset link',
+            'status' => $status
+        ]);
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        $validated = $request->validated();
+
+        $user = User::where([
+            [ 'handle', $validated['username'] ],
+            [ 'email', $validated['email'] ]
+        ])->first();
+
+        if( !$user ) {
+            return response()->json([
+                'message' => 'User not found',
+                'status' => 'user.invalid'
+            ], 400);
+        }
+
+        $status = Password::reset([
+                'email'    => $validated['email'],
+                'token'    => $validated['token'],
+                'password' => $validated['password'],
+                'password_confirmation' => $validated['password_confirmation'],
+            ],
+            function () use($user, $validated)
+            {
+                $user->forceFill([
+                    'password' => Hash::make( $validated['password'] )
+                ])->setRememberToken( Str::random(60));
+
+                $user->save();
+            }
+        );
+
+        return response()->json( ['status' => $status] );
     }
 }

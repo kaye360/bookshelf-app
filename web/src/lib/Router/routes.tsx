@@ -9,6 +9,8 @@ import Community from "../../app/community/Community";
 import AddBook from "../../app/bookshelf/_add/AddBook";
 import Profile from "../../app/profile/Profile";
 import Error from "../../app/error/Error";
+import PasswordReset from "../../app/auth/views/PasswordReset";
+import PasswordResetRequest from "../../app/auth/views/PasswordResetRequest";
 
 const errorElement = <Error />
 
@@ -28,6 +30,18 @@ export const router = createBrowserRouter([
 	{
 		path: '/register',
 		element : <Index />,
+		errorElement
+	},
+
+	{
+		path : '/password-reset/:token',
+		element : <PasswordReset />,
+		errorElement
+	},
+
+	{
+		path : '/password-reset-request/',
+		element : <PasswordResetRequest />,
 		errorElement
 	},
 	
