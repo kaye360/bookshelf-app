@@ -1,16 +1,16 @@
-import BookGridItem from "../bookshelf/components/views/BookGridItem";
-import BaseLayout from "../../layouts/BaseLayout";
-import { useStore } from "../../store/store";
+import BookGridItem from "../../bookshelf/components/views/BookGridItem";
+import BaseLayout from "../../../layouts/BaseLayout";
+import { useStore } from "../../../store/store";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../../components/form/Button";
-import { BookIcon, PlusIcon } from "../../components/common/Icon";
-import Heading from "./components/Heading";
-import Section from "./components/Section";
-import Slider from "./components/Slider";
-import { getTagsFromBookList } from "../tags/services/getTagsFromBookList";
-import { useCommunityPosts } from "../community/api/getCommunityPost";
-import BookCover from "../../components/common/BookCover";
-import Loader from "../../components/common/Loader";
+import Button from "../../../components/form/Button";
+import { BookIcon, PlusIcon } from "../../../components/common/Icon";
+import Heading from "../components/Heading";
+import Section from "../components/Section";
+import Slider from "../components/Slider";
+import { getTagsFromBookList } from "../../tags/services/getTagsFromBookList";
+import { useCommunityPosts } from "../../community/api/getCommunityPost";
+import BookCover from "../../../components/common/BookCover";
+import Loader from "../../../components/common/Loader";
 
 export default function Dashboard() {
 

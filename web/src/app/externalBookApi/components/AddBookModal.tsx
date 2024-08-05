@@ -1,9 +1,9 @@
-import Modal from "../../../../components/common/Modal";
-import Button from "../../../../components/form/Button";
-import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon, CloseIcon } from "../../../../components/common/Icon";
-import { CreateBook } from "../../../../types/types";
-import useHandleCreateBook from "../../hooks/useHandleCreateBook";
-import BookCover from "../../../../components/common/BookCover";
+import Modal from "../../../components/common/Modal";
+import Button from "../../../components/form/Button";
+import { CheckIcon, UncheckIcon, LoaderIcon, AlertIcon, CloseIcon } from "../../../components/common/Icon";
+import { CreateBook } from "../../../types/types";
+import useHandleCreateBook from "../../bookshelf/hooks/useHandleCreateBook";
+import BookCover from "../../../components/common/BookCover";
 import { getAuthors } from "../services/getAuthors";
 import { useState } from "react";
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import useExternalApiBooks from "../../externalBookApi/api/getExternalApiBooks"
+import useExternalApiBooks from "../api/getExternalApiBooks"
 import { UseQueryResult } from "@tanstack/react-query"
 import { ExternalApiBook } from "../../../types/types"
 

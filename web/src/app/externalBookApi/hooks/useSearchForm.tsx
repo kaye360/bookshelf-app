@@ -1,30 +1,24 @@
-import { SyntheticEvent, useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
-import useExternalApiBooks from "../../../externalBookApi/api/getExternalApiBooks"
-import usePaginateResults from "../../../externalBookApi/hooks/usePaginateResults"
+import { SyntheticEvent, useState } from "react"
+import usePaginateResults from "./usePaginateResults"
+import { UseMutationResult } from "@tanstack/react-query"
+import { CreateBook } from "../../../types/types"
+import { SetURLSearchParams } from "react-router-dom"
 
-
-export default function useFormHandlers() {
-
-    /**
-     * Search Params
-     */
-    const [searchParams, setSearchParams] = useSearchParams()
-    const searchQueryParam = searchParams.get('q')
-
-    /**
-     * Query
-     */
-    const query = useExternalApiBooks(searchQueryParam)
-    useEffect( () => {  
-        query.mutate()
-    }, [searchQueryParam])
+export default function useSearchForm({
+    query, 
+    setSearchParams
+} : {
+    query           : UseMutationResult<CreateBook[], Error, void, unknown>,
+    setSearchParams : SetURLSearchParams
+}) {
 
     /**
      * Form state
      */
     const [hasSearched, setHasSearched] = useState<boolean>(false)
+
     const hasResults = query.isSuccess && !query.isPending && query.data.length !== 0
+
     const { bookList, hasMoreBooks, nextPage } = usePaginateResults({ data : query.data })
 
     /**
@@ -47,9 +41,7 @@ export default function useFormHandlers() {
 
     function handleReset() {
         setHasSearched(false)
-        setSearchParams({
-            q: ''
-        })
+        setSearchParams({ q: '' })
     }
 
     return {
@@ -61,6 +53,5 @@ export default function useFormHandlers() {
         hasMoreBooks,
         nextPage,
         bookList,
-        searchQueryParam
     }
 }

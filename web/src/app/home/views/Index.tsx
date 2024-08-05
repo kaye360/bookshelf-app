@@ -1,9 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import BaseLayout from "../layouts/BaseLayout";
+import BaseLayout from "../../../layouts/BaseLayout";
 import { useEffect } from "react";
-import AccountForm from "./auth/components/AccountForm";
-import { useStore } from "../store/store";
-
+import AccountForm from "../../auth/components/AccountForm";
+import { useStore } from "../../../store/store";
 
 export default function Index() {
 

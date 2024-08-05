@@ -2,8 +2,7 @@ import { API_URL } from "../../../config"
 import { useQuery } from "@tanstack/react-query"
 import { Req } from "../../../lib/Req/Req"
 import { CommunityPost } from "../../../types/types"
-import { bundlePosts } from "../utils/bundlePosts"
-
+import { bundlePosts } from "../services/bundlePosts"
 
 /**
  * 

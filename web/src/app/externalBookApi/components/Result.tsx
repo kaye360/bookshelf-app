@@ -1,9 +1,9 @@
-import { PlusIcon, CheckIcon } from "../../../../components/common/Icon"
+import { PlusIcon, CheckIcon } from "../../../components/common/Icon"
 import AddBookModal from "./AddBookModal"
 import { useState } from "react"
-import { CreateBook } from "../../../../types/types"
-import BookCover from "../../../../components/common/BookCover"
-import { userHasBook } from "../../services/userHasBook"
+import { CreateBook } from "../../../types/types"
+import BookCover from "../../../components/common/BookCover"
+import { userHasBook } from "../../bookshelf/services/userHasBook"
 import { getAuthors } from "../services/getAuthors"
 
 export default function Result({

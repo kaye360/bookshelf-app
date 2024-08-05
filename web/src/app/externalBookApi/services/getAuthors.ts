@@ -1,4 +1,4 @@
-import { CreateBook } from "../../../../types/types"
+import { CreateBook } from "../../../types/types"
 
 export function getAuthors(createBookAuthors : CreateBook['authors']) {
 

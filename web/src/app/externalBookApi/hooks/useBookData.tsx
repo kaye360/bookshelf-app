@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
-import useSingleExternalApiAuthors from "../../externalBookApi/api/getSingleExternalApiAuthors"
-import useSingleExternalApiBook from "../../externalBookApi/api/getSingleExternalApiBook"
+import useSingleExternalApiAuthors from "../api/getSingleExternalApiAuthors"
+import useSingleExternalApiBook from "../api/getSingleExternalApiBook"
 
 export default function useBookData() {
 

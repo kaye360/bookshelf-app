@@ -6,7 +6,6 @@ import { CreateBookSchema } from "../validation/createBookValidation";
 import { BookSchema } from "../validation/bookValidation";
 import { useStore } from "../../../store/store";
 
-
 interface CreateBookProps {
     book : CreateBook,
     isOwned : HTMLInputElement,
@@ -14,7 +13,6 @@ interface CreateBookProps {
     tags    : HTMLInputElement,
 }
 
- 
 /**
  * 
  * The api query or mutation to be consumed across the app
@@ -45,8 +43,6 @@ export function useCreateBook() {
  * 
  */
 async function createBook(props : CreateBookProps ) : Promise<Book> {
-
-    console.log(props)
 
     const user  = useStore.getState().auth.user
     const token = useStore.getState().auth.token

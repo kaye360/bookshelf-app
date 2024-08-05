@@ -1,24 +1,32 @@
 import BaseLayout from '../../../layouts/BaseLayout'
 import Button from '../../../components/form/Button'
-import Result from './components/Result'
+import Result from '../components/Result'
 import TextInput from '../../../components/form/TextInput'
 import { LoaderIcon } from '../../../components/common/Icon'
-import useFormHandlers from './hooks/useFormHandlers'
+import { useSearchParams } from 'react-router-dom'
+import useExternalApiBooks from '../api/getExternalApiBooks'
+import { useEffect } from 'react'
+import useSearchForm from '../hooks/useSearchForm'
 
+export default function SearchBooks() {
 
-export default function AddBook() {
+    const [searchParams, setSearchParams] = useSearchParams()
+    const searchQueryParam = searchParams.get('q')
+
+    const query = useExternalApiBooks(searchQueryParam)
+    useEffect( () => {  
+        query.mutate()
+    }, [searchQueryParam])
     
     const {
         handleReset,
         handleSubmit,
-        query,
         hasResults,
         hasSearched,
         hasMoreBooks,
         nextPage,
         bookList,
-        searchQueryParam
-    } = useFormHandlers()
+    } = useSearchForm({query, setSearchParams})
 
     return (
         <BaseLayout>

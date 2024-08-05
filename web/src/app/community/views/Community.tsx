@@ -1,8 +1,8 @@
-import H1 from "../../components/common/H1";
-import BaseLayout from "../../layouts/BaseLayout";
-import CommunityPost from "./components/CommunityPost";
-import useInfiniteCommunityPosts from "./hooks/useInfiniteCommunityPosts";
-import Loader from "../../components/common/Loader";
+import H1 from "../../../components/common/H1";
+import BaseLayout from "../../../layouts/BaseLayout";
+import CommunityPost from "../components/CommunityPost";
+import useInfiniteCommunityPosts from "../hooks/useInfiniteCommunityPosts";
+import Loader from "../../../components/common/Loader";
 
 export default function Community() {
 

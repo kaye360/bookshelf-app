@@ -1,13 +1,13 @@
-import BaseLayout from "../../layouts/BaseLayout";
-import { BookIcon, PlusIcon } from "../../components/common/Icon";
-import Button from "../../components/form/Button";
+import BaseLayout from "../../../layouts/BaseLayout";
+import { BookIcon, PlusIcon } from "../../../components/common/Icon";
+import Button from "../../../components/form/Button";
 import { useNavigate } from "react-router-dom";
-import { useStore } from "../../store/store";
-import { BookShelfContext } from "./hooks/useBookShelfContext";
-import SearchBar from "./components/searchbar/SearchBar";
-import useBookShelfView from "./hooks/useBookShelfView";
-import Loader from "../../components/common/Loader";
-import useBookshelfParams from "./hooks/useBookShelfParams";
+import { useStore } from "../../../store/store";
+import { BookShelfContext } from "../hooks/useBookShelfContext";
+import SearchBar from "../components/searchbar/SearchBar";
+import useBookShelfView from "../hooks/useBookShelfView";
+import Loader from "../../../components/common/Loader";
+import useBookshelfParams from "../hooks/useBookShelfParams";
 
 export default function BookShelf() {
 
