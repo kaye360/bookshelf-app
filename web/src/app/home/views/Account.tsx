@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import AccountForm from "../../auth/components/AccountForm";
 import { useStore } from "../../../store/store";
 
-export default function Index() {
+export default function Account() {
 
     const navigate = useNavigate()
     const { auth } = useStore()

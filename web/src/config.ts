@@ -1,5 +1,5 @@
 
-export const APP_NAME = 'Bookshelf'
+export const APP_NAME = 'Bookshelf.app'
 
 export const API_URL = import.meta.env.DEV
     ? 'http://192.168.1.70:8000/api'

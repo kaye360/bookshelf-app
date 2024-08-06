@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../../app/home/views/Dashboard";
-import Index from "../../app/home/views/Index";
 import AuthRoute from "../../app/auth/components/AuthRoute";
 import Book from "../../app/externalBookApi/views/Book";
 import BookShelf from "../../app/bookshelf/views/Bookshelf";
@@ -11,25 +10,27 @@ import Profile from "../../app/profile/views/Profile";
 import Error from "../../app/error/Error";
 import PasswordReset from "../../app/auth/views/PasswordReset";
 import PasswordResetRequest from "../../app/auth/views/PasswordResetRequest";
+import Home from "../../app/home/views/Home";
+import Account from "../../app/home/views/Account";
 
 const errorElement = <Error />
 
 export const router = createBrowserRouter([
 	{
 		path: '/',
-		element : <Index />,
+		element : <Home />,
 		errorElement,
 	},
 
 	{
 		path: '/login',
-		element : <Index />,
+		element : <Account />,
 		errorElement
 	},
 
 	{
 		path: '/register',
-		element : <Index />,
+		element : <Account />,
 		errorElement
 	},
 

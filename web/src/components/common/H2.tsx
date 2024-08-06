@@ -1,7 +1,13 @@
 
-export default function H2({children} : {children : any}) {
+export default function H2({
+    className = '',
+    children
+} : {
+    className? : string
+    children : any
+}) {
     return (
-        <h2 className="font-bold text-xl mb-4">
+        <h2 className={`font-bold text-xl mb-4 ${className}`}>
             {children}
         </h2>
     )
