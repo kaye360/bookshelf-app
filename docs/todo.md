@@ -1,10 +1,10 @@
 # TODO
 
 ## Front end
-- Homepage: Make proper landing page, about page, help page
+- Homepage: Make proper about page, help page
+- Top Nav: Homepage link is active on about page. Make it Dashboard if isAuth
 - Bookshelf: Tooltip cut off in list view. Overflow issue
 - tests
-- On book page, disable Add Book Button
 
 ## Back end
 - tests

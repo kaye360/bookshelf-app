@@ -12,6 +12,7 @@ import PasswordReset from "../../app/auth/views/PasswordReset";
 import PasswordResetRequest from "../../app/auth/views/PasswordResetRequest";
 import Home from "../../app/home/views/Home";
 import Account from "../../app/home/views/Account";
+import About from "../../app/home/views/About";
 
 const errorElement = <Error />
 
@@ -19,6 +20,12 @@ export const router = createBrowserRouter([
 	{
 		path: '/',
 		element : <Home />,
+		errorElement,
+	},
+
+	{
+		path: '/about',
+		element : <About />,
 		errorElement,
 	},
 
