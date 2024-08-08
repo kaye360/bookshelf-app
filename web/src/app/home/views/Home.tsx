@@ -179,12 +179,12 @@ export default function Home() {
 
             </section>
 
-            <section>
-                <H2>
+            <section className="bg-primary-light/20 rounded-lg py-8">
+                <H2 className="px-8 mb-8">
                     Our Community
                 </H2>
 
-                <div className="overflow-hidden mb-6">
+                <div className="overflow-hidden mb-16">
                     <div className="flex gap-4 animate-marquee">
                         { communityNewestPosts.map( post => (
                             <Link 
@@ -206,23 +206,34 @@ export default function Home() {
                     </div>
                 </div>
 
-                <ul className="grid gap-6">
-                    {communityNewestUsers.map( user => (
-                        <li className="flex items-center gap-2">
-                            <UserPlusIcon />
-                            <Link 
-                                to={`/user/${user.userHandle}`}
-                                className="border border-primary-light/50 rounded-md px-2 py-1"
-                            >
-                                {user.userHandle}
-                            </Link>
-                            <span>
-                                joined on
-                                &nbsp;{ new Date(user.created_at).toDateString().split(' ').slice(0, -1).join(' ') }
-                            </span>
-                        </li>
-                    ))}
-                </ul>
+                <div className="grid md:grid-cols-2 gap-12 px-6">
+
+                    <ul className="grid gap-6">
+                        {communityNewestUsers.map( user => (
+                            <li className="flex items-center gap-2">
+                                <UserPlusIcon />
+                                <Link 
+                                    to={`/user/${user.userHandle}`}
+                                    className="border border-primary-light/50 rounded-md px-2 py-1"
+                                >
+                                    {user.userHandle}
+                                </Link>
+                                <span>
+                                    joined on
+                                    &nbsp;{ new Date(user.created_at).toDateString().split(' ').slice(0, -1).join(' ') }
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <img 
+                        src="/illustrations/reader-cloudy.png"
+                        width="300"
+                        height="300"
+                        className="rounded-xl w-full h-[300px] object-cover"
+                    />
+
+                </div>
 
             </section>
 

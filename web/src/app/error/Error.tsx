@@ -21,7 +21,7 @@ export default function Error() {
 
     return (
         <BaseLayout title="Error">
-            <div className="grid gap-4">
+            <div className="grid grid-cols-2 gap-4 items-center">
 
                 <div className=" max-w-xl mx-auto p-4">
 
@@ -35,6 +35,13 @@ export default function Error() {
                     </p>
 
                 </div>
+
+                <img 
+                    src="/illustrations/reader-hill.png"
+                    width="400"
+                    height="400"
+                    className="rounded-lg mt-16"
+                />
 
             </div>
         </BaseLayout>
