@@ -210,7 +210,7 @@ export default function Home() {
 
                     <ul className="grid gap-6">
                         {communityNewestUsers.map( user => (
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center gap-2" key={user.id}>
                                 <UserPlusIcon />
                                 <Link 
                                     to={`/user/${user.userHandle}`}

@@ -8,7 +8,7 @@ export default function useLogout() {
     const { 
         auth : { token }, 
         authActions : { updateAuth },
-        booksActions : { updateBooks }
+        booksActions : { clearBooks }
     } = useStore()
 
     const queryClient = useQueryClient()
@@ -16,10 +16,15 @@ export default function useLogout() {
     async function logout() {
 
         localStorage.clear()
-        queryClient.clear()
-        updateBooks([])
+        queryClient.removeQueries({
+            queryKey : ['getBooks', 'getSettings']
+        })
+        clearBooks()
         
-        if ( !token ) return
+        if ( !token ) {
+            window.location.reload()
+            return
+        }
         
         const response = await Req.post({ url : `${API_URL}/auth/logout`, token })
         

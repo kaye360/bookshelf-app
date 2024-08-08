@@ -7,11 +7,14 @@ import useCreateBook from "../hooks/useCreateBook";
 import useBookData from "../hooks/useBookData";
 import { userHasBook } from "../../bookshelf/services/userHasBook";
 import Loader from "../../../components/common/Loader";
+import { useStore } from "../../../store/store";
+import { Link } from "react-router-dom";
 
 export default function Book() {
 
+    const { auth } = useStore()
     const { key, bookQuery, authors} = useBookData()
-    
+
     const {
         createBook,
         isAddModalOpen,
@@ -21,6 +24,8 @@ export default function Book() {
         key,
         bookQuery
     })
+
+    const hasBook = userHasBook(key)
 
     return (
         <BaseLayout title={bookQuery.data?.title || ''}>
@@ -45,7 +50,7 @@ export default function Book() {
                                 />
                             )}
                             <div>
-                                { userHasBook(key) ? (                            
+                                { hasBook ? (                            
                                     <span className="flex gap-2 justify-center items-center min-w-max px-6 py-2 text-sm text-accent border border-accent/30 rounded-lg w-full select-none">
                                         <CheckIcon />
                                         Added
@@ -55,12 +60,18 @@ export default function Book() {
                                         variant="outline"
                                         className="w-full"
                                         onClick={ handleAddBook }
+                                        disabled={ !auth.isAuth }
                                     >
                                         <PlusIcon />
                                         Add Book
                                     </Button>
                                 )}
                             </div>
+                            { !auth.isAuth && (
+                                <span className="text-sm text-center">
+                                    <Link to="/login">Log in </Link> to add this book!
+                                </span>
+                            )}
                         </div>
 
                         <div className="grid gap-4">

@@ -19,7 +19,8 @@ export const useStore = create<Store>()((set => ({
 
     booksActions : {
         updateBooks : (newBooks) => set({books : newBooks}),
-        updateBookStatus : (newStatus) => set({booksStatus : newStatus})
+        updateBookStatus : (newStatus) => set({booksStatus : newStatus}),
+        clearBooks : () => set( () => ({books : []}))
     },
 
     settings : getSettingsFromLocalStorage(),

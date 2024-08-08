@@ -36,6 +36,7 @@ export interface Store {
     booksActions : {
         updateBooks      : (newBooks : Book[]) => void
         updateBookStatus : (newStatus : Store['booksStatus']) => void
+        clearBooks       : () => void
     }
 
     settings        : Settings
