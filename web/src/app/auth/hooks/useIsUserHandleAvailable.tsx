@@ -18,7 +18,7 @@ export default function useIsUserHandleAvailable() {
 
             setStatus('fetching')
 
-            const response = await Req.get( `${API_URL}/register/isUserHandleAvailable/${e.target.value}` )
+            const response = await Req.get( `${API_URL}/auth/register/isUserHandleAvailable/${e.target.value}` )
 
             if( 
                 Object.hasOwn( response.data, 'isHandleAvailable' ) &&
