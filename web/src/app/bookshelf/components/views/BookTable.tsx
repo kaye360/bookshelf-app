@@ -11,7 +11,7 @@ export default function BookTable({
     const { searchParams, updateSearchParam } = useBookshelfContext()
 
     return (
-        <div className="max-w-[100vw] overflow-x-auto">
+        <div className="max-w-[100vw] overflow-x-auto md:overflow-x-visible">
             <table className="w-full">
 
                 <thead>

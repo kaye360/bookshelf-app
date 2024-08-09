@@ -9,12 +9,13 @@ import useScrollToElement from "../../../hooks/useScrollToElement";
 import H2 from "../../../components/common/H2";
 import { useCommunityPosts } from "../../community/api/getCommunityPost";
 import BookCover from "../../../components/common/BookCover";
+import { useStore } from "../../../store/store";
 
 export default function Home() {
 
-    const navigate = useNavigate()
-    const welcome = useScrollToElement()
-
+    const { auth }  = useStore()
+    const navigate  = useNavigate()
+    const welcome   = useScrollToElement()
     const community = useCommunityPosts()
 
     const communityNewestPosts = community.data 
@@ -46,14 +47,23 @@ export default function Home() {
                     </span>
 
                     <div className="grid md:flex md:items-center gap-3">
-                        <Button onClick={ () => navigate('/register')}>
-                            <CheckIcon />
-                            Join Now
-                        </Button>
-                        <Button variant="outline" onClick={ welcome.scrollTo }>
-                            <ArrowDownIcon />
-                            Learn More
-                        </Button>
+                        { auth.isAuth ? (
+                            <Button onClick={ () => navigate('/dashboard')}>
+                                Continue to Dashboard
+                                <ArrowRightIcon />
+                            </Button>
+                        ) : (
+                            <>
+                                <Button onClick={ () => navigate('/register')}>
+                                    <CheckIcon />
+                                    Join Now
+                                </Button>
+                                <Button variant="outline" onClick={ welcome.scrollTo }>
+                                    <ArrowDownIcon />
+                                    Learn More
+                                </Button>
+                            </>
+                        )}
                     </div>
                 </div>
 

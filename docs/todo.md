@@ -1,9 +1,6 @@
 # TODO
 
 ## Front end
-- Homepage: Make proper about page, help page
-- Top Nav: Homepage link is active on about page. Make it Dashboard if isAuth
-- Bookshelf: Tooltip cut off in list view. Overflow issue
 - tests
 
 ## Back end

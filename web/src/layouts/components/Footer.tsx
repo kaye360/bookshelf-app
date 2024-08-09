@@ -8,7 +8,7 @@ export default function Footer() {
     const { auth } = useStore()
 
     return (
-        <footer className="relative -z-0 pb-12 bg-primary-light/20">
+        <footer className="relative -z-0 pb-12 bg-primary-light/20 mt-auto">
             <Wrapper>
                 <div className="flex flex-col items-center gap-6">
 
