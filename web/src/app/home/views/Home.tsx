@@ -218,7 +218,10 @@ export default function Home() {
 
                 <div className="grid md:grid-cols-2 gap-12 px-6">
 
-                    <ul className="grid gap-6">
+                    <ul className="grid gap-4 content-start">
+                        <li>
+                            <H2>Newest Users</H2>
+                        </li>
                         {communityNewestUsers.map( user => (
                             <li className="flex items-center gap-2" key={user.id}>
                                 <UserPlusIcon />

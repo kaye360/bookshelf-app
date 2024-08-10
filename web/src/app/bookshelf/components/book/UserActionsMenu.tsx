@@ -1,19 +1,18 @@
 import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useEffect, useState } from "react";
-import UserActionsMoreButton from "./UserActionsMoreButton";
 import EditTagsModal from "./EditTagsModal";
 import { useNavigate } from "react-router-dom";
 import DeleteBookModal from "./DeleteBookModal";
 import { EditIcon, BookIcon, TrashIcon } from "../../../../components/common/Icon";
 import { Book } from "../../../../types/types";
+import UserActionsMenuButton from "./UserActionsMenuButton";
 
-
-interface UserActionsMoreProps extends ComponentPropsWithoutRef<'div'> {
+interface UserActionsMenuProps extends ComponentPropsWithoutRef<'div'> {
     book : Book
     isOpen : boolean
     setIsOpen : React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function UserActionsMore({book, isOpen, setIsOpen} : UserActionsMoreProps) {
+export default function UserActionsMenu({book, isOpen, setIsOpen} : UserActionsMenuProps) {
 
     const navigate = useNavigate()
 
@@ -33,28 +32,26 @@ export default function UserActionsMore({book, isOpen, setIsOpen} : UserActionsM
         setIsOpen(false)
     }
 
-
-
     return (
         <div 
             id={id}
-            className={`absolute bottom-[34px] left-0 w-full overflow-hidden py-0 max-h-0 grid gap-0 bg-bg/95 rounded shadow-md transition-all duration-300 ${isOpen ? 'py-2 max-h-[150px]' : ''}`}
+            className={`absolute bottom-[34px] right-0 z-50 w-full min-w-fit overflow-hidden py-0 max-h-0 grid gap-0 bg-bg/95 rounded shadow-md transition-all duration-300 ${isOpen ? 'py-2 max-h-[150px]' : ''}`}
         >
 
-            <UserActionsMoreButton onClick={ handleEditTags }>
+            <UserActionsMenuButton onClick={ handleEditTags }>
                 Edit Tags
                 <EditIcon size={18} />
-            </UserActionsMoreButton>
+            </UserActionsMenuButton>
 
-            <UserActionsMoreButton onClick={ () => navigate(`/book/${book.key}`)}>
+            <UserActionsMenuButton onClick={ () => navigate(`/book/${book.key}`)}>
                 Book Info
                 <BookIcon size={18} />
-            </UserActionsMoreButton>
+            </UserActionsMenuButton>
 
-            <UserActionsMoreButton onClick={ handleDelete }>
+            <UserActionsMenuButton onClick={ handleDelete }>
                 Delete Book
                 <TrashIcon size={18} />
-            </UserActionsMoreButton>
+            </UserActionsMenuButton>
 
             { showEditTagsModal && (
                 <EditTagsModal 
@@ -92,8 +89,8 @@ function useEventHandler({
 
             if( !(e.target instanceof HTMLElement) ) return
             
-            const userActionsMoreEl = document.querySelector(`#${id}`)
-            if( !userActionsMoreEl ) return
+            const userActionsMenuEl = document.querySelector(`#${id}`)
+            if( !userActionsMenuEl ) return
 
             const els = document.elementsFromPoint(e.pageX, e.pageY)
 

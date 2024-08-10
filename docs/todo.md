@@ -14,3 +14,4 @@
 - add avatar color picker
 - Statistics - most read authors, most read topics, longest book
 - Some kind of User score. Pages Read? Books Read? Books Added? 
+- Make a Grid small and grid large option

@@ -30,10 +30,10 @@ export default function BaseLayout({
     }, [window.location.href])
     
     return (
-        <div className="flex flex-col justify-start min-h-[101vh]">
+        <div className="flex flex-col justify-start relative z-0 min-h-[101vh]">
             <Header />
             <Nav />
-            <main className="relative z-0">
+            <main className="relative z-10">
                 <Wrapper id="main-inner-content">
                     {children}
                 </Wrapper>

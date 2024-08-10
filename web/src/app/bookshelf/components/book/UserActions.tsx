@@ -6,7 +6,7 @@ import useHandleUpdateBookIsFavourite from "../../hooks/useHandleUpdateBookIsFav
 import useHandleUpdateBookIsOwned from "../../hooks/useHandleUpdateBookIsOwned";
 import useHandleUpdateBookIsRead from "../../hooks/useHandleUpdateBookIsRead";
 import UserActionButton from "./UserActionButton";
-import UserActionsMore from "./UserActionsMore";
+import UserActionsMenu from "./UserActionsMenu";
 
 export default function UserActions({book} : {book : Book}) {
 
@@ -19,7 +19,7 @@ export default function UserActions({book} : {book : Book}) {
     const IsReadIcon = isRead ? CheckIcon : UncheckIcon
 
     return (
-        <div className="flex items-top gap-1 mt-auto group/menu relative">
+        <div className="flex items-top gap-1 mt-auto group/menu relative z-0">
 
             <Tooltip title="Favourites">
                 <UserActionButton onClick={handleUpdateBookIsFavourite}>
@@ -45,7 +45,7 @@ export default function UserActions({book} : {book : Book}) {
                 </UserActionButton>
             </Tooltip>
 
-            <UserActionsMore 
+            <UserActionsMenu
                 book={book} 
                 isOpen={isMoreActionsOpen} 
                 setIsOpen={setIsMoreActionsOpen} 

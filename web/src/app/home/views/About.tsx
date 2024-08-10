@@ -14,6 +14,9 @@ export default function About() {
                 <TextFlow>
                     <H1>About {APP_NAME}</H1>
                     <p>
+                        <b>Current version: v0.9</b>
+                    </p>
+                    <p>
                         Bookshelf.app is your ultimate companion for all things reading! Whether you're an avid reader with a sprawling library or just getting started on your literary journey, our app is designed to help you effortlessly organize, track, and discover books.
                     </p>
                     <p>
@@ -94,7 +97,7 @@ export default function About() {
                         </p>
                         <ul className="pl-6 list-disc">
                             <li>
-                                <b>Backend:</b> PHP, MYSQL, Laravel
+                                <b>Backend:</b> PHP, MYSQL, Laravel Sanctum
                             </li>
                             <li>
                                 <b>Frontend:</b> React, Zustand, Tanstack Query, React-Router, Yup Validation

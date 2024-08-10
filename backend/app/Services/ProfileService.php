@@ -9,21 +9,25 @@ class ProfileService {
     public function getTags(mixed $user) {
 
         $dbTags = UserBook::select(['tags'])
-        ->where('userId', $user->id)
-        ->get();
+            ->where('userId', $user->id)
+            ->get();
 
         $tags = [];
 
         foreach ($dbTags as &$tag) {
             array_push($tags, json_decode( $tag['tags'] ));
         }
-        unset($topic);
+        unset($tag);
 
-        $tags = array_merge([], ...$tags);
-        $tags = array_unique( $tags );
-        $tags = array_rand( array_flip( $tags ), 10 );
+        $tags_flattend   = array_merge([], ...$tags);
+        $tags_unique     = array_unique( $tags_flattend );
+        $tags_count      = count( $tags_unique );
+        $tags_randomized = array_rand(
+            array_flip( $tags_unique ),
+            $tags_count < 10 ? $tags_count : 10
+        );
 
-        return $tags;
+        return $tags_randomized;
     }
 
     public function getBooks(mixed $user)

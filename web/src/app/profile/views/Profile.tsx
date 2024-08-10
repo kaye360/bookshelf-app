@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import BookCover from "../../../components/common/BookCover";
 import SectionHeading from "../../../components/common/SectionHeading";
 import Loader from "../../../components/common/Loader";
+import Avatar from "../../../components/common/Avatar";
 
 export default function Profile() {
 
@@ -27,12 +28,15 @@ export default function Profile() {
     return (
         <BaseLayout title={ user || 'User Profile' }>
             <H1>
-                {user}
+                <span className="flex items-center gap-1">
+                    <Avatar handle={user || ''} />
+                    {user}
+                </span>
             </H1>
 
             { profileQuery.isSuccess && (
                 <>
-                    <section className="grid gap-3">
+                    <section className="grid gap-3 mt-12">
                         <div className="flex items-center gap-1">
                             <LocationIcon /> {profileQuery.data?.location || 'None'}
                         </div>
@@ -40,7 +44,7 @@ export default function Profile() {
                             <UserIcon /> Joined { profileQuery.data?.joined }
                         </div>
                         <div className="flex items-center gap-1">
-                            <BookIcon /> { profileQuery.data.totalBooks } books
+                            <BookIcon /> { profileQuery.data.totalBooks } { profileQuery.data.totalBooks === 1 ? 'book' : 'books'}
                         </div>
                     </section>
 
