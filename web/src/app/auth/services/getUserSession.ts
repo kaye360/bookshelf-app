@@ -2,7 +2,6 @@ import { Auth } from "../../../types/types"
 import { isJson, isString } from "../../../utils/validation"
 import { AuthSchema } from "../validation/authValidation"
 
-
 export function getUserSessionFromLocalStorage() : Auth {
 
     const currentSession = validatedSession()

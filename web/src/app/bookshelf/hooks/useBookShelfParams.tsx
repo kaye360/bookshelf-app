@@ -35,7 +35,12 @@ export default function useBookshelfParams() {
         }, {replace : true} )
     } 
 
-    const bookListResolver = new BookListResolver({books, searchParams})
+    const bookListResolver = new BookListResolver({
+        books, 
+        searchQuery : searchParams.get('searchQuery'),
+        filterBy    : searchParams.get('filterBy'),
+        sortBy      : searchParams.get('sortBy'),
+    })
     const resolvedBooks = bookListResolver.resolve()
     
     return {

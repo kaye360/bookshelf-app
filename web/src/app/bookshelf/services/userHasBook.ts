@@ -1,9 +1,14 @@
-import { useStore } from "../../../store/store"
+import { Book } from "../../../types/types"
 
-export function userHasBook(key : string|undefined) : boolean {
+export function userHasBook({
+    key,
+    books
+} : {
+    key? : string, 
+    books : Book[]}
+) : boolean {
+
     if( !key ) return false
-
-    const books = useStore.getState().books
 
     if( books.some( b => b.key === key )) {
         return true

@@ -1,4 +1,4 @@
-import { Book } from "../../../types/types"
+import { Book, UserSettings } from "../../../types/types"
 
 /**
  * @class BookListResolver
@@ -11,37 +11,38 @@ import { Book } from "../../../types/types"
  * Instantiate the class and then call it with the resolve() method to access sorted/filtered book list.
  * 
  */
+interface BookListResolverConstructor {
+    books        : Book[]
+    searchQuery  : string | null
+    filterBy     : UserSettings['filter'] | string | null
+    sortBy       : string | null
+}
+
 export class BookListResolver {
 
     books        : Book[]
-    searchParams : URLSearchParams
+    searchQuery  : string
+    filterBy     : string
+    sortBy       : string
 
-    public constructor({
-        books,
-        searchParams
-    } : {
-        books        : Book[],
-        searchParams : URLSearchParams
-    }) {
-        this.books     = books
-        this.searchParams = searchParams
+    public constructor({ books, searchQuery, filterBy, sortBy } : BookListResolverConstructor) {
+        this.books       = books
+        this.searchQuery = searchQuery?.toLowerCase() || ''
+        this.filterBy    = filterBy || 'all'
+        this.sortBy      = sortBy || 'title'
     }
 
     public resolve() {
 
-        const searchQuery = this.searchParams.get('searchQuery')?.toLowerCase() || ""
-        const filterBy    = this.searchParams.get('filterBy') || "all"
-        const sortBy      = this.searchParams.get('sortBy') || 'title'
-
-        if( searchQuery !== '' ) {
-            this.search(searchQuery)
+        if( this.searchQuery !== '' ) {
+            this.search(this.searchQuery)
         }
 
-        if( !searchQuery && filterBy !== 'all' ) {
-            this.filter(filterBy)
+        if( !this.searchQuery && this.filterBy !== 'all' ) {
+            this.filter(this.filterBy)
         }
 
-        this.sort(sortBy)
+        this.sort(this.sortBy)
 
         return this.books
     }
@@ -74,6 +75,7 @@ export class BookListResolver {
                 this.books = this.books.filter( book => book.group === 'owned' )
                 break
             default :
+                // If none of the above, then it is a tag
                 this.books = this.books.filter( book => book.tags.includes( filterBy ))
         }
     }
@@ -93,6 +95,9 @@ export class BookListResolver {
             case 'oldest':
                 this.books = this.books.sort( (a,b) => a.created_at > b.created_at ? 1 : -1 )
                 break
+            default: 
+                // Default sort by title
+                this.books = this.books.sort( (a,b) => a.title !== b.title ? a.title < b.title ? -1 : 1 : 0 )
         }
     }
 

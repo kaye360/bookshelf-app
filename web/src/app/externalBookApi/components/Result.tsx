@@ -5,12 +5,15 @@ import { CreateBook } from "../../../types/types"
 import BookCover from "../../../components/common/BookCover"
 import { userHasBook } from "../../bookshelf/services/userHasBook"
 import { getAuthors } from "../services/getAuthors"
+import { useStore } from "../../../store/store"
 
 export default function Result({
     book, 
 } : {
     book: CreateBook, 
 }) {
+
+    const { books } = useStore()
 
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -36,7 +39,7 @@ export default function Result({
                         No cover available
                     </div>
                 )}
-                { userHasBook(book.key) ? (
+                { userHasBook({key: book.key, books}) ? (
                     <span className="flex gap-2 justify-center items-center min-w-max px-6 py-2 text-sm text-accent border border-accent/30 rounded-lg w-full select-none">
                         <CheckIcon />
                         Added

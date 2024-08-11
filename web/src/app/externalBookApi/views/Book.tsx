@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 export default function Book() {
 
-    const { auth } = useStore()
+    const { auth, books } = useStore()
     const { key, bookQuery, authors} = useBookData()
 
     const {
@@ -25,7 +25,7 @@ export default function Book() {
         bookQuery
     })
 
-    const hasBook = userHasBook(key)
+    const hasBook = userHasBook({key, books})
 
     return (
         <BaseLayout title={bookQuery.data?.title || ''}>

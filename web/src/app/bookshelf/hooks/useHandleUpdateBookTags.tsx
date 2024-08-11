@@ -14,7 +14,7 @@ export default function useHandleUpdateBookTags() {
         e.preventDefault()
 
         const tagsInput = document.querySelector('#book-tags-textarea') as HTMLTextAreaElement
-        const tags      = extractTagsFromInput(tagsInput)
+        const tags      = extractTagsFromInput(tagsInput.value)
 
         query.mutate({ book, tags })
         setHasClicked(true)

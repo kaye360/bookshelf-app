@@ -43,9 +43,6 @@ export interface Store {
     settingsActions : {
         updateSettings : (newSettings : Settings) => void
     }
-
-    tooltip : Tooltip
-    updateTooltip : (newTooltip : Tooltip) => void
 }
 
 export type AuthActions = 'LOADING' | 'LOGIN' | 'LOGIN_ERROR' | 'REGISTER' | 'REGISTER_ERROR' | 'LOGOUT'
@@ -178,7 +175,7 @@ export interface Book {
     title         : string
     authors       : string
     imageUrl      : string | null
-    userId        : string
+    userId        : number
     group         : 'wishlist' | 'owned'
     isRead        : boolean
     tags          : string[]

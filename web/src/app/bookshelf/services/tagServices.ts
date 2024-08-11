@@ -1,8 +1,12 @@
 
 
-export function extractTagsFromInput(input : HTMLTextAreaElement) : string[] {
+export function extractTagsFromInput(input : string) : string[] {
 
-    const tags      = new Set( input.value.trim().toLowerCase().split(' ').filter( tag => tag !== "") )
+    if( typeof input !== 'string') {
+        throw new Error(`Invalid input in extractTagsFromInput: ${input}`)
+    }
+
+    const tags      = new Set( input.trim().toLowerCase().split(' ').filter( tag => tag !== "") )
     const tagsArray = Array.from( tags )
 
     return tagsArray
