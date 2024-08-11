@@ -7,7 +7,7 @@ export function getAuthors(createBookAuthors : CreateBook['authors']) {
     }
 
     const authorsArr = createBookAuthors.split(',')
-    let authors      = authorsArr.slice(0,5).join(', ') 
+    let authors      = authorsArr.slice(0,5).join(',') 
 
     if( authorsArr.length > 5 ){
         authors += '...'

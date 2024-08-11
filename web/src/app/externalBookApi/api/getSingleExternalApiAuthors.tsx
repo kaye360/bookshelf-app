@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { ExternalApiAuthor, ExternalApiBook } from "../../../types/types"
+import { isArrayOfStrings } from "../../../utils/validation"
 
 
 /**
@@ -33,7 +34,7 @@ export default function useSingleExternalApiAuthors(authors: ExternalApiBook['au
  */
 async function getSingleExternalApiAuthors(authors: ExternalApiBook['authors']) : Promise<ExternalApiAuthor[]> {
 
-    if( !Array.isArray(authors) ) {
+    if( !isArrayOfStrings(authors) ) {
         throw new Error('Invalid external api authors array')
     }
 

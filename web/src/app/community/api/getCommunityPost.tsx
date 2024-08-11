@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import { Req } from "../../../lib/Req/Req"
 import { CommunityPost } from "../../../types/types"
 import { bundlePosts } from "../services/bundlePosts"
+import { isArray } from "../../../utils/validation"
 
 /**
  * 
@@ -42,7 +43,7 @@ async function getCommunityPosts( page : number ) : Promise<CommunityPost[]> {
 
     const response = await Req.get(`${API_URL}/community?page=${page}`)
 
-    if( response.error || !Array.isArray( response.data ) ) {
+    if( response.error || !isArray( response.data ) ) {
         throw new Error('Error getting community posts from API')
     }
 

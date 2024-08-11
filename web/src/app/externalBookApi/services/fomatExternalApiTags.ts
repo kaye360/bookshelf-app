@@ -1,8 +1,12 @@
 import { ExternalApiDoc } from "../../../types/types";
+import { isArray, isArrayOfStrings } from "../../../utils/validation";
 
-export function formatExternalApiTags( subject : ExternalApiDoc['subject'] ) {
+export function formatExternalApiTags( subjects : ExternalApiDoc['subject'] ) {
 
-    const tags = subject
+    if( !isArray(subjects) ) return []
+    if( !isArrayOfStrings(subjects) ) return []
+
+    const tags = subjects
         .filter( sub => sub.length > 4 && !/\d/.test(sub) )
         .sort( (a,b) => a.length > b.length ? 1 : -1)
         .slice(0,5) 

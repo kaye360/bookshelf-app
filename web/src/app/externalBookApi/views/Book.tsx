@@ -9,6 +9,7 @@ import { userHasBook } from "../../bookshelf/services/userHasBook";
 import Loader from "../../../components/common/Loader";
 import { useStore } from "../../../store/store";
 import { Link } from "react-router-dom";
+import { isArrayOfStrings } from "../../../utils/validation";
 
 export default function Book() {
 
@@ -41,7 +42,7 @@ export default function Book() {
                     <div className="flex items-start flex-wrap md:flex-nowrap gap-4">
 
                         <div className="grid gap-2">
-                            { Array.isArray( bookQuery.data?.covers ) && bookQuery.data?.covers[0] && (
+                            { isArrayOfStrings( bookQuery.data?.covers ) && bookQuery.data?.covers[0] && (
                                 <BookCover 
                                     size="lg" 
                                     autoHeight

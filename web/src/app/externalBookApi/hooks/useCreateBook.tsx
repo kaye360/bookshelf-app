@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import useExternalApiBooks from "../api/getExternalApiBooks"
 import { UseQueryResult } from "@tanstack/react-query"
 import { ExternalApiBook } from "../../../types/types"
+import { isArray } from "../../../utils/validation"
 
 export default function useCreateBook({
     key,
@@ -12,7 +13,7 @@ export default function useCreateBook({
 }) {
     const addBookQuery = useExternalApiBooks(key)
 
-    const createBook = Array.isArray( addBookQuery.data )
+    const createBook = isArray( addBookQuery.data )
         ? addBookQuery.data.filter( addBook => addBook.title === bookQuery.data?.title)[0]
         : null
 

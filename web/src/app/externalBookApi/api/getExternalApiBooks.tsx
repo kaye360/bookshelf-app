@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { CreateBook, ExternalApiBookResponse } from "../../../types/types"
 import { useStore } from "../../../store/store"
 import { CreateBookSchema } from "../../bookshelf/validation/createBookValidation"
-import { formatExternalApiTags } from "../services/tags"
+import { formatExternalApiTags } from "../services/fomatExternalApiTags"
 
 
 /**

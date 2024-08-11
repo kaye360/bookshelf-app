@@ -6,6 +6,7 @@ import BookCover from "../../../components/common/BookCover"
 import { userHasBook } from "../../bookshelf/services/userHasBook"
 import { getAuthors } from "../services/getAuthors"
 import { useStore } from "../../../store/store"
+import { isArrayOfStrings } from "../../../utils/validation"
 
 export default function Result({
     book, 
@@ -20,7 +21,7 @@ export default function Result({
     const authors = getAuthors(book.authors)
 
     const tagsArray = JSON.parse( book.tags )
-    const tags = Array.isArray( tagsArray ) 
+    const tags = isArrayOfStrings( tagsArray ) 
         ? tagsArray.map( (tag : string) => tag.split('&') ).flat()
         : []
 

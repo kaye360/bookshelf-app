@@ -30,7 +30,7 @@ export const StoreMock : Store = {
             "group": "owned",
             "isRead": true,
             "tags": ["mord","novela","police"],
-            "authors": "Henning Mankell",
+            "authors": "Zoey",
             "isFavourite": false,
             "pageCount": 537,
             "publishedDate": "1997",

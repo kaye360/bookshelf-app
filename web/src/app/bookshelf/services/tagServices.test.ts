@@ -1,7 +1,7 @@
 import { test, expect, describe } from 'vitest'
 import { extractTagsFromInput } from "./tagServices"
 
-describe('app/bookshelf/services/tagServices', () => {
+describe('extractTagsFromInput', () => {
     
     test("should extracts tags into array from input string", () => {
         expect( extractTagsFromInput('burger French-Fries  tacos ++   ice-Cream cheeseCake'))
@@ -9,13 +9,13 @@ describe('app/bookshelf/services/tagServices', () => {
     })
 
     test('should throw error on input null', () => {
-        // @ts-ignore
+        // @ts-expect-error
         expect( () => extractTagsFromInput(null))
             .toThrowError()
     })
 
     test('should throw error oni input number', () => {
-        // @ts-ignore
+        // @ts-expect-error
         expect( () => extractTagsFromInput(123))
             .toThrowError()
     })

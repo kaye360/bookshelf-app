@@ -1,6 +1,6 @@
 import { useStore } from "../../../store/store"
 import { API_URL } from "../../../config"
-import { isNumber } from "../../../utils/validation"
+import { isArray, isNumber } from "../../../utils/validation"
 import { useQuery } from "@tanstack/react-query"
 import { Req } from "../../../lib/Req/Req"
 import { Book } from "../../../types/types"
@@ -58,7 +58,7 @@ async function getBooks(
     }
     const response = await Req.get(`${API_URL}/bookshelf/${by}/${userId}`)
 
-    if( response.error || !Array.isArray( response.data ) ) {
+    if( response.error || !isArray( response.data ) ) {
         throw new Error('Error getting books from API')
     }
 
