@@ -29,7 +29,4 @@ export const useStore = create<Store>()((set => ({
         updateSettings : (newSettings) => set({ settings : newSettings })
     },
 
-    tooltip : null,
-    updateTooltip : (newTooltip) => set({ tooltip : newTooltip })
-
 })))
