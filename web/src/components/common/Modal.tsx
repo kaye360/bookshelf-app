@@ -2,7 +2,6 @@ import { SyntheticEvent, useEffect, useRef } from "react"
 import { CloseIcon } from "./Icon"
 import { createPortal } from "react-dom"
 
-
 interface ModalProps {
     closeModalFn : Function
     children? : any
