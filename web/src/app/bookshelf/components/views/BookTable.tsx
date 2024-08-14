@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "../../../../components/common/Icon"
-import { useBookshelfContext } from "../../hooks/useBookShelfContext"
+import useBookshelfParams from "../../hooks/useBookshelfParams"
 import { BookTableComponent } from "./BookTableComponents"
 
 export default function BookTable({
@@ -8,7 +8,7 @@ export default function BookTable({
     children?: any
 }) {
 
-    const { searchParams, updateSearchParam } = useBookshelfContext()
+    const { searchParams, updateSearchParam } = useBookshelfParams()
 
     return (
         <div className="max-w-[100vw] overflow-x-auto md:overflow-x-visible">

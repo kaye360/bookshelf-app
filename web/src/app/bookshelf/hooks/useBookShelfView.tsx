@@ -1,21 +1,52 @@
+import { useStore } from "../../../store/store"
 import BookCard from "../components/views/BookCard"
 import BookCardList from "../components/views/BookCardList"
 import BookGrid from "../components/views/BookGrid"
 import BookGridItem from "../components/views/BookGridItem"
 import BookTable from "../components/views/BookTable"
 import { BookTableComponent } from "../components/views/BookTableComponents"
+import { Book, UserSettings } from "../../../types/types"
+import useBookshelfParams from "./useBookshelfParams"
+import { isValidView } from "../services/isValidSetting"
 
-export default function useBookShelfView(searchParams : URLSearchParams) {
+type List = React.FC<{children : any}>
+type Item = React.FC<{book : Book}>
 
-    const viewAs = searchParams.get('viewAs')
+interface RenderedComponents {
+    list : List,
+    item : Item
+}
 
-    let BookList = BookGrid
-    if( viewAs === 'list' ) BookList = BookTable
-    if( viewAs === 'card' ) BookList = BookCardList
+export default function useBookshelfView() {
 
-    let BookListItem = BookGridItem
-    if( viewAs === 'list' ) BookListItem = BookTableComponent.Row
-    if( viewAs === 'card' ) BookListItem = BookCard
+    let BookList     : React.FC<{children : any}> = BookGrid
+    let BookListItem : React.FC<{book : Book}> = BookGridItem
+
+    const renderedComponents : { [key in UserSettings['view']] : RenderedComponents } = {
+        grid : { list : BookGrid,     item : BookGridItem },
+        card : { list : BookCardList, item : BookCard },
+        list : { list : BookTable,    item : BookTableComponent.Row },
+    }
+
+    const { searchParams } = useBookshelfParams()
+    const { settings }     = useStore()
+    const viewAs           = searchParams.get('viewAs')
+
+    if( isValidView(viewAs) ) {
+        // If Search Param, use search param
+        BookList     = renderedComponents[viewAs].list
+        BookListItem = renderedComponents[viewAs].item
+
+    } else if( isValidView(settings.view)) {
+        // Else use user setting
+        BookList     = renderedComponents[settings.view].list
+        BookListItem = renderedComponents[settings.view].item
+
+    } else {
+        // Default to Grid
+        BookList     = BookGrid
+        BookListItem = BookGridItem
+    }
 
     return {
         BookList,

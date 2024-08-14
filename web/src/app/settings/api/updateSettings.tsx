@@ -4,6 +4,7 @@ import { useStore } from "../../../store/store"
 import { Req } from "../../../lib/Req/Req"
 import { SettingsSchema } from "../validation/settingsValidation"
 import { useMutation } from "@tanstack/react-query"
+import { updateLocalTheme } from "../services/localTheme"
 
 
 /**
@@ -52,5 +53,6 @@ async function updateSettingsToApi() {
     if( response.error ) throw new Error(response.error)
 
     const validated = await SettingsSchema.validate(response.data)
+    updateLocalTheme(validated.theme)
     return validated
 }

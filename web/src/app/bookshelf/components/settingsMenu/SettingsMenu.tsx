@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import Button from "../../../../components/form/Button"
 import Divider from "../../../../components/common/Divider"
 import Wrapper from "../../../../layouts/components/Wrapper"
-import Options from "./Options"
+import Settings from "./Settings"
 
 
 export default function SettingsMenu({
@@ -66,14 +66,14 @@ export default function SettingsMenu({
 
                     <div>
                         <h3 className="font-semibold mb-4">View</h3>
-                        <Options.ViewOptions />
+                        <Settings.View />
                     </div>
 
                     <Divider />
 
                     <div>
                         <h3 className="font-semibold mb-4">Sort</h3>
-                        <Options.SortOptions />
+                        <Settings.Sort />
                     </div>
 
                     <Divider />
@@ -82,14 +82,14 @@ export default function SettingsMenu({
                         <h3 className="font-semibold mb-4">
                             Filter
                         </h3>
-                        <Options.FilterOptions />
+                        <Settings.Filter />
                     </div>
 
                     <Divider />
 
                     <div>
                         <h3 className="font-semibold mb-4">Tags</h3>
-                        <Options.TagOptions />
+                        <Settings.Tag />
                     </div>
 
                     <Button 

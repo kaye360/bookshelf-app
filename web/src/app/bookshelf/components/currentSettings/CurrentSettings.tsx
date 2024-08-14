@@ -4,7 +4,8 @@ import { StringUtils } from "../../../../utils/string"
 import SettingsMenuButton from "./SettingsMenuButton"
 import SearchParamButton from "./SearchParamButton"
 import { useStore } from "../../../../store/store"
-import { useBookshelfContext } from "../../hooks/useBookShelfContext"
+import useBookshelfParams from "../../hooks/useBookshelfParams"
+import { isString } from "../../../../utils/validation"
 
 export default function CurrentSettings({
     setShowFilters
@@ -13,26 +14,23 @@ export default function CurrentSettings({
 }) {
 
     const { settings } = useStore()
-    const {searchParams, updateSearchParam} = useBookshelfContext()
+    const { searchParams, updateSearchParam, clearSearchParam } = useBookshelfParams()
 
     const currentParams = {
         search : searchParams.get('searchQuery') || '',
-        view   : searchParams.get('viewAs'),
+        view   : searchParams.get('viewAs') || settings.view,
         sort   : searchParams.get('sortBy') || settings?.sort,
-        filter : searchParams.get('filterBy') || settings?.filter
+        filter : searchParams.get('filterBy') || settings?.filter,
+        tag    : searchParams.get('taggedAs')
     }
 
-    const hasSearchQuery = typeof currentParams.search === 'string' && currentParams.search.length > 0
+    const hasSearchQuery = isString(currentParams.search) && currentParams.search.length > 0
+    const hasTag         = currentParams.tag !== null
 
-    const viewAs = StringUtils.capitalize( currentParams.view )
-    const sortBy = currentParams.sort as UserSettings['sort']
-
-    const filterIsTag = !['all', 'read', 'unread', 'favourites', 'owned', 'wishlist']
-        .includes( currentParams.filter )
-
-    const filterBy = filterIsTag 
-        ? currentParams.filter
-        : StringUtils.capitalize(currentParams.filter)
+    const viewAs   = StringUtils.capitalize( currentParams.view )
+    const sortBy   = currentParams.sort as UserSettings['sort']
+    const filterBy = StringUtils.capitalize(currentParams.filter)
+    const taggedAs = currentParams.tag
         
     const sortTitles : { [key in UserSettings['sort']] : string } = {
         title   : 'Title A-Z',
@@ -66,10 +64,19 @@ export default function CurrentSettings({
                 </SearchParamButton>
             }
 
-            { currentParams.filter !== 'all' && (
-                <SearchParamButton hasSearchQuery={hasSearchQuery}>
+            { hasTag && (
+                <SearchParamButton disabled={hasSearchQuery}>
+                    Tag: #{taggedAs}
+                    <button onClick={ () => clearSearchParam('taggedAs') } >
+                        <CloseIcon size={18} />
+                    </button>
+                </SearchParamButton>
+            )}
 
-                    Filter: {filterIsTag && '#'}{filterBy}
+            { currentParams.filter !== 'all' && (
+                <SearchParamButton disabled={hasSearchQuery || hasTag}>
+
+                    Filter: {filterBy}
 
                     <button onClick={ () => updateSearchParam('filterBy', 'all')}>
                         <CloseIcon size={18} />

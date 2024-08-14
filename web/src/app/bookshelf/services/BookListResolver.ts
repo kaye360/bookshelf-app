@@ -1,47 +1,58 @@
 import { Book, UserSettings } from "../../../types/types"
+import { isString } from "../../../utils/validation"
 
 /**
  * @class BookListResolver
  * 
  * @description 
- * Use this class to resolve any filtering and sorting applyed to a UserBooks Array.
- * Used in useSearchBarParams.
+ * Use this class to resolve any filtering and sorting applyed to a Books Array.
  * 
- * @method resolve() : UserBook.
+ * @method resolve() : Book[]
  * Instantiate the class and then call it with the resolve() method to access sorted/filtered book list.
  * 
  */
 interface BookListResolverConstructor {
     books        : Book[]
+    sortBy       : UserSettings['sort']
+    filterBy     : UserSettings['filter']
+    taggedAs     : string | null
     searchQuery  : string | null
-    filterBy     : UserSettings['filter'] | string | null
-    sortBy       : string | null
 }
 
 export class BookListResolver {
 
-    books        : Book[]
-    searchQuery  : string
-    filterBy     : string
-    sortBy       : string
+    private books        : Book[]
+    private sortBy       : UserSettings['sort']
+    private filterBy     : UserSettings['filter']
+    private taggedAs     : string | null
+    private searchQuery  : string
 
-    public constructor({ books, searchQuery, filterBy, sortBy } : BookListResolverConstructor) {
+    public constructor({ books, searchQuery, filterBy, taggedAs, sortBy } : BookListResolverConstructor) {
         this.books       = books
         this.searchQuery = searchQuery?.toLowerCase() || ''
-        this.filterBy    = filterBy || 'all'
-        this.sortBy      = sortBy || 'title'
+        this.filterBy    = filterBy
+        this.sortBy      = sortBy
+        this.taggedAs    = taggedAs
     }
 
     public resolve() {
 
-        if( this.searchQuery !== '' ) {
+        // Determine if searchQuery first
+        if( this.searchQuery !== ''  ) {
             this.search(this.searchQuery)
         }
 
-        if( !this.searchQuery && this.filterBy !== 'all' ) {
+        // Then Determine Tag
+        if( !this.searchQuery && isString( this.taggedAs ) ) {
+            this.tag(this.taggedAs)
+        }
+
+        // Then Determine Filters
+        if( !this.searchQuery && this.filterBy !== 'all' && !this.taggedAs ) {
             this.filter(this.filterBy)
         }
 
+        // Then sort
         this.sort(this.sortBy)
 
         return this.books
@@ -56,7 +67,11 @@ export class BookListResolver {
         )
     }
 
-    private filter(filterBy : string) {
+    private tag(taggedAs : string) {
+        this.books = this.books.filter( book => book.tags.includes( taggedAs ))
+    }
+
+    private filter(filterBy : UserSettings['filter']) {
 
         switch ( filterBy ) {
             case 'read':
@@ -74,13 +89,10 @@ export class BookListResolver {
             case 'owned':
                 this.books = this.books.filter( book => book.group === 'owned' )
                 break
-            default :
-                // If none of the above, then it is a tag
-                this.books = this.books.filter( book => book.tags.includes( filterBy ))
         }
     }
 
-    private sort(sortBy : string) {
+    private sort(sortBy : UserSettings['sort']) {
 
         switch ( sortBy ) {
             case 'title':

@@ -39,9 +39,11 @@ export interface Store {
         clearBooks       : () => void
     }
 
-    settings        : Settings
+    settings        : Settings,
+    settingsStatus  : 'LOADING' | 'ERROR' | 'SUCCESS',
     settingsActions : {
-        updateSettings : (newSettings : Settings) => void
+        updateSettings : (newSettings : Settings) => void,
+        updateSettingsStatus : (newStatus : Store['settingsStatus']) => void
     }
 }
 
@@ -145,7 +147,7 @@ export interface Profile {
  */
 
 
-export type Settings = UserSettings | null
+export type Settings = UserSettings
 
 export interface UserSettings {
     currentlyReadingId : string | null
@@ -257,7 +259,8 @@ export interface ExternalApiAuthor {
 export interface BookshelfParams {
     viewAs      : UserSettings['view']
     sortBy      : UserSettings['sort']
-    filterBy    : UserSettings['filter'] | string
+    filterBy    : UserSettings['filter']
+    taggedAs    : string
     searchQuery : string
 }
 

@@ -2,11 +2,19 @@ import OptionButton from "./OptionButton";
 import { AllIcon, CheckIcon, UncheckIcon, FavouritesIcon, BookmarkIcon, FileTextIcon, ArrowDownIcon, ArrowUpIcon, ParagraphIcon, UserIcon, HashIcon, CardIcon, GridIcon, ListIcon } from "../../../../components/common/Icon";
 import { useStore } from "../../../../store/store";
 import { getTagsFromBookList } from "../../../tags/services/getTagsFromBookList";
-import { useBookshelfContext } from "../../hooks/useBookShelfContext";
+import useBookshelfParams from "../../hooks/useBookshelfParams";
+import { isValidFilter, isValidSort, isValidView } from "../../services/isValidSetting";
+import { UserSettings } from "../../../../types/types";
 
-function FilterOptions() {
+function Filter() {
 
-    const { searchParams, updateSearchParam } = useBookshelfContext()
+    const { settings } = useStore()
+    const { searchParams, updateSearchParam } = useBookshelfParams()
+    const filterParam = searchParams.get('viewAs')
+
+    function isActive(filter : UserSettings['filter']) : boolean {
+        return isValidFilter(filterParam) ? filterParam === filter : settings.filter === filter
+    }
 
     return (
         <div className={`
@@ -16,7 +24,7 @@ function FilterOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('filterBy', 'all') }
-                isActive={searchParams.get('filterBy') === 'all'}
+                isActive={ isActive('all') }
             >
                 <AllIcon size={18} />
                 All
@@ -24,7 +32,7 @@ function FilterOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('filterBy', 'read') }
-                isActive={searchParams.get('filterBy') === 'read'}
+                isActive={ isActive('read') }
             >
                 <CheckIcon size={18} />
                 Read
@@ -32,7 +40,7 @@ function FilterOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('filterBy', 'unread') }
-                isActive={searchParams.get('filterBy') === 'unread'}
+                isActive={ isActive('unread') }
             >
                 <UncheckIcon size={18} />
                 Unread
@@ -40,7 +48,7 @@ function FilterOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('filterBy', 'favourites') }
-                isActive={searchParams.get('filterBy') === 'favourites'}
+                isActive={ isActive('favourites') }
             >
                 <FavouritesIcon size={18} />
                 Favourites
@@ -48,7 +56,7 @@ function FilterOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('filterBy', 'owned') }
-                isActive={searchParams.get('filterBy') === 'owned'}
+                isActive={ isActive('owned') }
             >
                 <BookmarkIcon size={18} />    
                 Owned
@@ -56,7 +64,7 @@ function FilterOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('filterBy', 'wishlist') }
-                isActive={searchParams.get('filterBy') === 'wishlist'}
+                isActive={ isActive('wishlist') }
             >
                 <FileTextIcon size={18} />
                 Wishlist
@@ -66,16 +74,22 @@ function FilterOptions() {
     )
 }
 
-function SortOptions() {
+function Sort() {
 
-    const {searchParams, updateSearchParam } = useBookshelfContext()
+    const { settings } = useStore()
+    const {searchParams, updateSearchParam } = useBookshelfParams()
+    const sortParam = searchParams.get('sortBy')
+
+    function isActive(sort : UserSettings['sort']) : boolean {
+        return isValidSort(sortParam) ? sortParam === sort : settings.sort === sort
+    }
 
     return (
         <div className="flex gap-3 flex-wrap">
 
             <OptionButton
                 onClick={ () => updateSearchParam('sortBy', 'title') }
-                isActive={searchParams.get('sortBy') === 'title'}
+                isActive={ isActive('title') }
             >
                 <ParagraphIcon />
                 Title
@@ -83,7 +97,7 @@ function SortOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('sortBy', 'authors') }
-                isActive={searchParams.get('sortBy') === 'authors'}
+                isActive={ isActive('authors') }
             >
                 <UserIcon />
                 Author
@@ -91,7 +105,7 @@ function SortOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('sortBy', 'newest') }
-                isActive={searchParams.get('sortBy') === 'newest'}
+                isActive={ isActive('newest') }
             >
                 <ArrowDownIcon />
                 Newest
@@ -99,7 +113,7 @@ function SortOptions() {
 
             <OptionButton
                 onClick={ () => updateSearchParam('sortBy', 'oldest') }
-                isActive={searchParams.get('sortBy') === 'oldest'}
+                isActive={ isActive('oldest') }
             >
                 <ArrowUpIcon />
                 Oldest
@@ -109,12 +123,16 @@ function SortOptions() {
     )
 }
 
-function TagOptions() {
+function Tag() {
 
     const { books } = useStore()
-    const { searchParams, updateSearchParam } = useBookshelfContext()
-
+    const { searchParams, updateSearchParam } = useBookshelfParams()
+    const tagParam = searchParams.get('taggedAs')
     const tags = getTagsFromBookList(books).slice(0,15)
+
+    function isActive(tag : string) : boolean {
+        return tagParam === tag
+    }
 
     return (
         <div className={`
@@ -125,8 +143,8 @@ function TagOptions() {
             { tags.map( tag => (
                 <OptionButton
                     key={tag.tag}
-                    onClick={ () => updateSearchParam('filterBy', tag.tag)}
-                    isActive={searchParams.get('filterBy') === tag.tag}
+                    onClick={ () => updateSearchParam('taggedAs', tag.tag)}
+                    isActive={ isActive(tag.tag)}
                 >
                     <HashIcon size={18} />
                     {tag.tag}
@@ -137,16 +155,24 @@ function TagOptions() {
     )
 }
 
-function ViewOptions() {
+function View() {
 
-    const { searchParams, updateSearchParam } = useBookshelfContext()
+    const { settings } = useStore()
+    const { searchParams, updateSearchParam } = useBookshelfParams()
+    const viewParam = searchParams.get('viewAs')
+
+    function isActive(view : UserSettings['view']) : boolean {
+        return isValidView(viewParam)
+            ? viewParam === view
+            : settings.view === view
+    }
 
     return (
         <div className="flex flex-wrap gap-3">
 
             <OptionButton 
                 onClick={ () => updateSearchParam('viewAs', 'grid') }
-                isActive={searchParams.get('viewAs') === 'grid'}
+                isActive={ isActive('grid') }
             >
                 <GridIcon />
                 Grid
@@ -154,7 +180,7 @@ function ViewOptions() {
 
             <OptionButton 
                 onClick={ () => updateSearchParam('viewAs', 'list') }
-                isActive={searchParams.get('viewAs') === 'list'}
+                isActive={ isActive('list') }
             >
                 <ListIcon />
                 List
@@ -162,7 +188,7 @@ function ViewOptions() {
 
             <OptionButton 
                 onClick={ () => updateSearchParam('viewAs', 'card') }
-                isActive={searchParams.get('viewAs') === 'card'}
+                isActive={ isActive('card') }
             >
                 <CardIcon />
                 Card
@@ -173,8 +199,8 @@ function ViewOptions() {
 }
 
 export default {
-    FilterOptions,
-    SortOptions,
-    TagOptions,
-    ViewOptions
+    Filter,
+    Sort,
+    Tag,
+    View
 }

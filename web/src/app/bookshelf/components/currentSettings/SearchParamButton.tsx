@@ -1,16 +1,16 @@
 
 
 export default function SearchParamButton({
-    hasSearchQuery = false, 
+    disabled = false, 
     children
 } : {
-    hasSearchQuery? : boolean,
+    disabled? : boolean,
     children : any
 }) {
     return (
         <span className={`
             flex items-center gap-1 px-3 md:px-4 py-1 text-sm border border-primary-light rounded-lg bg-primary-light/10 min-w-max
-            ${ hasSearchQuery ? 'opacity-30' : ''}
+            ${ disabled ? 'opacity-30' : ''}
         `}>
             {children}
         </span>

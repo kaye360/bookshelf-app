@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { getUserSessionFromLocalStorage } from "../app/auth/services/getUserSession";
 import { authReducer } from "./authReducer";
 import { Store } from "../types/types";
-import { getSettingsFromLocalStorage } from "../app/settings/services/settingsService";
+import { getDefaultSettings } from "../app/settings/services/getDefaultSettings";
 
 
 export const useStore = create<Store>()((set => ({
@@ -23,10 +23,13 @@ export const useStore = create<Store>()((set => ({
         clearBooks : () => set( () => ({books : []}))
     },
 
-    settings : getSettingsFromLocalStorage(),
+    settings : getDefaultSettings(),
+
+    settingsStatus : 'LOADING',
 
     settingsActions : {
-        updateSettings : (newSettings) => set({ settings : newSettings })
+        updateSettings : (newSettings) => set({ settings : newSettings }),
+        updateSettingsStatus : (newStatus) => set({settingsStatus : newStatus}),
     },
 
 })))

@@ -3,7 +3,7 @@ import { API_URL } from "../../../config"
 import { useStore } from "../../../store/store"
 import { Settings } from "../../../types/types"
 import { Req } from "../../../lib/Req/Req"
-import { getInitialSettings } from "../services/settingsService"
+import { getDefaultSettings } from "../services/getDefaultSettings"
 import { SettingsSchema } from "../validation/settingsValidation"
 
 
@@ -16,19 +16,20 @@ export function useSettings() {
 
     const { 
         auth : { token }, 
-        settingsActions : { updateSettings } 
+        settingsActions : { updateSettings, updateSettingsStatus } 
     } = useStore()
 
     return useQuery({
         queryKey : ['getSettings', token],
         queryFn : async () => {
+            updateSettingsStatus('LOADING')
             const settings = await getSettings()
             updateSettings(settings)
+            updateSettingsStatus('SUCCESS')
             return settings
         }
     })
 }
-
 
 /**
  * 
@@ -40,7 +41,7 @@ export function useSettings() {
 async function getSettings() : Promise<Settings> {
 
     const token = useStore.getState().auth.token
-    if( typeof token !== 'string' ) return getInitialSettings()
+    if( typeof token !== 'string' ) return getDefaultSettings()
 
     const response = await Req.get({ url : `${API_URL}/settings`, token })
 
@@ -48,10 +49,8 @@ async function getSettings() : Promise<Settings> {
         throw new Error('Settings Response Error')
     }
 
-    const settings  = JSON.parse(response.data) as Settings
+    const settings  = JSON.parse(response.data)
     const validated = await SettingsSchema.validate(settings)
-
-    localStorage.setItem('settings', JSON.stringify(validated))
     
     return validated
 }

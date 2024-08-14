@@ -1,4 +1,4 @@
-import { useBookshelfContext } from "../../hooks/useBookShelfContext"
+import useBookshelfParams from "../../hooks/useBookshelfParams"
 
 export default function TagButton({
     tag
@@ -6,11 +6,11 @@ export default function TagButton({
     tag: string
 }) {
 
-    const { updateSearchParam } = useBookshelfContext()
+    const { updateSearchParam } = useBookshelfParams()
 
     return (
         <button
-            onClick={() => updateSearchParam('filterBy', tag)}
+            onClick={() => updateSearchParam('taggedAs', tag)}
             className="text-left text-wrap"
         >
             #{tag}
