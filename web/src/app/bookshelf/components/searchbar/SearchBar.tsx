@@ -6,7 +6,7 @@ import SettingsMenu from "../settingsMenu/SettingsMenu"
 
 export default function SearchBar() {
     
-    const [showFilters, setShowFilters] = useState<boolean>(false)
+    const [showSettingsMenu, setShowSettingsMenu] = useState<boolean>(false)
 
     return (
         <div className="grid gap-0 text-primary-dark mb-4">
@@ -18,11 +18,11 @@ export default function SearchBar() {
 
             </div>
 
-            <CurrentSettings setShowFilters={setShowFilters} />
+            <CurrentSettings setShowSettingsMenu={setShowSettingsMenu} />
 
             <SettingsMenu 
-                showFilters={showFilters} 
-                setShowFilters={setShowFilters}
+                showSettingsMenu={showSettingsMenu} 
+                setShowSettingsMenu={setShowSettingsMenu}
             />
 
         </div>

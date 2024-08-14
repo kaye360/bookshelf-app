@@ -28,7 +28,7 @@ export default function EditTagsModal({
                         </span>
                     </h2>
 
-                    <div className="flex items-start gap-2 p-3 rounded border border-primary-light text-primary-dark text-sm">
+                    <div className="flex items-center gap-2 p-3 rounded border border-primary-light text-primary-dark text-sm">
                         <AlertIcon size={28} />
                         Note: Separate each tag with a space. No hashtag is required.
                     </div>
@@ -37,13 +37,11 @@ export default function EditTagsModal({
 
             </div>
 
-
-                
             <form onSubmit={ (e) => handleUpdateBookTags(book, e) }>
 
                 <textarea 
                     id="book-tags-textarea"
-                    className="w-full border border-primary-light/30 p-3 resize-none rounded"
+                    className="w-full border border-primary-light/30 bg-bg p-3 resize-none rounded"
                     rows={3}
                     placeholder="Enter tags for this book"
                     defaultValue={book.tags.join(" ")}

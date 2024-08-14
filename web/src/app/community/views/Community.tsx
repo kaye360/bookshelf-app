@@ -29,10 +29,9 @@ export default function Community() {
                     ref={containerRef}
                     className="flex items-center gap-2 text-xl pt-12"
                 >
-                <Loader message="Loading more" />
+                <Loader message="Loading books..." />
             </div>
             )}
-
 
         </BaseLayout>
     )

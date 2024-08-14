@@ -8,9 +8,9 @@ import useBookshelfParams from "../../hooks/useBookshelfParams"
 import { isString } from "../../../../utils/validation"
 
 export default function CurrentSettings({
-    setShowFilters
+    setShowSettingsMenu
 } : {
-    setShowFilters : React.Dispatch<React.SetStateAction<boolean>>
+    setShowSettingsMenu : React.Dispatch<React.SetStateAction<boolean>>
 }) {
 
     const { settings } = useStore()
@@ -42,7 +42,7 @@ export default function CurrentSettings({
     return (
         <div className="flex items-stretch gap-2 flex-wrap mt-1">
 
-            <SettingsMenuButton setShowFilters={setShowFilters} />
+            <SettingsMenuButton setShowSettingsMenu={setShowSettingsMenu} />
 
             <SearchParamButton>
                 View: { viewAs }

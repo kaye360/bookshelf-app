@@ -91,7 +91,7 @@ export default function Home() {
 
             <section
                 ref={welcome.scrollRef}
-                className="relative bg-primary-dark bg-[url('/bookshelf-opacity-10.png')] bg-fixed bg-blend-overlay py-12 px-8 rounded text-bg mb-12"
+                className="relative bg-primary-dark dark:bg-primary-dark/5  bg-[url('/bookshelf-opacity-10.png')] bg-fixed bg-blend-overlay py-12 px-8 rounded text-bg dark:text-primary-dark mb-12"
             >
                 <div className="relative z-10 max-w-[500px] mx-auto">
                     <TextFlow>

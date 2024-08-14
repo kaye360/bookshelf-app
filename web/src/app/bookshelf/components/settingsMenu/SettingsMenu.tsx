@@ -9,11 +9,11 @@ import Settings from "./Settings"
 
 
 export default function SettingsMenu({
-    showFilters,
-    setShowFilters
+    showSettingsMenu,
+    setShowSettingsMenu
 }: {
-    showFilters: boolean
-    setShowFilters: Dispatch<SetStateAction<boolean>>
+    showSettingsMenu: boolean
+    setShowSettingsMenu: Dispatch<SetStateAction<boolean>>
 }) {
 
     const navigate   = useNavigate()
@@ -21,9 +21,9 @@ export default function SettingsMenu({
     useEffect( () => {
 
         function handleOutsideClick(e: MouseEvent) {
-            if( !showFilters ) return
+            if( !showSettingsMenu ) return
             if( e.target instanceof HTMLElement && e.target.id === 'edit-settings-bg' ) {
-                setShowFilters(false)
+                setShowSettingsMenu(false)
             }
         }
 
@@ -31,14 +31,14 @@ export default function SettingsMenu({
 
         return () => document.removeEventListener('click', handleOutsideClick)
 
-    }, [showFilters])
+    }, [showSettingsMenu])
 
     return createPortal(
         <div 
             id="edit-settings-bg"
             className={`
                 fixed inset-0 overflow-hidden transition-all 
-                ${ showFilters ? 'bg-white/70' : 'pointer-events-none'}
+                ${ showSettingsMenu ? 'bg-bg-accent/70' : 'pointer-events-none'}
             `}
         >
 
@@ -46,7 +46,7 @@ export default function SettingsMenu({
                 <div className={`
                     absolute top-0 bottom-0 w-full max-w-xs p-6 bg-bg transition-all duration-200 pointer-events-auto
                     grid gap-6 content-start
-                    ${showFilters ? 'right-0 opacity-1' : '-right-full opacity-0'}
+                    ${showSettingsMenu ? 'right-0 opacity-1' : '-right-full opacity-0'}
                 `}>
 
                     <header className="flex justify-between items-center ">
@@ -56,7 +56,7 @@ export default function SettingsMenu({
                         </h2>
 
                         <button
-                            onClick={() => setShowFilters(false)}
+                            onClick={() => setShowSettingsMenu(false)}
                             className="active:text-accent"
                         >
                             <CloseIcon size={28} />

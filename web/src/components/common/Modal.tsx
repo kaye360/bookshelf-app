@@ -40,7 +40,7 @@ export default function Modal( {closeModalFn, children} : ModalProps ) {
             id="modal"
             ref={modalOverlayRef}
             onClick={handleClick}
-            className={`fixed inset-0 grid place-items-center bg-white/90 animate-modal-overlay-open`}
+            className={`fixed inset-0 grid place-items-center bg-bg/85 animate-modal-overlay-open`}
         >
             <div 
                 ref={modalContentRef}
