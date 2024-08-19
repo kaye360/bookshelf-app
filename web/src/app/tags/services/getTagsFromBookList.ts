@@ -1,5 +1,5 @@
 import { Book } from "../../../types/types"
-
+import { isArray } from "../../../utils/validation"
 
 interface SortedTagsWithCounts {
     tag: string
@@ -7,6 +7,10 @@ interface SortedTagsWithCounts {
 }
 
 export function getTagsFromBookList(books : Book[]) : SortedTagsWithCounts[]  {
+    
+    if(!isArray(books)) {
+        return []
+    }
 
     const tags = books.map( book => book.tags ).flat()
 

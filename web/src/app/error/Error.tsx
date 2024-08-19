@@ -1,5 +1,6 @@
 import { useRouteError } from "react-router-dom"
 import BaseLayout from "../../layouts/BaseLayout"
+import { isNumber, isObject } from "../../utils/validation"
 
 export default function Error() {
 
@@ -50,5 +51,8 @@ export default function Error() {
 
 
 function validErrorStatus(error : unknown) {
-    return typeof error === 'object' && error !== null && 'status' in error && typeof error.status === 'number' ? error.status : 400
+    return  isObject(error) && 'status' in error 
+            && isNumber(error.status)
+                ? error.status 
+                : 400
 }

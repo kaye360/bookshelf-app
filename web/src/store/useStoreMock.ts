@@ -1,11 +1,26 @@
 import { Store } from "../types/types";
 
-// @ts-ignore
-export const StoreMock : Store = {
+// @ts-expect-error
+let storeMock : Store = {
+
+    settings : {
+        view   : 'grid',
+        filter : 'all',
+        sort   : 'title',
+        theme  : 'light',
+        email  : 'email@email.com',
+        name   : 'test user',
+        location : 'Canada',
+        currentlyReadingId : "OL1",
+    },
     
     books : [
-        // Should be length of 10
-        // First item should have key : "OL5901985W"
+        /**
+         * 
+         * Should be length of 10
+         * First item should have key : "OL5901985W"
+         * 
+         */
         {
             "id": 12,
             "key": "OL5901985W",
@@ -157,4 +172,8 @@ export const StoreMock : Store = {
             "created_at": "2024-07-30T04:43:46.000000Z",
         },
     ]
+}
+
+export let useStoreMock = {
+    useStore : () => storeMock
 }

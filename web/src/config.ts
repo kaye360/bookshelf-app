@@ -21,6 +21,12 @@ export const VALID_THEMES: UserSettings['theme'][] = ['light', 'dark']
 
 export const VALID_VIEWS: UserSettings['view'][] = ['grid', 'list', 'card']
 
+export const DEFAULT_VIEW : UserSettings['view'] = 'grid'
+
 export const VALID_SORTS: UserSettings['sort'][] = ['authors', 'title', 'newest', 'oldest']
 
+export const DEFAULT_SORT: UserSettings['sort'] = 'title'
+
 export const VALID_FILTERS: UserSettings['filter'][] = ['all', 'favourites', 'owned', 'read', 'unread', 'wishlist']
+
+export const DEFAULT_FILTER: UserSettings['filter'] = 'all'

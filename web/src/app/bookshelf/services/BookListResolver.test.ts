@@ -1,8 +1,10 @@
-import { StoreMock } from './../../../store/store.mock';
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { BookListResolver } from "./BookListResolver";
 
-const books = StoreMock.books
+let {useStoreMock} = await vi.hoisted( async () => await import('../../../store/useStoreMock') )
+
+vi.mock('../../../store/store', () =>  useStoreMock )
+const books = useStoreMock.useStore().books
 
 // Defaults
 const searchQuery = ''

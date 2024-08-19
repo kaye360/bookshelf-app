@@ -1,6 +1,5 @@
 import { AuthLoading, AuthSuccess, AuthError, User, WithoutAuth } from "../types/types"
 
-
 export function isLoading() : AuthLoading {
     return {
         user : null,
@@ -9,7 +8,6 @@ export function isLoading() : AuthLoading {
         isAuth : false
     }
 }
-
 
 export function isLoggedIn({
     user,
@@ -25,7 +23,6 @@ export function isLoggedIn({
         isAuth : true
     }
 }
-
 
 export function isLoginError() : AuthError {
     return {
@@ -44,7 +41,6 @@ export function isRegisterError() : AuthError {
         isAuth : false
     }
 }
-
 
 export function isLoggedOut() : WithoutAuth {
     return {

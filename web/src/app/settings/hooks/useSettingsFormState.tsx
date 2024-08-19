@@ -4,7 +4,7 @@ import useUpdateSettings from "../api/updateSettings"
 
 export default function useSettingsFormState() {
 
-    const [isSaved, setIsSaved]     = useState<boolean>(false)
+    const [isSaved, setIsSaved] = useState<boolean>(false)
 
     const { isTouched, touchForm, resetTouch } = useFormTouch()
 

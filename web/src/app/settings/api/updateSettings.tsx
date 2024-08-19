@@ -6,7 +6,6 @@ import { SettingsSchema } from "../validation/settingsValidation"
 import { useMutation } from "@tanstack/react-query"
 import { updateLocalTheme } from "../services/localTheme"
 
-
 /**
  * 
  * The api query or mutation to be consumed across the app
@@ -21,7 +20,6 @@ export default function useUpdateSettings() {
         mutationFn : async () => {
             const settings = await updateSettingsToApi() 
             updateSettings(settings)
-            localStorage.setItem('settings', JSON.stringify(settings))
         },
         onError : (error) => console.log(error.message)
     })

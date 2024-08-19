@@ -1,8 +1,9 @@
+import { isString } from "../../../utils/validation"
 
 
-export function extractTagsFromInput(input : string) : string[] {
+export function extractTags(input : string) : string[] {
 
-    if( typeof input !== 'string') {
+    if( !isString(input) ) {
         throw new Error(`Invalid input in extractTagsFromInput: ${input}`)
     }
 

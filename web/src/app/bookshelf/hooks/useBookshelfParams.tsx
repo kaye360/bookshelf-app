@@ -1,12 +1,13 @@
 import { useSearchParams } from "react-router-dom"
 import { BookshelfParams } from "../../../types/types"
+import { isString } from "../../../utils/validation"
 
 export default function useBookshelfParams() {
 
     const [searchParams, setSearchParams] = useSearchParams()
 
     function updateSearchParam<K extends keyof BookshelfParams>(param : K, value: BookshelfParams[K]) {
-        if( typeof param !== 'string') return
+        if( !isString(param)) return
         setSearchParams(prev => {
             prev.set(param, value)
             return prev

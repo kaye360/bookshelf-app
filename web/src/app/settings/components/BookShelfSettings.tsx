@@ -2,7 +2,6 @@ import { AllIcon, CheckIcon, UncheckIcon, FavouritesIcon, BookmarkIcon, FileText
 import OptionButton from "../../bookshelf/components/settingsMenu/OptionButton";
 import useBookshelfSettings from "../hooks/useBookshelfSettings";
 
-
 export default function BookShelfSettings({ 
     isTouched, 
     touchForm 
@@ -10,8 +9,16 @@ export default function BookShelfSettings({
     isTouched : boolean
     touchForm : () => void
 }) {
-    
-    const { view, filter, sort, handleClick } = useBookshelfSettings({isTouched, touchForm})
+
+    const { 
+        view, 
+        filter, 
+        sort, 
+        handleClick 
+    } = useBookshelfSettings({
+        isTouched, 
+        touchForm
+    })
 
     return (
         <div>
@@ -27,12 +34,12 @@ export default function BookShelfSettings({
             <div className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3">
 
                 <h3 className="font-semibold">
-                    View
+                    View 
                 </h3>
 
                 <div className="flex items-center gap-4 flex-wrap">
                     <OptionButton 
-                        onClick={ () => handleClick('view', 'grid') }
+                        onClick={ () => handleClick({view : 'grid'}) }
                         isActive={ view === 'grid' }
                     >
                         <GridIcon />
@@ -40,7 +47,7 @@ export default function BookShelfSettings({
                     </OptionButton>
 
                     <OptionButton 
-                        onClick={ () => handleClick('view', 'list') }
+                        onClick={ () => handleClick({view : 'list'}) }
                         isActive={ view === 'list' }
                     >
                         <ListIcon />
@@ -48,7 +55,7 @@ export default function BookShelfSettings({
                     </OptionButton>
 
                     <OptionButton 
-                        onClick={ () => handleClick('view', 'card') }
+                        onClick={ () => handleClick({view : 'card'}) }
                         isActive={ view === 'card' }
                     >
                         <CardIcon />
@@ -63,7 +70,7 @@ export default function BookShelfSettings({
                 <div className="flex items-center gap-4 flex-wrap">
 
                     <OptionButton
-                            onClick={ () => handleClick('filter', 'all') }
+                            onClick={ () => handleClick({filter : 'all'}) }
                             isActive={ filter === 'all' }
                         >
                         <AllIcon size={18} />
@@ -71,7 +78,7 @@ export default function BookShelfSettings({
                     </OptionButton>
 
                     <OptionButton
-                        onClick={ () => handleClick('filter', 'read') }
+                        onClick={ () => handleClick({filter : 'read'}) }
                         isActive={ filter === 'read' }
                     >
                         <CheckIcon size={18} />
@@ -79,7 +86,7 @@ export default function BookShelfSettings({
                     </OptionButton>
 
                     <OptionButton
-                        onClick={ () => handleClick('filter', 'unread') }
+                        onClick={ () => handleClick({filter : 'unread'}) }
                         isActive={ filter === 'unread' }
                     >
                         <UncheckIcon size={18} />
@@ -87,7 +94,7 @@ export default function BookShelfSettings({
                     </OptionButton>
 
                     <OptionButton
-                        onClick={ () => handleClick('filter', 'favourites') }
+                        onClick={ () => handleClick({filter : 'favourites'}) }
                         isActive={ filter === 'favourites' }
                     >
                         <FavouritesIcon size={18} />
@@ -95,7 +102,7 @@ export default function BookShelfSettings({
                     </OptionButton>
 
                     <OptionButton
-                        onClick={ () => handleClick('filter', 'owned') }
+                        onClick={ () => handleClick({filter : 'owned'}) }
                         isActive={ filter === 'owned'}
                     >
                         <BookmarkIcon size={18} />    
@@ -103,7 +110,7 @@ export default function BookShelfSettings({
                     </OptionButton>
 
                     <OptionButton
-                        onClick={ () => handleClick('filter', 'wishlist') }
+                        onClick={ () => handleClick({filter : 'wishlist'}) }
                         isActive={ filter === 'wishlist'}
                     >
                         <FileTextIcon size={18} />
@@ -119,7 +126,7 @@ export default function BookShelfSettings({
                 <div className="flex items-center gap-4 flex-wrap">
 
                     <OptionButton
-                        onClick={ () => handleClick('sort', 'title') }
+                        onClick={ () => handleClick({sort : 'title'}) }
                         isActive={ sort === 'title' }
                     >
                         <ParagraphIcon />
@@ -127,7 +134,7 @@ export default function BookShelfSettings({
                     </OptionButton>
 
                     <OptionButton
-                        onClick={ () => handleClick('sort', 'authors') }
+                        onClick={ () => handleClick({sort : 'authors'}) }
                         isActive={ sort === 'authors' }
                     >
                         <UserIcon />
@@ -135,7 +142,7 @@ export default function BookShelfSettings({
                     </OptionButton>
 
                     <OptionButton
-                        onClick={ () => handleClick('sort', 'newest') }
+                        onClick={ () => handleClick({sort : 'newest'}) }
                         isActive={ sort === 'newest' }
                     >
                         <ArrowDownIcon />
@@ -143,7 +150,7 @@ export default function BookShelfSettings({
                     </OptionButton>
 
                     <OptionButton
-                        onClick={ () => handleClick('sort', 'oldest') }
+                        onClick={ () => handleClick({sort : 'oldest'}) }
                         isActive={ sort === 'oldest' }
                     >
                         <ArrowUpIcon />

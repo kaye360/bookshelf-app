@@ -21,6 +21,7 @@ export default function useBookshelfView() {
 
     let BookList     : React.FC<{children : any}> = BookGrid
     let BookListItem : React.FC<{book : Book}> = BookGridItem
+    let view         : UserSettings['view']
 
     const renderedComponents : { [key in UserSettings['view']] : RenderedComponents } = {
         grid : { list : BookGrid,     item : BookGridItem },
@@ -36,20 +37,24 @@ export default function useBookshelfView() {
         // If Search Param, use search param
         BookList     = renderedComponents[viewAs].list
         BookListItem = renderedComponents[viewAs].item
+        view = viewAs
 
     } else if( isValidView(settings.view)) {
         // Else use user setting
         BookList     = renderedComponents[settings.view].list
         BookListItem = renderedComponents[settings.view].item
+        view = settings.view
 
     } else {
         // Default to Grid
         BookList     = BookGrid
         BookListItem = BookGridItem
+        view = 'grid'
     }
 
     return {
         BookList,
-        BookListItem
+        BookListItem,
+        view
     }
 }

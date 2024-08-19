@@ -1,9 +1,8 @@
 import { ExternalApiDoc } from "../../../types/types";
-import { isArray, isArrayOfStrings } from "../../../utils/validation";
+import { isArrayOfStrings } from "../../../utils/validation";
 
 export function formatExternalApiTags( subjects : ExternalApiDoc['subject'] ) {
 
-    if( !isArray(subjects) ) return []
     if( !isArrayOfStrings(subjects) ) return []
 
     const tags = subjects

@@ -1,4 +1,5 @@
 import { AuthActions, User } from "../types/types"
+import { isString } from "../utils/validation"
 import { isLoading, isLoggedIn, isLoginError, isRegisterError, isLoggedOut } from "./authActions"
 
 
@@ -15,7 +16,7 @@ export function authReducer(
             break
             
         case 'LOGIN':
-            if( user !== undefined && typeof token === 'string' ) {
+            if( user !== undefined && isString(token) ) {
                 set( () => ({ auth : isLoggedIn({user, token}) }))
             }
             break

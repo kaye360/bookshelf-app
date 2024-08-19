@@ -17,44 +17,42 @@ export class Req {
 
     static async get(props : string | Omit<ReqProps, 'payload'>) {
 
+        if( !props ) {
+            throw new Error('Invalid props')
+        }
+        
         let response : ReqResponse
 
         if( isString(props) ) {
             response = await this.send({ method : 'GET', url : props})
 
-        } else {
+        } else if( 'url' in props && isString(props.url) ) {
             response = await this.send({
                 method  : 'GET',
                 url     : props.url,
                 token   : props.token
             })
+        } else {
+            throw new Error('Invalid props')
         }
 
         return response
     }
-
-
 
     static async post({ url, token, payload } : ReqProps) {
         const response = await this.send({ url, token, payload, method : 'POST' })
         return response
     }
 
-
-
     static async put({ url, token, payload } : ReqProps) {
         const response = await this.send({ url, token, payload, method : 'PUT' })
         return response
     }
 
-
-
     static async delete({ url, token, payload } : ReqProps) {
         const response = await this.send({ url, token, payload, method : 'DELETE' })
         return response
     }
-
-
 
     private static async send({ 
         url,
@@ -68,6 +66,11 @@ export class Req {
         payload? : any
     }) : Promise<ReqResponse> {
     
+
+        if( !url ) {
+            throw new Error('No url given')
+        }
+
         let { data, error, code } = this.returnProps()
 
         const options: RequestInit = { 
@@ -92,8 +95,6 @@ export class Req {
         return { data, error, code }
     }
 
-
-
     private static headers({
         token = undefined
     } : {
@@ -110,8 +111,6 @@ export class Req {
     
         return headers
     }
-
-
 
     private static returnProps() : {
         data  : any 

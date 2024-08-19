@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from "react"
 import { Book } from "../../../types/types"
-import { extractTagsFromInput } from "../services/tagServices"
 import { useUpdateBookTags } from "../api/updateBookTags"
+import { extractTags } from "../services/extractTags"
 
 
 export default function useHandleUpdateBookTags() {
@@ -14,7 +14,7 @@ export default function useHandleUpdateBookTags() {
         e.preventDefault()
 
         const tagsInput = document.querySelector('#book-tags-textarea') as HTMLTextAreaElement
-        const tags      = extractTagsFromInput(tagsInput.value)
+        const tags      = extractTags(tagsInput.value)
 
         query.mutate({ book, tags })
         setHasClicked(true)

@@ -57,7 +57,7 @@ export default function CurrentSettings({
 
                     Search: {searchParams.get('searchQuery')}
 
-                    <button onClick={ () => updateSearchParam('searchQuery', '')}>
+                    <button onClick={ () => clearSearchParam('searchQuery') }>
                         <CloseIcon size={18} />
                     </button>
 

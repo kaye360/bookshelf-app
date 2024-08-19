@@ -1,9 +1,10 @@
+import { isString } from "./validation"
 
 export class StringUtils {
 
     public static capitalize(string: any) {
 
-        if( typeof string !== 'string' || !string || string === '') {
+        if( !isString(string) || !string || string === '') {
             return ''
         }
 

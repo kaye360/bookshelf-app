@@ -1,6 +1,5 @@
 import { useStore } from "../../../store/store"
 import useBookshelfParams from "./useBookshelfParams"
-import { isString } from "../../../utils/validation"
 import { UserSettings } from "../../../types/types"
 import { isValidFilter } from "../services/isValidSetting"
 
@@ -16,7 +15,7 @@ export default function useBookshelfFilter() {
         // If Search Param, use search param
         filter = filterBy
 
-    } else if( isString( settings.filter )) {
+    } else if( isValidFilter( settings.filter )) {
         // Else use user setting
         filter = settings.filter
 

@@ -22,9 +22,15 @@ class ProfileService {
         $tags_flattend   = array_merge([], ...$tags);
         $tags_unique     = array_unique( $tags_flattend );
         $tags_count      = count( $tags_unique );
+        $tags_count_max  = $tags_count < 10 ? $tags_count : 10;
+
+        if( count($tags_unique) === 0 ) {
+            return $tags_unique;
+        }
+
         $tags_randomized = array_rand(
             array_flip( $tags_unique ),
-            $tags_count < 10 ? $tags_count : 10
+            $tags_count_max
         );
 
         return $tags_randomized;

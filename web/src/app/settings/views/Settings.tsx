@@ -6,11 +6,22 @@ import PersonalSettings from "../components/PersonalSettings";
 import ThemeSettings from "../components/ThemeSettings";
 import { CheckIcon, LoaderIcon, SaveIcon } from "../../../components/common/Icon";
 import useSettingsFormState from "../hooks/useSettingsFormState";
+import { useStore } from "../../../store/store";
+import Loader from "../../../components/common/Loader";
 
 
 export default function Settings() {
 
+    const { settingsStatus } = useStore()
     const { touchForm, isTouched, handleSubmit, isSaved, query } = useSettingsFormState()
+
+    if( settingsStatus === 'LOADING') {
+        return (
+            <BaseLayout title="Settings">
+                <Loader message="Loading settings..." />
+            </BaseLayout>
+        )
+    }
 
     return (
         <BaseLayout title="Settings">

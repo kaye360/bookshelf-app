@@ -1,9 +1,19 @@
 
-export function isString(data : any) : data is string {
-    return typeof data === 'string'
+export function isString(
+    data : any,
+    options : { includeEmpty?: boolean } = { includeEmpty : true }
+) : data is string {
+    return  options.includeEmpty
+        ? typeof data === 'string'
+        : typeof data === 'string' && data !== ''
 }
 
 export function isNumber(data : any) : data is number {
+    if( 
+        ( !data && data !== 0) ||
+        data === '' || 
+        Array.isArray(data)
+    ) return false
     return !isNaN(data)
 }
 
@@ -21,13 +31,22 @@ export function isArrayOfStrings(data : any) : data is string[] {
     return true
 }
 
-export function isJson(data : string|null) : data is string {
+export function isObject(data: any) : data is object {
+    return typeof data === 'object' &&  data !== null && !Array.isArray(data)
+}
+
+export function objectLength(data: object) : number {
+    if( !isObject(data) ) throw new Error('Invalid objectLength prop')
+    return Object.keys(data).length
+}
+
+export function isJson(data : any) : data is string {
 
     if( typeof data !== 'string') return false
 
     try {
-        const json = JSON.parse(data)
-        if( typeof json === 'object') return true
+        JSON.parse(data)
+        return true
     }
     catch (e) {}
 

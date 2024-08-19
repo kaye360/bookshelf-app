@@ -5,6 +5,7 @@ import { Settings } from "../../../types/types"
 import { Req } from "../../../lib/Req/Req"
 import { getDefaultSettings } from "../services/getDefaultSettings"
 import { SettingsSchema } from "../validation/settingsValidation"
+import { isString } from "../../../utils/validation"
 
 
 /**
@@ -41,7 +42,7 @@ export function useSettings() {
 async function getSettings() : Promise<Settings> {
 
     const token = useStore.getState().auth.token
-    if( typeof token !== 'string' ) return getDefaultSettings()
+    if( !isString(token) ) return getDefaultSettings()
 
     const response = await Req.get({ url : `${API_URL}/settings`, token })
 

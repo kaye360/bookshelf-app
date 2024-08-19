@@ -6,7 +6,6 @@ export interface ReqResponse {
     code  : number|null
 }
 
-
 export interface ReqProps {
     url      : string
     token?   : string
