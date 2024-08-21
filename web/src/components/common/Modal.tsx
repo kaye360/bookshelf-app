@@ -37,6 +37,7 @@ export default function Modal( {closeModalFn, children} : ModalProps ) {
     return createPortal(
         <div
             id="modal"
+            data-testid="modal"
             ref={modalOverlayRef}
             onClick={handleClick}
             className={`fixed inset-0 grid place-items-center bg-bg/85 animate-modal-overlay-open`}
