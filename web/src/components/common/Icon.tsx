@@ -5,6 +5,19 @@
  * 
  */
 
+import { ForwardRefExoticComponent } from "react"
+
+export default function Icon({ Icon, size } : {
+    Icon : ForwardRefExoticComponent<any>,
+    size? : number
+}) {
+    return <Icon 
+        size={size} 
+        color="hsl( var(--color-primary-dark) )" 
+        strokeWidth={2}
+    />
+}
+
 interface IconProps {
     size? : number
     className? : string

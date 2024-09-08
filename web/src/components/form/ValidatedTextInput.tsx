@@ -4,7 +4,6 @@ import TextInput from "./TextInput";
 import { ComponentPropsWithoutRef, FormEventHandler } from "react";
 import { RegisterPayload } from "../../types/types";
 
-
 interface ValidatedTextInputProps extends ComponentPropsWithoutRef<'input'> {
     label?        : string
     register?     : UseFormRegister<any>
@@ -14,8 +13,14 @@ interface ValidatedTextInputProps extends ComponentPropsWithoutRef<'input'> {
     onChange?     : FormEventHandler<HTMLInputElement>
 }
 
-
-export default function ValidatedTextInput({ label, register, name, formStateData, onChange, ...props } : ValidatedTextInputProps) {
+export default function ValidatedTextInput({ 
+    label, 
+    register, 
+    name, 
+    formStateData, 
+    onChange, 
+    ...props 
+} : ValidatedTextInputProps) {
 
     const [formState, key] = formStateData
     const { errors }       = formState
@@ -24,7 +29,11 @@ export default function ValidatedTextInput({ label, register, name, formStateDat
     const hasErrors = Object.hasOwn( errors, key )
      
     return (
-        <div className="grid grid-cols-[1fr_30px] items-center gap-2">
+        <div 
+            className="grid grid-cols-[1fr_30px] items-center gap-2"
+            data-testingistouched={isTouched}
+            data-testinghaserrors={hasErrors}
+        >
             <TextInput 
                 label={label}
                 name={name}

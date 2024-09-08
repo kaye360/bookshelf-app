@@ -8,7 +8,6 @@ import Avatar from "../../components/common/Avatar"
 import AccountDropDown from "./AccountDropDown"
 import AccountDropDownLink from "./AccountDropDownLink"
 
-
 export default function Account() {
 
     const { auth : { isAuth, user } } = useStore()

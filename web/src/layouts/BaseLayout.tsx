@@ -5,6 +5,7 @@ import Wrapper from "./components/Wrapper";
 import { ReactNode, useEffect } from "react";
 import { useStore } from "../store/store";
 import { HTML_TITLE } from "../config";
+import { navLinks } from "./components/NavLinks";
 
 export default function BaseLayout({
     title,
@@ -32,7 +33,7 @@ export default function BaseLayout({
     return (
         <div className="flex flex-col justify-start relative z-0 min-h-[101vh]">
             <Header />
-            <Nav />
+            <Nav navLinks={navLinks} />
             <main className="relative z-10">
                 <Wrapper id="main-inner-content">
                     {children}

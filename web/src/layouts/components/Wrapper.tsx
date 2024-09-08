@@ -5,9 +5,13 @@ interface WrapperProps extends ComponentPropsWithoutRef<'div'> {
     className? : string
 }
 
-export default function Wrapper( {className: propClassNames = '', children, ...props} : WrapperProps ) {
+export default function Wrapper({
+    className = '', 
+    children, 
+    ...props
+} : WrapperProps ) {
     return (
-        <div className={`w-full relative max-w-6xl mx-auto py-4 px-3 md:px-8 ${propClassNames}`} {...props}>
+        <div className={`w-full relative max-w-6xl mx-auto py-4 px-3 md:px-8 ${className}`} {...props}>
             {children}
         </div>
     )

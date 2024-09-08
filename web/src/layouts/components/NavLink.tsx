@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 
-
 export default function NavLink({
     to, 
     children
@@ -25,6 +24,7 @@ export default function NavLink({
         <li>
             <Link 
                 to={to}
+                data-testingisactive={isActive}
                 className={`
                     flex items-center gap-[5px] px-5 py-2 min-w-max 
                     transition-all 

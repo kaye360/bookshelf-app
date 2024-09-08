@@ -16,6 +16,7 @@ export default function Button({
     return (
         <button 
             onClick={ disabled ? undefined : onClick}
+            data-testingvariant={variant}
             className={`
                 relative flex items-center justify-center gap-2 text-lg font-semibold tracking-wider px-6 py-2 rounded-lg active:scale-95 select-none transition-all
                 ${ variant === 'fill' 
